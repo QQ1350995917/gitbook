@@ -35,3 +35,16 @@ data|byte[]|变长|数据体
 协议设计目的|安全、垄断|避免传输层二次分包减少丢包几率
 协议头长度|可变长|应固定，防止协议头容量超出范围
 心跳|需要，防止空闲状态端口老化，物理断线等情况|不需要，本身面向无连接，可以根据超时机制做出识别
+
+## 协议编解码
+### JDK自带序列化
+使用ObjectOutputStream和ObjectInputStream结合ByteArrayOutputStream和ByteArrayInputStream进行读写操作;
+- 无法跨语言操作
+- 码流大
+- 效率低
+
+### Google Protobuf
+
+### Facebook Thrift
+
+### JBoss Marshalling
