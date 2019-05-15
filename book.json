@@ -1,0 +1,11 @@
+{
+        "plugins": [
+                "fontsettings",
+                "sharing",
+                "highlight",
+                "livereload",
+                "lunr",
+                "search",
+                "mermaid-gb3"
+        ]
+}
