@@ -22,5 +22,15 @@
 
 ## http报文封解包过程![](/network-protocol/images/http&https-packet.jpg)
 
+## 通用消息头
+
+请求消息头
+
+xianyi消息头
+
+
+
+
+
 
 
