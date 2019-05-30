@@ -24,13 +24,19 @@
 
 ## 通用消息头
 
-请求消息头
+## 请求消息头
 
-xianyi消息头
-
-
+## 响应消息头
 
 
+
+
+
+
+
+## 参考资料
+
+[http://www.52im.net/forum.php?mod=viewthread&tid=1677&highlight=http](http://www.52im.net/forum.php?mod=viewthread&tid=1677&highlight=http)
 
 
 
