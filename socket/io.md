@@ -2,7 +2,7 @@
 
 * ## Linux中的IO基本流程
 
-##  ![](/socket/images/io-in-linux.jpg)
+## ![](/socket/images/io-in-linux.jpg)
 
 * ## 同步阻塞IO\(BIO\)
 
@@ -18,7 +18,6 @@
 * #### 当访问量增大，工作线程膨胀，系统内存飙升；
 * #### 线程大量的销毁和重建，系统性能急剧下降；
 * #### 最终导致进程僵死或系统宕机；
-
 * ## 伪异步IO\(BIO\)
 
 ### BIO通讯模型图 ![BIO通讯模型图](images/bio1.jpg) 该模型的改良之处：
