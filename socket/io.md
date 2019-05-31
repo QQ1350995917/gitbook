@@ -49,7 +49,7 @@ lunix系统把任何对象看做是文件，文件就是一串二进制流，对
 
 linuxIO多路复用技术提供一个单进程,单线程内监听多个IO读写时间的机制,其基本原理是各个IO将句柄设置为非阻塞IO,然后将各个IO句柄注册到linux提供的IO复用函数上\(select,poll或者epoll\),如果某个句柄的IO数据就绪,则函数返回,由于开发者进行该IO数据处理.多路复用函数帮我们进行了多个非阻塞IO数据是否就绪的轮询操作,只不过IO多路复用函数的轮询更有效率,因为函数一次性传递文件描述符到内核态,在内核态中进行轮询\(epoll则是进行等待边缘事件的触发\),不必反复进行用户态和内核态的切换。linuxIO的多路复用技术主要的实现方式,select,poll,和epoll,过根据触发方式不同,与是否需要轮询的的不同。
 
-1. **SELECT:**   
+1. **SELECT:**  
    select是Linux最早支持的多路IO复用函数，其函数原型为：  
    int select\(int nfds, fd\_set\* readfds, fd\_set\* writefds, fd\_set\* errorfds, struct timeval\* timeout\);
 
@@ -121,28 +121,91 @@ linuxIO多路复用技术提供一个单进程,单线程内监听多个IO读写�
        通过边沿触发方式，epoll可以注册回调函数，等待期望的IO事件发生，系统内核会在事件发生时通知，而不必像水平触发那样去主动轮询检查状态。边沿触发和水平触发方式类似于电子信号中的电位高低变化，由此得名。
    ```
 
-* ## 信号驱动I/O （signal driven I/O ）
+3. ## 信号驱动I/O （signal driven I/O ）
 
-  ## ![](/socket/images/io-signal.jpg)
+   ## ![](/socket/images/io-signal.jpg)
 
-  信号驱动的IO是一种半异步的IO模型。使用信号驱动I/O时，当网络套接字可读后，内核通过发送SIGIO信号通知应用进程，于是应用可以开始读取数据。
+   信号驱动的IO是一种半异步的IO模型。使用信号驱动I/O时，当网络套接字可读后，内核通过发送SIGIO信号通知应用进程，于是应用可以开始读取数据。
 
-          具体的说，程序首先允许套接字使用信号驱动I/O模式，并且通过sigaction系统调用注册一个SIGIO信号处理程序。当有数据到达后，系统向应用进程交付一个SIGIO信号，然后应用程序调用read函数从内核中读取数据到用户态的数据缓存中。这样应用进程都不会因为尚无数据达到而被阻塞，应用主循环逻辑可以继续执行其他功能，直到收到通知后去读取数据或者处理已经在信号处理程序中读取完毕的数据。
+   ```
+       具体的说，程序首先允许套接字使用信号驱动I/O模式，并且通过sigaction系统调用注册一个SIGIO信号处理程序。当有数据到达后，系统向应用进程交付一个SIGIO信号，然后应用程序调用read函数从内核中读取数据到用户态的数据缓存中。这样应用进程都不会因为尚无数据达到而被阻塞，应用主循环逻辑可以继续执行其他功能，直到收到通知后去读取数据或者处理已经在信号处理程序中读取完毕的数据。
 
-          设置套接字允许信号驱动IO的步骤如下：
+       设置套接字允许信号驱动IO的步骤如下：
+   ```
 
-  1.注册SIGIO信号处理程序。\(安装信号处理器\)
+   1.注册SIGIO信号处理程序。\(安装信号处理器\)
 
-  2.使用fcntl的F\_SETOWN命令，设置套接字所有者。（设置套接字的所有者）
+   2.使用fcntl的F\_SETOWN命令，设置套接字所有者。（设置套接字的所有者）
 
-  3.使用fcntl的F\_SETFL命令，置O\_ASYNC标志，允许套接字信号驱动I/O。（允许这个套接字进行信号输入输出）   
+   3.使用fcntl的F\_SETFL命令，置O\_ASYNC标志，允许套接字信号驱动I/O。（允许这个套接字进行信号输入输出）
 
-        之所以说信号驱动的IO是半异步的，是因为实际读取数据到应用进程缓存的工作仍然是由应用自己负责的，而这部分工作执行期  间进程依然是阻塞的，如上图中的后半部分。而在下面介绍的异步IO则是完全的异步。
+   ```
+     之所以说信号驱动的IO是半异步的，是因为实际读取数据到应用进程缓存的工作仍然是由应用自己负责的，而这部分工作执行期  间进程依然是阻塞的，如上图中的后半部分。而在下面介绍的异步IO则是完全的异步。
+   ```
 
-* ## 异步I/O （asynchronous I/O）
+   ## 异步I/O （asynchronous I/O）
 
-  ## ![](/socket/images/io-aio.jpg)
-* ## 同步阻塞IO\(BIO\)
+   ## ![](/socket/images/io-aio.jpg)
+
+   异步I/O模型是一种处理与I/O重叠进行的模型。读请求会立即返回，说明read 请求已经成功发起了。在后台完成读操作时，应用程序然后会执行其他处理操作。当read 的响应到达时，就会产生一个信号或执行一个基于线程的回调函数来完成这次I/O 处理过程。
+
+           在一个进程中为了执行多个I/O请求而对计算操作和I/O 处理进行重叠处理的能力利用了处理速度与I/O速度之间的差异。当一个或多个I/O 请求挂起时，CPU可以执行其他任务；或者更为常见的是，在发起其他I/O的同时对已经完成的I/O 进行操作。
+
+           在传统的I/O模型中，有一个使用惟一句柄标识的I/O 通道。在 UNIX® 中，这些句柄是文件描述符（这等同于文件、管道、套接字等等）。在阻塞I/O中，我们发起了一次传输操作，当传输操作完成或发生错误时，系统调用就会返回。
+
+           在异步非阻塞I/O中，我们可以同时发起多个传输操作。这需要每个传输操作都有惟一的上下文，这样我们才能在它们完成时区分到底是哪个传输操作完成了。在AIO中，这是一个aiocb（AIO I/O Control Block）结构。这个结构包含了有关传输的所有信息，包括为数据准备的用户缓冲区。在产生I/O（称为完成）通知时，aiocb结构就被用来惟一标识所完成的I/O操作。  
+   以read操作为例，一个异步IO操作的时序流程如上图所示，
+
+           从上图中可以看出，比起信号驱动的IO那种半异步模式，异步IO中从内核拷贝数据到用户缓存空间的工作也是有系统完成的异步过程，用户程序只需要在指定的数组中引用数据即可。
+
+           数据接收后的处理程序是一个回调函数，Linux提供了两种机制实现异步IO的回调函数：
+
+           一种是信号回调函数机制，这种机制跟信号驱动的IO类似，利用信号触发回调函数的执行以处理接收的数据，这回中断正在执行的代码，而不会产生新的进程和线程；
+
+           另一种是线程回调函数机制，在这种机制下也需要编写相同的回调函数，但是这个函数将注册到异步IO的事件回调结构体对象中，当数据接收完成后将创建新的线程，在新的线程中调用回调函数进行数据处理。
+
+   ## **各个IO模型的比较和应用场景**
+
+  
+           为了比较各个IO模型的性能，这里设计了三种最主要的应用场景，分别是单个用户连接的频繁IO操作、少量用户连接的并发频繁IO操作、大量用户连接的并发频繁IO操作。在进行性能比较时，主要考虑的是总的IO等待、系统调用情况和CPU调度切换，IO等待越少、系统调用越少、CPU调度切换越少意味着IO操作的高效率。
+
+  
+
+
+
+
+           在单个用户连接频繁的IO操作中，可以采用单线程单进程的方式，这样可以不用考虑进程内部的CPU调度，只需关注IO等待和系统调用的频率。从上面各个IO模型的流程时序图来看，AIO的用户程序在执行Io操作时没有任何Io等待，而且只需要调用IO操作时一次系统调用，由于是异步操作，信号操作的回传不需要进行系统调用，连由内核返回用户态的系统调用都省了，因此效率最高。
+
+           在信号驱动的IO模型中，IO等待时间要比基本的阻塞式IO和多路复用IO要少，只需要等待数据从内核到用户缓存的操作。但是信号驱动的IO模型和多路复用IO的系统调用次数一样，需要两次系统调用，共四次上下文切换，而基本的阻塞模式只需要一次系统调用。在IO频繁的场景下，还是基本阻塞IO效率最高，其次为信号驱动IO，然后是多路复用IO。
+
+  
+
+
+           基本非阻塞IO的性能最差，因为在IO等待期间不仅不交出CPU控制权，还一遍又一遍进行昂贵的系统调用操作进行主动轮询，而主动轮询对于IO操作和业务操作都没有实际的意义，因此CPU计算资源浪费最严重。
+
+
+
+           在单个用户连接的频繁IO操作中，性能排名有好到差为：AIO&gt;基本阻塞IO&gt;信号IO&gt;epoll&gt;poll&gt;select&gt;基本非阻塞IO。
+
+  
+
+
+           在少量用户下的频繁IO操作中，基本阻塞IO一般要使用多线程操作，因此要产生额外的线程调度工作。虽然由于线程较少，远少于系统的总进程数，但是由于IO操作频繁，CPU切换还是会集中在IO操作的各个线程内。
+
+           对于基本阻塞IO和多路复用IO来讲，虽然多路IO复用一次系统调用可以完成更多的IO操作，但是在IO操作完成后对于每个IO操作还是要系统调用将内核中的数据取回到用户缓存中，因此系统调用次数仍然比阻塞IO略多，但线程切换的开销更大。特别对于select来说，由于select内部采用半轮询方式，效率不如阻塞方式，因此在这种少量用户连接的IO场景下，还不能只通过理论判断基本阻塞IO和select方式孰优孰劣。
+
+           其他的IO模型类似于单用户下，不再分析，由此得出在少量用户连接IO操作下的IO模型性能，由好到坏依次为AIO&gt;信号IO&gt;epoll&gt;基本阻塞IO?poll&gt;select&gt;基本非阻塞IO。
+
+  
+
+
+           在大量，甚至海量用户的并发频繁IO操作下，多路IO复用技术的性能会全面超越简单的多线程阻塞IO，因为这时大量的CPU切换操作将显著减少CPU效率，而多路复用一次完成大量的IO操作的优势更加明显。对于AIO和信号IO，在这种场景下依然有着更少的IO等待和更少的系统调用操作，性能依然最好。
+
+           由此可见，在大量用户的并发频繁IO操作下，IO性能由好到差依次为AIO&gt;信号IO&gt;epoll&gt;poll&gt;select&gt;基本阻塞IO&gt;基本非阻塞IO。
+
+           需要说明的是，以上三种场景都强调了是IO频繁的，如果是IO不频繁的以上三种场景，各个IO模型的性能表现又如何呢？结果不得而知，但是没必要纠结于此，选择一个最擅长的IO模型编程即可，既然IO不频繁，这种性能优劣的比较也就没有太大意义了。
+
+4. ## 同步阻塞IO\(BIO\)
 
 ### BIO通讯示意图 ![BIO通讯模型图](images/bio0.jpg) 该模型的通讯过程：
 
@@ -211,7 +274,7 @@ public abstract int read() throws IOException;
 
 参考资料：
 
-[https://mp.weixin.qq.com/s?\_\_biz=MzI4NTEzMjc5Mw==&mid=2650554694&idx=1&sn=b923effe8a7feed34f2d6637c4041df9&chksm=f3f833d0c48fbac69c0118c20bb7f8d983e0e571cf7cbf4efffc925c2324533b4d6ca463ac11&scene=21\#wechat\_redirect](https://mp.weixin.qq.com/s?__biz=MzI4NTEzMjc5Mw==&mid=2650554694&idx=1&sn=b923effe8a7feed34f2d6637c4041df9&chksm=f3f833d0c48fbac69c0118c20bb7f8d983e0e571cf7cbf4efffc925c2324533b4d6ca463ac11&scene=21#wechat_redirect)
+[https://mp.weixin.qq.com/s?\_\_biz=MzI4NTEzMjc5Mw==∣=2650554694&idx=1&sn=b923effe8a7feed34f2d6637c4041df9&chksm=f3f833d0c48fbac69c0118c20bb7f8d983e0e571cf7cbf4efffc925c2324533b4d6ca463ac11&scene=21\#wechat\_redirect](https://mp.weixin.qq.com/s?__biz=MzI4NTEzMjc5Mw==&mid=2650554694&idx=1&sn=b923effe8a7feed34f2d6637c4041df9&chksm=f3f833d0c48fbac69c0118c20bb7f8d983e0e571cf7cbf4efffc925c2324533b4d6ca463ac11&scene=21#wechat_redirect)
 
-[https://mp.weixin.qq.com/s?\_\_biz=MzI4NTEzMjc5Mw==&mid=2650554708&idx=1&sn=4fa4e599c5028825fda5ead907ec86a6&chksm=f3f833c2c48fbad49fda347833f14f553f764fc0e46ae71073d0b31028f7ec4f85b60d448e9a&mpshare=1&scene=1&srcid=0531oQOJ0j7hUzTSyGyQgRcU&rd2werd=1\#wechat\_redirect](https://mp.weixin.qq.com/s?__biz=MzI4NTEzMjc5Mw==&mid=2650554708&idx=1&sn=4fa4e599c5028825fda5ead907ec86a6&chksm=f3f833c2c48fbad49fda347833f14f553f764fc0e46ae71073d0b31028f7ec4f85b60d448e9a&mpshare=1&scene=1&srcid=0531oQOJ0j7hUzTSyGyQgRcU&rd2werd=1#wechat_redirect)
+[https://mp.weixin.qq.com/s?\_\_biz=MzI4NTEzMjc5Mw==∣=2650554708&idx=1&sn=4fa4e599c5028825fda5ead907ec86a6&chksm=f3f833c2c48fbad49fda347833f14f553f764fc0e46ae71073d0b31028f7ec4f85b60d448e9a&mpshare=1&scene=1&srcid=0531oQOJ0j7hUzTSyGyQgRcU&rd2werd=1\#wechat\_redirect](https://mp.weixin.qq.com/s?__biz=MzI4NTEzMjc5Mw==&mid=2650554708&idx=1&sn=4fa4e599c5028825fda5ead907ec86a6&chksm=f3f833c2c48fbad49fda347833f14f553f764fc0e46ae71073d0b31028f7ec4f85b60d448e9a&mpshare=1&scene=1&srcid=0531oQOJ0j7hUzTSyGyQgRcU&rd2werd=1#wechat_redirect)
 
