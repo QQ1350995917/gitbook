@@ -4,18 +4,17 @@
 
 ## ![](/socket/images/io-in-linux.jpg)
 
-* ## Linux中的五种IO
+* ## Linux中的五种IO（前四种都是同步IO）
 
-  * 阻塞I/O（blocking I/O）
+  1. 阻塞I/O（blocking I/O）
 
-  * 非阻塞I/O （nonblocking I/O）
+  2. 非阻塞I/O （nonblocking I/O）
 
-  * I/O复用\(select 和poll\) （I/O multiplexing）
+  3. I/O复用\(select 和poll\) （I/O multiplexing）
 
-  * 信号驱动I/O （signal driven I/O ）
+  4. 信号驱动I/O （signal driven I/O ）
 
-  * 异步I/O （asynchronous I/O）
-
+  5. 异步I/O （asynchronous I/O）
 * ## 同步阻塞IO\(BIO\)
 
 ### BIO通讯模型图 ![BIO通讯模型图](images/bio0.jpg) 该模型的通讯过程：
