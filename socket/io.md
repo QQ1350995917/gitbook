@@ -35,16 +35,23 @@ lunix系统把任何对象看做是文件，文件就是一串二进制流，对
 
 ## ![](/socket/images/io-blocked.jpg)
 
+当用户进程调用了recfrom这个系统调用,系统内核就开始了IO的第一个阶段,准备数据阶段\(对于网络IO,很多时候数据在一开始还没有到达,没有接收到一个完整的UDP包,这个时候内核就要等待足够的数据到来,磁盘IO的情况就是等待磁盘数据从磁盘上读取到内核空间\),这个过程需要等待,而用户进程这边整个进程就会被阻塞 ,当内核空间把数据准备好了,返回给用户进程一个结果,用户进程才解除阻塞状态。
+
 * ## 非阻塞I/O （nonblocking I/O）
 
 ## ![](/socket/images/io-none-blocked.jpg)
 
+非阻塞IO是对阻塞IO的一个改进,即在内核未完成准备数据的时候,返回一个状态error告诉进程我没准备好,用户进程收到error状态会继续发起发起IO请求,直到内核空间准备好了数据,返回正确的状态。
+
 * ## I/O复用\(select 和poll\) （I/O multiplexing）
+
+## ![](/socket/images/io-multiplexing.jpg)
+
 * ## 信号驱动I/O （signal driven I/O ）
 * ## 异步I/O （asynchronous I/O）
 * ## 同步阻塞IO\(BIO\)
 
-### BIO通讯模型图 ![BIO通讯模型图](images/bio0.jpg) 该模型的通讯过程：
+### BIO通讯示意图 ![BIO通讯模型图](images/bio0.jpg) 该模型的通讯过程：
 
 * #### 服务端有独立的accept线程负责监听客户端的链接；
 * #### Accept线程接收到客户端的链接后开启新的工作线程进行链接处理；
