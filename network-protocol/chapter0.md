@@ -1,7 +1,19 @@
 * ## 网口
-* ## 
+
+## ![](/network-protocol/images/linked-internet-card-port-translate.jpg)
+
+## ![](/network-protocol/images/linked-internet-card-port-translate-shortage.jpg)
+
 * ## 集线器
+
+## ![](/network-protocol/images/linked-hub-translate.jpg)
+
+## ![](/network-protocol/images/linked-hub-translate-shortage.jpg)
+
 * ## 交换机
+
+## 
+
 * ## 路由器
 * ### MAC地址和IP地址
 
