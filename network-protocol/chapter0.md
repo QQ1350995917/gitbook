@@ -12,9 +12,14 @@
 
 * ## 交换机
 
-## 
+## ![](/network-protocol/images/linked-switch-translate.jpg)
+
+## ![](/network-protocol/images/linked-switch-translate-shorta.jpg)
 
 * ## 路由器
+
+## ![](/network-protocol/images/linked-router-translate.jpg)
+
 * ### MAC地址和IP地址
 
   * ### MAC：Media Access Control Address（媒体访问控制地址）、LAN Address（局域网地址）、Ethernet Address（以太网地址）、Physical Address（物理地址），是处于OSI模型中的第二层：数据链路层，在网络上唯一标识一块网卡。
