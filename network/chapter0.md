@@ -2,25 +2,25 @@
 
 * ## 网口
 
-## ![](/network-protocol/images/linked-internet-card-port-translate.jpg)
+## ![](/network/images/linked-internet-card-port-translate.jpg)
 
-## ![](/network-protocol/images/linked-internet-card-port-translate-shortage.jpg)
+## ![](/network/images/linked-internet-card-port-translate-shortage.jpg)
 
 * ## 集线器
 
-## ![](/network-protocol/images/linked-hub-translate.jpg)
+## ![](/network/images/linked-hub-translate.jpg)
 
-## ![](/network-protocol/images/linked-hub-translate-shortage.jpg)
+## ![](/network/images/linked-hub-translate-shortage.jpg)
 
 * ## 交换机
 
-## ![](/network-protocol/images/linked-switch-translate.jpg)
+## ![](/network/images/linked-switch-translate.jpg)
 
-## ![](/network-protocol/images/linked-switch-translate-shorta.jpg)
+## ![](/network/images/linked-switch-translate-shortage.jpg)
 
 * ## 路由器
 
-## ![](/network-protocol/images/linked-router-translate.jpg)
+## ![](/network/images/linked-router-translate.jpg)
 
 * ### MAC地址和IP地址
 
