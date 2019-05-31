@@ -9,7 +9,7 @@
 | 会话层 | 无 |
 | 传输层 | TCP UDP |
 | 网络层 | IP RIP |
-| 数据层 | SLIP CSLIP MTU PPP ARP RARP |
+| 数据链路层 | SLIP CSLIP MTU PPP ARP RARP |
 | 物理层 |  |
 
 
