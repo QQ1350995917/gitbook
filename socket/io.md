@@ -49,15 +49,17 @@ lunix系统把任何对象看做是文件，文件就是一串二进制流，对
 
 linuxIO多路复用技术提供一个单进程,单线程内监听多个IO读写时间的机制,其基本原理是各个IO将句柄设置为非阻塞IO,然后将各个IO句柄注册到linux提供的IO复用函数上\(select,poll或者epoll\),如果某个句柄的IO数据就绪,则函数返回,由于开发者进行该IO数据处理.多路复用函数帮我们进行了多个非阻塞IO数据是否就绪的轮询操作,只不过IO多路复用函数的轮询更有效率,因为函数一次性传递文件描述符到内核态,在内核态中进行轮询\(epoll则是进行等待边缘事件的触发\),不必反复进行用户态和内核态的切换。linuxIO的多路复用技术主要的实现方式,select,poll,和epoll,过根据触发方式不同,与是否需要轮询的的不同。
 
-1. **SELECT:** 
-   select是Linux最早支持的多路IO复用函数，其函数原型为：
+1. **SELECT:**   
+   select是Linux最早支持的多路IO复用函数，其函数原型为：  
    int select\(int nfds, fd\_set\* readfds, fd\_set\* writefds, fd\_set\* errorfds, struct timeval\* timeout\);
 
-           参数nfds是所有文件描述符的数量+1，而readfds、writefds和errorfds分别为等待读、写和错误IO操作的文件描述符的集合，而timeout是超时时间，超过timeout时间select将返回（0表示不阻塞，NULL则是没有超时时间）。
+   ```
+       参数nfds是所有文件描述符的数量+1，而readfds、writefds和errorfds分别为等待读、写和错误IO操作的文件描述符的集合，而timeout是超时时间，超过timeout时间select将返回（0表示不阻塞，NULL则是没有超时时间）。
 
-           select的返回值是有可用的IO操作的文件描述符数量，如果超时返回0，如果发生错误返回-1。
+       select的返回值是有可用的IO操作的文件描述符数量，如果超时返回0，如果发生错误返回-1。
 
-           select函数需要和四个宏配合使用：FD\_SET\(\)、FD\_CLR\(\)、FD\_ZERO\(\)和FD\_ISSET\(\)。具体使用不再介绍，可以参考资料\[7,8\]的相关内容，下面介绍select函数的内部实现原理和主要流程：
+       select函数需要和四个宏配合使用：FD\_SET\(\)、FD\_CLR\(\)、FD\_ZERO\(\)和FD\_ISSET\(\)。具体使用不再介绍，可以参考资料\[7,8\]的相关内容，下面介绍select函数的内部实现原理和主要流程：
+   ```
 
    1、使用copy\_from\_user从用户空间拷贝fd\_set到内核空间；
 
@@ -73,52 +75,73 @@ linuxIO多路复用技术提供一个单进程,单线程内监听多个IO读写�
 
    7、把fd\_set从内核空间拷贝到用户空间，select返回。
 
+```
+        从上面的select内部流程中可以看出，select操作既有阻塞等待，也有主动轮询，相比于纯粹的轮询操作，效率应该稍微高一些。但是其缺点仍然十分明显：
+```
 
+1、每次调用select，都需要把fd集合从用户态拷贝到内核态返回时还要从内核态拷贝到用户态，这个开销在fd很多时会很大；
 
-            从上面的select内部流程中可以看出，select操作既有阻塞等待，也有主动轮询，相比于纯粹的轮询操作，效率应该稍微高一些。但是其缺点仍然十分明显：
+2、每次调用select都需要在内核遍历传递进来的所有fd，这个开销在fd很多时也很大；
 
-   1、每次调用select，都需要把fd集合从用户态拷贝到内核态返回时还要从内核态拷贝到用户态，这个开销在fd很多时会很大；
+3、select返回后，用户不得不自己再遍历一遍fd集合，以找到哪些fd的IO操作可用；
 
-   2、每次调用select都需要在内核遍历传递进来的所有fd，这个开销在fd很多时也很大；
+4、再次调用select时，fd数组需要重新被初始化；
 
-   3、select返回后，用户不得不自己再遍历一遍fd集合，以找到哪些fd的IO操作可用；
+5、select支持的文件描述符数量太小了，默认是1024。
 
-   4、再次调用select时，fd数组需要重新被初始化；
-
-   5、select支持的文件描述符数量太小了，默认是1024。
-
-2. **POLL**
+1. **POLL**  
    poll的函数原型为int poll\(struct pollfd \*fds, nfds\_t nfds, int timeout\)。其实现和select非常相似，只是描述fd集合的方式不同，poll通过一个pollfd数组向内核传递需要关注的事件，故没有描述符个数的限制。
 
-           pollfd中的events字段和revents分别用于标示关注的事件和发生的事件，故pollfd数组只需要被初始化一次。
+   ```
+       pollfd中的events字段和revents分别用于标示关注的事件和发生的事件，故pollfd数组只需要被初始化一次。
 
-           poll的实现机制与select类似，其对应内核中的sys\_poll，只不过poll向内核传递pollfd数组，然后对pollfd中的每个描述符进行poll。
+       poll的实现机制与select类似，其对应内核中的sys\_poll，只不过poll向内核传递pollfd数组，然后对pollfd中的每个描述符进行poll。
 
-           poll返回后，同样需要对pollfd中的每个元素检查其revents值，来得指事件是否发生。
+       poll返回后，同样需要对pollfd中的每个元素检查其revents值，来得指事件是否发生。
 
-           由此可见，poll除了没有文件描述个数限制和文件描述符数组只需初始化一次以外，select的其他缺点扔存在，而存在的缺点是select和poll性能低的主要原因。
+       由此可见，poll除了没有文件描述个数限制和文件描述符数组只需初始化一次以外，select的其他缺点扔存在，而存在的缺点是select和poll性能低的主要原因。
+   ```
 
-3. **EPOLL**
-    Epoll是Linux 2.6版本之后才引入的一种新的多路IO复用技术，epoll解决了select技术的所有主要缺点，可以取代select方式成为推荐的多路IO复用技术。
+2. **EPOLL**  
+    Epoll是Linux 2.6版本之后才引入的一种新的多路IO复用技术，epoll解决了select技术的所有主要缺点，可以取代select方式成为推荐的多路IO复用技术。
 
-           epoll通过epoll\_create创建一个用于epoll轮询的描述符，通过epoll\_ctl添加/修改/删除事件，通过epoll\_wait等待IO就绪或者IO状态变化的事件发生，epoll\_wait的第二个参数用于存放结果。
+   ```
+       epoll通过epoll\_create创建一个用于epoll轮询的描述符，通过epoll\_ctl添加/修改/删除事件，通过epoll\_wait等待IO就绪或者IO状态变化的事件发生，epoll\_wait的第二个参数用于存放结果。
 
-           epoll与select、poll不同，首先，其不用每次调用都向内核拷贝事件描述信息，在第一次调用后，事件信息就会与对应的epoll描述符关联起来。另外epoll不是通过轮询，而是通过在等待的描述符上注册回调函数，当事件发生时，回调函数负责把发生的事件存储在就绪事件链表中，最后写到用户空间。
+       epoll与select、poll不同，首先，其不用每次调用都向内核拷贝事件描述信息，在第一次调用后，事件信息就会与对应的epoll描述符关联起来。另外epoll不是通过轮询，而是通过在等待的描述符上注册回调函数，当事件发生时，回调函数负责把发生的事件存储在就绪事件链表中，最后写到用户空间。
 
-           epoll返回后，该参数指向的缓冲区中即为发生的事件，对缓冲区中每个元素进行处理即可，而不需要像poll、select那样进行轮询检查。
+       epoll返回后，该参数指向的缓冲区中即为发生的事件，对缓冲区中每个元素进行处理即可，而不需要像poll、select那样进行轮询检查。
 
-           之所以epoll能够避免效率低下的主动轮询，而完全采用效率更高的被动等待IO事件通知，是因为epoll在返回时机上支持被成为“边沿触发”（edge=triggered）的新思想，与此相对，select的触发时机被成为“水平触发”（level-triggered）。epoll同时支持这两种触发方式。
+       之所以epoll能够避免效率低下的主动轮询，而完全采用效率更高的被动等待IO事件通知，是因为epoll在返回时机上支持被成为“边沿触发”（edge=triggered）的新思想，与此相对，select的触发时机被成为“水平触发”（level-triggered）。epoll同时支持这两种触发方式。
 
-           边沿触发是指当有新的IO事件发生时，epoll才唤醒进程之后返回；而水平触发是指只要当前IO满足就绪态的要求，epoll或select就会检查到然后返回，即使在调用之后没有任何新的IO事件发生。
+       边沿触发是指当有新的IO事件发生时，epoll才唤醒进程之后返回；而水平触发是指只要当前IO满足就绪态的要求，epoll或select就会检查到然后返回，即使在调用之后没有任何新的IO事件发生。
 
-           举例来说，一个管道内收到了数据，注册该管道描述符的epoll返回，但是用户只读取了一部分数据，然后再次调用了epoll。这时，如果是水平触发方式，epoll将立刻返回，因为当前有数据可读，满足IO就绪的要求；但是如果是边沿触发方式，epoll不会返回，因为调用之后还没有新的IO事件发生，直到有新的数据到来，epoll才会返回，用户可以一并读到老的数据和新的数据。
+       举例来说，一个管道内收到了数据，注册该管道描述符的epoll返回，但是用户只读取了一部分数据，然后再次调用了epoll。这时，如果是水平触发方式，epoll将立刻返回，因为当前有数据可读，满足IO就绪的要求；但是如果是边沿触发方式，epoll不会返回，因为调用之后还没有新的IO事件发生，直到有新的数据到来，epoll才会返回，用户可以一并读到老的数据和新的数据。
 
-           通过边沿触发方式，epoll可以注册回调函数，等待期望的IO事件发生，系统内核会在事件发生时通知，而不必像水平触发那样去主动轮询检查状态。边沿触发和水平触发方式类似于电子信号中的电位高低变化，由此得名。
-
-
+       通过边沿触发方式，epoll可以注册回调函数，等待期望的IO事件发生，系统内核会在事件发生时通知，而不必像水平触发那样去主动轮询检查状态。边沿触发和水平触发方式类似于电子信号中的电位高低变化，由此得名。
+   ```
 
 * ## 信号驱动I/O （signal driven I/O ）
+
+  ## ![](/socket/images/io-signal.jpg)
+
+  信号驱动的IO是一种半异步的IO模型。使用信号驱动I/O时，当网络套接字可读后，内核通过发送SIGIO信号通知应用进程，于是应用可以开始读取数据。
+
+          具体的说，程序首先允许套接字使用信号驱动I/O模式，并且通过sigaction系统调用注册一个SIGIO信号处理程序。当有数据到达后，系统向应用进程交付一个SIGIO信号，然后应用程序调用read函数从内核中读取数据到用户态的数据缓存中。这样应用进程都不会因为尚无数据达到而被阻塞，应用主循环逻辑可以继续执行其他功能，直到收到通知后去读取数据或者处理已经在信号处理程序中读取完毕的数据。
+
+          设置套接字允许信号驱动IO的步骤如下：
+
+  1.注册SIGIO信号处理程序。\(安装信号处理器\)
+
+  2.使用fcntl的F\_SETOWN命令，设置套接字所有者。（设置套接字的所有者）
+
+  3.使用fcntl的F\_SETFL命令，置O\_ASYNC标志，允许套接字信号驱动I/O。（允许这个套接字进行信号输入输出）   
+
+        之所以说信号驱动的IO是半异步的，是因为实际读取数据到应用进程缓存的工作仍然是由应用自己负责的，而这部分工作执行期  间进程依然是阻塞的，如上图中的后半部分。而在下面介绍的异步IO则是完全的异步。
+
 * ## 异步I/O （asynchronous I/O）
+
+  ## ![](/socket/images/io-aio.jpg)
 * ## 同步阻塞IO\(BIO\)
 
 ### BIO通讯示意图 ![BIO通讯模型图](images/bio0.jpg) 该模型的通讯过程：
@@ -186,5 +209,9 @@ public abstract int read() throws IOException;
 
 ## 异步非阻塞IO
 
+参考资料：
 
+[https://mp.weixin.qq.com/s?\_\_biz=MzI4NTEzMjc5Mw==&mid=2650554694&idx=1&sn=b923effe8a7feed34f2d6637c4041df9&chksm=f3f833d0c48fbac69c0118c20bb7f8d983e0e571cf7cbf4efffc925c2324533b4d6ca463ac11&scene=21\#wechat\_redirect](https://mp.weixin.qq.com/s?__biz=MzI4NTEzMjc5Mw==&mid=2650554694&idx=1&sn=b923effe8a7feed34f2d6637c4041df9&chksm=f3f833d0c48fbac69c0118c20bb7f8d983e0e571cf7cbf4efffc925c2324533b4d6ca463ac11&scene=21#wechat_redirect)
+
+[https://mp.weixin.qq.com/s?\_\_biz=MzI4NTEzMjc5Mw==&mid=2650554708&idx=1&sn=4fa4e599c5028825fda5ead907ec86a6&chksm=f3f833c2c48fbad49fda347833f14f553f764fc0e46ae71073d0b31028f7ec4f85b60d448e9a&mpshare=1&scene=1&srcid=0531oQOJ0j7hUzTSyGyQgRcU&rd2werd=1\#wechat\_redirect](https://mp.weixin.qq.com/s?__biz=MzI4NTEzMjc5Mw==&mid=2650554708&idx=1&sn=4fa4e599c5028825fda5ead907ec86a6&chksm=f3f833c2c48fbad49fda347833f14f553f764fc0e46ae71073d0b31028f7ec4f85b60d448e9a&mpshare=1&scene=1&srcid=0531oQOJ0j7hUzTSyGyQgRcU&rd2werd=1#wechat_redirect)
 
