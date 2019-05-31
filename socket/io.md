@@ -33,11 +33,15 @@ lunix系统把任何对象看做是文件，文件就是一串二进制流，对
 
 * ## 阻塞I/O（blocking I/O）
 
+## ![](/socket/images/io-blocked.jpg)
+
 * ## 非阻塞I/O （nonblocking I/O）
+
+## ![](/socket/images/io-none-blocked.jpg)
+
 * ## I/O复用\(select 和poll\) （I/O multiplexing）
 * ## 信号驱动I/O （signal driven I/O ）
 * ## 异步I/O （asynchronous I/O）
-
 * ## 同步阻塞IO\(BIO\)
 
 ### BIO通讯模型图 ![BIO通讯模型图](images/bio0.jpg) 该模型的通讯过程：
