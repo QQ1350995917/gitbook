@@ -30,24 +30,6 @@ Bean工厂和上下文的区别:BeanFactory是ApplicationContext的顶级借口�
 
 上下文容器持有了Bean工厂容器。通过父类的getBeanFactory方法获取Bean工厂的实现类的实例。
 
-# SpringIOC 启动流程
-
-```mermaid
-graph TB
-
-start((启动开始))
-applicationContext[上下文容器启动]
-beanFactory[BeanFactory容器启动]
-finish((启动结束))
-
-
-
-start --> applicationContext
-applicationContext --> beanFactory
-applicationContext --> finish
-beanFactory --> finish
-
-```
 # ApplicationContext类关系图
 [上下文容器](ioc-application-context.md)
 
@@ -58,43 +40,4 @@ beanFactory --> finish
 org.springframework.context.support.AbstractRefreshableApplicationContext#getBeanFactory
 
 # SpringIOC容器启动流程
-
-
-```mermaid
-graph TB
-
-prepareRefresh[为容器的初始化做准备工作]
-obtainFreshBeanFactory[创建BeanFactory]
-prepareBeanFactory[给设置BeanFactory使用前的准备工作]
-postProcessBeanFactory[给BeanFactory设置抽象的可扩展的处理器]
-invokeBeanFactoryPostProcessors[调用给BeanFactory设置抽象的扩展点]
-registerBeanPostProcessors[注册BeanPostProcessor,在实例化时候调用]
-initMessageSource[初始化MessageSource,如国际化]
-initApplicationEventMulticaster[初始化广播器]
-onRefresh[回调,给子类扩展时机]
-registerListeners[检查监听器并注册]
-finishBeanFactoryInitialization[初始化非懒加载单例对象]
-finishRefresh[发布初始化完毕事件]
-destroyBeans[销毁已经实例化的单例对象释放资源]
-cancelRefresh[重置容器状态]
-resetCommonCaches[清理元数据缓存]
-
-
-prepareRefresh --> obtainFreshBeanFactory
-obtainFreshBeanFactory --> prepareBeanFactory
-prepareBeanFactory --> postProcessBeanFactory
-postProcessBeanFactory --> invokeBeanFactoryPostProcessors
-invokeBeanFactoryPostProcessors --> registerBeanPostProcessors
-registerBeanPostProcessors --> initMessageSource
-initMessageSource --> initApplicationEventMulticaster
-initApplicationEventMulticaster --> onRefresh
-onRefresh --> registerListeners
-registerListeners --> finishBeanFactoryInitialization
-finishBeanFactoryInitialization --> finishRefresh
-finishRefresh -- 初始化过程出现异常 --> destroyBeans
-destroyBeans --> cancelRefresh
-finishRefresh -- 初始化完毕 --> resetCommonCaches
-
-click prepareRefresh "ioc-flow.md" "This is a sequence"
-
-```
+![](/spring/images/spring-ioc-starter.jpg)
