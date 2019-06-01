@@ -10,10 +10,10 @@ SpringMVC
 
 ## SpringMVC工作时序图
 
-SpringMVC实现并没有脱离上述核心过程，只不过对JSP-Servlet进行了封装，简化开发流程，提供了额外的基于注解的url映射，http表单参数转换，全局异常处理，拦截器实现等。  
+SpringMVC实现并没有脱离上述核心过程，只不过对JSP-Servlet进行了封装，简化开发流程，提供了额外的基于注解的url映射，http表单参数转换，全局异常处理，拦截器实现等。
 SpringMVC提供了统一的请求入口DispatchServlet，识别请求由那个Servlet处理业务，业务Servlet处理完成后返回处理结果，DispatchServlet转发至视图处理器形成View，响应给客户端
 
-![](/spring/images/spring-mvc.drawio.jpg)
+![](/spring/images/spring-mvc.jpg)
 
 
 
@@ -29,9 +29,4 @@ SpringMVC提供了统一的请求入口DispatchServlet，识别请求由那个Se
 * HandlerExceptionResolver：处理异常
 * HandlerInterceptor：拦截器（和AOP，过滤器重复，在开发中用一种即可，否则容易迷惑）
 
-![](/spring/images/spring-mvc.drawio.jpg)
-
-
-
-
-
+![](/spring/images/spring-mvc-flow.jpg)
