@@ -3,7 +3,7 @@
 ```mermaid
 graph BT
 
-ApplicationContext[ApplicationContext]
+ApplicationContext[ApplicationContex]
 ConfigurableApplicationContext[ConfigurableApplicationContext]
 AbstractApplicationContext[AbstractApplicationContext]
 AbstractRefreshableApplicationContext[AbstractRefreshableApplicationContext]
