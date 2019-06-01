@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # BeanFactory类关系图
 
 ```mermaid
@@ -32,3 +33,8 @@ DefaultListableBeanFactory --> AbstractAutowireCapableBeanFactory
 style ApplicationContext fill:#f9f
 ```
 参考[ApplicationContext类关系图](ioc-application-context.md)
+=======
+# BeanFactory类关系图
+![](/spring/images/spring-bean-factory.jpg)
+参考[ApplicationContext类关系图](ioc-application-context.md)
+>>>>>>> Track 2 files into repository.
