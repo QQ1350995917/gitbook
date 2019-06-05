@@ -1,16 +1,24 @@
-ubuntu 安装mysql-server以及client
+# 安装
+
+## 安装mysql-server以及client
 
 sudo apt-get install mysql-server
 
-apt-get isntall mysql-client
+sudo apt-get install mysql-client
 
 sudo apt-get install libmysqlclient-dev
 
-检测
+## 检测
 
-**sudo netstat -tap \| grep mysql**
+sudo netstat -tap \| grep mysql
 
-安装过程如果没有设置密码则可以通过如下方式设置
+或
+
+sudo service mysql status
+
+## 异常处理
+
+### 安装过程如果没有设置密码
 
 cd etc/mysql
 
@@ -35,7 +43,7 @@ quit;
 
 /etc/init.d/mysql restart;
 
-卸载
+## 卸载
 
 sudo apt purge mysql-\*
 
