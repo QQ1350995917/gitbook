@@ -54,6 +54,8 @@ groovyScript("def returnType = \"${_1}\"; def result = ' * @return ' + returnTyp
 [Google规范仓库](https://github.com/google/styleguide)  
 导入即可
 
+![](/java/images/code-style.png)
+
 ## 我的快捷键设置
 
 * DefaultForXWin
