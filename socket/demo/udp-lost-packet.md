@@ -245,30 +245,27 @@ int disable = 1;
 setsockopt(sock_fd, SOL_SOCKET, SO_NO_CHECK, (void*)&disable, sizeof(disable)
 ```
 
-
-
 ## Udp丢包排查过程。
 
-1.	查看udp丢包，cat /proc/net/snmp \| grep Udp（比netstat –su效果好）
+1. 查看udp丢包，cat /proc/net/snmp \| grep Udp（比netstat –su效果好）
 
-2.	查看网卡丢包\(ifconfig 或者ethtool –S eth1\)
+2. 查看网卡丢包\(ifconfig 或者ethtool –S eth1\)
 
-3.	netstat –alupt 查看队列里现存的包数，如果过多说明有问题。
+3. netstat –alupt 查看队列里现存的包数，如果过多说明有问题。
 
-4.	查看socket队列长度，cat /proc/sys/net/core/rmem\_default \(wmem\_default是写队列长度\)
+4. 查看socket队列长度，cat /proc/sys/net/core/rmem\_default \(wmem\_default是写队列长度\)
 
-5.	查看网卡队列长度， ethtool -g eth1 
+5. 查看网卡队列长度， ethtool -g eth1
 
-6.	查看cpu负载情况，vmstat 1（或者mpstat –P ALL 1）
+6. 查看cpu负载情况，vmstat 1（或者mpstat –P ALL 1）
 
-7.	如果是arp缓存导致的丢包，查看arp缓存队列长度，/proc/sys/net/ipv4/neigh/eth1/unres\_qlen（小概率事件）
-
-
+7. 如果是arp缓存导致的丢包，查看arp缓存队列长度，/proc/sys/net/ipv4/neigh/eth1/unres\_qlen（小概率事件）
 
 参考资料
 
 * [linux 系统 UDP 丢包问题分析思路](https://cizixs.com/2018/01/13/linux-udp-packet-drop-debug/?hmsr=toutiao.io&utm_medium=toutiao.io&utm_source=toutiao.io)
 * [http://m.blog.chinaunix.net/uid-12274566-id-4252336.html](http://m.blog.chinaunix.net/uid-12274566-id-4252336.html)
+* [https://blog.csdn.net/charleslei/article/details/71699562](https://blog.csdn.net/charleslei/article/details/71699562)
 
 
 
