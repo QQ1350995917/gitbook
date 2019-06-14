@@ -329,6 +329,14 @@ echo 'net.core.netdev\_max\_backlog = 100000' &gt;&gt; /etc/sysctl.conf
 
 echo 'net.ipv4.udp\_mem= 10240 1048576000 1048576000' &gt;&gt; /etc/sysctl.conf
 
+
+
+ethtool -g et0
+
+ethtool -G eth0 rx 2048
+
+
+
 参考资料
 
 * [linux 系统 UDP 丢包问题分析思路](https://cizixs.com/2018/01/13/linux-udp-packet-drop-debug/?hmsr=toutiao.io&utm_medium=toutiao.io&utm_source=toutiao.io)
