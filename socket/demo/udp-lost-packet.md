@@ -261,11 +261,101 @@ setsockopt(sock_fd, SOL_SOCKET, SO_NO_CHECK, (void*)&disable, sizeof(disable)
 
 7. 如果是arp缓存导致的丢包，查看arp缓存队列长度，/proc/sys/net/ipv4/neigh/eth1/unres\_qlen（小概率事件）
 
+
+
+
+
+默认，Linux的stack是没有为广域网之间的大文件高速传输而配置的，这样做是为了节约内存资源。为了使连接的系统服务之间能有更加高速的网络处理更多的网络包，你可以很容易的通过增加网络 buffer size 来调整 Linux 网络 stack 。
+
+默认的 Linux buffer size 的最大值是非常小的，tcp 的内存是基于系统的内存自动计算的，你能通过键入以下命令找到实际的值：
+
+$ cat /proc/sys/net/ipv4/tcp\_mem
+
+默认的和最大的接收数据包内存大小：
+
+$ cat /proc/sys/net/core/rmem\_default
+
+$ cat /proc/sys/net/core/rmem\_max
+
+默认的和最大的发送数据包内存的大小：
+
+$ cat /proc/sys/net/core/wmem\_default
+
+$ cat /proc/sys/net/core/wmem\_max
+
+最大的内存 buffers 的选项：
+
+$ cat /proc/sys/net/core/optmem\_max
+
+为所有的协议队列设置操作系统层面的最大的发送 buffer size \(wmem\) 和 接收 buffer size （rmem）为 12 MB。换句话说，设置内存数量，分配给每一个为了传送文件而打开或者是创建的 tcp socket 。
+
+警告！在大多数的 Linux 中`rmem_max`和`wmem_max`被分配的值为 128 k，在一个低延迟的网络环境中，或者是 apps 比如 DNS、Web Server，这或许是足够的。尽管如此，如果延迟太大，默认的值可能就太小了，所以请记录以下在你的服务器上用来提高内存使用方法的设置
+
+\# echo 'net.core.wmem\_max=12582912' &gt;&gt; /etc/sysctl.conf
+
+\# echo 'net.core.rmem\_max=12582912' &gt;&gt; /etc/sysctl.conf
+
+你还需要设置 minimum size, initial size, and maximum size in bytes:
+
+\# echo 'net.ipv4.tcp\_rmem= 10240 87380 12582912' &gt;&gt; /etc/sysctl.conf
+
+\# echo 'net.ipv4.tcp\_wmem= 10240 87380 12582912' &gt;&gt; /etc/sysctl.conf
+
+打开 window scaling ，这是一个用来扩展传输窗口的选项：
+
+\# echo 'net.ipv4.tcp\_window\_scaling = 1' &gt;&gt; /etc/sysctl.conf
+
+确保定义在 RFC1323 中的`timestamps`打开：
+
+\# echo 'net.ipv4.tcp\_timestamps = 1' &gt;&gt; /etc/sysctl.conf
+
+确保 select acknowledgments：
+
+\# echo 'net.ipv4.tcp\_sack = 1' &gt;&gt; /etc/sysctl.conf
+
+当连接关闭的时候，TCP 默认缓存了很多连接指标在 route cache 中，以至于在不久的将来，连接建立的时候，可以用这些值来设置初始化条件。通常，这提升了整体的性能，但是，有时候会引起性能下降， 如果设置的话，TCP 在关闭的时候不缓存这些指标。
+
+\# echo 'net.ipv4.tcp\_no\_metrics\_save = 1' &gt;&gt; /etc/sysctl.conf
+
+当 interface 接收到的数据包数量比内核处理速度的快的时候， 设置 input 队列最大的 packets 数量值。
+
+\# echo 'net.core.netdev\_max\_backlog = 5000' &gt;&gt; /etc/sysctl.conf
+
+现在重载这些改变，使其生效：
+
+\# sysctl -p
+
+
+
+echo 'net.core.wmem\_max=1048576000' &gt;&gt; /etc/sysctl.conf
+
+echo 'net.core.rmem\_max=1048576000' &gt;&gt; /etc/sysctl.conf
+
+echo 'net.core.netdev\_max\_backlog = 100000' &gt;&gt; /etc/sysctl.conf
+
+echo 'net.ipv4.udp\_mem= 10240 1048576000 1048576000' &gt;&gt; /etc/sysctl.conf
+
+
+
+
+
+
+
+  
+
+
 参考资料
 
 * [linux 系统 UDP 丢包问题分析思路](https://cizixs.com/2018/01/13/linux-udp-packet-drop-debug/?hmsr=toutiao.io&utm_medium=toutiao.io&utm_source=toutiao.io)
 * [http://m.blog.chinaunix.net/uid-12274566-id-4252336.html](http://m.blog.chinaunix.net/uid-12274566-id-4252336.html)
 * [https://blog.csdn.net/charleslei/article/details/71699562](https://blog.csdn.net/charleslei/article/details/71699562)
+* [https://blog.csdn.net/mialo163/article/details/85706502](https://blog.csdn.net/mialo163/article/details/85706502)
+
+* [https://www.cyberciti.biz/faq/linux-tcp-tuning/](https://www.cyberciti.biz/faq/linux-tcp-tuning/)
+
+* [https://www.cnblogs.com/lvdongjie/p/10401028.html](https://www.cnblogs.com/lvdongjie/p/10401028.html)
+
+* [https://www.cnblogs.com/cloudos/p/8416415.html](https://www.cnblogs.com/cloudos/p/8416415.html)
 
 
 
