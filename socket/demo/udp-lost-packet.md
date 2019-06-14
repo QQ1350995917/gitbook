@@ -261,10 +261,6 @@ setsockopt(sock_fd, SOL_SOCKET, SO_NO_CHECK, (void*)&disable, sizeof(disable)
 
 7. 如果是arp缓存导致的丢包，查看arp缓存队列长度，/proc/sys/net/ipv4/neigh/eth1/unres\_qlen（小概率事件）
 
-
-
-
-
 默认，Linux的stack是没有为广域网之间的大文件高速传输而配置的，这样做是为了节约内存资源。为了使连接的系统服务之间能有更加高速的网络处理更多的网络包，你可以很容易的通过增加网络 buffer size 来调整 Linux 网络 stack 。
 
 默认的 Linux buffer size 的最大值是非常小的，tcp 的内存是基于系统的内存自动计算的，你能通过键入以下命令找到实际的值：
@@ -325,8 +321,6 @@ $ cat /proc/sys/net/core/optmem\_max
 
 \# sysctl -p
 
-
-
 echo 'net.core.wmem\_max=1048576000' &gt;&gt; /etc/sysctl.conf
 
 echo 'net.core.rmem\_max=1048576000' &gt;&gt; /etc/sysctl.conf
@@ -334,15 +328,6 @@ echo 'net.core.rmem\_max=1048576000' &gt;&gt; /etc/sysctl.conf
 echo 'net.core.netdev\_max\_backlog = 100000' &gt;&gt; /etc/sysctl.conf
 
 echo 'net.ipv4.udp\_mem= 10240 1048576000 1048576000' &gt;&gt; /etc/sysctl.conf
-
-
-
-
-
-
-
-  
-
 
 参考资料
 
@@ -356,6 +341,8 @@ echo 'net.ipv4.udp\_mem= 10240 1048576000 1048576000' &gt;&gt; /etc/sysctl.conf
 * [https://www.cnblogs.com/lvdongjie/p/10401028.html](https://www.cnblogs.com/lvdongjie/p/10401028.html)
 
 * [https://www.cnblogs.com/cloudos/p/8416415.html](https://www.cnblogs.com/cloudos/p/8416415.html)
+
+* [https://ref.onixs.biz/lost-multicast-packets-troubleshooting.html](https://ref.onixs.biz/lost-multicast-packets-troubleshooting.html)[https://ref.onixs.biz/lost-multicast-packets-troubleshooting.html](https://ref.onixs.biz/lost-multicast-packets-troubleshooting.html)
 
 
 
