@@ -342,7 +342,7 @@ echo 'net.ipv4.udp\_mem= 10240 1048576000 1048576000' &gt;&gt; /etc/sysctl.conf
 
 * [https://www.cnblogs.com/cloudos/p/8416415.html](https://www.cnblogs.com/cloudos/p/8416415.html)
 
-* [https://ref.onixs.biz/lost-multicast-packets-troubleshooting.html](https://ref.onixs.biz/lost-multicast-packets-troubleshooting.html)[https://ref.onixs.biz/lost-multicast-packets-troubleshooting.html](https://ref.onixs.biz/lost-multicast-packets-troubleshooting.html)
+* [https://ref.onixs.biz/lost-multicast-packets-troubleshooting.html](https://ref.onixs.biz/lost-multicast-packets-troubleshooting.html)
 
 
 
