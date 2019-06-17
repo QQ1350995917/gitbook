@@ -1,3 +1,7 @@
+redis服务端是有C实现
+
+
+
 数据存储结构：hashtable的存储方式（hash冲突，对scan的影响）
 
 常用命令：get，set，info，keys，scan，setnx，
@@ -30,70 +34,25 @@ rdb方式，主进程判断是否有子进程，如果有则返回，否则主�
 
 从节点并不是在主节点一进入 FAIL 状态就马上尝试发起选举，而是有一定延迟，一定的延迟确保我们等待FAIL状态在集群中传播，slave如果立即尝试选举，其它masters或许尚未意识到FAIL状态，可能会拒绝投票
 
-  
-
-
 DELAY = 500ms + random\(0 ~ 500ms\) + SLAVE\_RANK \* 1000ms
-
-  
-
 
 SLAVE\_RANK表示此slave已经从master复制数据的总量的rank。Rank越小代表已复制的数据越新。这种方式下，持有最新数据的slave将会首先发起选举（理论上）。
 
-  
+集群方式：增删节点重新规制Slot分布，异步同步，同步中间状态记录solt流向并对客户端进行重定向操作，
 
-
-  
-
-
- 集群方式：增删节点重新规制Slot分布，异步同步，同步中间状态记录solt流向并对客户端进行重定向操作，
-
-  
-
-
-  
-
-
- 分布式锁：基于Redis的分布式锁，使用setnx方式实现
-
-  
-
-
-  
-
-
-  
-
+分布式锁：基于Redis的分布式锁，使用setnx方式实现
 
 最大内存限制下的淘汰策略：
 
-  
-
-
 noeviction\(默认策略，可删除，可读，不可写\)，
-
-  
-
 
 volatile-lru（对设置了过期的key进行lru），
 
-  
-
-
 allkeys-lru（所有可以的lru\)，
-
-  
-
 
 volatile-random，
 
-  
-
-
 allkeys-random，
-
-  
-
 
 volatile-ttl（对设置了过期的key进行最小寿命淘汰）
 
