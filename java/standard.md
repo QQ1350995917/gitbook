@@ -63,3 +63,7 @@ groovyScript("def returnType = \"${_1}\"; def result = ' * @return ' + returnTyp
 
 
 
+其他
+
+[http://developer.51cto.com/art/201906/597685.htm](http://developer.51cto.com/art/201906/597685.htm)
+
