@@ -108,5 +108,47 @@ public class Controller {  // 目标对象
 }
 ```
 
+## Spring中开启AspectJ支持
+
+[https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html\#aop-ataspectj](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#aop-ataspectj)
+
+```
+@Configuration
+@EnableAspectJAutoProxy
+public class AppConfig {
+
+}
+
+或者
+<aop:aspectj-autoproxy/>
+```
+
+声明一个切面
+
+[https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html\#aop-at-aspectj](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#aop-at-aspectj)
+
+```
+<bean id="myAspect" class="org.xyz.NotVeryUsefulAspect">
+    <!-- configure properties of the aspect here -->
+</bean>
+或者
+package org.xyz;
+import org.aspectj.lang.annotation.Aspect;
+
+@Aspect
+public class NotVeryUsefulAspect {
+
+}
+```
+
+声明一个切点
+
+[https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html\#aop-pointcuts](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#aop-pointcuts)
+
+```
+@Pointcut("execution(* transfer(..))")// the pointcut expression // 切点是一个表，包含了springEL表达式，每个表达式是一个连接点
+private void anyOldTransfer() {}// the pointcut signature
+```
+
 
 
