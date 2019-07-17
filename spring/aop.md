@@ -14,6 +14,8 @@ CGLIB代理
 
 sping初始化织入还是getBean织入？初始化，在IOC容器中的对象初始化的时候就执行了织入。IOC容器名字singletonObjects，其本质是要给线程安全的HashMap。（具体织入是在singletonFactory.getObject\(\)时候织入）
 
+springIOC从容器中拿到一个对象后，进行各种判断，判断其是否要使用代理（AbstractAutowireCapableBeanFactory查找exposedObject = this.initializeBean），
+
 跟中容器对象初始化的方法：大胆假设，小心求证，使用条件断点法。
 
 ## SpringAOP和AspectJ的关系
