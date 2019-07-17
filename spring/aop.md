@@ -12,7 +12,7 @@ CGLIB代理
 
 编译期织入还是运行期织入？运行时
 
-sping初始化织入还是getBean织入？
+sping初始化织入还是getBean织入？初始化，在IOC容器中的对象初始化的时候就执行了织入。IOC容器名字singletonObjects，其本质是要给线程安全的HashMap。
 
 ## SpringAOP和AspectJ的关系
 
@@ -175,7 +175,7 @@ public class SystemArchitecture {
     public void doAccessCheckBefore() {
         // ...
     }
-    
+
     // 则可以搭配如下通知，通知中的表达式是切点方法的全路径限定
     @After("com.xyz.someapp.SystemArchitecture.dataAccessOperation()")
     public void doAccessCheckAfter() {
