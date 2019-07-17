@@ -12,7 +12,9 @@ CGLIB代理
 
 编译期织入还是运行期织入？运行时
 
-sping初始化织入还是getBean织入？初始化，在IOC容器中的对象初始化的时候就执行了织入。IOC容器名字singletonObjects，其本质是要给线程安全的HashMap。
+sping初始化织入还是getBean织入？初始化，在IOC容器中的对象初始化的时候就执行了织入。IOC容器名字singletonObjects，其本质是要给线程安全的HashMap。（具体织入是在singletonFactory.getObject\(\)时候织入）
+
+跟中容器对象初始化的方法：大胆假设，小心求证，使用条件断点法。
 
 ## SpringAOP和AspectJ的关系
 
