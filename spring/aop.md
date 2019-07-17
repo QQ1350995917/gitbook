@@ -30,3 +30,25 @@ AspectJSupport，使用AspectJ注解
 
 Schema-basedAOPSupport，使用xml配置
 
+## SpringAOP中的概念
+
+aspect
+
+PointCut（切点）：连接点的集合
+
+JoinPoint（连接点）：目标对象中的方法
+
+advice
+
+before
+
+after returen advice
+
+after throwing advice
+
+after\(final\) advice
+
+around advice
+
+
+
