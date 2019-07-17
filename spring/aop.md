@@ -14,7 +14,17 @@ CGLIB代理
 
 sping初始化织入还是getBean织入？初始化，在IOC容器中的对象初始化的时候就执行了织入。IOC容器名字singletonObjects，其本质是要给线程安全的HashMap。（具体织入是在singletonFactory.getObject\(\)时候织入）
 
-springIOC从容器中拿到一个对象后，进行各种判断，判断其是否要使用代理（AbstractAutowireCapableBeanFactory查找exposedObject = this.initializeBean），
+springIOC从容器中拿到一个对象后，进行各种判断，判断其是否要使用代理（AbstractAutowireCapableBeanFactory查找exposedObject = this.initializeBean），是在initializeBean方法中完成代理。里面具体过程如下
+
+```
+AbstractAutoProxyCreator.java -> AopProxy
+其中AopProxy有两个实现
+CglibAopProxy
+JdkDynamicAopProxy
+那么如何识别用哪个实现呢，在DefaultAopProxyFactory中的createAopProxy中进行了判断，进行了好几个判断条件。
+其中config.isProxyTargetClass默认为false，此时直接使用JDK动态代理。
+但是config.isProxyTargetClass是可以配置的，在@Configuration标注的文件上开启@EnableAspectJAutoProxy（proxyTargetClass = true)
+```
 
 跟中容器对象初始化的方法：大胆假设，小心求证，使用条件断点法。
 
