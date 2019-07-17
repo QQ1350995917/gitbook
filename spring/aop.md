@@ -36,6 +36,34 @@ Aspect（切面）：PointCut，JoinPoint，Advice定义的地方（文件）就
 
 PointCut（切点）：连接点的集合 （相对于连接点，切点可看作链接点的集合表）
 
+```
+public void save(){
+    // before logger.log();
+
+    save
+
+    // after logger.log();
+}
+
+public void modify(){
+    // before logger.log();
+
+    modify
+
+    // after logger.log();
+}
+
+public void delete(){
+    // before logger.log();
+
+    delete
+
+    // after logger.log();
+}
+
+以上各个类，方法中的logger.log()称之为切点
+```
+
 JoinPoint（连接点）：目标对象中的方法 （相对与切点，连接点可看作表中的一个记录），如下面的looger.log\(\)就称之为连接点
 
 ```
@@ -52,13 +80,27 @@ Weaving（织入）：把代理逻辑加入到目标对象上的过程叫织入
 
 Advice
 
-before
-
-after returen advice
-
-after throwing advice
-
-after\(final\) advice
+```
+public void save() throwing Exception { // after throwing advice
+    // before logger.log(); // before(前置通知)
+    try{
+        save
+    } catch(){
+        // after throwing advice
+    } finally{
+        // after(final) advice
+    }
+    // after logger.log(); // after returen advice(后置通知)
+}
+```
 
 around advice
+
+
+
+
+
+
+
+
 
