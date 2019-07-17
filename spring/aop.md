@@ -148,7 +148,40 @@ public class NotVeryUsefulAspect {
 ```
 @Pointcut("execution(* transfer(..))")// the pointcut expression // 切点是一个表，包含了springEL表达式，每个表达式是一个连接点
 private void anyOldTransfer() {}// the pointcut signature
+
 ```
+
+常用切点表达式
+
+[https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html\#aop-pointcuts-examples](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#aop-pointcuts-examples)
+
+声明一个通知
+
+[https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html\#aop-advice](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#aop-advice)
+
+```
+package com.xyz.someapp;
+
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+
+@Aspect
+public class SystemArchitecture {
+    // 如果有如下切点
+    @Pointcut("execution(* com.xyz.someapp.dao.*.*(..))")
+    public void dataAccessOperation() {}
+
+    // 则可以搭配如下通知，通知中的表达式是切点方法的全路径限定
+    @Before("com.xyz.someapp.SystemArchitecture.dataAccessOperation()")
+    public void doAccessCheck() {
+        // ...
+    }
+}
+```
+
+
+
+
 
 
 
