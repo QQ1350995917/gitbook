@@ -28,7 +28,7 @@ JdkDynamicAopProxy
 但是config.isProxyTargetClass是可以配置的，在@Configuration标注的文件上开启@EnableAspectJAutoProxy（proxyTargetClass = true)
 ```
 
-跟中容器对象初始化的方法：大胆假设，小心求证，使用条件断点法。
+**跟中容器对象初始化的方法：大胆假设，小心求证，使用条件断点法。**
 
 ## SpringAOP和AspectJ的关系
 
