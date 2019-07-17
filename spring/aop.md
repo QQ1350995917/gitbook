@@ -61,10 +61,10 @@ public void delete(){
     // after logger.log();
 }
 
-以上各个类，方法中的logger.log()称之为切点
+以上各个类，方法中的所有logger.log()加起来称之为切点
 ```
 
-JoinPoint（连接点）：目标对象中的方法 （相对与切点，连接点可看作表中的一个记录），如下面的looger.log\(\)就称之为连接点
+JoinPoint（连接点）：目标对象中的方法 （相对与切点，连接点可看作表中的一个记录），
 
 ```
 public void save(){
@@ -74,6 +74,7 @@ public void save(){
 
     // after logger.log();
 }
+以上的looger.log()和save结合的地方就称之为连接点
 ```
 
 Weaving（织入）：把代理逻辑加入到目标对象上的过程叫织入
@@ -96,11 +97,16 @@ public void save() throwing Exception { // after throwing advice
 
 around advice
 
+Target
 
-
-
-
-
+```
+public class Controller {  // 目标对象
+    public void save(){ // 连接点
+        logger.log(); // 代理对象，代理逻辑
+        save
+    }
+}
+```
 
 
 
