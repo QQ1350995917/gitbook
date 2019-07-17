@@ -32,7 +32,7 @@ Schema-basedAOPSupport，使用xml配置
 
 ## SpringAOP中的概念（spring中的aop作用为方法级别）
 
-Aspect（切面）：PointCut，JoinPoint，Advice定义的地方（文件）就是切面
+Aspect（切面）：PointCut，JoinPoint，Advice定义的地方（文件）就是切面，切点一定要交予Spring管理（@Component）
 
 PointCut（切点）：连接点的集合 （相对于连接点，切点可看作链接点的集合表）
 
@@ -148,7 +148,6 @@ public class NotVeryUsefulAspect {
 ```
 @Pointcut("execution(* transfer(..))")// the pointcut expression // 切点是一个表，包含了springEL表达式，每个表达式是一个连接点
 private void anyOldTransfer() {}// the pointcut signature
-
 ```
 
 常用切点表达式
@@ -173,15 +172,17 @@ public class SystemArchitecture {
 
     // 则可以搭配如下通知，通知中的表达式是切点方法的全路径限定
     @Before("com.xyz.someapp.SystemArchitecture.dataAccessOperation()")
-    public void doAccessCheck() {
+    public void doAccessCheckBefore() {
+        // ...
+    }
+    
+    // 则可以搭配如下通知，通知中的表达式是切点方法的全路径限定
+    @After("com.xyz.someapp.SystemArchitecture.dataAccessOperation()")
+    public void doAccessCheckAfter() {
         // ...
     }
 }
 ```
-
-
-
-
 
 
 
