@@ -34,16 +34,16 @@ Schema-basedAOPSupport，使用xml配置
 
 Aspect（切面）：PointCut，JoinPoint，Advice定义的地方（文件）就是切面
 
-PointCut（切点）：连接点的集合 （表）
+PointCut（切点）：连接点的集合 （相对于连接点，切点可看作链接点的集合表）
 
-JoinPoint（连接点）：目标对象中的方法 （记录），如下面的looger.log\(\)就称之为连接点
+JoinPoint（连接点）：目标对象中的方法 （相对与切点，连接点可看作表中的一个记录），如下面的looger.log\(\)就称之为连接点
 
 ```
 public void save(){
     // before logger.log();
-    
+
     save
-    
+
     // after logger.log();
 }
 ```
