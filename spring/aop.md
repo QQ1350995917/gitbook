@@ -30,15 +30,27 @@ AspectJSupport，使用AspectJ注解
 
 Schema-basedAOPSupport，使用xml配置
 
-## SpringAOP中的概念
+## SpringAOP中的概念（spring中的aop作用为方法级别）
 
-aspect
+Aspect（切面）：PointCut，JoinPoint，Advice定义的地方（文件）就是切面
 
-PointCut（切点）：连接点的集合
+PointCut（切点）：连接点的集合 （表）
 
-JoinPoint（连接点）：目标对象中的方法
+JoinPoint（连接点）：目标对象中的方法 （记录），如下面的looger.log\(\)就称之为连接点
 
-advice
+```
+public void save(){
+    // before logger.log();
+    
+    save
+    
+    // after logger.log();
+}
+```
+
+Weaving（织入）：把代理逻辑加入到目标对象上的过程叫织入
+
+Advice
 
 before
 
@@ -49,6 +61,4 @@ after throwing advice
 after\(final\) advice
 
 around advice
-
-
 
