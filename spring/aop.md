@@ -4,9 +4,11 @@ OOP是自上而下（自左而右）的单维度代码逻辑，在随着工程�
 
 ## AOP的底层实现
 
-JDK动态代理
+JDK动态代理（代理类有接口默认采用动态代理）
 
-CGLIB代理
+CGLIB代理（代理类没有接口默认采用CGLIB代理）
+
+但是不是 绝对的，可以使用@EnableAspectJAutoProxy（proxyTargetClass = true\)强制采用CGLIB。
 
 问题
 
