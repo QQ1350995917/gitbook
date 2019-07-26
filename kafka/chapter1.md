@@ -2,6 +2,10 @@
 
 ## 服务端相关命令
 
+启动
+
+./zookeeper-server-start.sh ../config/zookeeper.properties
+
 罗列所有的topic
 
 kafka-topics.sh --list --zookeeper localhost:2181
@@ -46,27 +50,27 @@ kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic udp-channel-
 
 罗列消费者Group
 
-1\) 分ZooKeeper方式（老）
+1\) 分ZooKeeper方式（老）
 
-kafka-consumer-groups.sh --zookeeper 127.0.0.1:2181/kafka --list
+kafka-consumer-groups.sh --zookeeper 127.0.0.1:2181/kafka --list
 
-2\) API方式（新）
+2\) API方式（新）
 
-kafka-consumer-groups.sh --new-consumer --bootstrap-server 127.0.0.1:9092 --list
+kafka-consumer-groups.sh --new-consumer --bootstrap-server 127.0.0.1:9092 --list
 
 消费者Group详情
 
-kafka-consumer-groups.sh --new-consumer --bootstrap-server 127.0.0.1:9092 --group test --describe
+kafka-consumer-groups.sh --new-consumer --bootstrap-server 127.0.0.1:9092 --group test --describe
 
 删除消费者Group
 
 老版本的ZooKeeper方式可以删除Group，新版本则自动删除，当执行：
 
-kafka-consumer-groups.sh --new-consumer --bootstrap-server 127.0.0.1:9092 --group test --delete
+kafka-consumer-groups.sh --new-consumer --bootstrap-server 127.0.0.1:9092 --group test --delete
 
 输出如下提示：
 
-| Option '\[delete\]' is only valid with '\[zookeeper\]'.Note that there's no need to delete group metadata for the new consumeras the group is deleted when the last committed offset for that group expires. |
+| Option '\[delete\]' is only valid with '\[zookeeper\]'.Note that there's no need to delete group metadata for the new consumeras the group is deleted when the last committed offset for that group expires. |
 | :--- |
 
 
@@ -77,8 +81,6 @@ kafka-consumer-groups.sh --new-consumer --bootstrap-server 127.0.0.1:9092 --
 ## 生产者相关命令
 
 kafka-console-producer.sh --broker-list localhost:9092 --topic udp-channel-publisher
-
-
 
 参考资料
 
