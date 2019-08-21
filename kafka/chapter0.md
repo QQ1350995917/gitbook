@@ -46,8 +46,6 @@
 
 10：./kafka-server-start.sh ../config/server.properties &
 
-
-
 # 集群配置
 
 
