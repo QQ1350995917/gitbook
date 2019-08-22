@@ -1,4 +1,4 @@
-首先查看cpu指令集
+1：首先查看cpu指令集
 
 cat /proc/cpuinfo \| grep name \| cut -f2 -d: \| uniq -c
 
@@ -6,13 +6,13 @@ cat /proc/cpuinfo \| grep name \| cut -f2 -d: \| uniq -c
 
 创建数据库文件夹与日志文件
 
+2：curl -O https://fastdl.mongodb.org/linux/mongodb-linux-x86\_64-ubuntu1804-4.2.0.tgz
+
 mkdir /usr/local/mongodb/data
 
 touch /usr/local/mongodb/logs
 
-
-
-2：mongod --dbpath /data/&lt;path&gt; --port &lt;port no&gt; 
+2：mongod --dbpath /data/&lt;path&gt; --port &lt;port no&gt;
 
 无密码启动
 
