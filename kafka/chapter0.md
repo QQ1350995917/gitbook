@@ -44,9 +44,11 @@
 
 9：./zookeeper-server-start.sh ../config/zookeeper.properties（尚未启动zookeeper时）
 
-10：./kafka-server-start.sh ../config/server.properties &
+10：./kafka-server-start.sh ../config/server.properties 
+
+11：./kafka-server-start.sh ../config/server.properties 1&gt;/dev/null 2&gt;&1 & （守护进程）
 
 # 集群配置
 
-
+[https://www.cnblogs.com/zikai/p/9627736.html](https://www.cnblogs.com/zikai/p/9627736.html)
 
