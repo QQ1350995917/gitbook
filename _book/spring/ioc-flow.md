@@ -1,0 +1,76 @@
+
+# ApplicationContext启动流程
+
+```mermaid
+sequenceDiagram
+ClassPathXmlApplicationContext ->>+ AbstractRefreshableConfigApplicationContext: setConfigLocations
+AbstractRefreshableConfigApplicationContext ->> AbstractRefreshableConfigApplicationContext: 给变量configLocations赋值
+AbstractRefreshableConfigApplicationContext -->>- ClassPathXmlApplicationContext:void
+activate AbstractApplicationContext
+ClassPathXmlApplicationContext ->> AbstractApplicationContext: refresh
+AbstractApplicationContext ->> AbstractApplicationContext: 加锁
+AbstractApplicationContext ->> AbstractApplicationContext: prepareRefresh：\n为容器记录启动时间和启动状态\n初始化配置文件占位符\n
+AbstractApplicationContext ->> AbstractApplicationContext: obtainFreshBeanFactory：
+AbstractApplicationContext ->> AbstractApplicationContext: refreshBeanFactory
+AbstractApplicationContext ->> AbstractRefreshableApplicationContext: refreshBeanFactory：为了生成DefaultListableBeanFactory类型的BeanFactory
+deactivate AbstractApplicationContext
+activate AbstractRefreshableApplicationContext
+AbstractRefreshableApplicationContext ->> AbstractRefreshableApplicationContext: 工厂已初始化就销毁并重建
+AbstractRefreshableApplicationContext ->> AbstractRefreshableApplicationContext: 设置工厂的ID等信息
+AbstractRefreshableApplicationContext ->> AbstractRefreshableApplicationContext: loadBeanDefinitions
+AbstractRefreshableApplicationContext ->> AbstractXmlApplicationContext: loadBeanDefinitions
+deactivate AbstractRefreshableApplicationContext
+activate AbstractXmlApplicationContext
+AbstractXmlApplicationContext ->> AbstractXmlApplicationContext: 初始化XmlBeanDefinitionReader
+AbstractXmlApplicationContext ->> AbstractXmlApplicationContext: 给XmlBeanDefinitionReader设置环境等
+AbstractXmlApplicationContext ->> AbstractXmlApplicationContext: 给XmlBeanDefinitionReader配置xml解析器
+AbstractXmlApplicationContext ->> AbstractXmlApplicationContext: loadBeanDefinitions
+AbstractXmlApplicationContext ->> AbstractBeanDefinitionReader: loadBeanDefinitions
+deactivate AbstractXmlApplicationContext
+activate AbstractBeanDefinitionReader
+AbstractBeanDefinitionReader ->> AbstractBeanDefinitionReader: for循环执行loadBeanDefinitions
+AbstractBeanDefinitionReader ->> XmlBeanDefinitionReader: loadBeanDefinitionst,同步IO加载配置文件进行解读
+deactivate AbstractBeanDefinitionReader
+activate XmlBeanDefinitionReader
+XmlBeanDefinitionReader ->> XmlBeanDefinitionReader: doLoadBeanDefinitions,形成文档对象
+XmlBeanDefinitionReader ->> XmlBeanDefinitionReader: registerBeanDefinitions,
+XmlBeanDefinitionReader ->> DefaultBeanDefinitionDocumentReader: doRegisterBeanDefinitions,
+deactivate XmlBeanDefinitionReader
+activate DefaultBeanDefinitionDocumentReader
+DefaultBeanDefinitionDocumentReader ->> DefaultBeanDefinitionDocumentReader: 创建BeanDefinitionParserDelegate,
+DefaultBeanDefinitionDocumentReader ->> DefaultBeanDefinitionDocumentReader: 前置preProcessXml空实现
+DefaultBeanDefinitionDocumentReader ->> DefaultBeanDefinitionDocumentReader: parseBeanDefinitions,
+DefaultBeanDefinitionDocumentReader ->> DefaultBeanDefinitionDocumentReader: parseDefaultElement,
+DefaultBeanDefinitionDocumentReader ->> DefaultBeanDefinitionDocumentReader: processBeanDefinition,
+DefaultBeanDefinitionDocumentReader ->> BeanDefinitionReaderUtils: registerBeanDefinition
+deactivate DefaultBeanDefinitionDocumentReader
+
+BeanDefinitionReaderUtils ->> BeanDefinitionRegistry: registerBeanDefinition
+
+BeanDefinitionRegistry ->>+ DefaultListableBeanFactory: registerBeanDefinition
+DefaultListableBeanFactory ->> DefaultListableBeanFactory: 把BeanDefinition注册到持有的ConcurrentHashMap<String, BeanDefinition>中
+DefaultListableBeanFactory -->>- AbstractApplicationContext: 注册完毕尚未实例化
+
+DefaultBeanDefinitionDocumentReader --> DefaultBeanDefinitionDocumentReader: 后置preProcessXml空实现
+activate AbstractApplicationContext
+AbstractApplicationContext ->> AbstractApplicationContext: getBeanFactory，检测AbstractRefreshableApplicationContext\n中新建的BeanFactory对象是否成功
+AbstractApplicationContext ->> AbstractApplicationContext: prepareBeanFactory，给BeaFactory配置加载器，BeanPostProcessor等属性
+AbstractApplicationContext ->> AbstractBeanFactory: addBeanPostProcessor\n把BeanPostProcessor实例存入List集合，\n比较奇怪的是首先从集合中移除该实例,\n然后再添加， 如果为了排重为何不使用set呢？
+deactivate AbstractApplicationContext
+
+activate AbstractApplicationContext
+AbstractApplicationContext ->> AbstractApplicationContext: postProcessBeanFactory: \n空实现，给子类处理机会，如注册request/session域
+AbstractApplicationContext ->> AbstractApplicationContext: invokeBeanFactoryPostProcessors,BeanFactoryPostProcessor对象处理，类似于BeanPostProcessor。
+AbstractApplicationContext ->> AbstractApplicationContext: registerBeanPostProcessors:对添加的BeanPostProcessor进行注册，进行排序等操作后还是对AbstractBeanFactory: addBeanPostProcessor的操作。
+AbstractApplicationContext ->> AbstractApplicationContext: initMessageSource，初始化MessageSource如国际化等信息
+AbstractApplicationContext ->> AbstractApplicationContext: initApplicationEventMulticaster，初始化当前 ApplicationContext 的事件广播器
+AbstractApplicationContext ->> AbstractApplicationContext: onRefresh，钩子方法，供子类扩展使用
+AbstractApplicationContext ->> AbstractApplicationContext: registerListeners，检查并注册监听器，监听器就是注册到上一步中初始化的广播器中
+AbstractApplicationContext ->> AbstractApplicationContext: finishBeanFactoryInitialization，实例化已经注册的bean
+AbstractApplicationContext ->> AbstractApplicationContext: finishRefresh，for循环广播出事件
+AbstractApplicationContext ->> AbstractApplicationContext: resetCommonCaches:
+deactivate activate AbstractApplicationContext
+
+
+
+```

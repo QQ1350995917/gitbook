@@ -1,0 +1,673 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>UDP丢包分析 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-mermaid-gb3/mermaid/mermaid.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="demo/udp-reliable-demo.html" />
+    
+    
+    <link rel="prev" href="io.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../java/standard.html">
+            
+                <a href="../java/standard.html">
+            
+                    
+                    JavaStandard
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="socket.html">
+            
+                <a href="socket.html">
+            
+                    
+                    Socket
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="protocol.html">
+            
+                <a href="protocol.html">
+            
+                    
+                    协议
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="io.html">
+            
+                <a href="io.html">
+            
+                    
+                    IO
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.3" data-path="udp-lost-packet.html">
+            
+                <a href="udp-lost-packet.html">
+            
+                    
+                    UDP丢包分析
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="demo/udp-reliable-demo.html">
+            
+                <a href="demo/udp-reliable-demo.html">
+            
+                    
+                    UDP案例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.4.1" data-path="demo/protocol.html">
+            
+                <a href="demo/protocol.html">
+            
+                    
+                    UDP自定义私有协议栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../mysql/mysql.html">
+            
+                <a href="../mysql/mysql.html">
+            
+                    
+                    MySQL
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../mysql/master-slave.html">
+            
+                <a href="../mysql/master-slave.html">
+            
+                    
+                    主从
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../mysql/cluster.html">
+            
+                <a href="../mysql/cluster.html">
+            
+                    
+                    集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../jdbc/jdbc.html">
+            
+                <a href="../jdbc/jdbc.html">
+            
+                    
+                    JDBC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../jdbc/pool.html">
+            
+                <a href="../jdbc/pool.html">
+            
+                    
+                    JDBC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../cap/cap.html">
+            
+                <a href="../cap/cap.html">
+            
+                    
+                    CAP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../spring/spring.html">
+            
+                <a href="../spring/spring.html">
+            
+                    
+                    Spring
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../spring/mvc-index.html">
+            
+                <a href="../spring/mvc-index.html">
+            
+                    
+                    MVC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../spring/ioc-index.html">
+            
+                <a href="../spring/ioc-index.html">
+            
+                    
+                    IOC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.1" data-path="../spring/ioc-application-context.html">
+            
+                <a href="../spring/ioc-application-context.html">
+            
+                    
+                    ApplicationContext
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.2" data-path="../spring/ioc-bean-factory.html">
+            
+                <a href="../spring/ioc-bean-factory.html">
+            
+                    
+                    BeanFactory
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.3" data-path="../spring/ioc-flow.html">
+            
+                <a href="../spring/ioc-flow.html">
+            
+                    
+                    Flow
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >UDP丢包分析</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="udp-&#x4E22;&#x5305;">UDP &#x4E22;&#x5305;</h1>
+<p>&#x7531;&#x4E0A;&#x56FE;&#x53EF;&#x77E5;&#xFF0C;&#x5728;&#x63A5;&#x6536; UDP &#x62A5;&#x6587;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x56FE;&#x4E2D;&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;&#x8FC7;&#x7A0B;&#x90FD;&#x53EF;&#x80FD;&#x4F1A;&#x4E3B;&#x52A8;&#x6216;&#x8005;&#x88AB;&#x52A8;&#x5730;&#x628A;&#x62A5;&#x6587;&#x4E22;&#x5F03;&#xFF0C;&#x56E0;&#x6B64;&#x4E22;&#x5305;&#x53EF;&#x80FD;&#x53D1;&#x751F;&#x5728;&#x7F51;&#x5361;&#x548C;&#x9A71;&#x52A8;&#xFF0C;&#x4E5F;&#x53EF;&#x80FD;&#x53D1;&#x751F;&#x5728;&#x7CFB;&#x7EDF;&#x548C;&#x5E94;&#x7528;&#x3002;</p>
+<p>&#x53D1;&#x751F;&#x4E22;&#x5305;&#x7684;&#x51E0;&#x79CD;&#x53EF;&#x80FD;&#x60C5;&#x51B5;</p>
+<ul>
+<li>&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7F13;&#x51B2;</li>
+<li>&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x53D1;&#x9001;&#x62A5;&#x6587;&#x901F;&#x7387;&#x5927;&#x4E8E;&#x5185;&#x6838;</li>
+<li>&#x5185;&#x6838;&#x5904;&#x7406;&#x62A5;&#x6587;&#x901F;&#x7387;&#x5927;&#x4E8E;&#x7F51;&#x5361;&#x5904;&#x7406;&#x62A5;&#x6587;&#x901F;&#x7387;</li>
+<li>&#x7CFB;&#x7EDF;&#x5185;&#x6838;&#x53C2;&#x6570;&#x8BBE;&#x7F6E;&#x4E0D;&#x5F53;</li>
+<li>&#x7CFB;&#x7EDF;&#x8D1F;&#x8F7D;&#x8FC7;&#x9AD8;</li>
+<li>&#x9632;&#x706B;&#x5899;</li>
+<li>&#x8DEF;&#x7531;</li>
+<li>UDP &#x62A5;&#x6587;&#x9519;&#x8BEF;</li>
+</ul>
+<h2 id="&#x5305;&#x4E22;&#x5728;&#x4EC0;&#x4E48;&#x5730;&#x65B9;">&#x5305;&#x4E22;&#x5728;&#x4EC0;&#x4E48;&#x5730;&#x65B9;</h2>
+<p>&#x60F3;&#x8981;&#x8BE6;&#x7EC6;&#x4E86;&#x89E3; linux &#x7CFB;&#x7EDF;&#x5728;&#x6267;&#x884C;&#x54EA;&#x4E2A;&#x51FD;&#x6570;&#x65F6;&#x4E22;&#x5305;&#x7684;&#x8BDD;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; dropwatch &#x5DE5;&#x5177;&#xFF0C;&#x5B83;&#x76D1;&#x542C;&#x7CFB;&#x7EDF;&#x4E22;&#x5305;&#x4FE1;&#x606F;&#xFF0C;&#x5E76;&#x6253;&#x5370;&#x51FA;&#x4E22;&#x5305;&#x53D1;&#x751F;&#x7684;&#x51FD;&#x6570;&#x5730;&#x5740;&#xFF1A;</p>
+<pre><code># dropwatch -l kas
+Initalizing kallsyms db
+dropwatch&gt; start
+Enabling monitoring...
+Kernel monitoring activated.
+Issue Ctrl-C to stop monitoring
+
+1 drops at tcp_v4_do_rcv+cd (0xffffffff81799bad)
+10 drops at tcp_v4_rcv+80 (0xffffffff8179a620)
+1 drops at sk_stream_kill_queues+57 (0xffffffff81729ca7)
+4 drops at unix_release_sock+20e (0xffffffff817dc94e)
+1 drops at igmp_rcv+e1 (0xffffffff817b4c41)
+1 drops at igmp_rcv+e1 (0xffffffff817b4c41)
+</code></pre><p>&#x901A;&#x8FC7;&#x8FD9;&#x4E9B;&#x4FE1;&#x606F;&#xFF0C;&#x627E;&#x5230;&#x5BF9;&#x5E94;&#x7684;&#x5185;&#x6838;&#x4EE3;&#x7801;&#x5904;&#xFF0C;&#x5C31;&#x80FD;&#x77E5;&#x9053;&#x5185;&#x6838;&#x5728;&#x54EA;&#x4E2A;&#x6B65;&#x9AA4;&#x4E2D;&#x628A;&#x62A5;&#x6587;&#x4E22;&#x5F03;&#xFF0C;&#x4EE5;&#x53CA;&#x5927;&#x81F4;&#x7684;&#x4E22;&#x5305;&#x539F;&#x56E0;&#x3002;
+&#x6B64;&#x5916;&#xFF0C;&#x8FD8;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; linux perf &#x5DE5;&#x5177;&#x76D1;&#x542C; kfree_skb&#xFF08;&#x628A;&#x7F51;&#x7EDC;&#x62A5;&#x6587;&#x4E22;&#x5F03;&#x65F6;&#x4F1A;&#x8C03;&#x7528;&#x8BE5;&#x51FD;&#x6570;&#xFF09; &#x4E8B;&#x4EF6;&#x7684;&#x53D1;&#x751F;&#xFF1A;</p>
+<pre><code>sudo perf record -g -a -e skb:kfree_skb
+sudo perf script
+</code></pre><h2 id="&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7F13;&#x51B2;">&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7F13;&#x51B2;</h2>
+<p>&#x4E0A;&#x9762;&#x63D0;&#x5230;&#x7CFB;&#x7EDF;&#x7684; UDP buffer size&#xFF0C;&#x8C03;&#x8282;&#x7684; sysctl &#x53C2;&#x6570;&#x53EA;&#x662F;&#x7CFB;&#x7EDF;&#x5141;&#x8BB8;&#x7684;&#x6700;&#x5927;&#x503C;&#xFF0C;&#x6BCF;&#x4E2A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5728;&#x521B;&#x5EFA; socket &#x65F6;&#x9700;&#x8981;&#x8BBE;&#x7F6E;&#x81EA;&#x5DF1; socket buffer size &#x7684;&#x503C;&#x3002;</p>
+<p>linux &#x7CFB;&#x7EDF;&#x4F1A;&#x628A;&#x63A5;&#x53D7;&#x5230;&#x7684;&#x62A5;&#x6587;&#x653E;&#x5230; socket &#x7684; buffer &#x4E2D;&#xFF0C;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4ECE; buffer &#x4E2D;&#x4E0D;&#x65AD;&#x5730;&#x8BFB;&#x53D6;&#x62A5;&#x6587;&#x3002;&#x6240;&#x4EE5;&#x8FD9;&#x91CC;&#x6709;&#x4E24;&#x4E2A;&#x548C;&#x5E94;&#x7528;&#x6709;&#x5173;&#x7684;&#x56E0;&#x7D20;&#x4F1A;&#x5F71;&#x54CD;&#x662F;&#x5426;&#x4F1A;&#x4E22;&#x5305;&#xFF1A;socket buffer size &#x5927;&#x5C0F;&#x4EE5;&#x53CA;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x8BFB;&#x53D6;&#x62A5;&#x6587;&#x7684;&#x901F;&#x5EA6;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E;&#x7B2C;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x521D;&#x59CB;&#x5316; socket &#x7684;&#x65F6;&#x5019;&#x8BBE;&#x7F6E; socket receive buffer &#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x6BD4;&#x5982;&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x628A; socket buffer &#x8BBE;&#x7F6E;&#x4E3A; 20MB&#xFF1A;</p>
+<pre><code>uint64_t receive_buf_size = 20*1024*1024;  //20 MB
+setsockopt(socket_fd, SOL_SOCKET, SO_RCVBUF, &amp;receive_buf_size, sizeof(receive_buf_size));
+</code></pre><p>&#x5982;&#x679C;&#x4E0D;&#x662F;&#x81EA;&#x5DF1;&#x7F16;&#x5199;&#x548C;&#x7EF4;&#x62A4;&#x7684;&#x7A0B;&#x5E8F;&#xFF0C;&#x4FEE;&#x6539;&#x5E94;&#x7528;&#x4EE3;&#x7801;&#x662F;&#x4EF6;&#x4E0D;&#x597D;&#x751A;&#x81F3;&#x4E0D;&#x592A;&#x53EF;&#x80FD;&#x7684;&#x4E8B;&#x60C5;&#x3002;&#x5F88;&#x591A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4F1A;&#x63D0;&#x4F9B;&#x914D;&#x7F6E;&#x53C2;&#x6570;&#x6765;&#x8C03;&#x8282;&#x8FD9;&#x4E2A;&#x503C;&#xFF0C;&#x8BF7;&#x53C2;&#x8003;&#x5BF9;&#x5E94;&#x7684;&#x5B98;&#x65B9;&#x6587;&#x6863;&#xFF1B;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x53EF;&#x7528;&#x7684;&#x914D;&#x7F6E;&#x53C2;&#x6570;&#xFF0C;&#x53EA;&#x80FD;&#x7ED9;&#x7A0B;&#x5E8F;&#x7684;&#x5F00;&#x53D1;&#x8005;&#x63D0; issue &#x4E86;&#x3002;</p>
+<p>&#x5F88;&#x660E;&#x663E;&#xFF0C;&#x589E;&#x52A0;&#x5E94;&#x7528;&#x7684; receive buffer &#x4F1A;&#x51CF;&#x5C11;&#x4E22;&#x5305;&#x7684;&#x53EF;&#x80FD;&#x6027;&#xFF0C;&#x4F46;&#x540C;&#x65F6;&#x4F1A;&#x5BFC;&#x81F4;&#x5E94;&#x7528;&#x4F7F;&#x7528;&#x66F4;&#x591A;&#x7684;&#x5185;&#x5B58;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x8C28;&#x614E;&#x4F7F;&#x7528;&#x3002;</p>
+<p>&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x56E0;&#x7D20;&#x662F;&#x5E94;&#x7528;&#x8BFB;&#x53D6; buffer &#x4E2D;&#x62A5;&#x6587;&#x7684;&#x901F;&#x5EA6;&#xFF0C;&#x5BF9;&#x4E8E;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x6765;&#x8BF4;&#xFF0C;&#x5904;&#x7406;&#x62A5;&#x6587;&#x5E94;&#x8BE5;&#x91C7;&#x53D6;&#x5F02;&#x6B65;&#x7684;&#x65B9;&#x5F0F;&#x3002;
+&#xFF08;&#x67E5;&#x770B;Netty&#x6846;&#x67B6;&#x662F;&#x5426;&#x7ED9;&#x51FA;&#x8BBE;&#x7F6E;&#x5927;&#x5C0F;&#x7684;api&#xFF09;&#x3002;</p>
+<h2 id="&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x53D1;&#x9001;&#x62A5;&#x6587;&#x901F;&#x7387;&#x5927;&#x4E8E;&#x5185;&#x6838;-&#x6216;&#x8005;-&#x7CFB;&#x7EDF;&#x5185;&#x6838;&#x53C2;&#x6570;&#x8BBE;&#x7F6E;&#x4E0D;&#x5F53;">&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x53D1;&#x9001;&#x62A5;&#x6587;&#x901F;&#x7387;&#x5927;&#x4E8E;&#x5185;&#x6838; &#x6216;&#x8005; &#x7CFB;&#x7EDF;&#x5185;&#x6838;&#x53C2;&#x6570;&#x8BBE;&#x7F6E;&#x4E0D;&#x5F53;</h2>
+<p>linux &#x7CFB;&#x7EDF;&#x5728;&#x63A5;&#x6536;&#x62A5;&#x6587;&#x4E4B;&#x540E;&#xFF0C;&#x4F1A;&#x628A;&#x62A5;&#x6587;&#x4FDD;&#x5B58;&#x5230;&#x7F13;&#x5B58;&#x533A;&#x4E2D;&#x3002;&#x56E0;&#x4E3A;&#x7F13;&#x5B58;&#x533A;&#x7684;&#x5927;&#x5C0F;&#x662F;&#x6709;&#x9650;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x51FA;&#x73B0; UDP &#x62A5;&#x6587;&#x8FC7;&#x5927;&#xFF08;&#x8D85;&#x8FC7;&#x7F13;&#x5B58;&#x533A;&#x5927;&#x5C0F;&#x6216;&#x8005; MTU &#x5927;&#x5C0F;&#xFF09;&#x3001;&#x63A5;&#x6536;&#x5230;&#x62A5;&#x6587;&#x7684;&#x901F;&#x7387;&#x592A;&#x5FEB;&#xFF0C;&#x90FD;&#x53EF;&#x80FD;&#x5BFC;&#x81F4; linux &#x56E0;&#x4E3A;&#x7F13;&#x5B58;&#x6EE1;&#x800C;&#x76F4;&#x63A5;&#x4E22;&#x5305;&#x7684;&#x60C5;&#x51B5;&#x3002;</p>
+<p>&#x5728;&#x7CFB;&#x7EDF;&#x5C42;&#x9762;&#xFF0C;linux &#x8BBE;&#x7F6E;&#x4E86; receive buffer &#x53EF;&#x4EE5;&#x914D;&#x7F6E;&#x7684;&#x6700;&#x5927;&#x503C;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x4E0B;&#x9762;&#x7684;&#x6587;&#x4EF6;&#x4E2D;&#x67E5;&#x770B;&#xFF0C;&#x4E00;&#x822C;&#x662F; linux &#x5728;&#x542F;&#x52A8;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x6839;&#x636E;&#x5185;&#x5B58;&#x5927;&#x5C0F;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x521D;&#x59CB;&#x503C;&#x3002;</p>
+<ul>
+<li>/proc/sys/net/core/rmem_max&#xFF1A;&#x5141;&#x8BB8;&#x8BBE;&#x7F6E;&#x7684; receive buffer &#x6700;&#x5927;&#x503C;</li>
+<li>/proc/sys/net/core/rmem_default&#xFF1A;&#x9ED8;&#x8BA4;&#x4F7F;&#x7528;&#x7684; receive buffer &#x503C;</li>
+<li>/proc/sys/net/core/wmem_max&#xFF1A;&#x5141;&#x8BB8;&#x8BBE;&#x7F6E;&#x7684; send buffer &#x6700;&#x5927;&#x503C;</li>
+<li>/proc/sys/net/core/wmem_dafault&#xFF1A;&#x9ED8;&#x8BA4;&#x4F7F;&#x7528;&#x7684; send buffer &#x6700;&#x5927;&#x503C;</li>
+</ul>
+<p>&#x4F46;&#x662F;&#x8FD9;&#x4E9B;&#x521D;&#x59CB;&#x503C;&#x5E76;&#x4E0D;&#x662F;&#x4E3A;&#x4E86;&#x5E94;&#x5BF9;&#x5927;&#x6D41;&#x91CF;&#x7684; UDP &#x62A5;&#x6587;&#xFF0C;&#x5982;&#x679C;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x63A5;&#x6536;&#x548C;&#x53D1;&#x9001; UDP &#x62A5;&#x6587;&#x975E;&#x5E38;&#x591A;&#xFF0C;&#x9700;&#x8981;&#x8BB2;&#x8FD9;&#x4E2A;&#x503C;&#x8C03;&#x5927;&#x3002;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; sysctl &#x547D;&#x4EE4;&#x8BA9;&#x5B83;&#x7ACB;&#x5373;&#x751F;&#x6548;&#xFF1A;</p>
+<pre><code>sysctl -w net.core.rmem_max=26214400 # &#x8BBE;&#x7F6E;&#x4E3A; 25M
+</code></pre><p>&#x4E5F;&#x53EF;&#x4EE5;&#x4FEE;&#x6539; /etc/sysctl.conf &#x4E2D;&#x5BF9;&#x5E94;&#x7684;&#x53C2;&#x6570;&#x5728;&#x4E0B;&#x6B21;&#x542F;&#x52A8;&#x65F6;&#x8BA9;&#x53C2;&#x6570;&#x4FDD;&#x6301;&#x751F;&#x6548;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x62A5;&#x6587;&#x62A5;&#x6587;&#x8FC7;&#x5927;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x53D1;&#x9001;&#x65B9;&#x5BF9;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x5206;&#x5272;&#xFF0C;&#x4FDD;&#x8BC1;&#x6BCF;&#x4E2A;&#x62A5;&#x6587;&#x7684;&#x5927;&#x5C0F;&#x5728; MTU &#x5185;&#x3002;</p>
+<p>&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x53EF;&#x4EE5;&#x914D;&#x7F6E;&#x7684;&#x53C2;&#x6570;&#x662F; netdev_max_backlog&#xFF0C;&#x5B83;&#x8868;&#x793A; linux &#x5185;&#x6838;&#x4ECE;&#x7F51;&#x5361;&#x9A71;&#x52A8;&#x4E2D;&#x8BFB;&#x53D6;&#x62A5;&#x6587;&#x540E;&#x53EF;&#x4EE5;&#x7F13;&#x5B58;&#x7684;&#x62A5;&#x6587;&#x6570;&#x91CF;&#xFF0C;&#x9ED8;&#x8BA4;&#x662F; 1000&#xFF0C;&#x53EF;&#x4EE5;&#x8C03;&#x5927;&#x8FD9;&#x4E2A;&#x503C;&#xFF0C;&#x6BD4;&#x5982;&#x8BBE;&#x7F6E;&#x6210; 2000&#xFF1A;</p>
+<pre><code>sudo sysctl -w net.core.netdev_max_backlog=2000
+</code></pre><h2 id="&#x5185;&#x6838;&#x5904;&#x7406;&#x62A5;&#x6587;&#x901F;&#x7387;&#x5927;&#x4E8E;&#x7F51;&#x5361;&#x5904;&#x7406;&#x62A5;&#x6587;&#x901F;&#x7387;">&#x5185;&#x6838;&#x5904;&#x7406;&#x62A5;&#x6587;&#x901F;&#x7387;&#x5927;&#x4E8E;&#x7F51;&#x5361;&#x5904;&#x7406;&#x62A5;&#x6587;&#x901F;&#x7387;</h2>
+<p>&#x8981;&#x67E5;&#x770B;&#x7F51;&#x5361;&#x662F;&#x5426;&#x6709;&#x4E22;&#x5305;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; ethtool -S eth0 &#x67E5;&#x770B;&#xFF0C;&#x5728;&#x8F93;&#x51FA;&#x4E2D;&#x67E5;&#x627E; bad &#x6216;&#x8005; drop &#x5BF9;&#x5E94;&#x7684;&#x5B57;&#x6BB5;&#x662F;&#x5426;&#x6709;&#x6570;&#x636E;&#xFF0C;&#x5728;&#x6B63;&#x5E38;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x8FD9;&#x4E9B;&#x5B57;&#x6BB5;&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x5B57;&#x5E94;&#x8BE5;&#x90FD;&#x662F; 0&#x3002;&#x5982;&#x679C;&#x770B;&#x5230;&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x5B57;&#x5728;&#x4E0D;&#x65AD;&#x589E;&#x957F;&#xFF0C;&#x5C31;&#x8BF4;&#x660E;&#x7F51;&#x5361;&#x6709;&#x4E22;&#x5305;&#x3002;</p>
+<p>&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x67E5;&#x770B;&#x7F51;&#x5361;&#x4E22;&#x5305;&#x6570;&#x636E;&#x7684;&#x547D;&#x4EE4;&#x662F; ifconfig&#xFF0C;&#x5B83;&#x7684;&#x8F93;&#x51FA;&#x4E2D;&#x4F1A;&#x6709; RX(receive &#x63A5;&#x6536;&#x62A5;&#x6587;)&#x548C; TX&#xFF08;transmit &#x53D1;&#x9001;&#x62A5;&#x6587;&#xFF09;&#x7684;&#x7EDF;&#x8BA1;&#x6570;&#x636E;&#xFF1A;</p>
+<pre><code>~# ifconfig eth0
+...
+        RX packets 3553389376  bytes 2599862532475 (2.3 TiB)
+        RX errors 0  dropped 1353  overruns 0  frame 0
+        TX packets 3479495131  bytes 3205366800850 (2.9 TiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+...
+</code></pre><p>&#x6B64;&#x5916;&#xFF0C;linux &#x7CFB;&#x7EDF;&#x4E5F;&#x63D0;&#x4F9B;&#x4E86;&#x5404;&#x4E2A;&#x7F51;&#x7EDC;&#x534F;&#x8BAE;&#x7684;&#x4E22;&#x5305;&#x4FE1;&#x606F;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; netstat -s &#x547D;&#x4EE4;&#x67E5;&#x770B;&#xFF0C;&#x52A0;&#x4E0A; --udp &#x53EF;&#x4EE5;&#x53EA;&#x770B; UDP &#x76F8;&#x5173;&#x7684;&#x62A5;&#x6587;&#x6570;&#x636E;&#xFF1A;</p>
+<pre><code>[root@holodesk02 GOD]# netstat -s -u
+IcmpMsg:
+    InType0: 3
+    InType3: 1719356
+    InType8: 13
+    InType11: 59
+    OutType0: 13
+    OutType3: 1737641
+    OutType8: 10
+    OutType11: 263
+Udp:
+    517488890 packets received
+    2487375 packets to unknown port received.
+    47533568 packet receive errors
+    147264581 packets sent
+    12851135 receive buffer errors
+    0 send buffer errors
+UdpLite:
+IpExt:
+    OutMcastPkts: 696
+    InBcastPkts: 2373968
+    InOctets: 4954097451540
+    OutOctets: 5538322535160
+    OutMcastOctets: 79632
+    InBcastOctets: 934783053
+    InNoECTPkts: 5584838675
+</code></pre><p>&#x5BF9;&#x4E8E;&#x4E0A;&#x9762;&#x7684;&#x8F93;&#x51FA;&#xFF0C;&#x5173;&#x6CE8;&#x4E0B;&#x9762;&#x7684;&#x4FE1;&#x606F;&#x6765;&#x67E5;&#x770B; UDP &#x4E22;&#x5305;&#x7684;&#x60C5;&#x51B5;&#xFF1A;</p>
+<p>packet receive errors &#x4E0D;&#x4E3A;&#x7A7A;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x4E00;&#x76F4;&#x589E;&#x957F;&#x8BF4;&#x660E;&#x7CFB;&#x7EDF;&#x6709; UDP &#x4E22;&#x5305;
+packets to unknown port received &#x8868;&#x793A;&#x7CFB;&#x7EDF;&#x63A5;&#x6536;&#x5230;&#x7684; UDP &#x62A5;&#x6587;&#x6240;&#x5728;&#x7684;&#x76EE;&#x6807;&#x7AEF;&#x53E3;&#x6CA1;&#x6709;&#x5E94;&#x7528;&#x5728;&#x76D1;&#x542C;&#xFF0C;&#x4E00;&#x822C;&#x662F;&#x670D;&#x52A1;&#x6CA1;&#x6709;&#x542F;&#x52A8;&#x5BFC;&#x81F4;&#x7684;&#xFF0C;&#x5E76;&#x4E0D;&#x4F1A;&#x9020;&#x6210;&#x4E25;&#x91CD;&#x7684;&#x95EE;&#x9898;
+receive buffer errors &#x8868;&#x793A;&#x56E0;&#x4E3A; UDP &#x7684;&#x63A5;&#x6536;&#x7F13;&#x5B58;&#x592A;&#x5C0F;&#x5BFC;&#x81F4;&#x4E22;&#x5305;&#x7684;&#x6570;&#x91CF;
+NOTE&#xFF1A; &#x5E76;&#x4E0D;&#x662F;&#x4E22;&#x5305;&#x6570;&#x91CF;&#x4E0D;&#x4E3A;&#x96F6;&#x5C31;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x5BF9;&#x4E8E; UDP &#x6765;&#x8BF4;&#xFF0C;&#x5982;&#x679C;&#x6709;&#x5C11;&#x91CF;&#x7684;&#x4E22;&#x5305;&#x5F88;&#x53EF;&#x80FD;&#x662F;&#x9884;&#x671F;&#x7684;&#x884C;&#x4E3A;&#xFF0C;&#x6BD4;&#x5982;&#x4E22;&#x5305;&#x7387;&#xFF08;&#x4E22;&#x5305;&#x6570;&#x91CF;/&#x63A5;&#x6536;&#x62A5;&#x6587;&#x6570;&#x91CF;&#xFF09;&#x5728;&#x4E07;&#x5206;&#x4E4B;&#x4E00;&#x751A;&#x81F3;&#x66F4;&#x4F4E;&#x3002;</p>
+<p>&#x5982;&#x679C; ethtool -S eth0 &#x4E2D;&#x6709; rx_<em>*</em>_errors &#x90A3;&#x4E48;&#x5F88;&#x53EF;&#x80FD;&#x662F;&#x7F51;&#x5361;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x5BFC;&#x81F4;&#x7CFB;&#x7EDF;&#x4E22;&#x5305;&#xFF0C;&#x9700;&#x8981;&#x8054;&#x7CFB;&#x670D;&#x52A1;&#x5668;&#x6216;&#x8005;&#x7F51;&#x5361;&#x4F9B;&#x5E94;&#x5546;&#x8FDB;&#x884C;&#x5904;&#x7406;&#x3002;</p>
+<pre><code># ethtool -S eth0 | grep rx_ | grep errors
+     rx_crc_errors: 0
+     rx_missed_errors: 0
+     rx_long_length_errors: 0
+     rx_short_length_errors: 0
+     rx_align_errors: 0
+     rx_errors: 0
+     rx_length_errors: 0
+     rx_over_errors: 0
+     rx_frame_errors: 0
+     rx_fifo_errors: 0
+</code></pre><p>netstat -i &#x4E5F;&#x4F1A;&#x63D0;&#x4F9B;&#x6BCF;&#x4E2A;&#x7F51;&#x5361;&#x7684;&#x63A5;&#x53D1;&#x62A5;&#x6587;&#x4EE5;&#x53CA;&#x4E22;&#x5305;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x6B63;&#x5E38;&#x60C5;&#x51B5;&#x4E0B;&#x8F93;&#x51FA;&#x4E2D; error &#x6216;&#x8005; drop &#x5E94;&#x8BE5;&#x4E3A; 0&#x3002;</p>
+<p>&#x5982;&#x679C;&#x786C;&#x4EF6;&#x6216;&#x8005;&#x9A71;&#x52A8;&#x6CA1;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x4E00;&#x822C;&#x7F51;&#x5361;&#x4E22;&#x5305;&#x662F;&#x56E0;&#x4E3A;&#x8BBE;&#x7F6E;&#x7684;&#x7F13;&#x5B58;&#x533A;&#xFF08;ring buffer&#xFF09;&#x592A;&#x5C0F;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; ethtool &#x547D;&#x4EE4;&#x67E5;&#x770B;&#x548C;&#x8BBE;&#x7F6E;&#x7F51;&#x5361;&#x7684; ring buffer&#x3002;</p>
+<p>ethtool -g &#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x67D0;&#x4E2A;&#x7F51;&#x5361;&#x7684; ring buffer&#xFF0C;&#x6BD4;&#x5982;&#x4E0B;&#x9762;&#x7684;&#x4F8B;&#x5B50;</p>
+<pre><code># ethtool -g eth0
+Ring parameters for eth0:
+Pre-set maximums:
+RX:        4096
+RX Mini:    0
+RX Jumbo:    0
+TX:        4096
+Current hardware settings:
+RX:        256
+RX Mini:    0
+RX Jumbo:    0
+TX:        256
+</code></pre><p>Pre-set &#x8868;&#x793A;&#x7F51;&#x5361;&#x6700;&#x5927;&#x7684; ring buffer &#x503C;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; ethtool -G eth0 rx 8192 &#x8BBE;&#x7F6E;&#x5B83;&#x7684;&#x503C;&#x3002;</p>
+<h2 id="&#x7CFB;&#x7EDF;&#x8D1F;&#x8F7D;&#x8FC7;&#x9AD8;">&#x7CFB;&#x7EDF;&#x8D1F;&#x8F7D;&#x8FC7;&#x9AD8;</h2>
+<p>&#x7CFB;&#x7EDF; CPU&#x3001;memory&#x3001;IO &#x8D1F;&#x8F7D;&#x8FC7;&#x9AD8;&#x90FD;&#x6709;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;&#x7F51;&#x7EDC;&#x4E22;&#x5305;&#xFF0C;&#x6BD4;&#x5982; CPU &#x5982;&#x679C;&#x8D1F;&#x8F7D;&#x8FC7;&#x9AD8;&#xFF0C;&#x7CFB;&#x7EDF;&#x6CA1;&#x6709;&#x65F6;&#x95F4;&#x8FDB;&#x884C;&#x62A5;&#x6587;&#x7684; checksum &#x8BA1;&#x7B97;&#x3001;&#x590D;&#x5236;&#x5185;&#x5B58;&#x7B49;&#x64CD;&#x4F5C;&#xFF0C;&#x4ECE;&#x800C;&#x5BFC;&#x81F4;&#x7F51;&#x5361;&#x6216;&#x8005; socket buffer &#x51FA;&#x4E22;&#x5305;&#xFF1B;memory &#x8D1F;&#x8F7D;&#x8FC7;&#x9AD8;&#xFF0C;&#x4F1A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5904;&#x7406;&#x8FC7;&#x6162;&#xFF0C;&#x65E0;&#x6CD5;&#x53CA;&#x65F6;&#x5904;&#x7406;&#x62A5;&#x6587;&#xFF1B;IO &#x8D1F;&#x8F7D;&#x8FC7;&#x9AD8;&#xFF0C;CPU &#x90FD;&#x7528;&#x6765;&#x54CD;&#x5E94; IO wait&#xFF0C;&#x6CA1;&#x6709;&#x65F6;&#x95F4;&#x5904;&#x7406;&#x7F13;&#x5B58;&#x4E2D;&#x7684; UDP &#x62A5;&#x6587;&#x3002;</p>
+<p>linux &#x7CFB;&#x7EDF;&#x672C;&#x8EAB;&#x5C31;&#x662F;&#x76F8;&#x4E92;&#x5173;&#x8054;&#x7684;&#x7CFB;&#x7EDF;&#xFF0C;&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;&#x7EC4;&#x4EF6;&#x51FA;&#x73B0;&#x95EE;&#x9898;&#x90FD;&#x6709;&#x53EF;&#x80FD;&#x5F71;&#x54CD;&#x5230;&#x5176;&#x4ED6;&#x7EC4;&#x4EF6;&#x7684;&#x6B63;&#x5E38;&#x8FD0;&#x884C;&#x3002;&#x5BF9;&#x4E8E;&#x7CFB;&#x7EDF;&#x8D1F;&#x8F7D;&#x8FC7;&#x9AD8;&#xFF0C;&#x8981;&#x4E48;&#x662F;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x8981;&#x4E48;&#x662F;&#x7CFB;&#x7EDF;&#x4E0D;&#x8DB3;&#x3002;&#x5BF9;&#x4E8E;&#x524D;&#x8005;&#x9700;&#x8981;&#x53CA;&#x65F6;&#x53D1;&#x73B0;&#xFF0C;debug &#x548C;&#x4FEE;&#x590D;&#xFF1B;&#x5BF9;&#x4E8E;&#x540E;&#x8005;&#xFF0C;&#x4E5F;&#x8981;&#x53CA;&#x65F6;&#x53D1;&#x73B0;&#x5E76;&#x6269;&#x5BB9;&#x3002;</p>
+<h2 id="&#x9632;&#x706B;&#x5899;">&#x9632;&#x706B;&#x5899;</h2>
+<p>&#x5982;&#x679C;&#x7CFB;&#x7EDF;&#x9632;&#x706B;&#x5899;&#x4E22;&#x5305;&#xFF0C;&#x8868;&#x73B0;&#x7684;&#x884C;&#x4E3A;&#x4E00;&#x822C;&#x662F;&#x6240;&#x6709;&#x7684; UDP &#x62A5;&#x6587;&#x90FD;&#x65E0;&#x6CD5;&#x6B63;&#x5E38;&#x63A5;&#x6536;&#xFF0C;&#x5F53;&#x7136;&#x4E0D;&#x6392;&#x9664;&#x9632;&#x706B;&#x5899;&#x53EA; drop &#x4E00;&#x90E8;&#x5206;&#x62A5;&#x6587;&#x7684;&#x53EF;&#x80FD;&#x6027;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x9047;&#x5230;&#x4E22;&#x5305;&#x6BD4;&#x7387;&#x975E;&#x5E38;&#x5927;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x8BF7;&#x5148;&#x68C0;&#x67E5;&#x9632;&#x706B;&#x5899;&#x89C4;&#x5219;&#xFF0C;&#x4FDD;&#x8BC1;&#x9632;&#x706B;&#x5899;&#x6CA1;&#x6709;&#x4E3B;&#x52A8; drop UDP &#x62A5;&#x6587;&#x3002;</p>
+<h2 id="udp-&#x62A5;&#x6587;&#x9519;&#x8BEF;">UDP &#x62A5;&#x6587;&#x9519;&#x8BEF;</h2>
+<p>&#x5982;&#x679C;&#x5728;&#x4F20;&#x8F93;&#x8FC7;&#x7A0B;&#x4E2D;UDP &#x62A5;&#x6587;&#x88AB;&#x4FEE;&#x6539;&#xFF0C;&#x4F1A;&#x5BFC;&#x81F4; checksum &#x9519;&#x8BEF;&#xFF0C;&#x6216;&#x8005;&#x957F;&#x5EA6;&#x9519;&#x8BEF;&#xFF0C;linux &#x5728;&#x63A5;&#x6536;&#x5230; UDP &#x62A5;&#x6587;&#x65F6;&#x4F1A;&#x5BF9;&#x6B64;&#x8FDB;&#x884C;&#x6821;&#x9A8C;&#xFF0C;&#x4E00;&#x65E6;&#x53D1;&#x660E;&#x9519;&#x8BEF;&#x4F1A;&#x628A;&#x62A5;&#x6587;&#x4E22;&#x5F03;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x5E0C;&#x671B; UDP &#x62A5;&#x6587; checksum &#x53CA;&#x65F6;&#x6709;&#x9519;&#x4E5F;&#x8981;&#x53D1;&#x9001;&#x7ED9;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x901A;&#x8FC7; socket &#x53C2;&#x6570;&#x7981;&#x7528; UDP checksum &#x68C0;&#x67E5;&#xFF1A;</p>
+<pre><code>int disable = 1;
+setsockopt(sock_fd, SOL_SOCKET, SO_NO_CHECK, (void*)&amp;disable, sizeof(disable)
+</code></pre><p>&#x53C2;&#x8003;&#x8D44;&#x6599;</p>
+<ul>
+<li><a href="https://cizixs.com/2018/01/13/linux-udp-packet-drop-debug/?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io" target="_blank">linux &#x7CFB;&#x7EDF; UDP &#x4E22;&#x5305;&#x95EE;&#x9898;&#x5206;&#x6790;&#x601D;&#x8DEF;</a></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="io.html" class="navigation navigation-prev " aria-label="Previous page: IO">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="demo/udp-reliable-demo.html" class="navigation navigation-next " aria-label="Next page: UDP案例">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"UDP丢包分析","level":"1.3.3","depth":2,"next":{"title":"UDP案例","level":"1.3.4","depth":2,"path":"socket/demo/udp-reliable-demo.md","ref":"socket/demo/udp-reliable-demo.md","articles":[{"title":"UDP自定义私有协议栈","level":"1.3.4.1","depth":3,"path":"socket/demo/protocol.md","ref":"socket/demo/protocol.md","articles":[]}]},"previous":{"title":"IO","level":"1.3.2","depth":2,"path":"socket/io.md","ref":"socket/io.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["fontsettings","sharing","highlight","livereload","lunr","search","mermaid-gb3"],"pluginsConfig":{"fontsettings":{"family":"sans","size":2,"theme":"white"},"sharing":{"all":["facebook","google","twitter","weibo","instapaper"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"highlight":{},"livereload":{},"lunr":{"ignoreSpecialCharacters":false,"maxIndexSize":1000000},"search":{},"mermaid-gb3":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"socket/udp-lost-packet.md","mtime":"2019-05-05T06:52:38.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-15T06:13:09.766Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-mermaid-gb3/book/plugin.js"></script>
+        
+    
+
+    <script src="../gitbook/gitbook-plugin-mermaid-gb3/mermaid/mermaid.min.js"></script>
+
+    </body>
+</html>
+

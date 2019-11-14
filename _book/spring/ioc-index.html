@@ -1,0 +1,630 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>IOC · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-mermaid-gb3/mermaid/mermaid.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="ioc-application-context.html" />
+    
+    
+    <link rel="prev" href="mvc-index.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../java/standard.html">
+            
+                <a href="../java/standard.html">
+            
+                    
+                    JavaStandard
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../socket/socket.html">
+            
+                <a href="../socket/socket.html">
+            
+                    
+                    Socket
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../socket/protocol.html">
+            
+                <a href="../socket/protocol.html">
+            
+                    
+                    协议
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../socket/io.html">
+            
+                <a href="../socket/io.html">
+            
+                    
+                    IO
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../socket/udp-lost-packet.html">
+            
+                <a href="../socket/udp-lost-packet.html">
+            
+                    
+                    UDP丢包分析
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../socket/demo/udp-reliable-demo.html">
+            
+                <a href="../socket/demo/udp-reliable-demo.html">
+            
+                    
+                    UDP案例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.4.1" data-path="../socket/demo/protocol.html">
+            
+                <a href="../socket/demo/protocol.html">
+            
+                    
+                    UDP自定义私有协议栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../mysql/mysql.html">
+            
+                <a href="../mysql/mysql.html">
+            
+                    
+                    MySQL
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../mysql/master-slave.html">
+            
+                <a href="../mysql/master-slave.html">
+            
+                    
+                    主从
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../mysql/cluster.html">
+            
+                <a href="../mysql/cluster.html">
+            
+                    
+                    集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../jdbc/jdbc.html">
+            
+                <a href="../jdbc/jdbc.html">
+            
+                    
+                    JDBC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../jdbc/pool.html">
+            
+                <a href="../jdbc/pool.html">
+            
+                    
+                    JDBC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../cap/cap.html">
+            
+                <a href="../cap/cap.html">
+            
+                    
+                    CAP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="spring.html">
+            
+                <a href="spring.html">
+            
+                    
+                    Spring
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="mvc-index.html">
+            
+                <a href="mvc-index.html">
+            
+                    
+                    MVC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7.2" data-path="ioc-index.html">
+            
+                <a href="ioc-index.html">
+            
+                    
+                    IOC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.1" data-path="ioc-application-context.html">
+            
+                <a href="ioc-application-context.html">
+            
+                    
+                    ApplicationContext
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.2" data-path="ioc-bean-factory.html">
+            
+                <a href="ioc-bean-factory.html">
+            
+                    
+                    BeanFactory
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.3" data-path="ioc-flow.html">
+            
+                <a href="ioc-flow.html">
+            
+                    
+                    Flow
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >IOC</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="ioc&#xFF08;inversion-of-control&#xFF09;">IOC&#xFF08;Inversion of Control&#xFF09;</h1>
+<p>IOC&#xFF08;&#x63A7;&#x5236;&#x53CD;&#x8F6C;&#xFF09;,&#x76EE;&#x7684;&#x4E3A;&#x4E86;&#x89E3;&#x51B3;&#x5BF9;&#x8C61;&#x7684;&#x521D;&#x59CB;&#x5316;&#x4EE5;&#x53CA;&#x4F9D;&#x8D56;,&#x5176;&#x5B9E;&#x73B0;&#x624B;&#x6BB5;&#x4E3A;DI&#xFF08;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#xFF09;&#x3002;
+SpringIOC&#x7684;&#x6838;&#x5FC3;&#x5C31;&#x662F;&#x63CF;&#x8FF0;bean&#x4EE5;&#x53CA;bean&#x751F;&#x547D;&#x5468;&#x671F;&#x7BA1;&#x7406;&#x3002;
+Spring&#x6CA1;&#x6709;IOC&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5982;&#x679C;A&#x5BF9;&#x8C61;&#x8C03;&#x7528;B&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5916;&#x90E8;&#x4F20;&#x5165;&#xFF0C;&#x5185;&#x90E8;&#x521B;&#x5EFA;&#x65B9;&#x5F0F;&#xFF0C;&#x901A;&#x8FC7;new&#x5173;&#x952E;&#x5B57;&#x6216;&#x8005;&#x624B;&#x52A8;&#x7684;&#x53CD;&#x5C04;&#x65B9;&#x5F0F;&#x83B7;&#x53D6;&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;&#xFF0C;&#x5982;&#x679C;&#x5BF9;&#x8C61;&#x4F9D;&#x8D56;&#x5F88;&#x590D;&#x6742;&#xFF0C;&#x5219;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;&#x65F6;&#x5019;&#x8981;&#x6784;&#x5EFA;&#x6574;&#x4E2A;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x3002;
+SpringIOC&#x4E2D;bean&#x7684;&#x521B;&#x5EFA;&#x65B9;&#x5F0F;&#x6709;&#x56DB;&#x79CD;&#xFF1A;</p>
+<ul>
+<li>&#x57FA;&#x4E8E;Class&#x6784;&#x5EFA;&#xFF1A;&#x4F7F;&#x7528;<bean>&#x6807;&#x7B7E;&#xFF0C;&#x57FA;&#x4E8E;&#x53CD;&#x5C04;&#x5B9E;&#x73B0;&#xFF1B;</bean></li>
+<li>&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x521B;&#x5EFA;&#xFF1A;&#x4F7F;&#x7528;<bean>&#x6807;&#x7B7E;&#xFF0C;&#x5E76;&#x914D;&#x7F6E;&#x6784;&#x9020;&#x5668;&#x53C2;&#x6570;&#xFF0C;&#x57FA;&#x4E8E;ASM&#x83B7;&#x53D6;&#x5B57;&#x8282;&#x7801;&#x4E2D;&#x65B9;&#x6CD5;&#x7684;&#x53C2;&#x6570;&#x5B9E;&#x73B0;&#xFF1B;</bean></li>
+<li>&#x9759;&#x6001;&#x5DE5;&#x5382;&#x521B;&#x5EFA;&#xFF1A;&#x9759;&#x6001;&#x5DE5;&#x5382;&#x5C31;&#x662F;&#x5728;&#x7C7B;&#x4E2D;&#x9759;&#x6001;&#x5316;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5;&#xFF0C;&#x65B9;&#x6CD5;&#x5185;new&#x51FA;&#x5BF9;&#x8C61;&#xFF0C;&#x4F9B;&#x52A0;&#x8F7D;&#x521D;&#x59CB;&#x5316;&#xFF0C;&#x5728;AB&#x6D4B;&#x8BD5;&#x8FC7;&#x7A0B;&#x4E2D;&#x4F7F;&#x7528;&#xFF0C;&#x5176;&#x4ED6;&#x4E0D;&#x5E38;&#x7528;&#xFF1B;</li>
+<li>FactoryBean&#xFF1A;&#x81EA;&#x5B9A;&#x4E49;&#x7C7B;&#x5B9E;&#x73B0;FactoryBean&#xFF0C;&#x5E76;&#x914D;&#x7F6E;&#x5728;<bean>&#x6807;&#x7B7E;&#x4E0A;&#xFF0C;&#x5728;&#x914D;&#x7F6E;&#x4E2D;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x5C5E;&#x6027;&#x53C2;&#x6570;&#x3002;&#x8FD0;&#x884C;&#x65F6;&#x83B7;&#x53D6;&#x5230;&#x7684;bean&#x5E76;&#x4E0D;&#x662F;&#x81EA;&#x5B9A;&#x4E49;&#x7684;FactoryBean&#x7684;&#x5B9E;&#x4F8B;&#xFF0C;&#x800C;&#x662F;&#x5176;&#x4E2D;&#x7684;&#x771F;&#x6B63;&#x8FD4;&#x56DE;&#x7684;bean&#x7684;&#x5B9E;&#x4F8B;&#x3002;</bean></li>
+</ul>
+<p>SpringDI&#x662F;&#x89E3;&#x51B3;&#x4E86;&#x5BF9;&#x8C61;&#x521B;&#x5EFA;&#x65F6;&#x5019;&#x7684;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#xFF0C;&#x662F;SpringIOC&#x7684;&#x5B9E;&#x73B0;&#x624B;&#x6BB5;&#x3002;
+SpringDI&#x6709;&#x56DB;&#x79CD;&#x65B9;&#x5F0F;&#xFF1A;</p>
+<ul>
+<li>Set&#x65B9;&#x6CD5;&#x6CE8;&#x5165;</li>
+<li>&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x6CE8;&#x5165;</li>
+<li>&#x81EA;&#x52A8;&#x6CE8;&#x5165;(byName,byType,constructor)&#xFF1A;&#x9ED8;&#x8BA4;&#x7684;&#x65B9;&#x5F0F;&#x6536;&#x5230;&#x5168;&#x5C40;&#x914D;&#x7F6E;&#x7684;&#x5F71;&#x54CD;&#x3002;</li>
+<li>&#x65B9;&#x6CD5;&#x6CE8;&#x5165;&#xFF08;lookup-method&#xFF09;&#x9759;&#x6001;&#x5355;&#x4F8B;&#x4F9D;&#x8D56;&#x52A8;&#x6001;&#x5B9E;&#x4F8B;&#xFF0C;&#x6BCF;&#x6B21;&#x90FD;&#x8981;&#x521B;&#x5EFA;&#x65B0;&#x7684;&#x52A8;&#x6001;&#x5B9E;&#x4F8B;&#x65F6;&#x5019;&#x4F7F;&#x7528;&#xFF0C;&#x524D;&#x63D0;&#x662F;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65E0;&#x9700;&#x5B9E;&#x73B0;&#x7684;&#x62BD;&#x8C61;&#x7C7B;&#xFF0C;&#x7ED9;&#x5B9A;&#x4E00;&#x4E2A;&#x62BD;&#x8C61;&#x65B9;&#x6CD5;&#xFF0C;&#x8FD4;&#x56DE;&#x503C;&#x662F;&#x52A8;&#x6001;&#x7C7B;&#xFF0C;&#x6709;Spring&#x4F7F;&#x7528;CGlib&#x5B9E;&#x73B0;&#x62BD;&#x8C61;&#x7C7B;&#x3002;&#x53E6;&#x5916;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5B9E;&#x73B0;BeanFactoryAware&#x7C7B;&#x5B9E;&#x73B0;&#x3002;</li>
+</ul>
+<p>Bean&#x5728;SpringIoC&#x4E2D;&#x7684;&#x7279;&#x6027;</p>
+<ul>
+<li>&#x4F5C;&#x7528;&#x8303;&#x56F4;&#xFF1A;&#x5F88;&#x591A;&#x7684;bean&#x5728;Spring&#x4E2D;&#x662F;&#x65E0;&#x72B6;&#x6001;&#x7684;&#xFF0C;scope&#x662F;singleton&#xFF08;&#x9ED8;&#x8BA4;&#xFF09;&#xFF0C;&#x5982;&#x679C;&#x6709;&#x72B6;&#x6001;&#x5219;&#x4F7F;&#x7528;prototype&#x8868;&#x793A;&#x591A;&#x4F8B;&#x6A21;&#x5F0F;</li>
+<li>&#x751F;&#x547D;&#x5468;&#x671F;&#xFF1A;&#x7C7B;&#x4E2D;&#x53EF;&#x914D;&#x7F6E;init&#x4EE5;&#x53CA;destroy&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x5E76;&#x914D;&#x7F6E;&#x5230;<bean>&#xFF0C;&#x5373;&#x53EF;&#x5F97;&#x5230;&#x54CD;&#x5E94;&#x7684;&#x56DE;&#x8C03;&#xFF0C;&#x4E5F;&#x53EF;&#x5B9E;&#x73B0;InitBean&#x548C;DestroyBean&#x7684;&#x63A5;&#x53E3;&#x4F9D;&#x6258;Sring&#x5BB9;&#x5668;&#x5468;&#x671F;&#x81EA;&#x52A8;&#x5B9E;&#x73B0;&#x3002;</bean></li>
+<li>&#x88C5;&#x8F7D;&#x673A;&#x5236;&#xFF1A;&#x914D;&#x7F6E;bean&#x662F;&#x5426;&#x662F;&#x61D2;&#x52A0;&#x8F7D;&#x3002;&#x5982;&#x679C;&#x60F3;&#x5C3D;&#x65E9;&#x53D1;&#x73B0;bug&#xFF0C;&#x5219;&#x4F7F;&#x7528;&#x975E;&#x61D2;&#x52A0;&#x8F7D;&#x65B9;&#x5F0F;&#x3002;</li>
+</ul>
+<p>Bean&#x5DE5;&#x5382;&#x548C;&#x4E0A;&#x4E0B;&#x6587;&#x7684;&#x533A;&#x522B;:BeanFactory&#x662F;ApplicationContext&#x7684;&#x9876;&#x7EA7;&#x501F;&#x53E3;&#xFF0C;BeanFacotry&#x9ED8;&#x8BA4;&#x61D2;&#x52A0;&#x8F7D;&#xFF0C;ApplicationContext&#x5728;&#x542F;&#x52A8;&#x5C31;&#x52A0;&#x8F7D;&#x6240;&#x4EE5;&#x53EF;&#x4EE5;&#x68C0;&#x6D4B;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x9519;&#x8BEF;&#xFF0C;ApplicationContext&#x6709;&#x591A;&#x91CD;&#x5B9E;&#x73B0;&#x8868;&#x793A;&#x4E0D;&#x540C;&#x5C42;&#x6B21;&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#xFF0C;ApplicationContext&#x652F;&#x6301;&#x56FD;&#x9645;&#x5316;&#xFF0C;ApplicationContext&#x652F;&#x6301;&#x4E8B;&#x4EF6;&#x673A;&#x5236;</p>
+<h1 id="springioc-&#x4E24;&#x79CD;&#x5BB9;&#x5668;">SpringIOC &#x4E24;&#x79CD;&#x5BB9;&#x5668;</h1>
+<ul>
+<li><a href="ioc-application-context.html">&#x4E0A;&#x4E0B;&#x6587;&#x5BB9;&#x5668;</a>&#xFF1A;&#x4E00;&#x822C;&#x7531;ClassPathXmlApplicationContext&#x6216;&#x8005;AnnotationConfigApplicationContext&#x62C5;&#x4EFB;&#x3002;</li>
+<li><a href="ioc-bean-factory.html">Bean&#x5DE5;&#x5382;&#x5BB9;&#x5668;</a>&#xFF1A;&#x4E00;&#x822C;&#x7531;DefaultListableBeanFactory&#x62C5;&#x4EFB;&#x3002;</li>
+</ul>
+<p>&#x4E0A;&#x4E0B;&#x6587;&#x5BB9;&#x5668;&#x6301;&#x6709;&#x4E86;Bean&#x5DE5;&#x5382;&#x5BB9;&#x5668;&#x3002;&#x901A;&#x8FC7;&#x7236;&#x7C7B;&#x7684;getBeanFactory&#x65B9;&#x6CD5;&#x83B7;&#x53D6;Bean&#x5DE5;&#x5382;&#x7684;&#x5B9E;&#x73B0;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;&#x3002;</p>
+<h1 id="springioc-&#x542F;&#x52A8;&#x6D41;&#x7A0B;">SpringIOC &#x542F;&#x52A8;&#x6D41;&#x7A0B;</h1>
+<div class="mermaid">
+graph TB
+
+start((&#x542F;&#x52A8;&#x5F00;&#x59CB;))
+applicationContext[&#x4E0A;&#x4E0B;&#x6587;&#x5BB9;&#x5668;&#x542F;&#x52A8;]
+beanFactory[BeanFactory&#x5BB9;&#x5668;&#x542F;&#x52A8;]
+finish((&#x542F;&#x52A8;&#x7ED3;&#x675F;))
+
+
+
+start --&gt; applicationContext
+applicationContext --&gt; beanFactory
+applicationContext --&gt; finish
+beanFactory --&gt; finish
+
+</div>
+# ApplicationContext&#x7C7B;&#x5173;&#x7CFB;&#x56FE;
+[&#x4E0A;&#x4E0B;&#x6587;&#x5BB9;&#x5668;](ioc-application-context.md)
+
+# BeanFactory&#x7C7B;&#x5173;&#x7CFB;&#x56FE;
+[Bean&#x5DE5;&#x5382;&#x5BB9;&#x5668;](ioc-bean-factory.md)
+
+# ApplicationContext&#x548C;BeanFactory&#x5173;&#x7CFB;
+org.springframework.context.support.AbstractRefreshableApplicationContext#getBeanFactory
+
+# SpringIOC&#x5BB9;&#x5668;&#x542F;&#x52A8;&#x6D41;&#x7A0B;
+
+
+<div class="mermaid">
+graph TB
+
+prepareRefresh[&#x4E3A;&#x5BB9;&#x5668;&#x7684;&#x521D;&#x59CB;&#x5316;&#x505A;&#x51C6;&#x5907;&#x5DE5;&#x4F5C;]
+obtainFreshBeanFactory[&#x521B;&#x5EFA;BeanFactory]
+prepareBeanFactory[&#x7ED9;&#x8BBE;&#x7F6E;BeanFactory&#x4F7F;&#x7528;&#x524D;&#x7684;&#x51C6;&#x5907;&#x5DE5;&#x4F5C;]
+postProcessBeanFactory[&#x7ED9;BeanFactory&#x8BBE;&#x7F6E;&#x62BD;&#x8C61;&#x7684;&#x53EF;&#x6269;&#x5C55;&#x7684;&#x5904;&#x7406;&#x5668;]
+invokeBeanFactoryPostProcessors[&#x8C03;&#x7528;&#x7ED9;BeanFactory&#x8BBE;&#x7F6E;&#x62BD;&#x8C61;&#x7684;&#x6269;&#x5C55;&#x70B9;]
+registerBeanPostProcessors[&#x6CE8;&#x518C;BeanPostProcessor,&#x5728;&#x5B9E;&#x4F8B;&#x5316;&#x65F6;&#x5019;&#x8C03;&#x7528;]
+initMessageSource[&#x521D;&#x59CB;&#x5316;MessageSource,&#x5982;&#x56FD;&#x9645;&#x5316;]
+initApplicationEventMulticaster[&#x521D;&#x59CB;&#x5316;&#x5E7F;&#x64AD;&#x5668;]
+onRefresh[&#x56DE;&#x8C03;,&#x7ED9;&#x5B50;&#x7C7B;&#x6269;&#x5C55;&#x65F6;&#x673A;]
+registerListeners[&#x68C0;&#x67E5;&#x76D1;&#x542C;&#x5668;&#x5E76;&#x6CE8;&#x518C;]
+finishBeanFactoryInitialization[&#x521D;&#x59CB;&#x5316;&#x975E;&#x61D2;&#x52A0;&#x8F7D;&#x5355;&#x4F8B;&#x5BF9;&#x8C61;]
+finishRefresh[&#x53D1;&#x5E03;&#x521D;&#x59CB;&#x5316;&#x5B8C;&#x6BD5;&#x4E8B;&#x4EF6;]
+destroyBeans[&#x9500;&#x6BC1;&#x5DF2;&#x7ECF;&#x5B9E;&#x4F8B;&#x5316;&#x7684;&#x5355;&#x4F8B;&#x5BF9;&#x8C61;&#x91CA;&#x653E;&#x8D44;&#x6E90;]
+cancelRefresh[&#x91CD;&#x7F6E;&#x5BB9;&#x5668;&#x72B6;&#x6001;]
+resetCommonCaches[&#x6E05;&#x7406;&#x5143;&#x6570;&#x636E;&#x7F13;&#x5B58;]
+
+
+prepareRefresh --&gt; obtainFreshBeanFactory
+obtainFreshBeanFactory --&gt; prepareBeanFactory
+prepareBeanFactory --&gt; postProcessBeanFactory
+postProcessBeanFactory --&gt; invokeBeanFactoryPostProcessors
+invokeBeanFactoryPostProcessors --&gt; registerBeanPostProcessors
+registerBeanPostProcessors --&gt; initMessageSource
+initMessageSource --&gt; initApplicationEventMulticaster
+initApplicationEventMulticaster --&gt; onRefresh
+onRefresh --&gt; registerListeners
+registerListeners --&gt; finishBeanFactoryInitialization
+finishBeanFactoryInitialization --&gt; finishRefresh
+finishRefresh -- &#x521D;&#x59CB;&#x5316;&#x8FC7;&#x7A0B;&#x51FA;&#x73B0;&#x5F02;&#x5E38; --&gt; destroyBeans
+destroyBeans --&gt; cancelRefresh
+finishRefresh -- &#x521D;&#x59CB;&#x5316;&#x5B8C;&#x6BD5; --&gt; resetCommonCaches
+
+click prepareRefresh &quot;ioc-flow.md&quot; &quot;This is a sequence&quot;
+
+</div>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="mvc-index.html" class="navigation navigation-prev " aria-label="Previous page: MVC">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="ioc-application-context.html" class="navigation navigation-next " aria-label="Next page: ApplicationContext">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"IOC","level":"1.7.2","depth":2,"next":{"title":"ApplicationContext","level":"1.7.2.1","depth":3,"path":"spring/ioc-application-context.md","ref":"spring/ioc-application-context.md","articles":[]},"previous":{"title":"MVC","level":"1.7.1","depth":2,"path":"spring/mvc-index.md","ref":"spring/mvc-index.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["fontsettings","sharing","highlight","livereload","lunr","search","mermaid-gb3"],"pluginsConfig":{"fontsettings":{"family":"sans","size":2,"theme":"white"},"sharing":{"all":["facebook","google","twitter","weibo","instapaper"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"highlight":{},"livereload":{},"lunr":{"ignoreSpecialCharacters":false,"maxIndexSize":1000000},"search":{},"mermaid-gb3":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"spring/ioc-index.md","mtime":"2019-05-07T07:17:01.586Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-15T06:13:09.766Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-mermaid-gb3/book/plugin.js"></script>
+        
+    
+
+    <script src="../gitbook/gitbook-plugin-mermaid-gb3/mermaid/mermaid.min.js"></script>
+
+    </body>
+</html>
+
