@@ -1,8 +1,11 @@
-原理分析
-org.apache.http.impl.client.AbstractHttpClient
-GET ttp://192.168.202.222:51000/eureka/apps/
+## 实现分析
 
+### 客户端
+#### com.netflix.discovery.EurekaClient
+#### jersey
+#### [com.netflix.discovery.shared.transport.EurekaHttpClient](chapter02-01.md)
 
-
-
-com.netflix.discovery.shared.transport.EurekaHttpClient
+### 服务端
+#### com.netflix.discovery.EurekaClient
+#### jersey 
+#### [com.netflix.discovery.shared.transport.EurekaHttpClient](chapter02-02.md)

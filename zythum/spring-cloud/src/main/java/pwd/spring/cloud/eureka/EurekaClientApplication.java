@@ -1,21 +1,13 @@
 package pwd.spring.cloud.eureka;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * pwd.spring.cloud@gitbook
@@ -30,39 +22,18 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  */
 @EnableDiscoveryClient
 @SpringBootApplication
+@EnableAspectJAutoProxy(exposeProxy = true)
+@RestController
+@RequestMapping(path = "")
 public class EurekaClientApplication {
+
   public static void main(String[] args) {
     SpringApplication.run(EurekaClientApplication.class, args);
   }
 
 
-//  @Aspect
-//  @Component
-//  public class PersonAspect {
-//
-//    @Pointcut(value = "execution(public String doExecute(..))")
-//    public void pointCut(){
-//
-//    }
-//
-//    @Around("pointCut()")
-//    public Object beforeAddActivitiExecuteHandler(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-//      ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-//      Map<String, Object> nameAndArgs = getFieldsName(proceedingJoinPoint);
-//      return proceedingJoinPoint.proceed(nameAndArgs.values().toArray());
-//    }
-//
-//
-//    private Map<String, Object> getFieldsName(ProceedingJoinPoint point) {
-//      Map<String, Object> map = new LinkedHashMap<>();
-//      MethodSignature methodSignature = (MethodSignature) point.getSignature();
-//      String[] parameterNames = methodSignature.getParameterNames();
-//      Class[] parameterTypes = methodSignature.getParameterTypes();
-//      Object[] args = point.getArgs();
-//      for (int i = 0; i < args.length; i++) {
-//        map.put(parameterNames[i], args[i]);
-//      }
-//      return map;
-//    }
-//  }
+  @GetMapping(value = "/test")
+  public String test() {
+    return "ok";
+  }
 }
