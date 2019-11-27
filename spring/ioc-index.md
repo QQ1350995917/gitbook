@@ -134,16 +134,18 @@ public class BeanAFactoryBean implements FactoryBean {
   }
 }
 ```
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://www.springframework.org/schema/beans"
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-  <bean class="pwd.spring.framework.ioc.BeanAFactoryBean">
+  <bean id="beanA" class="pwd.spring.framework.ioc.BeanAFactoryBean">
     <property name="id" value="123"></property>
     <property name="name" value="abc"></property>
   </bean>
 </beans>
+
 ```
 
 ### Bean在SpringIoC中的特性
@@ -160,20 +162,96 @@ public class BeanAFactoryBean implements FactoryBean {
 ### SpringDI通过四种方式产生Bean的依赖：
 如果没有DI产生依赖，以及解决循环依赖问题，则IOC的应用场景则一无是处。
 - 构造方法注入
-```xml
 
-```
+见上述IOC创建对象的构造器方法
 - Set方法注入
-```xml
 
+见上述IOC创建对象的Set方法
+
+- 自动注入(byName,byType,constructor,default)：默认按照byName创建依赖，默认的方式受到全局配置的影响。
+
+   - byName  
+    配置autowire="byName",则BeanA在初始化后根据属性的名称在配置中寻找名称和ID一致的Bean
+      ```xml
+      <?xml version="1.0" encoding="UTF-8"?>
+      <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.springframework.org/schema/beans"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+        <bean id="beanA" class="pwd.spring.framework.ioc.BeanA" autowire="byName"></bean>
+        <bean id="beanB" class="pwd.spring.framework.ioc.BeanB"></bean>
+        <bean id="beanBxxx" class="pwd.spring.framework.ioc.BeanB"></bean>
+      </beans>
+      
+      ```  
+   - byType  
+    配置autowire="byType",则BeanA在初始化后自动读取配置中的BeanB的配置，如果多个Bean的配置，这应指定一个primary。
+      ```xml
+      <?xml version="1.0" encoding="UTF-8"?>
+      <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.springframework.org/schema/beans"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+        <bean id="beanA" class="pwd.spring.framework.ioc.BeanA" autowire="byType"></bean>
+        <bean class="pwd.spring.framework.ioc.BeanB" primary="true"></bean>
+        <bean class="pwd.spring.framework.ioc.BeanB"></bean>
+      </beans>
+      ```
+
+  - constructor  
+    配置autowire="constructor",在BeanA中构建一个以BeanB为参数的构造器。
+      ```xml
+      <?xml version="1.0" encoding="UTF-8"?>
+      <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.springframework.org/schema/beans"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+        <bean id="beanA" class="pwd.spring.framework.ioc.BeanA" autowire="constructor"></bean>
+      </beans>
+      ```
+  - 修该全局配置
+    ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns="http://www.springframework.org/schema/beans"
+      xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+      default-autowire="byType">
+      <bean id="beanA" class="pwd.spring.framework.ioc.BeanA"></bean>
+    </beans>
+    ```    
+- 方法注入（lookup-method）  
+在单例A依赖多例B，且需要每次调用A都要创建新B的场景中使用；过程是是创建一个无需实现的抽象类，给定一个抽象方法，返回值是动态类;
+实现原理是Spring使用CGlib实现抽象类，使用到了动态字节码增强技术。另外也可以使用实现BeanFactoryAware类实现。这种设计不常见。
+```xml
+package pwd.spring.framework.ioc;
+
+/**
+ * pwd.spring.framework.ioc@gitbook
+ *
+ * <h1>TODO what you want to do?</h1>
+ *
+ * date 2019-11-27 19:06
+ *
+ * @author DingPengwei[dingpengwei@eversec.com]
+ * @version 1.0.0
+ * @since DistributionVersion
+ */
+public abstract class A {
+
+  public void refreshBeanB() {
+    BeanB beanB = getBeanB();
+    // newest bean instance 
+  }
+
+  public abstract BeanB getBeanB();
+}
 ```
-- 自动注入(byName,byType,constructor)：默认的方式收到全局配置的影响。
 ```xml
-
-```
-- 方法注入（lookup-method）静态单例依赖动态实例，每次都要创建新的动态实例时候使用，前提是创建一个无需实现的抽象类，给定一个抽象方法，返回值是动态类，有Spring使用CGlib实现抽象类。另外也可以使用实现BeanFactoryAware类实现。
-```xml
-
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.springframework.org/schema/beans"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+  <bean class="pwd.spring.framework.ioc.A">
+    <lookup-method name="getBeanB"></lookup-method>
+  </bean>
+</beans>
 ```
 #### 构造方法注入产生的循环依赖无法解除，造成容器初始化失败
 ```xml
@@ -244,28 +322,78 @@ private final Map<String, Object> earlySingletonObjects = new HashMap<String, Ob
 对于prototype作用域bean，spring容器无法完成依赖注入，因为spring容器不进行缓存prototype作用域的bean，因此无法提前暴露一个正在创建中的bean。
 
 ## SpringIOC是如何实例化Bean的？
-Spring读取配置文件中的<bean>节点，在加载后都会对应一个BeanDefinition类,通过BeanDefinitionReader读取后注册到BeanDefinitionRegistry。然后进入BeanFactory创建。
-### // TODO 
+Spring读取配置文件中的<bean>节点，在加载后都会对应一个BeanDefinition类,或者一个BeanDefinition子类。
+通过BeanDefinitionReader读取后注册到BeanDefinitionRegistry。然后进入BeanFactory创建。
+一个id可以对应一个bean实例，一个bean可以对应多个id。
+
+![](images/ioc-bean-definition-reader.png)
+
+在org.springframework.beans.factory.support.DefaultListableBeanFactory中保存了BeanDefinition
+```java
+	/** Map of bean definition objects, keyed by bean name. */
+	private final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(256);
+```
+// TODO 代码模拟一下BeanDefinitionReader在上图中的三个过程。
+
+## BeanFactory和ApplicationContext的区别
+BeanFactory：是Spring里面最低层的接口，提供了最简单的容器的功能，只提供了实例化对象和获取对象以及依赖注入的功能；BeanFactory默认懒加载，在启动的时候不会去实例化Bean，中有从容器中拿Bean的时候才会去实例化；
+ApplicationContext：继承BeanFactory接口，它是Spring的一各更高级的容器，提供了更多的有用的功能；
+1) 国际化（MessageSource）
+2) 访问资源，如URL和文件（ResourceLoader）
+3) 载入多个（有继承关系）上下文 ，使得每一个上下文都专注于一个特定的层次，比如应用的web层  
+4) 事件机制消息发送、响应机制（ApplicationEventPublisher）
+5) AOP（拦截器）  
+ApplicationContext在启动的时候就把所有的Bean全部实例化了。它还可以为Bean配置lazy-init=true来让Bean延迟实例化； 
+ApplicationContext有多重实现表示不同层次的上下文ApplicationContext支持事件机制
+
+该用BeanFactory还是ApplicationContent
+
+延迟实例化的优点：（BeanFactory）
+
+应用启动的时候占用资源很少；对资源要求较高的应用，比较有优势； 
+
+不延迟实例化的优点： （ApplicationContext）
+
+1. 所有的Bean在启动的时候都加载，系统运行的速度快； 
+
+2. 在启动的时候所有的Bean都加载了，我们就能在系统启动的时候，尽早的发现系统中的配置问题 
+
+3. 建议web应用，在启动的时候就把所有的Bean都加载了。（把费时的操作放到系统启动中完成）
+
+```java
+public class BeanFactoryMain {
+  public static void main(String[] args) throws Throwable{
+    ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+    Resource res = resolver.getResource("classpath:applicationContext.xml");
+    System.out.println(res.getURL());
+    BeanFactory beanFactory = new XmlBeanFactory(res);
+    BeanA bean = beanFactory.getBean(BeanA.class);
+  }
+}
+```
+```java
+public class IOCMain {
+
+  public static void main(String[] args) {
+    ApplicationContext fileSystemXmlApplicationContext = new FileSystemXmlApplicationContext(
+        "classpath:applicationContext.xml");
+    BeanA bean = fileSystemXmlApplicationContext.getBean(BeanA.class);
+  }
+}
+```
+ ApplicationContext的初始化和BeanFactory有一个重大的区别:BeanFactory在初始化容器时，并未实例化Bean,直到第一次访问某个Bean时才实例目标Bean;而ApplicationContext则在初始化应用上下文时就实例化所有的单实例的Bean。因此ApplicationContext的初始化时间会比BeanFactory稍长一些.
 
 
-Bean工厂和上下文的区别:BeanFactory是ApplicationContext的顶级借口，BeanFacotry默认懒加载，ApplicationContext在启动就加载所以可以检测配置文件错误，ApplicationContext有多重实现表示不同层次的上下文，ApplicationContext支持国际化，ApplicationContext支持事件机制
+-  ApplicationContext(上下文容器)：一般由ClassPathXmlApplicationContext或者AnnotationConfigApplicationContext担任。
+![](images/spring-context.jpg)
 
-
-# SpringIOC 两种容器
-
-- [上下文容器](ioc-application-context.md)：一般由ClassPathXmlApplicationContext或者AnnotationConfigApplicationContext担任。
-- [Bean工厂容器](ioc-bean-factory.md)：一般由DefaultListableBeanFactory担任。
+- BeanFactory：一般由DefaultListableBeanFactory担任。
+![](images/spring-bean-factory.jpg)
 
 上下文容器持有了Bean工厂容器。通过父类的getBeanFactory方法获取Bean工厂的实现类的实例。
 
-# ApplicationContext类关系图
-[上下文容器](ioc-application-context.md)
 
-# BeanFactory类关系图
-[Bean工厂容器](ioc-bean-factory.md)
-
-# ApplicationContext和BeanFactory关系
 org.springframework.context.support.AbstractRefreshableApplicationContext#getBeanFactory
 
-# SpringIOC容器启动流程
+# SpringIOC容器启动流程，refresh()接口中的实现逻辑
 ![](images/spring-ioc-starter.jpg)

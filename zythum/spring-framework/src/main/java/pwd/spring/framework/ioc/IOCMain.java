@@ -18,8 +18,8 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 public class IOCMain {
 
   public static void main(String[] args) {
-    FileSystemXmlApplicationContext fileSystemXmlApplicationContext = new FileSystemXmlApplicationContext(
+    ApplicationContext fileSystemXmlApplicationContext = new FileSystemXmlApplicationContext(
         "classpath:applicationContext.xml");
-    fileSystemXmlApplicationContext.getBean(BeanB.class);
+    BeanA bean = fileSystemXmlApplicationContext.getBean(BeanA.class);
   }
 }
