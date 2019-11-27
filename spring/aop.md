@@ -92,6 +92,16 @@ public void save(){
 }
 以上的looger.log()和save结合的地方就称之为连接点
 ```
+Join Point 类型
+1：execution：限定方法的方方面面，如访问修饰，返回值，参数等等。
+2：with：限定的粒度为类
+3：args：限定参数类型和数量，和包名类名无关
+4：this：从容器中取出的对象是限定的对象实例
+4：target：从容器中取出的对象代理的目标对象是限定的对象实例
+5：annotation：限定到方法上的注解
+注意，以上类型的限定参数都支持@
+
+参数：JoinPoint对象，ProceedingJoinPoint增强的JoinPoint可以增强环绕，可以动态替换参数，调用方法等。
 
 Weaving（织入）：把代理逻辑加入到目标对象上的过程叫织入
 
