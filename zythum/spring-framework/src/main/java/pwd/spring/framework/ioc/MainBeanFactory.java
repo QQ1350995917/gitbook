@@ -17,7 +17,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
  * @version 1.0.0
  * @since DistributionVersion
  */
-public class BeanFactoryMain {
+public class MainBeanFactory {
   public static void main(String[] args) throws Throwable{
     ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
     Resource res = resolver.getResource("classpath:applicationContext.xml");

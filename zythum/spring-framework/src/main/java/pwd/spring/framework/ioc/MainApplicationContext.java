@@ -2,7 +2,6 @@ package pwd.spring.framework.ioc;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 /**
  * pwd.spring.framework.ioc@gitbook
@@ -15,11 +14,11 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
  * @version 1.0.0
  * @since DistributionVersion
  */
-public class IOCMain {
+public class MainApplicationContext {
 
   public static void main(String[] args) {
-    ApplicationContext fileSystemXmlApplicationContext = new FileSystemXmlApplicationContext(
+    ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
         "classpath:applicationContext.xml");
-    BeanA bean = fileSystemXmlApplicationContext.getBean(BeanA.class);
+    BeanA bean = applicationContext.getBean(BeanA.class);
   }
 }

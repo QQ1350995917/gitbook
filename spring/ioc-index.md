@@ -289,8 +289,9 @@ IOC 容器在读到上面的配置时，会按照顺序，先去实例化 beanA�
 容器会获取 beanA 对象的一个早期的引用（early reference），并把这个早期引用注入到 beanB 中，让 beanB 先完成实例化。
 beanB 完成实例化，beanA 就可以获取到 beanB 的引用，beanA 随之完成实例化。所谓的”早期引用“是指向原始对象的引用。所谓的原始对象是指刚创建好的对象，但还未填充属性。
 
-Spring 容器对缓存的定义
+org.springframework.beans.factory.support.DefaultSingletonBeanRegistry 对缓存的定义
 ```java
+public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements SingletonBeanRegistry {
 /** Cache of singleton objects: bean name --> bean instance */
 //用于存放完全初始化好的 bean，从该缓存中取出的 bean 可以直接使用
 private final Map<String, Object> singletonObjects = new ConcurrentHashMap<String, Object>(256);
@@ -301,7 +302,8 @@ private final Map<String, ObjectFactory<?>> singletonFactories = new HashMap<Str
 
 /** Cache of early singleton objects: bean name --> bean instance */
 // 存放 bean 工厂对象，用于解决循环依赖
-private final Map<String, Object> earlySingletonObjects = new HashMap<String, Object>(16);
+private final Map<String, Object> earlySingletonObjects = new HashMap<String, Object>(16);  
+}
 ```
 #### Set方法注入产生的循环依赖scope都为prototype，容器无法解除循环解除，依赖链上有一个singleton则可以解除循环依赖
 
@@ -336,6 +338,7 @@ Spring读取配置文件中的<bean>节点，在加载后都会对应一个BeanD
 // TODO 代码模拟一下BeanDefinitionReader在上图中的三个过程。
 
 ## BeanFactory和ApplicationContext的区别
+![](images/applicationContext-beanFactory.png)
 BeanFactory：是Spring里面最低层的接口，提供了最简单的容器的功能，只提供了实例化对象和获取对象以及依赖注入的功能；BeanFactory默认懒加载，在启动的时候不会去实例化Bean，中有从容器中拿Bean的时候才会去实例化；
 ApplicationContext：继承BeanFactory接口，它是Spring的一各更高级的容器，提供了更多的有用的功能；
 1) 国际化（MessageSource）
@@ -359,6 +362,12 @@ ApplicationContext有多重实现表示不同层次的上下文ApplicationContex
 2. 在启动的时候所有的Bean都加载了，我们就能在系统启动的时候，尽早的发现系统中的配置问题 
 
 3. 建议web应用，在启动的时候就把所有的Bean都加载了。（把费时的操作放到系统启动中完成）
+
+### BeanFactory和ApplicationContext和BeanDefinitionRegistry的结合
+
+![](images/classPathXmlApplicationContext.png)
+
+![](images/defaultListableBeanFactory.png)
 
 ```java
 public class BeanFactoryMain {
