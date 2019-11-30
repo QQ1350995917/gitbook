@@ -1,3 +1,11 @@
+# MongoDB分片部署
+
+
+ongodb一共有三种集群搭建的方式：
+
+Replica Set（副本集）、
+
+Sharding（切片）
 MongoDB分片+副本集集群环境搭建
 
 ## 1.**分片中的节点说明：**
@@ -188,6 +196,11 @@ MongoDB分片+副本集集群环境搭建
 > use test  ;
 >
 > db.auth\("dev","123456"\)
+
+
+
+
+
 
 
 
