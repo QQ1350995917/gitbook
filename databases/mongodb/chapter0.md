@@ -13,11 +13,11 @@ touch /usr/local/mongodb/logs
 - 启动方式一
   - 启动服务
   ```
-  mongod --dbpath=/usr/local/mongodb/data –logpath=/usr/local/mongodb/logs –logappend --bind_ip=127.0.0.1 -–port=27017 --fork 
+  mongod --dbpath=/usr/local/mongodb/data –logpath=/usr/local/mongodb/logs –logappend --bind_ip=0.0.0.0 -–port=27017 --fork 
   ```
   - 设置服务开机启动
   ```
-  echo "/usr/local/mongodb/bin/mongod --dbpath=/usr/local/mongodb/data –logpath=/usr/local/mongodb/logs –logappend --bind_ip=127.0.0.1 -–port=27017 --fork" >> /etc/rc.local
+  echo "/usr/local/mongodb/bin/mongod --dbpath=/usr/local/mongodb/data –logpath=/usr/local/mongodb/logs –logappend --bind_ip=0.0.0.0 -–port=27017 --fork" >> /etc/rc.local
   ```
   - 启动客户端
   ```
@@ -43,7 +43,7 @@ touch /usr/local/mongodb/logs
   #关闭http接口，默认关闭http端口访问
   #nohttpinterface=true
   #mongodb所绑定的ip地址
-  #bind_ip = 127.0.0.1 
+  #bind_ip = 0.0.0.0
   #启用日志文件，默认启用
   journal=true 
   #这个选项可以过滤掉一些无用的日志信息，若需要调试使用请设置为false
@@ -107,6 +107,13 @@ touch /usr/local/mongodb/logs
   rm mongod.lock
   mongod --repair --dbpath=/usr/local/mongodb/data  
   ```
+
+- 客户端连接
+```
+mongo 
+或者
+mongo --host=127.0.0.1 --port=27017
+```
   
 [https://www.cnblogs.com/shileima/p/7823434.html](https://www.cnblogs.com/shileima/p/7823434.html)
 
