@@ -2,7 +2,7 @@
 
 * [Introduction](README.md)
 * [Project]()
-  * [JavaCodeStyle](project/java/standard.md)
+  * [Code](project/code/SUMMARY.md)
   * [Maven]()
   * [Git]()
   * [GitLab]()

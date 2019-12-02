@@ -30,9 +30,9 @@ kafka选举是发生在切片之间的，依托的是Zookeeper分布式锁实现
 
 
 
-![](/kafka/images/kafka-01.jpg)
+![](images/kafka-01.jpg)
 
-![](/kafka/images/kafka-02.jpg)
+![](images/kafka-02.jpg)
 
-![](/kafka/images/kafka-03.jpg)
+![](images/kafka-03.jpg)
 
