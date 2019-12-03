@@ -1,27 +1,170 @@
-# MongoDB分片部署
+# MongoDB Cluster 分片部署
 ## 分片部署架构示意图
 ![分片部署架构示意图](images/deploy-sharding-replication.png)
 随着数据的增长，单机实例的瓶颈是很明显的。可以通过复制的机制应对压力，但mongodb中单个集群的 节点数量限制到了12个以内，所以需要通过分片进一步横向扩展。此外分片也可节约磁盘的存储。
 
 MongoDB分片+副本集集群环境搭建
 
-## 1.**分片中的节点说明：**
+## 1分片中的节点说明
 
 * 路由节点\(mongos\)：用于分发用户的请求，起到反向代理的作用。
 * 配置节点\(config\)：用于存储分片的元数据信息，路由节基于元数据信息 决定把请求发给哪个分片。（3.4版本之后，该节点，必须使用复制集。）
 * 分片节点\(shard\):用于实际存储的节点，其每个数据块默认为64M，满了之后就会产生新的数据库。
 
 开启分片功能
-分片有三部分组成，如右图，路由，配置信息，分片；数据存储在分片上，在配置信息上记录数据存储的节点，在路由上访问时选择分片。
+分片有三部分组成，路由，配置信息，分片；数据存储在分片上，在配置信息上记录数据存储的节点，在路由上访问时选择分片。
 每个分片的大小可以配置默认64M
 
 
+## 集群部署规划
+![](images/mongodb-cluster-deploy-plan.png)
 
-## **2.分片示例流程：**
+### 准备工作
+[准备工作参考](chapter0.md)
 
-1. 配置 并启动config 节点集群
-   1. 配置集群信息
-2. 配置并启动2个shard 节点
+### shard节点集群
+#### 配置
+
+1. shard-13211.conf
+> dbpath=/home/mongodb/shard/shard-13211
+>
+> logpath=/home/mongodb/logs/shard-13211.log
+>
+> port=13211
+>
+> fork=true
+>
+> shardsvr=true
+
+2. shard-13212.conf
+> dbpath=/home/mongodb/shard/shard-13212
+>
+> logpath=/home/mongodb/logs/shard-13212.log
+>
+> port=13211
+>
+> fork=true
+>
+> shardsvr=true
+
+3. shard-13213.conf
+> dbpath=/home/mongodb/shard/shard-13213
+>
+> logpath=/home/mongodb/logs/shard-13213.log
+>
+> port=13211
+>
+> fork=true
+>
+> shardsvr=true
+
+#### 启动
+```
+mongod -f /home/mongodb/shard/shard-13211.conf
+mongod -f /home/mongodb/shard/shard-13212.conf
+mongod -f /home/mongodb/shard/shard-13213.conf
+```
+
+### config节点集群
+#### 配置
+1. config-13111.conf
+> dbpath=/home/mongodb/config/config-13111
+> 
+> logpath=/home/mongodb/logs/config-13111.log
+>
+> port=13111
+>
+> fork=true
+>
+> replSet=configCluster
+>
+> configsvr=true
+
+2. config-13112.conf
+> dbpath=/home/mongodb/config/config-13112
+> 
+> logpath=/home/mongodb/logs/config-13112.log
+>
+> port=13111
+>
+> fork=true
+>
+> replSet=configCluster
+>
+> configsvr=true
+
+3. config-13113.conf
+> dbpath=/home/mongodb/config/config-13113
+> 
+> logpath=/home/mongodb/logs/config-13113.log
+>
+> port=13111
+>
+> fork=true
+>
+> replSet=configCluster
+>
+> configsvr=true
+
+#### 启动
+```
+mongod -f /home/mongodb/config/config-13111.conf
+mongod -f /home/mongodb/config/config-13112.conf
+mongod -f /home/mongodb/config/config-13113.conf
+```
+
+### router节点集群
+#### 配置
+1. route-13011.conf
+> port=13011
+>
+> fork=true
+>
+> logpath=/home/mongodb/logs/route-13011.log
+>
+> configdb=configCluster/127.0.0.1:13111,127.0.0.1:13112,127.0.0.1:13113
+
+2. route-13012.conf
+> port=13012
+>
+> fork=true
+>
+> logpath=/home/mongodb/logs/route-13012.log
+>
+> configdb=configCluster/127.0.0.1:13111,127.0.0.1:13112,127.0.0.1:13113
+
+3. route-13013.conf
+> port=13013
+>
+> fork=true
+>
+> logpath=/home/mongodb/logs/route-13013.log
+>
+> configdb=configCluster/127.0.0.1:13111,127.0.0.1:13112,127.0.0.1:13113
+
+#### 启动
+```
+mongos --config /home/mongodb/routers/route-13011.conf
+mongos -config /home/mongodb/routers/route-13012.conf
+mongos -config /home/mongodb/routers/route-13013.conf
+```
+
+## 启动集群
+1. 启动shard集群
+2. 启动config集群
+
+进入shell 并添加 config 集群配置：
+```js
+var cfg ={"_id":"configCluster","protocolVersion" : 1,"members":[{"_id":0,"host":"127.0.0.1:13111"},{"_id":1,"host":"127.0.0.1:13112"},{"_id":2,"host":"127.0.0.1:13113"}]}
+
+rs.initiate(cfg)
+```
+3. 启动router集群
+
+
+
+
+####################################################################################################
 3. 配置并启动路由节点
    1. 添加shard 节点
    2. 添加shard 数据库
@@ -34,35 +177,6 @@ MongoDB分片+副本集集群环境搭建
 
 **配置 并启动config 节点集群**
 
-
-
-## 节点1 config1-37017.conf
-
-> dbpath=/data/mongo/config1
->
-> port=37017
->
-> fork=true
->
-> logpath=logs/config1.log
->
-> replSet=configCluster
->
-> configsvr=true
-
-## 节点2 config2-37018.conf
-
-> dbpath=/data/mongo/config2
->
-> port=37018
->
-> fork=true
->
-> logpath=logs/config2.log
->
-> replSet=configCluster
->
-> configsvr=true
 
 进入shell 并添加 config 集群配置：
 
@@ -84,33 +198,6 @@ MongoDB分片+副本集集群环境搭建
 >
 > rs.initiate\(cfg\)
 
-## 配置 shard 节点集群
-
-> \# 节点1 shard1-47017.conf
->
-> dbpath=/data/mongo/shard1
->
-> port=47017
->
-> fork=true
->
-> logpath=logs/shard1.log
->
-> shardsvr=true
->
->
->
-> \# 节点2 shard2-47018.conf
->
-> dbpath=/data/mongo/shard2
->
-> port=47018
->
-> fork=true
->
-> logpath=logs/shard2.log
->
-> shardsvr=true
 
 配置 路由节点 mongos
 
@@ -204,6 +291,6 @@ MongoDB分片+副本集集群环境搭建
 
 
 
-
+https://www.cnblogs.com/wangshouchang/p/6920390.html
 
 
