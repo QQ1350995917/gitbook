@@ -120,6 +120,8 @@ mongod -f /home/mongodb/config/config-13113.conf
 >
 > fork=true
 >
+> bind\_ip=0.0.0.0
+> 
 > logpath=/home/mongodb/logs/route-13011.log
 >
 > configdb=configCluster/127.0.0.1:13111,127.0.0.1:13112,127.0.0.1:13113
@@ -127,6 +129,8 @@ mongod -f /home/mongodb/config/config-13113.conf
 2. route-13012.conf
 > port=13012
 >
+> bind\_ip=0.0.0.0
+> 
 > fork=true
 >
 > logpath=/home/mongodb/logs/route-13012.log
@@ -136,6 +140,8 @@ mongod -f /home/mongodb/config/config-13113.conf
 3. route-13013.conf
 > port=13013
 >
+> bind\_ip=0.0.0.0
+> 
 > fork=true
 >
 > logpath=/home/mongodb/logs/route-13013.log
@@ -144,9 +150,9 @@ mongod -f /home/mongodb/config/config-13113.conf
 
 #### 启动
 ```
-mongos --config /home/mongodb/routers/route-13011.conf
-mongos -config /home/mongodb/routers/route-13012.conf
-mongos -config /home/mongodb/routers/route-13013.conf
+mongos -f /home/mongodb/routers/route-13011.conf
+mongos -f /home/mongodb/routers/route-13012.conf
+mongos -f /home/mongodb/routers/route-13013.conf
 ```
 
 ## 启动集群
