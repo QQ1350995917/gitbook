@@ -17,7 +17,8 @@
 - [单机部署](chapter0.md)
 - [主从部署](chapter1.md)
 - [分片部署]()
+## [运行监控](chapter4.md)
 ## 基本操作
 - [库表操作](chapter3.md)
-- [数据操作](chapter4.md)
+- [数据操作](chapter5.md)
 
