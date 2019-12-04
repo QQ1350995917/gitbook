@@ -6,7 +6,7 @@ db.friend.insertOne({name:"wukong"，sex:"man"});
 db.friend.insertMany([
 {name:"wukong",sex:"man"},{name:"diaocan",sex:"woman",age:18,birthday:new Date("1995-11-02")},{name:"zixiao",sex:"woman"}
 ]);
-// 指定ID 
+
  db.friend.insert([
         {_id:1,name:"wokong",sex:"man",age:1},
         {_id:2,name:"diaocan",sex:"women",birthday:new Date("1988-11-    11")}
