@@ -22,7 +22,7 @@ MongoDB分片+副本集集群环境搭建
 ### 准备工作
 [准备工作参考](chapter0.md)
 
-### shard节点集群
+### shard节点集群(2个起步)
 #### 配置
 
 1. shard-13211.conf
@@ -34,6 +34,14 @@ MongoDB分片+副本集集群环境搭建
 >
 > fork=true
 >
+> logappend=true
+>
+> maxConns=5000
+>
+> storageEngine=mmapv1
+>
+> replSet=shard1
+>
 > shardsvr=true
 
 2. shard-13212.conf
@@ -41,9 +49,17 @@ MongoDB分片+副本集集群环境搭建
 >
 > logpath=/home/mongodb/logs/shard-13212.log
 >
-> port=13211
+> port=13212
 >
 > fork=true
+>
+> logappend=true
+>
+> maxConns=5000
+>
+> storageEngine=mmapv1
+>
+> replSet=shard1
 >
 > shardsvr=true
 
@@ -52,9 +68,17 @@ MongoDB分片+副本集集群环境搭建
 >
 > logpath=/home/mongodb/logs/shard-13213.log
 >
-> port=13211
+> port=13213
 >
 > fork=true
+>
+> logappend=true
+>
+> maxConns=5000
+>
+> storageEngine=mmapv1
+>
+> replSet=shard1
 >
 > shardsvr=true
 
@@ -65,7 +89,7 @@ mongod -f /home/mongodb/shard/shard-13212.conf
 mongod -f /home/mongodb/shard/shard-13213.conf
 ```
 
-### config节点集群
+### config节点集群（3个起步）
 #### 配置
 1. config-13111.conf
 > dbpath=/home/mongodb/config/config-13111
@@ -85,7 +109,7 @@ mongod -f /home/mongodb/shard/shard-13213.conf
 > 
 > logpath=/home/mongodb/logs/config-13112.log
 >
-> port=13111
+> port=13112
 >
 > fork=true
 >
@@ -98,7 +122,7 @@ mongod -f /home/mongodb/shard/shard-13213.conf
 > 
 > logpath=/home/mongodb/logs/config-13113.log
 >
-> port=13111
+> port=13113
 >
 > fork=true
 >
@@ -130,7 +154,7 @@ rs.status()
 ![](images/config-after-cluster-rs-status-2.png)
 ![](images/config-after-cluster-rs-status-3.png)
 
-### router节点集群
+### router节点集群（1个起步）
 #### 配置
 1. route-13011.conf
 > port=13011
@@ -190,37 +214,35 @@ sh.status()
 集群部署完毕
 ![](images/cluster-deploy-over-dbs.png)
 
+#### [为分片添加副本集](chapter1.md)
+
 ## 业务设置
 ### 为数据库开启分片功能
 ```
-sh.enableSharding("extract_result")
+sh.enableSharding("cluster_test")
 ``` 
 ### 为数据集开启分片功能 
 ```
-sh.shardCollection("extract_result.genernal_result,{"_id":1}")
+use cluster_test
+db.cluster_test.createIndex({"id":1}) # 以"id"作为索引
+sh.shardCollection("cluster_test.collection_shard_test,{"_id":1}")
 ```
-### 修改分片大小（单位M）
+### 修改分片大小（测试可选操作，单位M）
 ```
 use config
 db.settings.find()
 db.settings.save({_id:"chunksize",value:1})
 ```
 
+### 插入测试数据
+```
+use cluster_test
+for(i=1;i<=50000;i++){db.collection_shard_test.insert({"id":i,"name":"DingPengwei"+i,"email":"www.dingPengwei@foxmail"+i})}
+```
+
 ###  #################################################################################################
 
-4. 插入测试数据
-   1. 检查数据的分布
-5. 插入大批量数据查看shard 分布
-   1. 设置shard 数据块为一M
-   2. 插入10万条数据
 
-尝试插入1万条数据：
-
-> for\(var i=1;i&lt;=100000;i++\){
->
-> 			     db.emp.insert\({"\_id":i,"name":"copy"+i}\);
->
-> }
 
 ## 用户管理与数据集验证
 
@@ -263,8 +285,6 @@ db.settings.save({_id:"chunksize",value:1})
 > use test  ;
 >
 > db.auth\("dev","123456"\)
-
-
 
 
 

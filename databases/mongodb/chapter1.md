@@ -15,141 +15,108 @@ Master-Slaver（主从）
 4：分片+副本集在系统部署和维护上的复杂度要高于主从模式。
 
 
-## 主从环境搭建有两种方式，一主一从，一主多从。这里仅做一主多从方式的搭建。
+## 主从环境搭建
 
-主节点配置
+### 配置信息
+- 节点1配置node-13151.conf
 
-> dbpath=/data/mongo/master
+> dbpath=/home/mongo/master-slave/node-13151/data
 >
-> port=27017
+> logpath=/home/mongo/master-slave/node-13151/log/node.log
+>
+> port=13151
 >
 > fork=true
 >
-> logpath=master.log
->
-> replSet=cluster
+> replSet=replicationCluster  # 在分片上，不同分片的副本集命名不能一样
 
-从节点1配置
+- 节点2配置node-13152.conf
 
-> dbpath=/data/mongo/slave1
+> dbpath=/home/mongo/master-slave/node-13152/data
 >
-> port=27018
+> logpath=/home/mongo/master-slave/node-13152/log/node.log
+>
+> port=13152
 >
 > fork=true
 >
-> logpath=slave1.log
->
-> replSet=cluster
+> replSet=replicationCluster  # 在分片上，不同分片的副本集命名不能一样
 
-从节点2配置
+- 节点3配置node-13153.conf
 
-> dbpath=/data/mongo/slave2
+> dbpath=/home/mongo/master-slave/node-13153/data
 >
-> port=27019
+> logpath=/home/mongo/master-slave/node-13153/log/node.log
+>
+> port=13153
 >
 > fork=true
 >
-> logpath=slave2.log
->
-> replSet=cluster
+> replSet=replicationCluster  # 在分片上，不同分片的副本集命名不能一样
 
+### 启动
 分别启动三个节点并进入其中一个节点
+```
+mongod -f /home/mongo/master-slave/node-13151.conf
+mongod -f /home/mongo/master-slave/node-13152.conf
+mongod -f /home/mongo/master-slave/node-13153.conf
+```
 
-集群复制配置管理
+### 主从复制配置管理
+- 查看复制集群的帮助文档
+```
+rs.help()
+rs.status()
+```
 
-> \#查看复制集群的帮助方法
->
-> rs.help\(\)
+- 添加配置
+```
+var cfg ={"_id":"replicationCluster","members":[{"_id":0,"host":"127.0.0.1:13151"},{"_id":0,"host":"127.0.0.1:13152"},{"_id":0,"host":"127.0.0.1:13153"}]}
+rs.initiate(cfg)
+rs.status()
+```
 
-添加配置
+默认从节点不能读数据。需在从节点上执行
+```
+rs.slaveOk()
+```
+ 
 
-> // 声明配置变量
->
-> var cfg ={"\_id":"tulingCluster",
->
-> 			"members":\[
->
-> 				{"\_id":0,"host":"127.0.0.1:27017"},
->
-> 				{"\_id":1,"host":"127.0.0.1:27018"}
->
-> 			\]
->
-> 		 }
->
-> // 初始化配置
->
-> rs.initiate\(cfg\)
->
-> // 查看集群状态
->
-> rs.status\(\)
+### 变更节点示例：
+插入新的复制节点
+```
+rs.add("127.0.0.1:13154")
+```
+删除slave 节点
+```
+rs.remove("127.0.0.1:27019")
+```
+查看节点状态
+```
+rs.status()
+```
+主从复制部署完毕，进入主节点即可插入数据;进入从节点即可查看数据,从节点无法插入数据。
 
-变更节点示例：
+##  主从复制
+- 主从之间使用oplog进行数据复制同步，同步过程自动发生
+- 配置arbiterOnly不会复制数据，仅作为选举裁判，不能把就有的节点变成arbiterOnly。 
 
-> // 插入新的复制节点
->
-> rs.add\("127.0.0.1:27019"\)
->
-> // 删除slave 节点
->
-> rs.remove\("127.0.0.1:27019"\)
+## 复制集选举原理
+- 节点使用属性值property大小来决定选举谁做为主节点。
+- 配置property越大越可能成为master。
+- 集群当中如果主节点挂掉后，会自动在从节点中选举一个重新做为主节点。
+- 设置arbiterOnly 为true 表示 做为裁判节点用于执行选举操作，该配置下的节点 永远不会被选举为主节点和从节点。
 
-演示复制状态
+## 重新配置节点
+```
+var cfg ={"_id":"replicationCluster","members":[{"_id":0,"host":"127.0.0.1:13151","priority":10},{"_id":0,"host":"127.0.0.1:13152","priority":5},{"_id":0,"host":"127.0.0.1:13153","arbiterOnly":true}]}
+rs.reconfig(cfg)
+rs.status()
+```
 
-进入主节点客户端
+## 节点说明
 
-插入数据
-
-进入从节点查看数据
-
-尝试在从节点下插入数据
-
-注：默认节点下从节点不能读取数据。调用 rs.slaveOk\(\) 解决。
-
-1：主从复制
-oplog，自动切换，slaveOK，配置property越可能成为master，配置arbiterOnly不会复制数据，仅作为裁判，不能把就有的节点变成arbiterOnly。
-
-
-### 复制集群选举操作
-
-为了保证高可用，在集群当中如果主节点挂掉后，会自动 在从节点中选举一个 重新做为主节点。
-
-演示节点的切换操作
-
-kill 主节点
-
-进入从节点查看集群状态 。rs.status\(\)**选举的原理：**
-
-在mongodb 中通过在 集群配置中的 rs.属性值大小来决定选举谁做为主节点，通时也可以设置arbiterOnly 为true 表示 做为裁判节点用于执行选举操作，该配置下的节点 永远不会被选举为主节点和从节点。
-
-> 重新配置节点
->
-> var cfg ={"\_id":"tulingCluster",
->
-> 		  "protocolVersion" : 1,
->
-> 		  "members":\[
->
-> 				{"\_id":0,"host":"127.0.0.1:27017","priority":10},
->
-> 				{"\_id":1,"host":"127.0.0.1:27018","priority":2},
->
-> 				{"\_id":2,"host":"127.0.0.1:27019","arbiterOnly":true}
->
-> 			\]
->
-> 		 }
->
-> // 重新装载配置，并重新生成集群节点。
->
-> rs.reconfig\(cfg\)
->
-> //重新查看集群状态
->
-> rs.status\(\)
-
-**节点说明：**
-
- PRIMARY 节点： 可以查询和新增数据  SECONDARY 节点：只能查询 不能新增  基于priority 权重可以被选为主节点  RBITER 节点： 不能查询数据 和新增数据 ，不能变成主节点
+- PRIMARY 节点： 可以查询和新增数据  
+- SECONDARY 节点：只能查询 不能新增  基于priority 权重可以被选为主节点  
+- ARBITER 节点： 不能查询数据 和新增数据 ，不能变成主节点
 
