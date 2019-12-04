@@ -113,6 +113,23 @@ mongod -f /home/mongodb/config/config-13112.conf
 mongod -f /home/mongodb/config/config-13113.conf
 ```
 
+#### 集群
+使用客户端连接任意config节点
+```
+mongo --port 13111
+rs.status();
+```
+![](images/config-before-cluster-rs-status.png)
+```
+var cfg ={"_id":"configCluster","protocolVersion" : 1,"members":[{"_id":0,"host":"127.0.0.1:13111"},{"_id":1,"host":"127.0.0.1:13112"},{"_id":2,"host":"127.0.0.1:13113"}]}
+rs.initiate(cfg)
+rs.status()
+```
+![](images/config-cluster.png)
+![](images/config-after-cluster-rs-status-1.png)
+![](images/config-after-cluster-rs-status-2.png)
+![](images/config-after-cluster-rs-status-3.png)
+
 ### router节点集群
 #### 配置
 1. route-13011.conf
@@ -154,94 +171,48 @@ mongos -f /home/mongodb/routers/route-13011.conf
 mongos -f /home/mongodb/routers/route-13012.conf
 mongos -f /home/mongodb/routers/route-13013.conf
 ```
-
-## 启动集群
-1. 启动shard集群
-2. 启动config集群
-
-进入shell 并添加 config 集群配置：
-```js
-var cfg ={"_id":"configCluster","protocolVersion" : 1,"members":[{"_id":0,"host":"127.0.0.1:13111"},{"_id":1,"host":"127.0.0.1:13112"},{"_id":2,"host":"127.0.0.1:13113"}]}
-
-rs.initiate(cfg)
+#### 添加分片节点
+登录任意路由节点
 ```
-3. 启动router集群
+mongo --port 13011
+sh.status()
+```
+![](images/router-before-add-shard-sh-status.png)
+```
+sh.addShard("127.0.0.1:13211")
+sh.addShard("127.0.0.1:13212")
+sh.addShard("127.0.0.1:13213")
+sh.status()
+```
+![](images/router-add-shard.png)
+![](images/router-after-add-shard-sh-status.png)
 
+集群部署完毕
+![](images/cluster-deploy-over-dbs.png)
 
+## 业务设置
+### 为数据库开启分片功能
+```
+sh.enableSharding("extract_result")
+``` 
+### 为数据集开启分片功能 
+```
+sh.shardCollection("extract_result.genernal_result,{"_id":1}")
+```
+### 修改分片大小（单位M）
+```
+use config
+db.settings.find()
+db.settings.save({_id:"chunksize",value:1})
+```
 
+###  #################################################################################################
 
-####################################################################################################
-3. 配置并启动路由节点
-   1. 添加shard 节点
-   2. 添加shard 数据库
-   3. 添加shard 集合
 4. 插入测试数据
    1. 检查数据的分布
 5. 插入大批量数据查看shard 分布
    1. 设置shard 数据块为一M
    2. 插入10万条数据
-
-**配置 并启动config 节点集群**
-
-
-进入shell 并添加 config 集群配置：
-
-> var cfg ={"\_id":"configCluster",
->
-> 		  "protocolVersion" : 1,
->
-> 		  "members":\[
->
-> 				{"\_id":0,"host":"127.0.0.1:37017"},
->
-> 				{"\_id":1,"host":"127.0.0.1:37018"}
->
-> 			\]
->
-> 		 }
->
-> // 重新装载配置，并重新生成集群。
->
-> rs.initiate\(cfg\)
-
-
-配置 路由节点 mongos
-
-## 节点 route-27017.conf
-
-> port=27017
->
-> bind\_ip=0.0.0.0
->
-> fork=true
->
-> logpath=logs/route.log
->
-> configdb=configCluster/127.0.0.1:37017,127.0.0.1:37018
-
-添加分片节点
-
-> sh.status\(\)
->
-> sh.addShard\("127.0.0.1:47017"\);
->
-> sh.addShard\("127.0.0.1:47018"\);
-
-为数据库开启分片功能
-
-> sh.enableSharding\("testdb"\)
-
-为指定集合开启分片功能
-
-> sh.shardCollection\("testdb.emp",{"\_id":1}\)
-
-修改分片大小
-
-> use config
->
-> db.settings.find\(\)
->
-> db.settings.save\({\_id:"chunksize",value:1}\)
 
 尝试插入1万条数据：
 
@@ -300,3 +271,4 @@ rs.initiate(cfg)
 https://www.cnblogs.com/wangshouchang/p/6920390.html
 
 
+https://cloud.tencent.com/developer/article/1509156
