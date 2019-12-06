@@ -1,10 +1,10 @@
-package pwd.spring.framework.boot;
+package pwd.spring.mybatis.boot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * pwd.spring.framework.boot@gitbook
+ * pwd.spring.mybatis.boot@gitbook
  *
  * <h1>TODO what you want to do?</h1>
  *

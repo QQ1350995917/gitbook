@@ -1,4 +1,4 @@
-package pwd.spring.framework.ioc;
+package pwd.spring.mybatis.ioc;
 
 import org.aspectj.lang.annotation.AdviceName;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * pwd.spring.framework.ioc@gitbook
+ * pwd.spring.mybatis.ioc@gitbook
  *
  * <h1>TODO what you want to do?</h1>
  *
@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
  * @since DistributionVersion
  */
 @Configuration
-@ComponentScan("pwd.spring.framework.ioc")
+@ComponentScan("pwd.spring.mybatis.ioc")
 public class MainAnnotationContext {
 
   public static void main(String[] args) {

@@ -1,9 +1,9 @@
-package pwd.spring.framework.ioc;
+package pwd.spring.mybatis.ioc;
 
 import org.springframework.stereotype.Component;
 
 /**
- * pwd.spring.framework.ioc@gitbook
+ * pwd.spring.mybatis.ioc@gitbook
  *
  * <h1>TODO what you want to do?</h1>
  *

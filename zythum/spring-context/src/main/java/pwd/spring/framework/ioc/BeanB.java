@@ -1,4 +1,4 @@
-package pwd.spring.framework.ioc;
+package pwd.spring.mybatis.ioc;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * pwd.spring.framework.ioc@gitbook
+ * pwd.spring.mybatis.ioc@gitbook
  *
  * <h1>TODO what you want to do?</h1>
  *

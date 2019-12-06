@@ -19,3 +19,38 @@ FullText索引又称全文索引，是一种记录关键字与对应文档关系
 ## 3.MyIASAM索引
 
 ## 4.InnoDB索引
+
+
+## 索引操作
+MySQL中可以使用alter table这个SQL语句来为表中的字段添加索引。
+使用alter table语句来为表中的字段添加索引的基本语法是：
+ALTER TABLE <表名> ADD INDEX (<字段>);
+
+查看表的索引
+```mysql
+show index from `table_name`;
+```
+添加PRIMARY KEY（主键索引）
+```mysql
+ALTER TABLE `table_name` ADD PRIMARY KEY ( `column_name` )
+```
+添加UNIQUE(唯一索引) 
+```mysql
+ALTER TABLE `table_name` ADD UNIQUE ( `column_name` )
+```
+添加INDEX(普通索引) 
+```mysql
+ALTER TABLE `table_name` ADD INDEX `index_name`( `column_name` )
+```
+添加FULLTEXT(全文索引) 
+```mysql
+ALTER TABLE `table_name` ADD FULLTEXT `index_name`( `column_name` )
+```
+添加多列索引 
+```mysql
+ALTER TABLE `table_name` ADD INDEX `index_name` ( `column1`, `column2`, `column3` )
+```
+删除索引
+```mysql
+alter table `table_name` drop index `index_name`;/*mdl_tag_use_ix是上表查出的索引名，key_name*/
+```

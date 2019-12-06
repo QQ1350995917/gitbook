@@ -1,4 +1,4 @@
-package pwd.spring.framework.ioc;
+package pwd.spring.mybatis.ioc;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
@@ -7,7 +7,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
 /**
- * pwd.spring.framework.ioc@gitbook
+ * pwd.spring.mybatis.ioc@gitbook
  *
  * <h1>TODO what you want to do?</h1>
  *

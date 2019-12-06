@@ -1,10 +1,10 @@
-package pwd.spring.framework.ioc;
+package pwd.spring.mybatis.ioc;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * pwd.spring.framework.ioc@gitbook
+ * pwd.spring.mybatis.ioc@gitbook
  *
  * <h1>TODO what you want to do?</h1>
  *

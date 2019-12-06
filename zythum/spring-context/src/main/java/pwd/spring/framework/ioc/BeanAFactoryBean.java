@@ -1,11 +1,11 @@
-package pwd.spring.framework.ioc;
+package pwd.spring.mybatis.ioc;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.FactoryBean;
 
 /**
- * pwd.spring.framework.ioc@gitbook
+ * pwd.spring.mybatis.ioc@gitbook
  *
  * <h1>TODO what you want to do?</h1>
  *

@@ -240,6 +240,13 @@ use cluster_test
 for(i=1;i<=50000;i++){db.collection_shard_test.insert({"id":i,"name":"DingPengwei"+i,"email":"www.dingPengwei@foxmail"+i})}
 ```
 
+## 注意事项
+- 分片建是不可变的
+- 分片建必须有索引
+- 分片建大小限制在512Bytes
+- 分片建用于路由查询
+- 不允许已分片的collection上插入分片建为空的文档
+
 ###  #################################################################################################
 
 

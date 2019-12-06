@@ -1,9 +1,9 @@
-package pwd.spring.framework.aop;
+package pwd.spring.mybatis.aop;
 
 import org.springframework.stereotype.Component;
 
 /**
- * pwd.spring.framework.aop@gitbook
+ * pwd.spring.mybatis.aop@gitbook
  *
  * <h1>TODO what you want to do?</h1>
  *

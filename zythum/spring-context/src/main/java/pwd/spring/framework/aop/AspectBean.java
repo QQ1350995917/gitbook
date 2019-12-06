@@ -1,4 +1,4 @@
-package pwd.spring.framework.aop;
+package pwd.spring.mybatis.aop;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -11,7 +11,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 /**
- * pwd.spring.framework.aop@gitbook
+ * pwd.spring.mybatis.aop@gitbook
  *
  * <h1>TODO what you want to do?</h1>
  *
@@ -24,20 +24,20 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class AspectBean {
-  @Pointcut("execution(* pwd.spring.framework.aop.Bean.*(..))")
+  @Pointcut("execution(* pwd.spring.mybatis.aop.Bean.*(..))")
   public void pointCut(){}
 
-  @Before("pwd.spring.framework.aop.AspectBean.pointCut()")
+  @Before("pwd.spring.mybatis.aop.AspectBean.pointCut()")
   public void beforePointCut(){
     System.out.println("before");
   }
 
-  @After("pwd.spring.framework.aop.AspectBean.pointCut()")
+  @After("pwd.spring.mybatis.aop.AspectBean.pointCut()")
   public void afterPointCut(){
     System.out.println("after");
   }
 
-  @Around("pwd.spring.framework.aop.AspectBean.pointCut()")
+  @Around("pwd.spring.mybatis.aop.AspectBean.pointCut()")
   public Object aroundPointCut(ProceedingJoinPoint pjp){
     Object result = null;
     System.out.println("Around - before");
@@ -51,12 +51,12 @@ public class AspectBean {
     return result;
   }
 
-  @AfterThrowing("pwd.spring.framework.aop.AspectBean.pointCut()")
+  @AfterThrowing("pwd.spring.mybatis.aop.AspectBean.pointCut()")
   public void afterThrowingPointCut(){
     System.out.println("AfterThrowing");
   }
 
-  @AfterReturning("pwd.spring.framework.aop.AspectBean.pointCut()")
+  @AfterReturning("pwd.spring.mybatis.aop.AspectBean.pointCut()")
   public void afterReturnPointCut(){
     System.out.println("AfterReturning");
   }

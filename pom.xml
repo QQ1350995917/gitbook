@@ -9,9 +9,15 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>zythum/spring-context</module>
     <!--<module>zythum/spring-cloud</module>-->
+    <!--<module>zythum/spring-context</module>-->
+    <module>zythum/spring-mybatis</module>
   </modules>
+
+
+  <properties>
+    <java.version>1.8</java.version>
+  </properties>
 
   <dependencies>
     <dependency>
@@ -22,5 +28,19 @@
     </dependency>
   </dependencies>
 
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>

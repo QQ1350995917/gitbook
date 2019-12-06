@@ -1,4 +1,4 @@
-package pwd.spring.framework.aop;
+package pwd.spring.mybatis.aop;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
- * pwd.spring.framework.aop@gitbook
+ * pwd.spring.mybatis.aop@gitbook
  *
  * <h1>TODO what you want to do?</h1>
  *
@@ -17,7 +17,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  * @since DistributionVersion
  */
 @Configuration
-@ComponentScan("pwd.spring.framework.aop")
+@ComponentScan("pwd.spring.mybatis.aop")
 @EnableAspectJAutoProxy
 public class AopApplication {
 

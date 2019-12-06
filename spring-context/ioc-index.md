@@ -56,7 +56,7 @@ public class BeanB {
   xmlns="http://www.springframework.org/schema/beans"
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
   <!--根据默认构造函数构建-->
-  <bean class="pwd.spring.framework.ioc.BeanA"></bean>
+  <bean class="pwd.spring.mybatis.ioc.BeanA"></bean>
 </beans>
 ```
 #### 基于构造方法创建实例
@@ -66,13 +66,13 @@ public class BeanB {
   xmlns="http://www.springframework.org/schema/beans"
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
   <!--根据默认构造函数构建-->
-  <bean id="beanA" class="pwd.spring.framework.ioc.BeanA">
+  <bean id="beanA" class="pwd.spring.mybatis.ioc.BeanA">
     <constructor-arg index="0" value="123"></constructor-arg>
     <constructor-arg index="1" value="abc"></constructor-arg>
     <constructor-arg index="2" ref="beanB"></constructor-arg>
   </bean>
   
-  <bean id="beanB"  class="pwd.spring.framework.ioc.BeanB">
+  <bean id="beanB"  class="pwd.spring.mybatis.ioc.BeanB">
     <constructor-arg index="0" value="123"></constructor-arg>
     <constructor-arg index="1" value="abc"></constructor-arg>
     <constructor-arg index="2" ref="beanA"></constructor-arg>
@@ -85,7 +85,7 @@ public class BeanB {
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://www.springframework.org/schema/beans"
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-  <bean class="pwd.spring.framework.ioc.BeanA" factory-method="getBean">
+  <bean class="pwd.spring.mybatis.ioc.BeanA" factory-method="getBean">
     <constructor-arg name="flag" value="a"></constructor-arg>
   </bean>
 </beans>
@@ -93,14 +93,14 @@ public class BeanB {
 #### 基于FactoryBean实例
 Mybatis、JDBC等集成在Spring中的实现均采用该方式
 ```java
-package pwd.spring.framework.ioc;
+package pwd.spring.mybatis.ioc;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.FactoryBean;
 
 /**
- * pwd.spring.framework.ioc@gitbook
+ * pwd.spring.mybatis.ioc@gitbook
  *
  * <h1>TODO what you want to do?</h1>
  *
@@ -140,7 +140,7 @@ public class BeanAFactoryBean implements FactoryBean {
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://www.springframework.org/schema/beans"
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-  <bean id="beanA" class="pwd.spring.framework.ioc.BeanAFactoryBean">
+  <bean id="beanA" class="pwd.spring.mybatis.ioc.BeanAFactoryBean">
     <property name="id" value="123"></property>
     <property name="name" value="abc"></property>
   </bean>
@@ -177,9 +177,9 @@ public class BeanAFactoryBean implements FactoryBean {
       <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.springframework.org/schema/beans"
         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-        <bean id="beanA" class="pwd.spring.framework.ioc.BeanA" autowire="byName"></bean>
-        <bean id="beanB" class="pwd.spring.framework.ioc.BeanB"></bean>
-        <bean id="beanBxxx" class="pwd.spring.framework.ioc.BeanB"></bean>
+        <bean id="beanA" class="pwd.spring.mybatis.ioc.BeanA" autowire="byName"></bean>
+        <bean id="beanB" class="pwd.spring.mybatis.ioc.BeanB"></bean>
+        <bean id="beanBxxx" class="pwd.spring.mybatis.ioc.BeanB"></bean>
       </beans>
       
       ```  
@@ -190,9 +190,9 @@ public class BeanAFactoryBean implements FactoryBean {
       <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.springframework.org/schema/beans"
         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-        <bean id="beanA" class="pwd.spring.framework.ioc.BeanA" autowire="byType"></bean>
-        <bean class="pwd.spring.framework.ioc.BeanB" primary="true"></bean>
-        <bean class="pwd.spring.framework.ioc.BeanB"></bean>
+        <bean id="beanA" class="pwd.spring.mybatis.ioc.BeanA" autowire="byType"></bean>
+        <bean class="pwd.spring.mybatis.ioc.BeanB" primary="true"></bean>
+        <bean class="pwd.spring.mybatis.ioc.BeanB"></bean>
       </beans>
       ```
 
@@ -203,7 +203,7 @@ public class BeanAFactoryBean implements FactoryBean {
       <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.springframework.org/schema/beans"
         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-        <bean id="beanA" class="pwd.spring.framework.ioc.BeanA" autowire="constructor"></bean>
+        <bean id="beanA" class="pwd.spring.mybatis.ioc.BeanA" autowire="constructor"></bean>
       </beans>
       ```
   - 修该全局配置
@@ -213,17 +213,17 @@ public class BeanAFactoryBean implements FactoryBean {
       xmlns="http://www.springframework.org/schema/beans"
       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
       default-autowire="byType">
-      <bean id="beanA" class="pwd.spring.framework.ioc.BeanA"></bean>
+      <bean id="beanA" class="pwd.spring.mybatis.ioc.BeanA"></bean>
     </beans>
     ```    
 - 方法注入（lookup-method）  
 在单例A依赖多例B，且需要每次调用A都要创建新B的场景中使用；过程是是创建一个无需实现的抽象类，给定一个抽象方法，返回值是动态类;
 实现原理是Spring使用CGlib实现抽象类，使用到了动态字节码增强技术。另外也可以使用实现BeanFactoryAware类实现。这种设计不常见。
 ```xml
-package pwd.spring.framework.ioc;
+package pwd.spring.mybatis.ioc;
 
 /**
- * pwd.spring.framework.ioc@gitbook
+ * pwd.spring.mybatis.ioc@gitbook
  *
  * <h1>TODO what you want to do?</h1>
  *
@@ -248,7 +248,7 @@ public abstract class A {
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://www.springframework.org/schema/beans"
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-  <bean class="pwd.spring.framework.ioc.A">
+  <bean class="pwd.spring.mybatis.ioc.A">
     <lookup-method name="getBeanB"></lookup-method>
   </bean>
 </beans>
@@ -259,10 +259,10 @@ public abstract class A {
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://www.springframework.org/schema/beans"
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-  <bean class="pwd.spring.framework.ioc.BeanA" id="beanA">
+  <bean class="pwd.spring.mybatis.ioc.BeanA" id="beanA">
     <constructor-arg name="beanB" ref="beanB"></constructor-arg>
   </bean>
-  <bean class="pwd.spring.framework.ioc.BeanB" id="beanB">
+  <bean class="pwd.spring.mybatis.ioc.BeanB" id="beanB">
     <constructor-arg name="beanA" ref="beanA"></constructor-arg>
   </bean>
 </beans>
@@ -275,10 +275,10 @@ public abstract class A {
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://www.springframework.org/schema/beans"
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-  <bean class="pwd.spring.framework.ioc.BeanA" id="beanA">
+  <bean class="pwd.spring.mybatis.ioc.BeanA" id="beanA">
     <property name="beanB" ref="beanB"></property>
   </bean>
-  <bean class="pwd.spring.framework.ioc.BeanB" id="beanB">
+  <bean class="pwd.spring.mybatis.ioc.BeanB" id="beanB">
     <property name="beanA" ref="beanA"></property>
   </bean>
 </beans>
@@ -312,10 +312,10 @@ private final Map<String, Object> earlySingletonObjects = new HashMap<String, Ob
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://www.springframework.org/schema/beans"
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-  <bean class="pwd.spring.framework.ioc.BeanA" id="beanA" scope="prototype">
+  <bean class="pwd.spring.mybatis.ioc.BeanA" id="beanA" scope="prototype">
     <property name="beanB" ref="beanB"></property>
   </bean>
-  <bean class="pwd.spring.framework.ioc.BeanB" id="beanB" scope="prototype">
+  <bean class="pwd.spring.mybatis.ioc.BeanB" id="beanB" scope="prototype">
     <property name="beanA" ref="beanA"></property>
   </bean>
 </beans>

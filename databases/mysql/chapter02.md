@@ -161,12 +161,46 @@ INSERT number_decimal VALUES(30.556)
 + [SQL模式文档](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html)
          
 ## 4：字符串类型
-+ CHAR[(M)] 一个固定长度的字符串，在存储时始终用空格填充指定长度。 M表示以字符为单位的列长度。M的范围为0到255.如果M省略，则长度为1，存储时占用M个字节
-+ VARCHAR(M)可变长度的字符串，M 表示字符的最大列长度，M的范围是0到65,535，存储时占用L+1（L<=M,L为实际字符的长度）个字节
++ CHAR[(M)] 一个固定长度的字符串，在存储时始终用空格填充指定长度。 M表示以字符为单位的最大列长度。M的范围为0到255.如果M省略，则长度为1，存储时根据编码计算占用字节数，utf8为3M
++ VARCHAR(M)可变长度的字符串，M 表示字符的最大列长度，M的范围是0到65,535，存储时占用L+1（L<=M,L为实际字符的长度，1个字节记录实际长度）个字节
 + TINYTEXT[(M)] 不能有默认值，占用L+1个字节，L<2^8
 + TEXT[(M)] 不能有默认值，占用L+2个字节，L<2^16
 + MEDIUMTEXT[(M)] 不能有默认值，占用L+3个字节，L<2^24
 + LONGTEXT[(M)] 不能有默认值，占用L+4个字节，L<2^32
+
+```mysql
+CREATE TABLE `string` (
+  `char` char(255) DEFAULT NULL,
+  `varchar` varchar(255) DEFAULT NULL,
+  `tinytext` tinytext,
+  `text` text,
+  `mediumtext` mediumtext,
+  `longtext` longtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+```
+![](images/string.png)
+变更char长度
+```mysql
+ALTER TABLE `test`.`string` CHANGE COLUMN `char` `char` CHAR(256) NULL DEFAULT NULL ;
+```
+![](images/string-char-max.png)
+变更varchar长度
+```mysql
+ ALTER TABLE `test`.`string` CHANGE COLUMN `varchar` `varchar` VARCHAR(2560000) NULL DEFAULT NULL ;
+```
+![](images/string-varchar-max.png)
+
+由于使用utf8编码故21845*3=65535，实际只能放置21575个字符，21575*3-21845*8=-810（这些字节去哪里了？）
+![](images/string-varchar-max-actual.png)
+
+|类型|设定长度M|实际占用长度L|最大容量|最大容量|最大容量|
+|---|---|---|---|---|---|
+|CHAR|M|M|255|255 bytes||
+|VARCHAR|M|L+1|65536|65,536 bytes||
+|TINYTEXT|M|L+1|L<2^8|256 bytes|256B|
+|TEXT|M|L+2|L<2^16|65,535 bytes|64K|
+|MEDIUMTEXT|M|L+3|L<2^24| 16,777,215 bytes|16M|
+|LONGTEXT|M|L+4|L<2^32|4,294,967,295 bytes|4GB|
 
 ### 4.1 CHAR和VARCHAR
 创建表
@@ -199,14 +233,14 @@ CHAR类型不管存储的值的长度是多少，都会占用M个字节，而VAR
 ### 4.2 TEXT系列
 TEXT系列的存储范围比VARCHAR要大，当VARCHAR不满足时可以用TEXT系列中的类型。需要注意的是TEXT系列类型的字段不能有默认值，在检索的时候不存在大小写转换，没有CHAR和VARCHAR的效率高
 
-|类型|设定长度M|实际占用长度L|最大容量|
-|---|---|---|---|
-|CHAR|M|M|255|
-|VARCHAR|M|L+1|65536|
-|TINYTEXT|M|L+1|L<2^8|
-|TEXT|M|L+2|L<2^16|
-|MEDIUMTEXT|M|L+3|L<2^24|
-|LONGTEXT|M|L+4|L<2^32|
+|类型|设定长度M|实际占用长度L|最大容量|最大容量|最大容量|
+|---|---|---|---|---|---|
+|CHAR|M|M|255|255 bytes||
+|VARCHAR|M|L+1|65536|65,536 bytes||
+|TINYTEXT|M|L+1|L<2^8|256 bytes|256B|
+|TEXT|M|L+2|L<2^16|65,535 bytes|64K|
+|MEDIUMTEXT|M|L+3|L<2^24| 16,777,215 bytes|16M|
+|LONGTEXT|M|L+4|L<2^32|4,294,967,295 bytes|4GB|
 
 ## 5：枚举类型ENUM
 + ENUM('value1','value2',...) ENUM是一个字符串对象，其值从允许值列表中选择，它只能有一个值，从值列表中选择,最多可包含65,535个不同的元素
