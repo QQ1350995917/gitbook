@@ -293,11 +293,10 @@ for(i=1;i<=50000;i++){db.collection_shard_test.insert({"id":i,"name":"DingPengwe
 >
 > db.auth\("dev","123456"\)
 
-
-
 https://www.cnblogs.com/wangshouchang/p/6920390.html
-
 
 https://cloud.tencent.com/developer/article/1509156
 
 https://www.cnblogs.com/littleatp/p/8563273.html
+
+https://www.cnblogs.com/littleatp/p/8419647.html
