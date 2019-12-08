@@ -163,26 +163,37 @@ echo -n <用户名>:<密码> | openssl dgst -binary -sha1 | openssl base64
 
 1.	设置digest 权限  
     先 sha1 加密，然后base64加密
-echo -n luban:123456 | openssl dgst -binary -sha1 | openssl base64
+    ```
+    echo -n pwd:123456 | openssl dgst -binary -sha1 | openssl base64
     返回密钥
-2Rz3ZtRZEs5RILjmwuXW/wT13Tk=
+    ```
     设置digest权限
-setAcl /luban digest:luban:2Rz3ZtRZEs5RILjmwuXW/wT13Tk=:cdrw
+    ```
+    setAcl /test digest:pwd:返回秘钥:cdrw
+    ```
 
 2.	查看节点将显示没有权限
     查看节点
-get /luban
-   显示没有权限访问
-org.apache.zookeeper.KeeperException$NoAuthException: KeeperErrorCode = NoAuth for /luban
-
+    ```
+    get /test
+    ```
+    显示没有权限访问
+    ```
+    org.apache.zookeeper.KeeperException$NoAuthException: KeeperErrorCode = NoAuth for /test
+    ```
 3.	给当前会话添加认证后在次查看
     给当前会话添加权限帐户
-addauth digest luban:123456
+    ```
+    addauth digest pwd:123456
+    ```
     在次查看
-get /luban
+    ```
+    get /test
+    ```
     获得返回结果
-luban is good man
-
-ACL的特殊说明：
-权限仅对当前节点有效，不会让子节点继承。如限制了IP防问A节点，但不妨碍该IP防问A的子节点 /A/B。
+    ```
+    hello world
+    ```
+    ACL的特殊说明：
+    权限仅对当前节点有效，不会让子节点继承。如限制了IP防问A节点，但不妨碍该IP防问A的子节点 /A/B。
 
