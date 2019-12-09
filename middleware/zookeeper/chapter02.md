@@ -27,13 +27,14 @@ mkdir data datalog conf logger zoolog
   syncLimit=5
   maxClientCnxns=60
   clientPort=21811
+  admin.serverPort=21911
   dataDir=/home/zookeeper/cluster/21811/data
   dataLogDir=/home/zookeeper/cluster/21811/datalog
   zooLogDir=/home/zookeeper/cluster/21811/zoolog
   
-  server.1=127.0.0.1:21811:28881
-  server.2=127.0.0.1:21812:28882
-  server.3=127.0.0.1:21813:28883
+  server.1=127.0.0.1:27881:28881
+  server.2=127.0.0.1:27882:28882
+  server.3=127.0.0.1:27883:28883
   ```
   log4j.properties
   ```
@@ -50,13 +51,14 @@ mkdir data datalog conf logger zoolog
   syncLimit=5
   maxClientCnxns=60
   clientPort=21812
+  admin.serverPort=21912
   dataDir=/home/zookeeper/cluster/21812/data
   dataLogDir=/home/zookeeper/cluster/21812/datalog
   zooLogDir=/home/zookeeper/cluster/21812/zoolog
   
-  server.1=127.0.0.1:21811:28881
-  server.2=127.0.0.1:21812:28882
-  server.3=127.0.0.1:21813:28883
+  server.1=127.0.0.1:27881:28881
+  server.2=127.0.0.1:27882:28882
+  server.3=127.0.0.1:27883:28883
   ```
   log4j.properties
   ```
@@ -73,13 +75,14 @@ mkdir data datalog conf logger zoolog
   syncLimit=5
   maxClientCnxns=60
   clientPort=21813
+  admin.serverPort=21913
   dataDir=/home/zookeeper/cluster/21813/data
   dataLogDir=/home/zookeeper/cluster/21813/datalog
   zooLogDir=/home/zookeeper/cluster/21813/zoolog
   
-  server.1=127.0.0.1:21811:28881
-  server.2=127.0.0.1:21812:28882
-  server.3=127.0.0.1:21813:28883
+  server.1=127.0.0.1:27881:28881
+  server.2=127.0.0.1:27882:28882
+  server.3=127.0.0.1:27883:28883
   ```
   log4j.properties
   ```
@@ -118,11 +121,13 @@ zkServer.sh --config /home/zookeeper/cluster/21813/conf status
 检查集群复制情况：
 1. 分别连接指定节点
 zkCli.sh 后加参数-server 表示连接指定IP与端口。
+```
 zkCli.sh -server 127.0.0.1:21811
 zkCli.sh -server 127.0.0.1:21812
 zkCli.sh -server 127.0.0.1:21813
+zkCli.sh -server 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813
+```
 2. 任意节点中创建数据，查看其它节点已经同步成功。
-注意： -server参数后同时连接多个服务节点，并用逗号隔开 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813
 
 ## 集群角色说明
 zookeeper 集群中总共有三种角色，分别是
@@ -141,4 +146,3 @@ observer配置：
 server.3=127.0.0.1:21813:28883:observer
 
 ## [集群选举](chapter05.md)
-
