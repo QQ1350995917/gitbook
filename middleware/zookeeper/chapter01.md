@@ -125,19 +125,19 @@ Usage: /usr/local/bin/zookeeper/zookeeper/bin/zkServer.sh [--config <conf-dir>] 
 ```
 zkServer.sh --config /home/zookeeper/stand-alone/conf start
 ```
-#启动
+## 启动
 ```
 zkServer.sh start
 ```
-#停止
+## 停止
 ```
 zkServer.sh stop
 ```
-#重启
+## 重启
 ```
 zkServer.sh restart
 ```
-#查看状态
+## 查看状态
 ```
 zkServer.sh status
 ```
@@ -145,8 +145,13 @@ zkServer.sh status
 ```
 zkServer.sh --config /home/zookeeper/stand-alone/conf status
 ```
-#查看zookeeper输出信息
+##  查看zookeeper输出信息
 ```
 tail -f /home/zookeeper/stand-alone/zoo/zookeeper.out
 ```
+## 客户端连接
+```
+zkCli.sh -server 127.0.0.1:2181
+```
+
 

@@ -24,7 +24,7 @@
   * [Memory]()
   * [GC]()
 * [DB](databases/SUMMARY.md)
-  * [MySQL](databases/mysql/README.md)
+  * [MySQL](databases/mysql/SUMMARY.md)
   * [MongoDB](databases/mongodb/README.md)
   * [Redis](databases/redis/SUMMARY.md)
   * [Neo4j]()
