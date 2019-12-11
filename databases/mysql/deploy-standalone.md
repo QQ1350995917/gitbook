@@ -93,7 +93,7 @@ flush privileges;
 ```
 此时,还不能远程访问,因为Navicat只支持旧版本的加密,需要更改mysql的加密规则
 ```
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'password' PASSWORD EXPIRE NEVER;
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'root' PASSWORD EXPIRE NEVER;
 ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'root';
 flush privileges;
 ```
@@ -114,32 +114,34 @@ mkdir /home/mysql/standalone/conf
 mkdir /home/mysql/standalone/mysqld
 mkdir /home/mysql/standalone/logger
 ```
+```
+mkdir -p /home/mysql/standalone/data /home/mysql/standalone/conf /home/mysql/standalone/mysqld /home/mysql/standalone/logger
+```
 my.cnf
 ```
-[mysqld]
-# 服务Id唯一
-server-id=1   
+[mysqld]   
 port=33306
-# 只能用IP地址
-skip_name_resolve 
-# 表名不区分大小写
 lower_case_table_names=1 
-# 数据库默认字符集
 character-set-server=utf8mb4
-# 数据库字符集对应一些排序等规则
 collation-server=utf8mb4_general_ci
-# 设置client连接mysql时的字符集,防止乱码
 init_connect='SET NAMES utf8mb4'
-# 最大连接数
-max_connections=300
-[mysqld_safe]
-log-error=/home/mysql/standalone/logger/mysqld.log
-pid-file=/home/mysql/standalone//mysqld/mysqld.pid
+max_connections=320
 ```
 接下来分别映射数据库目录和配置文件目录，启动容器：
 ```
-docker run --name standalone -d --rm \
+docker run -d --name standalone \
 -v /home/mysql/standalone/conf:/etc/mysql/conf.d \
 -v /home/mysql/standalone/data:/var/lib/mysql \
 -p 33306:3306 -e MYSQL_ROOT_PASSWORD=root mysql
 ```
+
+```
+docker run -d --name test \
+-v /home/mysql/standalone/conf:/etc/mysql/conf.d \
+-v /home/mysql/standalone/data:/var/lib/mysql \
+-p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql
+```
+
+
+docker run -p 3306:3306 --name test -e MYSQL_ROOT_PASSWORD=root -d mysql:latest
+docker run -p 3306:3306 --name test -e MYSQL_ROOT_PASSWORD=root -d mysql:latest -v /home/mysql/standalone/data:/var/lib/mysql 
