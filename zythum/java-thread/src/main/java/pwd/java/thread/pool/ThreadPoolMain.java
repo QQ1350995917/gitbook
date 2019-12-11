@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  *
  * date 2019-12-11 18:24
  *
- * @author DingPengwei[dingpengwei@eversec.com]
+ * @author DingPengwei[dingpengwei@foxmail.com]
  * @version 1.0.0
  * @since DistributionVersion
  */
