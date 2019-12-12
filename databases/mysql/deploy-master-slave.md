@@ -1,6 +1,75 @@
 # 主从（多主）
 
 # 主从（一主多从）
+```
+mkdir -p /home/mysql/master-slave/{master-2200,slave-22001,slave-22002}
+mkdir -p /home/mysql/master-slave/master-2200/{data,mysql,logger}
+mkdir -p /home/mysql/master-slave/slave-22001/{data,mysql,logger}
+mkdir -p /home/mysql/master-slave/slave-22002/{data,mysql,logger}
+```
+
+- /home/mysql/master-slave/master-2200/mysql/my.conf
+```
+vim /home/mysql/master-slave/master-2200/mysql/my.conf
+
+[mysqld]    
+port=2200 
+lower_case_table_names=1  
+character-set-server=utf8 
+collation-server=utf8_general_ci 
+init_connect='SET NAMES utf' 
+default_authentication_plugin=mysql_native_password 
+max_connections=320 
+[client] 
+default-character-set=utf8 
+[mysql] 
+default-character-set=utf8 
+```
+
+- /home/mysql/master-slave/slave-22001/mysql/my.conf
+```
+vim /home/mysql/master-slave/slave-22001/mysql/my.conf
+
+[mysqld]    
+port=22001 
+lower_case_table_names=1  
+character-set-server=utf8 
+collation-server=utf8_general_ci 
+init_connect='SET NAMES utf' 
+default_authentication_plugin=mysql_native_password 
+max_connections=320 
+[client] 
+default-character-set=utf8 
+[mysql] 
+default-character-set=utf8 
+```
+
+
+- /home/mysql/master-slave/slave-22002/mysql/my.conf
+```
+vim /home/mysql/master-slave/slave-22002/mysql/my.conf
+
+[mysqld]    
+port=22002 
+lower_case_table_names=1  
+character-set-server=utf8 
+collation-server=utf8_general_ci 
+init_connect='SET NAMES utf' 
+default_authentication_plugin=mysql_native_password 
+max_connections=320 
+[client] 
+default-character-set=utf8 
+[mysql] 
+default-character-set=utf8 
+```
+
+启动
+```
+docker run -p 2200:3306  --name master-slave-2200  -v /home/mysql/master-slave/master-2200/mysql/my.conf:/etc/my.cnf -v /home/mysql/master-slave/master-2200/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -d mysql:latest
+docker run -p 22001:3306 --name master-slave-22001 -v /home/mysql/master-slave/slave-22001/mysql/my.conf:/etc/my.cnf -v /home/mysql/master-slave/slave-22001/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -d mysql:latest
+docker run -p 22002:3306 --name master-slave-22002 -v /home/mysql/master-slave/slave-22002/mysql/my.conf:/etc/my.cnf -v /home/mysql/master-slave/slave-22002/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -d mysql:latest
+```
+
 
 MySQL 主从复制为异步方式，也可以设置为半同步方式。
 

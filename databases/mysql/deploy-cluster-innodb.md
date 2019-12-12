@@ -26,3 +26,11 @@ var cluster = dba.createCluster\('testCluster'\)
 
 [安装方式](https://dev.mysql.com/doc/refman/5.7/en/mysql-innodb-cluster-methods-installing.html)
 
+## 部署操作
+```
+mkdir -p /home/mysql/innodb-cluster/3301/data
+mkdir -p /home/mysql/innodb-cluster/3302/data
+mkdir -p /home/mysql/innodb-cluster/3303/data
+```
+
+

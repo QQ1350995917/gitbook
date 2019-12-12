@@ -103,45 +103,61 @@ flush privileges;
 1. 进入MySQL容器查看my.cnf
 ```
 docker exec -it standalone /bin/bash
-cat /etc/mysql/my.cnf
+cat /etc/my.cnf
 ```
-![](images/docker-standalone-cnf.png)
-可以发现，主配置文件 my.cnf 加载了 /etc/mysql/conf.d 文件夹下所有的配置（后缀必须是 .cnf），我们只需映射 conf.d 文件夹即可。
-宿主机中创建文件夹 mysql，并分别创建 data 目录和 conf 目录。新建配置文件 my.cnf：
+
 ```
 mkdir /home/mysql/standalone/data
-mkdir /home/mysql/standalone/conf
-mkdir /home/mysql/standalone/mysqld
+mkdir /home/mysql/standalone/mysql
 mkdir /home/mysql/standalone/logger
 ```
 ```
 mkdir -p /home/mysql/standalone/data /home/mysql/standalone/conf /home/mysql/standalone/mysqld /home/mysql/standalone/logger
 ```
-my.cnf
+
+在/home/mysql/standalone/mysql下创建配置文件my.cnf\
 ```
 [mysqld]   
-port=33306
+port=3306
 lower_case_table_names=1 
-character-set-server=utf8mb4
-collation-server=utf8mb4_general_ci
-init_connect='SET NAMES utf8mb4'
+character-set-server=utf8
+collation-server=utf8_general_ci
+init_connect='SET NAMES utf'
+default_authentication_plugin=mysql_native_password
 max_connections=320
+[client]
+default-character-set=utf8
+[mysql]
+default-character-set=utf8
 ```
+
 接下来分别映射数据库目录和配置文件目录，启动容器：
 ```
 docker run -d --name standalone \
--v /home/mysql/standalone/conf:/etc/mysql/conf.d \
+-v /home/mysql/standalone/mysql/my.cnf:/etc/my.cnf \
 -v /home/mysql/standalone/data:/var/lib/mysql \
 -p 33306:3306 -e MYSQL_ROOT_PASSWORD=root mysql
 ```
 
 ```
-docker run -d --name test \
--v /home/mysql/standalone/conf:/etc/mysql/conf.d \
+docker run -d --name standalone \
+-v /home/mysql/standalone/mysql/my.cnf:/etc/my.cnf \
 -v /home/mysql/standalone/data:/var/lib/mysql \
--p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql
+-p 33306:3306 -e MYSQL_ROOT_PASSWORD=root mysql \
+--character-set-server=utf8 \
+--collation-server=utf8_general_ci \
+--restart always \ 开机启动
+--privileged=true \ 提升容器内权限为root
+--default-authentication-plugin=mysql_native_password 
 ```
 
-
+```
 docker run -p 3306:3306 --name test -e MYSQL_ROOT_PASSWORD=root -d mysql:latest
-docker run -p 3306:3306 --name test -e MYSQL_ROOT_PASSWORD=root -d mysql:latest -v /home/mysql/standalone/data:/var/lib/mysql 
+docker run -p 3306:3306 --name test -v /home/mysql/standalone/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -d mysql:latest  
+```
+
+### docker 部署
+```
+
+docker run -p 3306:3306 --name standalone -v /home/mysql/standalone/data:/var/lib/mysql -v /home/mysql/standalone/mysql/my.cnf:/etc/my.cnf -e MYSQL_ROOT_PASSWORD=root -d mysql:latest
+```
