@@ -7,7 +7,7 @@ package pwd.java.thread;
  *
  * date 2019-12-13 9:48
  *
- * @author DingPengwei[dingpengwei@eversec.com]
+ * @author DingPengwei[dingpengwei@foxmail.com]
  * @version 1.0.0
  * @since DistributionVersion
  */
