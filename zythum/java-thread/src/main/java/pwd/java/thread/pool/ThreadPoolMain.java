@@ -21,4 +21,11 @@ public class ThreadPoolMain {
 
   private static final ThreadPoolExecutor generalExecutorService = new ThreadPoolExecutor(1, 1, 60L, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
 
+
+  public static void main(String[] args) throws Exception {
+
+    generalExecutorService.execute(() -> System.out.println("run on " + Thread.currentThread().getName()));
+    generalExecutorService.execute(() -> System.out.println("run on " + Thread.currentThread().getName()));
+    generalExecutorService.execute(() -> System.out.println("run on " + Thread.currentThread().getName()));
+  }
 }
