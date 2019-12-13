@@ -10,7 +10,10 @@
 
 ### 1.2 线程状态切换
 示意图如下：
-![](images/thread-status-change.jpg)
+![](images/thread-status-change-0.jpg)
+![](images/thread-status-change-1.png)
+![](images/thread-status-change-2.png)
+
 - 初始状态
   1. 实现Runnable接口和继承Thread可以得到一个线程类，new一个实例出来，线程就进入了初始状态
 - 就绪状态
