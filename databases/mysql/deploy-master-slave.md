@@ -250,6 +250,7 @@ MySQL 主从复制是指数据可以从一个MySQL数据库服务器主节点复
 
 ## 主从复制原理
 ![](images/concept.jfif)
+
 MySQL主从复制涉及到三个线程，一个运行在主节点（log dump thread），其余两个(I/O thread, SQL thread)运行在从节点，如图所示:
 
 ### 主节点 binary log dump 线程
