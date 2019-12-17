@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  *
  * date 2019-12-17 19:02
  *
- * @author DingPengwei[dingpengwei@eversec.com]
+ * @author DingPengwei[dingpengwei@foxmail.com]
  * @version 1.0.0
  * @since DistributionVersion
  */
