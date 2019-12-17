@@ -1,3 +1,5 @@
+[MongoDb菜鸟教程](https://www.runoob.com/mongodb/mongodb-mongodump-mongorestore.html)
+
 ### 新增
 ```
 //插入单条 

@@ -9,7 +9,8 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>zythum/java-thread</module>
+    <module>zythum/mysql</module>
+    <!--<module>zythum/java-thread</module>-->
     <!--<module>zythum/spring-cloud</module>-->
     <!--<module>zythum/spring-context</module>-->
     <!--<module>zythum/spring-mybatis</module>-->

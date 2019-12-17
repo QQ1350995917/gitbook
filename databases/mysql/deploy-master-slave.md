@@ -350,7 +350,10 @@ Slave_IO_Running: NO：一般情况下是各个主机连接不同的情况，可
 
 Slave_SQL_Running: NO：master_log_pos需要和当前主库的Position保持一致。其他[参考](https://blog.51cto.com/kerry/277414)
 
+
 参考资料
 - [Mysql集群搭建（多实例、主从）](https://blog.csdn.net/qq_21153619/article/details/81529880)
 - [MySQL主从同步](https://www.cnblogs.com/kylinlin/p/5258719.html)
 - [Mac10.13.6 Mysql5.7.23多实例部署](https://www.jianshu.com/p/30d504d0ee50)
+
+
