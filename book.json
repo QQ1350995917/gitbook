@@ -5,7 +5,6 @@
                 "highlight",
                 "livereload",
                 "lunr",
-                "search",
-                "mermaid-gb3"
+                "search"
         ]
 }

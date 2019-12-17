@@ -1,6 +1,6 @@
 # UDP 丢包
 
-```mermaid
+```
 graph TD
 
 subgraph user-space

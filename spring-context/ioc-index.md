@@ -409,7 +409,7 @@ org.springframework.context.support.AbstractRefreshableApplicationContext#getBea
 
 ## ApplicationContext启动流程
    
- ```mermaid
+ ```
    sequenceDiagram
    ClassPathXmlApplicationContext ->>+ AbstractRefreshableConfigApplicationContext: setConfigLocations
    AbstractRefreshableConfigApplicationContext ->> AbstractRefreshableConfigApplicationContext: 给变量configLocations赋值

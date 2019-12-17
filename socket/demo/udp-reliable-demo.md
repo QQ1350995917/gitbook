@@ -14,7 +14,7 @@
 
 ## 可靠性基本架构
 
-```mermaid
+```
 graph TD
 
 subgraph dataPoint0
