@@ -5,6 +5,7 @@
                 "highlight",
                 "livereload",
                 "lunr",
-                "search"
+                "search",
+                "expandable-chapters"
         ]
 }
