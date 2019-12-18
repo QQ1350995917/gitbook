@@ -889,3 +889,6 @@ hostname的-s -f
 -i等等选项都用到了/etc/hosts或者DNS系统，跟我们讨论的hostname有点远了，也容易产生误会。具体可以man
 hostname查看。
 
+
+## 参考
+https://blog.csdn.net/chenhaifeng2016/article/details/78552803
