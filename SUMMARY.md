@@ -87,6 +87,7 @@
 * [Design pattern]() 
 * [DDD](ddd/SUMMARY.md)
   * [ModelConcept](ddd/model-concept/SUMMARY.md)
+    * [数据模型](ddd/model-concept/chapter3.md)
   * [UML](ddd/uml/SUMMARY.md)
 * [Docker](docker/SUMMARY.md)  
   * [安装与基本操作](docker/chapter1.md)
@@ -94,5 +95,6 @@
   * [内容社交]()
   * [IM]()
   * [UDP-CHANNEL]()
+  * [大数据去重方案](DuplicateRemoval.md)
 
 
