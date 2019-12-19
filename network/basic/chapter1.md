@@ -2,7 +2,7 @@
 
 * ## 体系模型
 
-![](/network/basic/images/summary-stack.jpg)
+![](images/summary-stack.jpg)
 
 * ## 协议簇
 
@@ -20,7 +20,7 @@
 
 * ## 协议封包长度
 
-![](/network/basic/images/protocol-packet.jpg)
+![](images/protocol-packet.jpg)
 
 * ## 参考资料
 

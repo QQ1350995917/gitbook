@@ -4,15 +4,15 @@
 
 * ### http报文概述
 
-### ![](/network/basic/images/http&https-protocol-0.jpg)
+### ![](images/http&https-protocol-0.jpg)
 
 * ### http请求报文
 
-### ![](/network/basic/images/http&https-protocol-request.jpg)
+### ![](images/http&https-protocol-request.jpg)
 
 * ### http响应报文
 
-### ![](/network/basic/images/http&https-protocol-response.jpg)
+### ![](images/http&https-protocol-response.jpg)
 
 * ### 消息头中重复数据
 
@@ -22,7 +22,7 @@
 
 ## http报文封解包过程
 
-![](/network/basic/images/http&https-packet.jpg)
+![](images/http&https-packet.jpg)
 
 ## 通用消息头
 
