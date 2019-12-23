@@ -1,9 +1,13 @@
-## 并发和并行                                
-- https://www.jianshu.com/p/cbf9588b2afb
-- https://www.cnblogs.com/f-ck-need-u/p/11161481.html
-
-## 进程和线程
-http://blog.sina.com.cn/s/blog_5a2bbc860101gedc.html
-
-
-## Thread&Runnable
+- [并发和并行](concurrency-parallellism.md)                                
+- [进程和线程](http://blog.sina.com.cn/s/blog_5a2bbc860101gedc.html)
+- [Java中的线程](thread.md)
+- [Java中的线程池](thread-pool.md)
+- [Java中的线程同步](thread-sync-queue.md)
+- [Java内存模型JMM](jmm.md)
+- [Volatile](volatile.md)
+- [Synchronized](synchronized.md)
+- [Lock](sync-lock.md)
+- [CountDownLatch](sync-count-down-latch.md)
+- [CyclicBarrier](sync-cyclic-barrier.md)
+- [Semaphore](sync-semaphore.md)
+- [AQS](sync-aqs.md)
