@@ -18,6 +18,7 @@ sudo service mysql status
 
 ## 异常处理
 
+
 ### 安装过程如果没有设置密码
 
 cd etc/mysql

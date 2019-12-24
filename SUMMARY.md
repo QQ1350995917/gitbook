@@ -61,6 +61,7 @@
     * [读写分离](databases/mysql/chapter11.md)
     * [主从模式](databases/mysql/deploy-master-slave.md)
     * [其他数据库](databases/mysql/chapter15.md)
+    * [运维相关](databases/mysql/op.md)
   * [MongoDB](databases/mongodb/SUMMARY.md)
     * [单机部署](databases/mongodb/chapter0.md)
     * [主从部署](databases/mongodb/chapter1.md)

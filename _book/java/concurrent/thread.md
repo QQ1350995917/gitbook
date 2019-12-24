@@ -241,4 +241,6 @@ public class ThreadG {
 T1 start!
 T1 end!
 
-https://www.cnblogs.com/cowboys/p/9315331.html
+- https://www.cnblogs.com/cowboys/p/9315331.html
+- https://www.uml-diagrams.org/java-thread-uml-state-machine-diagram-example.html
+- https://www.jianshu.com/p/f4454164c017
