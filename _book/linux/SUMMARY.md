@@ -1,1 +1,0 @@
-## [Ubuntu](ubuntu/user.md)

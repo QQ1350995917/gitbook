@@ -7,7 +7,5 @@
 - [Volatile](volatile.md)
 - [Synchronized](synchronized.md)
 - [Lock](sync-lock.md)
-- [CountDownLatch](sync-count-down-latch.md)
-- [CyclicBarrier](sync-cyclic-barrier.md)
-- [Semaphore](sync-semaphore.md)
+- [同步工具类](sync-tools.md)
 - [AQS](sync-aqs.md)
