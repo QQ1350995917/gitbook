@@ -25,8 +25,16 @@ public class TransactionApplication {
     SpringApplication.run(TransactionApplication.class, args);
   }
 
-  @Transactional(propagation = Propagation.REQUIRED,readOnly = false)
-  public void test(){
+  @Transactional(propagation = Propagation.REQUIRED)
+  public void methodA(){
+    methodB();
+  }
+
+  @Transactional(propagation = Propagation.NESTED)
+  public void methodB(){
 
   }
+
+
+
 }
