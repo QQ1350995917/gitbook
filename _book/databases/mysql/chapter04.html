@@ -1972,7 +1972,152 @@ mysql&gt; set collation_connection=utf8;
 mysql&gt; set collation_database=utf8;
 mysql&gt; set collation_server=utf8;
 mysql&gt; show variables like &apos;character_set</em>%&apos;;</p>
+<h1 id="&#x94FE;&#x63A5;&#x67E5;&#x8BE2;">&#x94FE;&#x63A5;&#x67E5;&#x8BE2;</h1>
+<p><img src="images/mysql-join.png" alt=""></p>
+<h1 id="&#x8DEF;&#x4EBA;&#x7532;java&#x7684;mysql&#x6559;&#x7A0B;&#xFF08;&#x963F;&#x91CC;p7&#xFF09;">&#x8DEF;&#x4EBA;&#x7532;java&#x7684;mysql&#x6559;&#x7A0B;&#xFF08;&#x963F;&#x91CC;P7&#xFF09;</h1>
+<li><strong><a target="_blank" href="https://mp.weixin.qq.com/s?__biz=MzA5MTkxMDQ4MQ==&amp;mid=2648933257&amp;idx=1&amp;sn=0f0086a2465a2fcae13d3fea65064803&amp;chksm=88621bb7bf1592a1ac94fe4107ba1ef26a0fa97e1bf9aea7279009d8bd240f1ef7d27aa10393&amp;token=1876080189&amp;lang=zh_CN#rd">&#x7B2C;1&#x7BC7;&#xFF1A;mysql&#x57FA;&#x7840;&#x77E5;&#x8BC6;</a></strong></li>
+<li><strong><a target="_blank" href="https://mp.weixin.qq.com/s?__biz=MzA5MTkxMDQ4MQ==&amp;mid=2648933270&amp;idx=1&amp;sn=409080e17352da2035b0bfdf63ccdfde&amp;chksm=88621ba8bf1592beb2ef6106d6bf9f3eccd48d6814c7031f36e3c8be68821f17cf065129688c&amp;token=1876080189&amp;lang=zh_CN#rd"> &#x7B2C;2&#x7BC7;&#xFF1A;&#x8BE6;&#x89E3;mysql&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF08;&#x91CD;&#x70B9;&#xFF09;</a></strong></li>
+<li><strong><a target="_blank" href="https://mp.weixin.qq.com/s?__biz=MzA5MTkxMDQ4MQ==&amp;mid=2648933279&amp;idx=1&amp;sn=f8591b95362cb3c352d895b1289d665a&amp;chksm=88621ba1bf1592b72a43a62e3f310695e8b87f17932d052145622c3edbb70ef8cb987849fc3e&amp;token=516655478&amp;lang=zh_CN#rd"> &#x7B2C;3&#x7BC7;&#xFF1A;&#x7BA1;&#x7406;&#x5458;&#x5FC5;&#x5907;&#x6280;&#x80FD;(&#x5FC5;&#x987B;&#x638C;&#x63E1;)</a></strong></li>
+<li><strong><a target="_blank" href="https://mp.weixin.qq.com/s?__biz=MzA5MTkxMDQ4MQ==&amp;mid=2648933289&amp;idx=1&amp;sn=c4f212c312ea86e08ad322caddd05e38&amp;chksm=88621b97bf159281156ee3be510a1a15234531d2c97d66957e67377829ab23779809ea55bbde&amp;token=1484565200&amp;lang=zh_CN#rd"> &#x7B2C;4&#x7BC7;&#xFF1A;DDL&#x5E38;&#x89C1;&#x64CD;&#x4F5C;</a></strong></li>
+<li><strong><a target="_blank" href="https://mp.weixin.qq.com/s?__biz=MzA5MTkxMDQ4MQ==&amp;mid=2648933296&amp;idx=1&amp;sn=1c56256d60c5847a944d87c8cfc9c14d&amp;chksm=88621b8ebf159298b0789e2994d2aaf8b582effc7d8c1ba715deaca11c86a9dc8ac730878dc0&amp;token=2000571846&amp;lang=zh_CN#rd"> &#x7B2C;5&#x7BC7;&#xFF1A;DML&#x64CD;&#x4F5C;&#x6C47;&#x603B;&#xFF08;insert,update,delete&#xFF09;</a></strong></li>
+<li><strong><a target="_blank" href="https://mp.weixin.qq.com/s?__biz=MzA5MTkxMDQ4MQ==&amp;mid=2648933300&amp;idx=1&amp;sn=bedef4d430dc76141e42e42ef6acfaa6&amp;chksm=88621b8abf15929caae7904019c946a396885a33855ca465bacdd4187538005ebc3c116888f5&amp;token=1814800041&amp;lang=zh_CN#rd"> &#x7B2C;6&#x7BC7;&#xFF1A;select&#x67E5;&#x8BE2;&#x57FA;&#x7840;&#x7BC7;</a></strong></li>
+<li><strong><a target="_blank" href="https://mp.weixin.qq.com/s?__biz=MzA5MTkxMDQ4MQ==&amp;mid=2648933305&amp;idx=1&amp;sn=2c5ba0bea6fcdd57d86cecd63541f91a&amp;chksm=88621b87bf1592915086c1e945119fcc95af6aa1127b90ef1b56b018083bfd787ad95efde918&amp;token=1144227002&amp;lang=zh_CN#rd"> &#x7B2C;7&#x7BC7;&#xFF1A;&#x73A9;&#x8F6C;select&#x6761;&#x4EF6;&#x67E5;&#x8BE2;&#xFF0C;&#x907F;&#x514D;&#x91C7;&#x5751;</a></strong></li>
+<li><strong><a target="_blank" href="https://mp.weixin.qq.com/s?__biz=MzA5MTkxMDQ4MQ==&amp;mid=2648933309&amp;idx=1&amp;sn=0f7dfec8bc70e67daa7159ee219325b8&amp;chksm=88621b83bf1592951d949179061f39a1f4266b2879bc9a25af4da3b4b29f69ab1fcc595a462f&amp;token=516674265&amp;lang=zh_CN#rd"> &#x7B2C;8&#x7BC7;&#xFF1A;&#x8BE6;&#x89E3;&#x6392;&#x5E8F;&#x548C;&#x5206;&#x9875;(order by &amp; limit)</a></strong></li>
+<li><strong><a target="_blank" href="https://mp.weixin.qq.com/s?__biz=MzA5MTkxMDQ4MQ==&amp;mid=2648933315&amp;idx=1&amp;sn=4abf2b34a53a85cbd4a3b9ee31fcd398&amp;chksm=88621bfdbf1592eb6a5a13202588dde9068ac7e6391d8dbf3fde33647bf0e044839ba4228216&amp;token=1937580929&amp;lang=zh_CN#rd"> &#x7B2C;9&#x7BC7;&#xFF1A;&#x5206;&#x7EC4;&#x67E5;&#x8BE2;&#x8BE6;&#x89E3;&#xFF08;group by &amp; having&#xFF09;</a></strong></li>
+<li><strong><a target="_blank" href="https://mp.weixin.qq.com/s?__biz=MzA5MTkxMDQ4MQ==&amp;mid=2648933321&amp;idx=1&amp;sn=110f6cacb90845bf2327fbcd7acd708c&amp;chksm=88621bf7bf1592e1f1c0f2f01e40d4bd63a48d98daa4ba1157ecad4c6c6520d18b4b2c24c906&amp;token=1096041061&amp;lang=zh_CN#rd"> &#x7B2C;10&#x7BC7;&#xFF1A;&#x5E38;&#x7528;&#x7684;&#x51E0;&#x5341;&#x4E2A;&#x51FD;&#x6570;&#x8BE6;&#x89E3;</a></strong></li>
+<li><strong><a target="_blank" href="https://mp.weixin.qq.com/s?__biz=MzA5MTkxMDQ4MQ==&amp;mid=2648933325&amp;idx=1&amp;sn=33274227db275a3570e1e43ccdd4f49c&amp;chksm=88621bf3bf1592e5b75f537e21961c4295fafb782dbf31c0c1cbf9e36f5f4ed44d31cdad68b3&amp;token=1832579722&amp;lang=zh_CN#rd"> &#x7B2C;11&#x7BC7;&#xFF1A;&#x6DF1;&#x5165;&#x4E86;&#x89E3;&#x8FDE;&#x63A5;&#x67E5;&#x8BE2;&#x53CA;&#x539F;&#x7406;</a></strong></li>
+<li><strong><a target="_blank" href="https://mp.weixin.qq.com/s?__biz=MzA5MTkxMDQ4MQ==&amp;mid=2648933342&amp;idx=2&amp;sn=2e41daa0926a9c32d5fddd23590391aa&amp;chksm=88621be0bf1592f66904a184858df7c11129e8b545c7626b8b6c1fcc32d3dfdd9ab21aeda8e5&amp;token=386795745&amp;lang=zh_CN#rd"> &#x7B2C;12&#x7BC7;&#xFF1A;&#x5B50;&#x67E5;&#x8BE2;</a></strong></li>
+<li><strong><a target="_blank" href="https://mp.weixin.qq.com/s?__biz=MzA5MTkxMDQ4MQ==&amp;mid=2648933349&amp;idx=1&amp;sn=6e81f9046119cda43f8eb602d1139ef0&amp;chksm=88621bdbbf1592cd9a20ec4715fe9f9459d079b641b04f607999c106cd52453d8c8508d939d7&amp;token=386795745&amp;lang=zh_CN#rd"> &#x7B2C;13&#x7BC7;&#xFF1A;&#x7EC6;&#x8BF4;NULL&#x5BFC;&#x81F4;&#x7684;&#x795E;&#x5751;&#xFF0C;&#x8BA9;&#x4EBA;&#x9632;&#x4E0D;&#x80DC;&#x9632;</a></strong></li>
+<li><strong><a target="_blank" href="https://mp.weixin.qq.com/s?__biz=MzA5MTkxMDQ4MQ==&amp;mid=2648933355&amp;idx=1&amp;sn=b426ad28dfc2a64bba813df5b7c341a4&amp;chksm=88621bd5bf1592c3c08e441398f699d0a4c2303a51519aac169447f22765cc613dfc3d991f8b&amp;token=385335213&amp;lang=zh_CN#rd"> &#x7B2C;14&#x7BC7;&#xFF1A;&#x8BE6;&#x89E3;&#x4E8B;&#x52A1;</a></strong></li>
+<li><strong><a target="_blank" href="https://mp.weixin.qq.com/s?__biz=MzA5MTkxMDQ4MQ==&amp;mid=2648933370&amp;idx=1&amp;sn=4fe9b8e2aba766988c503737d34d9836&amp;chksm=88621bc4bf1592d2b06d659884bf9881bd207a042ac36176f12808bd72f235e8e3404366259e&amp;token=84059034&amp;lang=zh_CN#rd"> &#x7B2C;15&#x7BC7;&#xFF1A;&#x8BE6;&#x89E3;&#x89C6;&#x56FE;</a></strong></li>
+<li><strong><a target="_blank" href="https://mp.weixin.qq.com/s?__biz=MzA5MTkxMDQ4MQ==&amp;mid=2648933374&amp;idx=1&amp;sn=c294b6a69564a4c98d4c0cb29aeb9ac0&amp;chksm=88621bc0bf1592d650752c44ca50540c1fa0c88c0a514019f1317559e13098de7dac37ddfc05&amp;token=1531009350&amp;lang=zh_CN#rd"> &#x7B2C;16&#x7BC7;&#xFF1A;&#x53D8;&#x91CF;&#x8BE6;&#x89E3;</a></strong></li>
+<li><strong><a target="_blank" href="https://mp.weixin.qq.com/s?__biz=MzA5MTkxMDQ4MQ==&amp;mid=2648933382&amp;idx=1&amp;sn=4cf80b4f50c80dcc8171d2128b47cf63&amp;chksm=88621c38bf15952e193177a0ba3e03beeaeed996553ce6900f91518310332e99c915e8be2566&amp;token=1341741305&amp;lang=zh_CN#rd"> &#x7B2C;17&#x7BC7;&#xFF1A;&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;&amp;&#x81EA;&#x5B9A;&#x4E49;&#x51FD;&#x6570;&#x8BE6;&#x89E3;</a></strong></li>
+<li><strong><a target="_blank" href="https://mp.weixin.qq.com/s?__biz=MzA5MTkxMDQ4MQ==&amp;mid=2648933388&amp;idx=1&amp;sn=59cb1d23845e45894bb72c1e2479f074&amp;chksm=88621c32bf1595241573e4194912ca60a51eb8477f4b49492e26668c9bebc032e9d6672e7fdd&amp;token=1832749573&amp;lang=zh_CN#rd"> &#x7B2C;18&#x7BC7;&#xFF1A;&#x6D41;&#x7A0B;&#x63A7;&#x5236;&#x8BED;&#x53E5;</a></strong></li>
+<li><strong><a target="_blank" href="https://mp.weixin.qq.com/s?__biz=MzA5MTkxMDQ4MQ==&amp;mid=2648933392&amp;idx=1&amp;sn=ff29e380b42a0aa7cb1dc7659d745686&amp;chksm=88621c2ebf1595380f99d9c4c89581638a27a5cf356de35d31aa9ae7ac17e63abe0e4adc813c&amp;token=1479782197&amp;lang=zh_CN#rd"> &#x7B2C;19&#x7BC7;&#xFF1A;&#x6E38;&#x6807;&#x8BE6;&#x89E3;</a></strong></li>
+<li><strong><a target="_blank" href="https://mp.weixin.qq.com/s?__biz=MzA5MTkxMDQ4MQ==&amp;mid=2648933396&amp;idx=1&amp;sn=b6cc5d5287bf43d94e6706fa217aa8cb&amp;chksm=88621c2abf15953c3200c6d4d945ad70bdd2177f020f8e2229ae269153bbc8bf251af83e1135&amp;token=1846211483&amp;lang=zh_CN#rd"> &#x7B2C;20&#x7BC7;&#xFF1A;&#x5F02;&#x5E38;&#x6355;&#x83B7;&#x53CA;&#x5904;&#x7406;&#x8BE6;&#x89E3;</a></strong></li>
+<li><strong><a target="_blank" href="https://mp.weixin.qq.com/s?__biz=MzA5MTkxMDQ4MQ==&amp;mid=2648933400&amp;idx=1&amp;sn=61af771f10342ee4956efea6749abd71&amp;chksm=88621c26bf15953041a6bc65734edf788af711ff176ad36884fe6411e5c4cfd0bf967e0e33fc&amp;token=1781447741&amp;lang=zh_CN#rd"> &#x7B2C;21&#x7BC7;&#xFF1A;&#x4EC0;&#x4E48;&#x662F;&#x7D22;&#x5F15;&#xFF1F;</a></strong></li>
+<li><strong><a target="_blank" href="https://mp.weixin.qq.com/s?__biz=MzA5MTkxMDQ4MQ==&amp;mid=2648933422&amp;idx=1&amp;sn=f28a92c195d914d636117c2316524c5e&amp;chksm=88621c10bf159506af8a3c6b947e32b11414ff72ed3ad19a9fa0b0cec0be6c3ae3931117b3d2&amp;token=1335865345&amp;lang=zh_CN#rd"> &#x7B2C;22&#x7BC7;&#xFF1A;mysql&#x7D22;&#x5F15;&#x539F;&#x7406;&#x8BE6;&#x89E3;</a></strong></li>
 
+
+
+
+
+<h1 id="&#x8BB0;&#x5F55;&#x4E00;&#x6B21;&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;">&#x8BB0;&#x5F55;&#x4E00;&#x6B21;&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;</h1>
+<pre><code>CREATE DEFINER=`root`@`%` PROCEDURE `copyTaskToNew`(IN `originJobGroup` int,IN `targetJobGroup` int)
+BEGIN
+    DECLARE done BOOLEAN DEFAULT 0 ;
+  DECLARE jobCron varchar(128) DEFAULT  &apos;0 0/3 * * * ?&apos;;
+  DECLARE jobDesc varchar(255) DEFAULT  &apos;&apos;;
+  DECLARE addTime datetime DEFAULT NULL;
+  DECLARE updateTime datetime DEFAULT NULL;
+  DECLARE author varchar(64) DEFAULT NULL;
+  DECLARE alarmEmail varchar(255) DEFAULT NULL;
+  DECLARE executorRouteStrategy varchar(50) DEFAULT NULL;
+  DECLARE executorHandler varchar(255) DEFAULT NULL;
+  DECLARE executorParam varchar(5120) DEFAULT NULL;
+  DECLARE executorBlockStrategy varchar(50) DEFAULT NULL;
+  DECLARE executorTimeout int(11) DEFAULT &apos;0&apos;;
+  DECLARE executorFailRetryCount int(11) DEFAULT &apos;0&apos;;
+  DECLARE glueType varchar(50) DEFAULT &apos;BEAN&apos;;
+  DECLARE glueSource mediumtext;
+  DECLARE glueRemark varchar(128) DEFAULT NULL;
+  DECLARE glueUpdatetime datetime DEFAULT NULL;
+  DECLARE childJobid varchar(255) DEFAULT NULL;
+
+    DECLARE cur CURSOR FOR 
+    SELECT 
+    job_cron as jobCron,
+    job_desc,
+    add_time,
+        update_time,
+        author,
+        alarm_email,
+        executor_route_strategy,
+        executor_handler,
+        executor_param,
+        executor_block_strategy,
+        executor_timeout,
+        executor_fail_retry_count,
+        glue_type,
+        glue_source,
+        glue_remark,
+        glue_updatetime,
+        child_jobid
+  FROM
+    XXL_JOB_QRTZ_TRIGGER_INFO 
+  WHERE job_group = originJobGroup;
+
+    DECLARE CONTINUE HANDLER FOR SQLSTATE &apos;02000&apos; SET done = 1 ;
+
+    OPEN cur ;
+    REPEAT
+        FETCH cur INTO 
+    jobCron,
+    jobDesc,
+    addTime,
+        updateTime,
+        author,
+        alarmEmail,
+        executorRouteStrategy,
+        executorHandler,
+        executorParam,
+        executorBlockStrategy,
+        executorTimeout,
+        executorFailRetryCount,
+        glueType,
+        glueSource,
+        glueRemark,
+        glueUpdatetime,
+        childJobid;
+
+
+    INSERT INTO XXL_JOB_QRTZ_TRIGGER_INFO
+        (
+            job_group,
+            job_cron,
+            job_desc,
+            add_time,
+            update_time,
+            author,
+            alarm_email,
+            executor_route_strategy,
+            executor_handler,
+            executor_param,
+            executor_block_strategy,
+            executor_timeout,
+            executor_fail_retry_count,
+            glue_type,
+            glue_source,
+            glue_remark,
+            glue_updatetime,
+            child_jobid
+        ) 
+    VALUES
+        (
+            targetJobGroup,
+            jobCron,
+            jobDesc,
+            addTime,
+            updateTime,
+            author,
+            alarmEmail,
+            executorRouteStrategy,
+            executorHandler,
+            executorParam,
+            executorBlockStrategy,
+            executorTimeout,
+            executorFailRetryCount,
+            glueType,
+            glueSource,
+            glueRemark,
+            glueUpdatetime,
+            childJobid
+        ) ;
+    UNTIL done 
+  END REPEAT ;
+  CLOSE cur ;
+END
+</code></pre>
                                 
                                 </section>
                             
@@ -2015,7 +2160,7 @@ mysql&gt; show variables like &apos;character_set</em>%&apos;;</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"基本操作","level":"1.8.1.7","depth":3,"next":{"title":"事务与隔离","level":"1.8.1.8","depth":3,"path":"databases/mysql/chapter05.md","ref":"databases/mysql/chapter05.md","articles":[]},"previous":{"title":"设计范式","level":"1.8.1.6","depth":3,"path":"databases/mysql/chapter03.md","ref":"databases/mysql/chapter03.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["fontsettings","sharing","highlight","livereload","lunr","search","expandable-chapters","livereload"],"pluginsConfig":{"fontsettings":{"family":"sans","size":2,"theme":"white"},"sharing":{"all":["facebook","google","twitter","weibo","instapaper"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"highlight":{},"livereload":{},"lunr":{"ignoreSpecialCharacters":false,"maxIndexSize":1000000},"search":{},"expandable-chapters":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"databases/mysql/chapter04.md","mtime":"2019-12-10T03:15:02.994Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-08T02:25:46.694Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"基本操作","level":"1.8.1.7","depth":3,"next":{"title":"事务与隔离","level":"1.8.1.8","depth":3,"path":"databases/mysql/chapter05.md","ref":"databases/mysql/chapter05.md","articles":[]},"previous":{"title":"设计范式","level":"1.8.1.6","depth":3,"path":"databases/mysql/chapter03.md","ref":"databases/mysql/chapter03.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["fontsettings","sharing","highlight","livereload","lunr","search","expandable-chapters","livereload"],"pluginsConfig":{"fontsettings":{"family":"sans","size":2,"theme":"white"},"sharing":{"all":["facebook","google","twitter","weibo","instapaper"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"highlight":{},"livereload":{},"lunr":{"ignoreSpecialCharacters":false,"maxIndexSize":1000000},"search":{},"expandable-chapters":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"databases/mysql/chapter04.md","mtime":"2020-03-04T08:44:09.099Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-05T08:41:03.537Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
