@@ -1,5 +1,4 @@
 .idea
-_book
 .DS_Store
 node_modules
 **/target

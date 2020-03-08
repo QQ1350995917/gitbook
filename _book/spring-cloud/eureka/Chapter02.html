@@ -1,0 +1,2688 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>源码分析 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="Chapter01.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    Project
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" >
+            
+                <span>
+            
+                    
+                    CodeStyle
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../../project/code/java.html">
+            
+                <a href="../../project/code/java.html">
+            
+                    
+                    Java
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../../project/code/">
+            
+                <a href="../../project/code/">
+            
+                    
+                    Maven
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../../project/git/">
+            
+                <a href="../../project/git/">
+            
+                    
+                    Git
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../../project/idea/">
+            
+                <a href="../../project/idea/">
+            
+                    
+                    Idea
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.4.1" data-path="../../project/idea/">
+            
+                <a href="../../project/idea/">
+            
+                    
+                    Idea快捷键
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    Linux
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    Socket
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../network/basic/SUMMARY.html">
+            
+                <a href="../../network/basic/SUMMARY.html">
+            
+                    
+                    Network
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../network/basic/SUMMARY.html">
+            
+                <a href="../../network/basic/SUMMARY.html">
+            
+                    
+                    网络基础知识
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../../network/basic/chapter0.html">
+            
+                <a href="../../network/basic/chapter0.html">
+            
+                    
+                    网卡、集成器、交换机、路由工作原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="../../network/basic/chapter1.html">
+            
+                <a href="../../network/basic/chapter1.html">
+            
+                    
+                    网络协议
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.3" data-path="../../network/basic/chapter2.html">
+            
+                <a href="../../network/basic/chapter2.html">
+            
+                    
+                    HTTP报文结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.4" data-path="../../network/basic/chapter3.html">
+            
+                <a href="../../network/basic/chapter3.html">
+            
+                    
+                    HTTPS工作过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.5" data-path="../../network/basic/chapter4.html">
+            
+                <a href="../../network/basic/chapter4.html">
+            
+                    
+                    关于UDP单播、组播、广播等概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.6" data-path="../../network/basic/chapter5.html">
+            
+                <a href="../../network/basic/chapter5.html">
+            
+                    
+                    IP协议
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.7" data-path="../../network/basic/chapter6.html">
+            
+                <a href="../../network/basic/chapter6.html">
+            
+                    
+                    Auth2.0以及SSO
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.8" data-path="../../network/basic/chapter7.html">
+            
+                <a href="../../network/basic/chapter7.html">
+            
+                    
+                    DNS协议以及工作介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" >
+            
+                <span>
+            
+                    
+                    Netty
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" >
+            
+                <span>
+            
+                    
+                    Jersey
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" >
+            
+                <span>
+            
+                    
+                    Java
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../java/concurrent/SUMMARY.html">
+            
+                <a href="../../java/concurrent/SUMMARY.html">
+            
+                    
+                    concurrent
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1" data-path="../../java/concurrent/concurrency-parallellism.html">
+            
+                <a href="../../java/concurrent/concurrency-parallellism.html">
+            
+                    
+                    并发和并行
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.2" >
+            
+                <a target="_blank" href="http://blog.sina.com.cn/s/blog_5a2bbc860101gedc.html">
+            
+                    
+                    进程和线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.3" data-path="../../java/concurrent/thread.html">
+            
+                <a href="../../java/concurrent/thread.html">
+            
+                    
+                    Java中的线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.4" data-path="../../java/concurrent/thread-pool.html">
+            
+                <a href="../../java/concurrent/thread-pool.html">
+            
+                    
+                    Java中的线程池
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.5" data-path="../../java/concurrent/thread-sync-queue.html">
+            
+                <a href="../../java/concurrent/thread-sync-queue.html">
+            
+                    
+                    Java中的线程同步
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.6" data-path="../../java/concurrent/jmm.html">
+            
+                <a href="../../java/concurrent/jmm.html">
+            
+                    
+                    Java内存模型JMM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.7" data-path="../../java/concurrent/volatile.html">
+            
+                <a href="../../java/concurrent/volatile.html">
+            
+                    
+                    Volatile
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.8" data-path="../../java/concurrent/synchronized.html">
+            
+                <a href="../../java/concurrent/synchronized.html">
+            
+                    
+                    Synchronized
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.9" data-path="../../java/concurrent/sync-lock.html">
+            
+                <a href="../../java/concurrent/sync-lock.html">
+            
+                    
+                    Lock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.10" data-path="../../java/concurrent/sync-tools.html">
+            
+                <a href="../../java/concurrent/sync-tools.html">
+            
+                    
+                    同步工具类
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.11" data-path="../../java/concurrent/sync-aqs.html">
+            
+                <a href="../../java/concurrent/sync-aqs.html">
+            
+                    
+                    AQS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.12" data-path="../../java/concurrent/no-lock-singleton.html">
+            
+                <a href="../../java/concurrent/no-lock-singleton.html">
+            
+                    
+                    无锁单例
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../java/io/io.html">
+            
+                <a href="../../java/io/io.html">
+            
+                    
+                    IO
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" >
+            
+                <span>
+            
+                    
+                    BIO
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.2" >
+            
+                <span>
+            
+                    
+                    NIO
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.3" >
+            
+                <span>
+            
+                    
+                    AIO
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.4" data-path="../../java/io/0io.html">
+            
+                <a href="../../java/io/0io.html">
+            
+                    
+                    零拷贝IO
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" >
+            
+                <span>
+            
+                    
+                    JVM
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" >
+            
+                <span>
+            
+                    
+                    Memory
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" >
+            
+                <span>
+            
+                    
+                    GC
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../../databases/SUMMARY.html">
+            
+                <a href="../../databases/SUMMARY.html">
+            
+                    
+                    DB
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../../databases/mysql/SUMMARY.html">
+            
+                <a href="../../databases/mysql/SUMMARY.html">
+            
+                    
+                    MySQL
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1.1" data-path="../../databases/mysql/deploy-standalone.html">
+            
+                <a href="../../databases/mysql/deploy-standalone.html">
+            
+                    
+                    单机部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.1.2" data-path="../../databases/mysql/deploy-master-slave.html">
+            
+                <a href="../../databases/mysql/deploy-master-slave.html">
+            
+                    
+                    主从部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.1.3" data-path="../../databases/mysql/deploy-cluster-ndb.html">
+            
+                <a href="../../databases/mysql/deploy-cluster-ndb.html">
+            
+                    
+                    NDB-Cluster部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.1.4" data-path="../../databases/mysql/deploy-cluster-innodb.html">
+            
+                <a href="../../databases/mysql/deploy-cluster-innodb.html">
+            
+                    
+                    INNODB-Cluster部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.1.5" data-path="../../databases/mysql/chapter02.html">
+            
+                <a href="../../databases/mysql/chapter02.html">
+            
+                    
+                    数据类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.1.6" data-path="../../databases/mysql/chapter03.html">
+            
+                <a href="../../databases/mysql/chapter03.html">
+            
+                    
+                    设计范式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.1.7" data-path="../../databases/mysql/chapter04.html">
+            
+                <a href="../../databases/mysql/chapter04.html">
+            
+                    
+                    基本操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.1.8" data-path="../../databases/mysql/chapter05.html">
+            
+                <a href="../../databases/mysql/chapter05.html">
+            
+                    
+                    事务与隔离
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.1.9" data-path="../../databases/mysql/chapter05.html">
+            
+                <a href="../../databases/mysql/chapter05.html">
+            
+                    
+                    引擎
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.1.10" data-path="../../databases/mysql/chapter07.html">
+            
+                <a href="../../databases/mysql/chapter07.html">
+            
+                    
+                    锁
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.1.11" data-path="../../databases/mysql/chapter08.html">
+            
+                <a href="../../databases/mysql/chapter08.html">
+            
+                    
+                    索引
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.1.12" data-path="../../databases/mysql/chapter09.html">
+            
+                <a href="../../databases/mysql/chapter09.html">
+            
+                    
+                    调优
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.1.13" data-path="../../databases/mysql/chapter10.html">
+            
+                <a href="../../databases/mysql/chapter10.html">
+            
+                    
+                    8.0新特性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.1.14" data-path="../../databases/mysql/chapter11.html">
+            
+                <a href="../../databases/mysql/chapter11.html">
+            
+                    
+                    读写分离
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.1.15" data-path="../../databases/mysql/deploy-master-slave.html">
+            
+                <a href="../../databases/mysql/deploy-master-slave.html">
+            
+                    
+                    主从模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.1.16" data-path="../../databases/mysql/chapter15.html">
+            
+                <a href="../../databases/mysql/chapter15.html">
+            
+                    
+                    其他数据库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.1.17" data-path="../../databases/mysql/op.html">
+            
+                <a href="../../databases/mysql/op.html">
+            
+                    
+                    运维相关
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../../databases/mongodb/SUMMARY.html">
+            
+                <a href="../../databases/mongodb/SUMMARY.html">
+            
+                    
+                    MongoDB
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.2.1" data-path="../../databases/mongodb/chapter0.html">
+            
+                <a href="../../databases/mongodb/chapter0.html">
+            
+                    
+                    单机部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2.2" data-path="../../databases/mongodb/chapter1.html">
+            
+                <a href="../../databases/mongodb/chapter1.html">
+            
+                    
+                    主从部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2.3" data-path="../../databases/mongodb/chapter3.html">
+            
+                <a href="../../databases/mongodb/chapter3.html">
+            
+                    
+                    分片部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2.4" data-path="../../databases/mongodb/chapter4.html">
+            
+                <a href="../../databases/mongodb/chapter4.html">
+            
+                    
+                    运行监控
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2.5" data-path="../../databases/mongodb/chapter3.html">
+            
+                <a href="../../databases/mongodb/chapter3.html">
+            
+                    
+                    库表操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2.6" data-path="../../databases/mongodb/chapter5.html">
+            
+                <a href="../../databases/mongodb/chapter5.html">
+            
+                    
+                    数据操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../../databases/redis/SUMMARY.html">
+            
+                <a href="../../databases/redis/SUMMARY.html">
+            
+                    
+                    Redis
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" >
+            
+                <span>
+            
+                    
+                    Neo4j
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" >
+            
+                <span>
+            
+                    
+                    JDBC
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../../jdbc/jdbc/jdbc.html">
+            
+                <a href="../../jdbc/jdbc/jdbc.html">
+            
+                    
+                    JDBC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../../jdbc/jdbc/pool.html">
+            
+                <a href="../../jdbc/jdbc/pool.html">
+            
+                    
+                    JDBCPool
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../../jdbc/mybatis/">
+            
+                <a href="../../jdbc/mybatis/">
+            
+                    
+                    MyBatis
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../../jdbc/sharding/">
+            
+                <a href="../../jdbc/sharding/">
+            
+                    
+                    Sharding
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" >
+            
+                <span>
+            
+                    
+                    Web
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../../web/nginx/SUMMARY.html">
+            
+                <a href="../../web/nginx/SUMMARY.html">
+            
+                    
+                    Nginx
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" >
+            
+                <span>
+            
+                    
+                    Apache
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" >
+            
+                <span>
+            
+                    
+                    Tomcat
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" >
+            
+                <span>
+            
+                    
+                    Distributed
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../../cap/cap.html">
+            
+                <a href="../../cap/cap.html">
+            
+                    
+                    CAP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" >
+            
+                <span>
+            
+                    
+                    Lock
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" >
+            
+                <span>
+            
+                    
+                    Transaction
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" >
+            
+                <span>
+            
+                    
+                    Zookeeper
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" >
+            
+                <span>
+            
+                    
+                    Dubbo
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.6" data-path="../../middleware/kafka/SUMMARY.html">
+            
+                <a href="../../middleware/kafka/SUMMARY.html">
+            
+                    
+                    Kafka
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.6.1" data-path="../../middleware/kafka/chapter0.html">
+            
+                <a href="../../middleware/kafka/chapter0.html">
+            
+                    
+                    安装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.6.2" data-path="../../middleware/kafka/chapter2.html">
+            
+                <a href="../../middleware/kafka/chapter2.html">
+            
+                    
+                    高可用集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.6.3" data-path="../../middleware/kafka/chapter3.html">
+            
+                <a href="../../middleware/kafka/chapter3.html">
+            
+                    
+                    实现原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.6.4" data-path="../../middleware/kafka/chapter1.html">
+            
+                <a href="../../middleware/kafka/chapter1.html">
+            
+                    
+                    常用命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.7" >
+            
+                <span>
+            
+                    
+                    RabbitMQ
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.8" >
+            
+                <span>
+            
+                    
+                    ZeroMQ
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.9" >
+            
+                <span>
+            
+                    
+                    分布式事务
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" >
+            
+                <span>
+            
+                    
+                    Session
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" >
+            
+                <span>
+            
+                    
+                    SSO
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" >
+            
+                <span>
+            
+                    
+                    OAuth2.0
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../../spring-context/SUMMARY.html">
+            
+                <a href="../../spring-context/SUMMARY.html">
+            
+                    
+                    Spring-context
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="../../spring-context/ioc-index.html">
+            
+                <a href="../../spring-context/ioc-index.html">
+            
+                    
+                    SpringIOC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="../../spring-context/aop-index.html">
+            
+                <a href="../../spring-context/aop-index.html">
+            
+                    
+                    SpringAOP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.3" data-path="../../spring-context/mvc-index.html">
+            
+                <a href="../../spring-context/mvc-index.html">
+            
+                    
+                    SpringMVC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.4" data-path="../../spring-context/do-get-bean.html">
+            
+                <a href="../../spring-context/do-get-bean.html">
+            
+                    
+                    DoGetBean
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.5" data-path="../../spring-context/transactional.html">
+            
+                <a href="../../spring-context/transactional.html">
+            
+                    
+                    事务与隔离
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="../SUMMARY.html">
+            
+                <a href="../SUMMARY.html">
+            
+                    
+                    Spring-Cloud
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.1" data-path="SUMMARY.html">
+            
+                <a href="SUMMARY.html">
+            
+                    
+                    Register
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.1.1" data-path="Chapter01.html">
+            
+                <a href="Chapter01.html">
+            
+                    
+                    使用示例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.14.1.2" data-path="Chapter02.html">
+            
+                <a href="Chapter02.html">
+            
+                    
+                    源码分析
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.2" >
+            
+                <span>
+            
+                    
+                    Gateway
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.3" >
+            
+                <span>
+            
+                    
+                    Config
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.4" >
+            
+                <span>
+            
+                    
+                    Breaker
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.5" >
+            
+                <span>
+            
+                    
+                    Tracing
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="../../logger/SUMMARY.html">
+            
+                <a href="../../logger/SUMMARY.html">
+            
+                    
+                    Logger
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.15.1" data-path="../../logger/chapter1.html">
+            
+                <a href="../../logger/chapter1.html">
+            
+                    
+                    日志门面
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" >
+            
+                <a target="_blank" href="http://m.biancheng.net/design_pattern/">
+            
+                    
+                    Design pattern
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="../../ddd/SUMMARY.html">
+            
+                <a href="../../ddd/SUMMARY.html">
+            
+                    
+                    DDD
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.17.1" data-path="../../ddd/model-concept/SUMMARY.html">
+            
+                <a href="../../ddd/model-concept/SUMMARY.html">
+            
+                    
+                    ModelConcept
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.17.1.1" data-path="../../ddd/model-concept/chapter3.html">
+            
+                <a href="../../ddd/model-concept/chapter3.html">
+            
+                    
+                    数据模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.2" data-path="../../ddd/uml/SUMMARY.html">
+            
+                <a href="../../ddd/uml/SUMMARY.html">
+            
+                    
+                    UML
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="../../docker/SUMMARY.html">
+            
+                <a href="../../docker/SUMMARY.html">
+            
+                    
+                    Docker
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.18.1" data-path="../../docker/chapter1.html">
+            
+                <a href="../../docker/chapter1.html">
+            
+                    
+                    安装与基本操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" >
+            
+                <span>
+            
+                    
+                    工程应用
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.19.1" >
+            
+                <span>
+            
+                    
+                    内容社交
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.2" >
+            
+                <span>
+            
+                    
+                    IM
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.3" >
+            
+                <span>
+            
+                    
+                    UDP-CHANNEL
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19.4" data-path="../../DuplicateRemoval.md">
+            
+                <span>
+            
+                    
+                    大数据去重方案
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >源码分析</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="&#x5B9E;&#x73B0;&#x5206;&#x6790;">&#x5B9E;&#x73B0;&#x5206;&#x6790;</h2>
+<h3 id="&#x5BA2;&#x6237;&#x7AEF;">&#x5BA2;&#x6237;&#x7AEF;</h3>
+<h4 id="comnetflixdiscoveryeurekaclient">com.netflix.discovery.EurekaClient</h4>
+<h4 id="jersey">jersey</h4>
+<h4 id="comnetflixdiscoverysharedtransporteurekahttpclient">com.netflix.discovery.shared.transport.EurekaHttpClient</h4>
+<p>&#x6839;&#x636E;Eureka&#x7684;&#x5E94;&#x7528;&#x4ECB;&#x7ECD;&#xFF0C;&#x5176;&#x5E94;&#x8BE5;&#x4E3A;&#x4E00;&#x4E2A;CS&#x7ED3;&#x6784;&#x7684;&#x5E94;&#x7528;&#xFF0C;&#x90A3;&#x4E48;&#x5BA2;&#x6237;&#x7AEF;&#x548C;&#x670D;&#x52A1;&#x7AEF;&#x5219;&#x5B58;&#x5728;&#x901A;&#x8BAF;&#xFF0C;&#x4F7F;&#x7528;&#x6293;&#x5305;&#x5DE5;&#x5177;&#x6293;&#x53D6;&#x6570;&#x636E;&#x4E3A;</p>
+<p><img src="images/eureka-client-request-01.png" alt="">
+<img src="images/eureka-client-request-02.png" alt="">
+<img src="images/eureka-client-request-03.png" alt=""></p>
+<h3 id="comnetflixdiscoverysharedtransporteurekahttpclient">com.netflix.discovery.shared.transport.EurekaHttpClient</h3>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> com.netflix.discovery.shared.transport;
+
+<span class="hljs-keyword">import</span> com.netflix.appinfo.InstanceInfo;
+<span class="hljs-keyword">import</span> com.netflix.appinfo.InstanceInfo.InstanceStatus;
+<span class="hljs-keyword">import</span> com.netflix.discovery.shared.Application;
+<span class="hljs-keyword">import</span> com.netflix.discovery.shared.Applications;
+
+<span class="hljs-comment">/**
+ * Low level Eureka HTTP client API.
+ *
+ * <span class="hljs-doctag">@author</span> Tomasz Bak
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">EurekaHttpClient</span> </span>{
+
+    <span class="hljs-function">EurekaHttpResponse&lt;Void&gt; <span class="hljs-title">register</span><span class="hljs-params">(InstanceInfo info)</span></span>;
+
+    <span class="hljs-function">EurekaHttpResponse&lt;Void&gt; <span class="hljs-title">cancel</span><span class="hljs-params">(String appName, String id)</span></span>;
+
+    <span class="hljs-function">EurekaHttpResponse&lt;InstanceInfo&gt; <span class="hljs-title">sendHeartBeat</span><span class="hljs-params">(String appName, String id, InstanceInfo info, InstanceStatus overriddenStatus)</span></span>;
+
+    <span class="hljs-function">EurekaHttpResponse&lt;Void&gt; <span class="hljs-title">statusUpdate</span><span class="hljs-params">(String appName, String id, InstanceStatus newStatus, InstanceInfo info)</span></span>;
+
+    <span class="hljs-function">EurekaHttpResponse&lt;Void&gt; <span class="hljs-title">deleteStatusOverride</span><span class="hljs-params">(String appName, String id, InstanceInfo info)</span></span>;
+
+    <span class="hljs-function">EurekaHttpResponse&lt;Applications&gt; <span class="hljs-title">getApplications</span><span class="hljs-params">(String... regions)</span></span>;
+
+    <span class="hljs-function">EurekaHttpResponse&lt;Applications&gt; <span class="hljs-title">getDelta</span><span class="hljs-params">(String... regions)</span></span>;
+
+    <span class="hljs-function">EurekaHttpResponse&lt;Applications&gt; <span class="hljs-title">getVip</span><span class="hljs-params">(String vipAddress, String... regions)</span></span>;
+
+    <span class="hljs-function">EurekaHttpResponse&lt;Applications&gt; <span class="hljs-title">getSecureVip</span><span class="hljs-params">(String secureVipAddress, String... regions)</span></span>;
+
+    <span class="hljs-function">EurekaHttpResponse&lt;Application&gt; <span class="hljs-title">getApplication</span><span class="hljs-params">(String appName)</span></span>;
+
+    <span class="hljs-function">EurekaHttpResponse&lt;InstanceInfo&gt; <span class="hljs-title">getInstance</span><span class="hljs-params">(String appName, String id)</span></span>;
+
+    <span class="hljs-function">EurekaHttpResponse&lt;InstanceInfo&gt; <span class="hljs-title">getInstance</span><span class="hljs-params">(String id)</span></span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">shutdown</span><span class="hljs-params">()</span></span>;
+}
+</code></pre>
+<p>&#x5176;&#x5B9E;&#x73B0;&#x7C7B;&#x5982;&#x4E0B;&#x56FE;</p>
+<p><img src="images/eureka-client-class.png" alt=""></p>
+<p>&#x8FD0;&#x884C;&#x65F6;&#x4E3B;&#x8981;&#x4F7F;&#x7528;&#x5230;&#x4E86;com.netflix.discovery.shared.transport.jersey.AbstractJerseyEurekaHttpClient</p>
+<h3 id="comnetflixdiscoverysharedtransportjerseyabstractjerseyeurekahttpclient">com.netflix.discovery.shared.transport.jersey.AbstractJerseyEurekaHttpClient</h3>
+<h4 id="register">register</h4>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> com.netflix.discovery.shared.transport.jersey;
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@author</span> Tomasz Bak
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbstractJerseyEurekaHttpClient</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">EurekaHttpClient</span> </span>{
+     <span class="hljs-meta">@Override</span>
+     <span class="hljs-function"><span class="hljs-keyword">public</span> EurekaHttpResponse&lt;Void&gt; <span class="hljs-title">register</span><span class="hljs-params">(InstanceInfo info)</span> </span>{
+         String urlPath = <span class="hljs-string">&quot;apps/&quot;</span> + info.getAppName();
+         ClientResponse response = <span class="hljs-keyword">null</span>;
+         <span class="hljs-keyword">try</span> {
+             Builder resourceBuilder = jerseyClient.resource(serviceUrl).path(urlPath).getRequestBuilder();
+             addExtraHeaders(resourceBuilder);
+             response = resourceBuilder
+                     .header(<span class="hljs-string">&quot;Accept-Encoding&quot;</span>, <span class="hljs-string">&quot;gzip&quot;</span>)
+                     .type(MediaType.APPLICATION_JSON_TYPE)
+                     .accept(MediaType.APPLICATION_JSON)
+                     .post(ClientResponse.class, info);
+             <span class="hljs-keyword">return</span> anEurekaHttpResponse(response.getStatus()).headers(headersOf(response)).build();
+         } <span class="hljs-keyword">finally</span> {
+             <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) {
+                 logger.debug(<span class="hljs-string">&quot;Jersey HTTP POST {}/{} with instance {}; statusCode={}&quot;</span>, serviceUrl, urlPath, info.getId(),
+                         response == <span class="hljs-keyword">null</span> ? <span class="hljs-string">&quot;N/A&quot;</span> : response.getStatus());
+             }
+             <span class="hljs-keyword">if</span> (response != <span class="hljs-keyword">null</span>) {
+                 response.close();
+             }
+         }
+     } 
+}
+</code></pre>
+<h4 id="cancel">cancel</h4>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> com.netflix.discovery.shared.transport.jersey;
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@author</span> Tomasz Bak
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbstractJerseyEurekaHttpClient</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">EurekaHttpClient</span> </span>{
+      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> EurekaHttpResponse&lt;Void&gt; <span class="hljs-title">cancel</span><span class="hljs-params">(String appName, String id)</span> </span>{
+          String urlPath = <span class="hljs-string">&quot;apps/&quot;</span> + appName + <span class="hljs-string">&apos;/&apos;</span> + id;
+          ClientResponse response = <span class="hljs-keyword">null</span>;
+          <span class="hljs-keyword">try</span> {
+              Builder resourceBuilder = jerseyClient.resource(serviceUrl).path(urlPath).getRequestBuilder();
+              addExtraHeaders(resourceBuilder);
+              response = resourceBuilder.delete(ClientResponse.class);
+              <span class="hljs-keyword">return</span> anEurekaHttpResponse(response.getStatus()).headers(headersOf(response)).build();
+          } <span class="hljs-keyword">finally</span> {
+              <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) {
+                  logger.debug(<span class="hljs-string">&quot;Jersey HTTP DELETE {}/{}; statusCode={}&quot;</span>, serviceUrl, urlPath, response == <span class="hljs-keyword">null</span> ? <span class="hljs-string">&quot;N/A&quot;</span> : response.getStatus());
+              }
+              <span class="hljs-keyword">if</span> (response != <span class="hljs-keyword">null</span>) {
+                  response.close();
+              }
+          }
+      }
+}
+</code></pre>
+<h4 id="sendheartbeat">sendHeartBeat</h4>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> com.netflix.discovery.shared.transport.jersey;
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@author</span> Tomasz Bak
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbstractJerseyEurekaHttpClient</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">EurekaHttpClient</span> </span>{
+      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> EurekaHttpResponse&lt;InstanceInfo&gt; <span class="hljs-title">sendHeartBeat</span><span class="hljs-params">(String appName, String id, InstanceInfo info, InstanceStatus overriddenStatus)</span> </span>{
+          String urlPath = <span class="hljs-string">&quot;apps/&quot;</span> + appName + <span class="hljs-string">&apos;/&apos;</span> + id;
+          ClientResponse response = <span class="hljs-keyword">null</span>;
+          <span class="hljs-keyword">try</span> {
+              WebResource webResource = jerseyClient.resource(serviceUrl)
+                      .path(urlPath)
+                      .queryParam(<span class="hljs-string">&quot;status&quot;</span>, info.getStatus().toString())
+                      .queryParam(<span class="hljs-string">&quot;lastDirtyTimestamp&quot;</span>, info.getLastDirtyTimestamp().toString());
+              <span class="hljs-keyword">if</span> (overriddenStatus != <span class="hljs-keyword">null</span>) {
+                  webResource = webResource.queryParam(<span class="hljs-string">&quot;overriddenstatus&quot;</span>, overriddenStatus.name());
+              }
+              Builder requestBuilder = webResource.getRequestBuilder();
+              addExtraHeaders(requestBuilder);
+              response = requestBuilder.put(ClientResponse.class);
+              EurekaHttpResponseBuilder&lt;InstanceInfo&gt; eurekaResponseBuilder = anEurekaHttpResponse(response.getStatus(), InstanceInfo.class).headers(headersOf(response));
+              <span class="hljs-keyword">if</span> (response.hasEntity()) {
+                  eurekaResponseBuilder.entity(response.getEntity(InstanceInfo.class));
+              }
+              <span class="hljs-keyword">return</span> eurekaResponseBuilder.build();
+          } <span class="hljs-keyword">finally</span> {
+              <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) {
+                  logger.debug(<span class="hljs-string">&quot;Jersey HTTP PUT {}/{}; statusCode={}&quot;</span>, serviceUrl, urlPath, response == <span class="hljs-keyword">null</span> ? <span class="hljs-string">&quot;N/A&quot;</span> : response.getStatus());
+              }
+              <span class="hljs-keyword">if</span> (response != <span class="hljs-keyword">null</span>) {
+                  response.close();
+              }
+          }
+      }
+}
+</code></pre>
+<h4 id="statusupdate">statusUpdate</h4>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> com.netflix.discovery.shared.transport.jersey;
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@author</span> Tomasz Bak
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbstractJerseyEurekaHttpClient</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">EurekaHttpClient</span> </span>{
+      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> EurekaHttpResponse&lt;Void&gt; <span class="hljs-title">statusUpdate</span><span class="hljs-params">(String appName, String id, InstanceStatus newStatus, InstanceInfo info)</span> </span>{
+          String urlPath = <span class="hljs-string">&quot;apps/&quot;</span> + appName + <span class="hljs-string">&apos;/&apos;</span> + id + <span class="hljs-string">&quot;/status&quot;</span>;
+          ClientResponse response = <span class="hljs-keyword">null</span>;
+          <span class="hljs-keyword">try</span> {
+              Builder requestBuilder = jerseyClient.resource(serviceUrl)
+                      .path(urlPath)
+                      .queryParam(<span class="hljs-string">&quot;value&quot;</span>, newStatus.name())
+                      .queryParam(<span class="hljs-string">&quot;lastDirtyTimestamp&quot;</span>, info.getLastDirtyTimestamp().toString())
+                      .getRequestBuilder();
+              addExtraHeaders(requestBuilder);
+              response = requestBuilder.put(ClientResponse.class);
+              <span class="hljs-keyword">return</span> anEurekaHttpResponse(response.getStatus()).headers(headersOf(response)).build();
+          } <span class="hljs-keyword">finally</span> {
+              <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) {
+                  logger.debug(<span class="hljs-string">&quot;Jersey HTTP PUT {}/{}; statusCode={}&quot;</span>, serviceUrl, urlPath, response == <span class="hljs-keyword">null</span> ? <span class="hljs-string">&quot;N/A&quot;</span> : response.getStatus());
+              }
+              <span class="hljs-keyword">if</span> (response != <span class="hljs-keyword">null</span>) {
+                  response.close();
+              }
+          }
+      }
+}
+</code></pre>
+<h4 id="deletestatusoverride">deleteStatusOverride</h4>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> com.netflix.discovery.shared.transport.jersey;
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@author</span> Tomasz Bak
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbstractJerseyEurekaHttpClient</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">EurekaHttpClient</span> </span>{
+      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> EurekaHttpResponse&lt;Void&gt; <span class="hljs-title">deleteStatusOverride</span><span class="hljs-params">(String appName, String id, InstanceInfo info)</span> </span>{
+          String urlPath = <span class="hljs-string">&quot;apps/&quot;</span> + appName + <span class="hljs-string">&apos;/&apos;</span> + id + <span class="hljs-string">&quot;/status&quot;</span>;
+          ClientResponse response = <span class="hljs-keyword">null</span>;
+          <span class="hljs-keyword">try</span> {
+              Builder requestBuilder = jerseyClient.resource(serviceUrl)
+                      .path(urlPath)
+                      .queryParam(<span class="hljs-string">&quot;lastDirtyTimestamp&quot;</span>, info.getLastDirtyTimestamp().toString())
+                      .getRequestBuilder();
+              addExtraHeaders(requestBuilder);
+              response = requestBuilder.delete(ClientResponse.class);
+              <span class="hljs-keyword">return</span> anEurekaHttpResponse(response.getStatus()).headers(headersOf(response)).build();
+          } <span class="hljs-keyword">finally</span> {
+              <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) {
+                  logger.debug(<span class="hljs-string">&quot;Jersey HTTP DELETE {}/{}; statusCode={}&quot;</span>, serviceUrl, urlPath, response == <span class="hljs-keyword">null</span> ? <span class="hljs-string">&quot;N/A&quot;</span> : response.getStatus());
+              }
+              <span class="hljs-keyword">if</span> (response != <span class="hljs-keyword">null</span>) {
+                  response.close();
+              }
+          }
+      }
+}
+</code></pre>
+<h4 id="getapplications-getdelta-getvip-getsecurevip">getApplications getDelta getVip getSecureVip</h4>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> com.netflix.discovery.shared.transport.jersey;
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@author</span> Tomasz Bak
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbstractJerseyEurekaHttpClient</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">EurekaHttpClient</span> </span>{
+      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> EurekaHttpResponse&lt;Applications&gt; <span class="hljs-title">getApplications</span><span class="hljs-params">(String... regions)</span> </span>{
+          <span class="hljs-keyword">return</span> getApplicationsInternal(<span class="hljs-string">&quot;apps/&quot;</span>, regions);
+      }
+
+      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> EurekaHttpResponse&lt;Applications&gt; <span class="hljs-title">getDelta</span><span class="hljs-params">(String... regions)</span> </span>{
+          <span class="hljs-keyword">return</span> getApplicationsInternal(<span class="hljs-string">&quot;apps/delta&quot;</span>, regions);
+      }
+
+      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> EurekaHttpResponse&lt;Applications&gt; <span class="hljs-title">getVip</span><span class="hljs-params">(String vipAddress, String... regions)</span> </span>{
+          <span class="hljs-keyword">return</span> getApplicationsInternal(<span class="hljs-string">&quot;vips/&quot;</span> + vipAddress, regions);
+      }
+
+      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> EurekaHttpResponse&lt;Applications&gt; <span class="hljs-title">getSecureVip</span><span class="hljs-params">(String secureVipAddress, String... regions)</span> </span>{
+          <span class="hljs-keyword">return</span> getApplicationsInternal(<span class="hljs-string">&quot;svips/&quot;</span> + secureVipAddress, regions);
+      }
+
+      <span class="hljs-function"><span class="hljs-keyword">private</span> EurekaHttpResponse&lt;Applications&gt; <span class="hljs-title">getApplicationsInternal</span><span class="hljs-params">(String urlPath, String[] regions)</span> </span>{
+        ClientResponse response = <span class="hljs-keyword">null</span>;
+        String regionsParamValue = <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">try</span> {
+            WebResource webResource = jerseyClient.resource(serviceUrl).path(urlPath);
+            <span class="hljs-keyword">if</span> (regions != <span class="hljs-keyword">null</span> &amp;&amp; regions.length &gt; <span class="hljs-number">0</span>) {
+                regionsParamValue = StringUtil.join(regions);
+                webResource = webResource.queryParam(<span class="hljs-string">&quot;regions&quot;</span>, regionsParamValue);
+            }
+            Builder requestBuilder = webResource.getRequestBuilder();
+            addExtraHeaders(requestBuilder);
+            response = requestBuilder.accept(MediaType.APPLICATION_JSON_TYPE).get(ClientResponse.class);
+
+            Applications applications = <span class="hljs-keyword">null</span>;
+            <span class="hljs-keyword">if</span> (response.getStatus() == Status.OK.getStatusCode() &amp;&amp; response.hasEntity()) {
+                applications = response.getEntity(Applications.class);
+            }
+            <span class="hljs-keyword">return</span> anEurekaHttpResponse(response.getStatus(), Applications.class)
+                    .headers(headersOf(response))
+                    .entity(applications)
+                    .build();
+        } <span class="hljs-keyword">finally</span> {
+            <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) {
+                logger.debug(<span class="hljs-string">&quot;Jersey HTTP GET {}/{}?{}; statusCode={}&quot;</span>,
+                        serviceUrl, urlPath,
+                        regionsParamValue == <span class="hljs-keyword">null</span> ? <span class="hljs-string">&quot;&quot;</span> : <span class="hljs-string">&quot;regions=&quot;</span> + regionsParamValue,
+                        response == <span class="hljs-keyword">null</span> ? <span class="hljs-string">&quot;N/A&quot;</span> : response.getStatus()
+                );
+            }
+            <span class="hljs-keyword">if</span> (response != <span class="hljs-keyword">null</span>) {
+                response.close();
+            }
+        }
+    }      
+}
+</code></pre>
+<h4 id="getapplication">getApplication</h4>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> com.netflix.discovery.shared.transport.jersey;
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@author</span> Tomasz Bak
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbstractJerseyEurekaHttpClient</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">EurekaHttpClient</span> </span>{
+      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> EurekaHttpResponse&lt;Application&gt; <span class="hljs-title">getApplication</span><span class="hljs-params">(String appName)</span> </span>{
+          String urlPath = <span class="hljs-string">&quot;apps/&quot;</span> + appName;
+          ClientResponse response = <span class="hljs-keyword">null</span>;
+          <span class="hljs-keyword">try</span> {
+              Builder requestBuilder = jerseyClient.resource(serviceUrl).path(urlPath).getRequestBuilder();
+              addExtraHeaders(requestBuilder);
+              response = requestBuilder.accept(MediaType.APPLICATION_JSON_TYPE).get(ClientResponse.class);
+
+              Application application = <span class="hljs-keyword">null</span>;
+              <span class="hljs-keyword">if</span> (response.getStatus() == Status.OK.getStatusCode() &amp;&amp; response.hasEntity()) {
+                  application = response.getEntity(Application.class);
+              }
+              <span class="hljs-keyword">return</span> anEurekaHttpResponse(response.getStatus(), Application.class)
+                      .headers(headersOf(response))
+                      .entity(application)
+                      .build();
+          } <span class="hljs-keyword">finally</span> {
+              <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) {
+                  logger.debug(<span class="hljs-string">&quot;Jersey HTTP GET {}/{}; statusCode={}&quot;</span>, serviceUrl, urlPath, response == <span class="hljs-keyword">null</span> ? <span class="hljs-string">&quot;N/A&quot;</span> : response.getStatus());
+              }
+              <span class="hljs-keyword">if</span> (response != <span class="hljs-keyword">null</span>) {
+                  response.close();
+              }
+          }
+      }
+}
+</code></pre>
+<h4 id="getinstance">getInstance</h4>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> com.netflix.discovery.shared.transport.jersey;
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@author</span> Tomasz Bak
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbstractJerseyEurekaHttpClient</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">EurekaHttpClient</span> </span>{
+      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> EurekaHttpResponse&lt;InstanceInfo&gt; <span class="hljs-title">getInstance</span><span class="hljs-params">(String id)</span> </span>{
+          <span class="hljs-keyword">return</span> getInstanceInternal(<span class="hljs-string">&quot;instances/&quot;</span> + id);
+      }
+
+      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> EurekaHttpResponse&lt;InstanceInfo&gt; <span class="hljs-title">getInstance</span><span class="hljs-params">(String appName, String id)</span> </span>{
+          <span class="hljs-keyword">return</span> getInstanceInternal(<span class="hljs-string">&quot;apps/&quot;</span> + appName + <span class="hljs-string">&apos;/&apos;</span> + id);
+      }
+
+      <span class="hljs-function"><span class="hljs-keyword">private</span> EurekaHttpResponse&lt;InstanceInfo&gt; <span class="hljs-title">getInstanceInternal</span><span class="hljs-params">(String urlPath)</span> </span>{
+        ClientResponse response = <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">try</span> {
+            Builder requestBuilder = jerseyClient.resource(serviceUrl).path(urlPath).getRequestBuilder();
+            addExtraHeaders(requestBuilder);
+            response = requestBuilder.accept(MediaType.APPLICATION_JSON_TYPE).get(ClientResponse.class);
+
+            InstanceInfo infoFromPeer = <span class="hljs-keyword">null</span>;
+            <span class="hljs-keyword">if</span> (response.getStatus() == Status.OK.getStatusCode() &amp;&amp; response.hasEntity()) {
+                infoFromPeer = response.getEntity(InstanceInfo.class);
+            }
+            <span class="hljs-keyword">return</span> anEurekaHttpResponse(response.getStatus(), InstanceInfo.class)
+                    .headers(headersOf(response))
+                    .entity(infoFromPeer)
+                    .build();
+        } <span class="hljs-keyword">finally</span> {
+            <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) {
+                logger.debug(<span class="hljs-string">&quot;Jersey HTTP GET {}/{}; statusCode={}&quot;</span>, serviceUrl, urlPath, response == <span class="hljs-keyword">null</span> ? <span class="hljs-string">&quot;N/A&quot;</span> : response.getStatus());
+            }
+            <span class="hljs-keyword">if</span> (response != <span class="hljs-keyword">null</span>) {
+                response.close();
+            }
+        }
+    }      
+}
+</code></pre>
+<p>&#x6267;&#x884C;&#x987A;&#x5E8F;&#x4E3A;</p>
+<ul>
+<li>getApplications</li>
+<li>register</li>
+<li>getDelta</li>
+<li>sendHeartBeat</li>
+<li>getDelta</li>
+<li>sendHeartBeat</li>
+<li>...</li>
+</ul>
+<p>&#x5728;AbstractJerseyEurekaHttpClient&#x4E2D;&#x4EE5;&#x4E0A;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x7684;&#x6570;&#x636E;&#x4E3A;&#x538B;&#x7F29;&#x540E;&#x7684;&#x6570;&#x636E;&#x5728;entity&#x4E2D;&#x5B58;&#x50A8;&#x3002;&#x5728;&#x4E0A;&#x5C42;&#x7528;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x8FD4;&#x56DE;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x5982;&#x4E0B;&#x56FE;</p>
+<p><img src="images/eureka-client-response-01.png" alt="">
+<img src="images/eureka-client-response-01-01.png" alt=""></p>
+<p>Applications&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x5728;com.netflix.discovery.shared.Applications&#x4E2D;&#x3002;</p>
+<p>org.apache.http.impl.client.AbstractHttpClient
+GET ttp://192.168.202.222:51000/eureka/apps/</p>
+<p>com.netflix.discovery.shared.transport.EurekaHttpClient</p>
+<h3 id="&#x670D;&#x52A1;&#x7AEF;">&#x670D;&#x52A1;&#x7AEF;</h3>
+<h4 id="comnetflixdiscoveryeurekaclient">com.netflix.discovery.EurekaClient</h4>
+<h4 id="jersey">jersey</h4>
+<h4 id="comnetflixdiscoverysharedtransporteurekahttpclient">com.netflix.discovery.shared.transport.EurekaHttpClient</h4>
+<h5 id="&#x6CE8;&#x518C;&#x4E2D;&#x5FC3;&#x957F;&#x76F8;-comnetflixeurekaregistryabstractinstanceregistry">&#x6CE8;&#x518C;&#x4E2D;&#x5FC3;&#x957F;&#x76F8; com.netflix.eureka.registry.AbstractInstanceRegistry</h5>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbstractInstanceRegistry</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">InstanceRegistry</span> </span>{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ConcurrentHashMap&lt;String, Map&lt;String, Lease&lt;InstanceInfo&gt;&gt;&gt; registry
+            = <span class="hljs-keyword">new</span> ConcurrentHashMap&lt;String, Map&lt;String, Lease&lt;InstanceInfo&gt;&gt;&gt;();  
+}
+</code></pre>
+<p>&#x5916;&#x5C42;key&#x4E3A;appName,&#x5185;&#x5C42;&#x7684;key&#x4E3A;instanceId&#x3002;InstanceInfo&#x5BF9;&#x8C61;&#x4E2D;&#x5B58;&#x50A8;&#x7684;&#x662F;&#x6CE8;&#x518C;&#x7684;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x3002;</p>
+<h3 id="comnetflixeurekaresourcesapplicationsresource">com.netflix.eureka.resources.ApplicationsResource</h3>
+<pre><code class="lang-java"><span class="hljs-meta">@Path</span>(<span class="hljs-string">&quot;/{version}/apps&quot;</span>)
+<span class="hljs-meta">@Produces</span>({<span class="hljs-string">&quot;application/xml&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>})
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ApplicationsResource</span> </span>{
+    <span class="hljs-comment">/**
+     * Gets information about a particular {<span class="hljs-doctag">@link</span> com.netflix.discovery.shared.Application}.
+     *
+     * <span class="hljs-doctag">@param</span> version
+     *            the version of the request.
+     * <span class="hljs-doctag">@param</span> appId
+     *            the unique application identifier (which is the name) of the
+     *            application.
+     * <span class="hljs-doctag">@return</span> information about a particular application.
+     */</span>
+    <span class="hljs-meta">@Path</span>(<span class="hljs-string">&quot;{appId}&quot;</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> ApplicationResource <span class="hljs-title">getApplicationResource</span><span class="hljs-params">(
+            @PathParam(<span class="hljs-string">&quot;version&quot;</span>)</span> String version,
+            @<span class="hljs-title">PathParam</span><span class="hljs-params">(<span class="hljs-string">&quot;appId&quot;</span>)</span> String appId) </span>{
+        CurrentRequestVersion.set(Version.toEnum(version));
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ApplicationResource(appId, serverConfig, registry);
+    }
+}
+</code></pre>
+<pre><code class="lang-java"><span class="hljs-meta">@Path</span>(<span class="hljs-string">&quot;/{version}/apps&quot;</span>)
+<span class="hljs-meta">@Produces</span>({<span class="hljs-string">&quot;application/xml&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>})
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ApplicationsResource</span> </span>{
+    <span class="hljs-comment">/**
+     * Get information about all {<span class="hljs-doctag">@link</span> com.netflix.discovery.shared.Applications}.
+     *
+     * <span class="hljs-doctag">@param</span> version the version of the request.
+     * <span class="hljs-doctag">@param</span> acceptHeader the accept header to indicate whether to serve JSON or XML data.
+     * <span class="hljs-doctag">@param</span> acceptEncoding the accept header to indicate whether to serve compressed or uncompressed data.
+     * <span class="hljs-doctag">@param</span> eurekaAccept an eureka accept extension, see {<span class="hljs-doctag">@link</span> com.netflix.appinfo.EurekaAccept}
+     * <span class="hljs-doctag">@param</span> uriInfo the {<span class="hljs-doctag">@link</span> java.net.URI} information of the request made.
+     * <span class="hljs-doctag">@param</span> regionsStr A comma separated list of remote regions from which the instances will also be returned.
+     *                   The applications returned from the remote region can be limited to the applications
+     *                   returned by {<span class="hljs-doctag">@link</span> EurekaServerConfig#getRemoteRegionAppWhitelist(String)}
+     *
+     * <span class="hljs-doctag">@return</span> a response containing information about all {<span class="hljs-doctag">@link</span> com.netflix.discovery.shared.Applications}
+     *         from the {<span class="hljs-doctag">@link</span> AbstractInstanceRegistry}.
+     */</span>
+    <span class="hljs-meta">@GET</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Response <span class="hljs-title">getContainers</span><span class="hljs-params">(@PathParam(<span class="hljs-string">&quot;version&quot;</span>)</span> String version,
+                                  @<span class="hljs-title">HeaderParam</span><span class="hljs-params">(HEADER_ACCEPT)</span> String acceptHeader,
+                                  @<span class="hljs-title">HeaderParam</span><span class="hljs-params">(HEADER_ACCEPT_ENCODING)</span> String acceptEncoding,
+                                  @<span class="hljs-title">HeaderParam</span><span class="hljs-params">(EurekaAccept.HTTP_X_EUREKA_ACCEPT)</span> String eurekaAccept,
+                                  @Context UriInfo uriInfo,
+                                  @Nullable @<span class="hljs-title">QueryParam</span><span class="hljs-params">(<span class="hljs-string">&quot;regions&quot;</span>)</span> String regionsStr) </span>{
+
+        <span class="hljs-keyword">boolean</span> isRemoteRegionRequested = <span class="hljs-keyword">null</span> != regionsStr &amp;&amp; !regionsStr.isEmpty();
+        String[] regions = <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">if</span> (!isRemoteRegionRequested) {
+            EurekaMonitors.GET_ALL.increment();
+        } <span class="hljs-keyword">else</span> {
+            regions = regionsStr.toLowerCase().split(<span class="hljs-string">&quot;,&quot;</span>);
+            Arrays.sort(regions); <span class="hljs-comment">// So we don&apos;t have different caches for same regions queried in different order.</span>
+            EurekaMonitors.GET_ALL_WITH_REMOTE_REGIONS.increment();
+        }
+
+        <span class="hljs-comment">// Check if the server allows the access to the registry. The server can</span>
+        <span class="hljs-comment">// restrict access if it is not</span>
+        <span class="hljs-comment">// ready to serve traffic depending on various reasons.</span>
+        <span class="hljs-keyword">if</span> (!registry.shouldAllowAccess(isRemoteRegionRequested)) {
+            <span class="hljs-keyword">return</span> Response.status(Status.FORBIDDEN).build();
+        }
+        CurrentRequestVersion.set(Version.toEnum(version));
+        KeyType keyType = Key.KeyType.JSON;
+        String returnMediaType = MediaType.APPLICATION_JSON;
+        <span class="hljs-keyword">if</span> (acceptHeader == <span class="hljs-keyword">null</span> || !acceptHeader.contains(HEADER_JSON_VALUE)) {
+            keyType = Key.KeyType.XML;
+            returnMediaType = MediaType.APPLICATION_XML;
+        }
+
+        Key cacheKey = <span class="hljs-keyword">new</span> Key(Key.EntityType.Application,
+                ResponseCacheImpl.ALL_APPS,
+                keyType, CurrentRequestVersion.get(), EurekaAccept.fromString(eurekaAccept), regions
+        );
+
+        Response response;
+        <span class="hljs-keyword">if</span> (acceptEncoding != <span class="hljs-keyword">null</span> &amp;&amp; acceptEncoding.contains(HEADER_GZIP_VALUE)) {
+            response = Response.ok(responseCache.getGZIP(cacheKey))
+                    .header(HEADER_CONTENT_ENCODING, HEADER_GZIP_VALUE)
+                    .header(HEADER_CONTENT_TYPE, returnMediaType)
+                    .build();
+        } <span class="hljs-keyword">else</span> {
+            response = Response.ok(responseCache.get(cacheKey))
+                    .build();
+        }
+        <span class="hljs-keyword">return</span> response;
+    }
+
+}
+</code></pre>
+<pre><code class="lang-java"><span class="hljs-meta">@Path</span>(<span class="hljs-string">&quot;/{version}/apps&quot;</span>)
+<span class="hljs-meta">@Produces</span>({<span class="hljs-string">&quot;application/xml&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>})
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ApplicationsResource</span> </span>{
+    <span class="hljs-comment">/**
+     * Get information about all delta changes in {<span class="hljs-doctag">@link</span> com.netflix.discovery.shared.Applications}.
+     *
+     * &lt;p&gt;
+     * The delta changes represent the registry information change for a period
+     * as configured by
+     * {<span class="hljs-doctag">@link</span> EurekaServerConfig#getRetentionTimeInMSInDeltaQueue()}. The
+     * changes that can happen in a registry include
+     * &lt;em&gt;Registrations,Cancels,Status Changes and Expirations&lt;/em&gt;. Normally
+     * the changes to the registry are infrequent and hence getting just the
+     * delta will be much more efficient than getting the complete registry.
+     * &lt;/p&gt;
+     *
+     * &lt;p&gt;
+     * Since the delta information is cached over a period of time, the requests
+     * may return the same data multiple times within the window configured by
+     * {<span class="hljs-doctag">@link</span> EurekaServerConfig#getRetentionTimeInMSInDeltaQueue()}.The clients
+     * are expected to handle this duplicate information.
+     * &lt;p&gt;
+     *
+     * <span class="hljs-doctag">@param</span> version the version of the request.
+     * <span class="hljs-doctag">@param</span> acceptHeader the accept header to indicate whether to serve  JSON or XML data.
+     * <span class="hljs-doctag">@param</span> acceptEncoding the accept header to indicate whether to serve compressed or uncompressed data.
+     * <span class="hljs-doctag">@param</span> eurekaAccept an eureka accept extension, see {<span class="hljs-doctag">@link</span> com.netflix.appinfo.EurekaAccept}
+     * <span class="hljs-doctag">@param</span> uriInfo  the {<span class="hljs-doctag">@link</span> java.net.URI} information of the request made.
+     * <span class="hljs-doctag">@return</span> response containing the delta information of the
+     *         {<span class="hljs-doctag">@link</span> AbstractInstanceRegistry}.
+     */</span>
+    <span class="hljs-meta">@Path</span>(<span class="hljs-string">&quot;delta&quot;</span>)
+    <span class="hljs-meta">@GET</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Response <span class="hljs-title">getContainerDifferential</span><span class="hljs-params">(
+            @PathParam(<span class="hljs-string">&quot;version&quot;</span>)</span> String version,
+            @<span class="hljs-title">HeaderParam</span><span class="hljs-params">(HEADER_ACCEPT)</span> String acceptHeader,
+            @<span class="hljs-title">HeaderParam</span><span class="hljs-params">(HEADER_ACCEPT_ENCODING)</span> String acceptEncoding,
+            @<span class="hljs-title">HeaderParam</span><span class="hljs-params">(EurekaAccept.HTTP_X_EUREKA_ACCEPT)</span> String eurekaAccept,
+            @Context UriInfo uriInfo, @Nullable @<span class="hljs-title">QueryParam</span><span class="hljs-params">(<span class="hljs-string">&quot;regions&quot;</span>)</span> String regionsStr) </span>{
+
+        <span class="hljs-keyword">boolean</span> isRemoteRegionRequested = <span class="hljs-keyword">null</span> != regionsStr &amp;&amp; !regionsStr.isEmpty();
+
+        <span class="hljs-comment">// If the delta flag is disabled in discovery or if the lease expiration</span>
+        <span class="hljs-comment">// has been disabled, redirect clients to get all instances</span>
+        <span class="hljs-keyword">if</span> ((serverConfig.shouldDisableDelta()) || (!registry.shouldAllowAccess(isRemoteRegionRequested))) {
+            <span class="hljs-keyword">return</span> Response.status(Status.FORBIDDEN).build();
+        }
+
+        String[] regions = <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">if</span> (!isRemoteRegionRequested) {
+            EurekaMonitors.GET_ALL_DELTA.increment();
+        } <span class="hljs-keyword">else</span> {
+            regions = regionsStr.toLowerCase().split(<span class="hljs-string">&quot;,&quot;</span>);
+            Arrays.sort(regions); <span class="hljs-comment">// So we don&apos;t have different caches for same regions queried in different order.</span>
+            EurekaMonitors.GET_ALL_DELTA_WITH_REMOTE_REGIONS.increment();
+        }
+
+        CurrentRequestVersion.set(Version.toEnum(version));
+        KeyType keyType = Key.KeyType.JSON;
+        String returnMediaType = MediaType.APPLICATION_JSON;
+        <span class="hljs-keyword">if</span> (acceptHeader == <span class="hljs-keyword">null</span> || !acceptHeader.contains(HEADER_JSON_VALUE)) {
+            keyType = Key.KeyType.XML;
+            returnMediaType = MediaType.APPLICATION_XML;
+        }
+
+        Key cacheKey = <span class="hljs-keyword">new</span> Key(Key.EntityType.Application,
+                ResponseCacheImpl.ALL_APPS_DELTA,
+                keyType, CurrentRequestVersion.get(), EurekaAccept.fromString(eurekaAccept), regions
+        );
+
+        <span class="hljs-keyword">if</span> (acceptEncoding != <span class="hljs-keyword">null</span>
+                &amp;&amp; acceptEncoding.contains(HEADER_GZIP_VALUE)) {
+            <span class="hljs-keyword">return</span> Response.ok(responseCache.getGZIP(cacheKey))
+                    .header(HEADER_CONTENT_ENCODING, HEADER_GZIP_VALUE)
+                    .header(HEADER_CONTENT_TYPE, returnMediaType)
+                    .build();
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">return</span> Response.ok(responseCache.get(cacheKey))
+                    .build();
+        }
+    }
+
+}
+</code></pre>
+<h3 id="comnetflixeurekaresourcesapplicationresource">com.netflix.eureka.resources.ApplicationResource</h3>
+<pre><code class="lang-java"><span class="hljs-meta">@Produces</span>({<span class="hljs-string">&quot;application/xml&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>})
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ApplicationResource</span> </span>{
+      <span class="hljs-comment">/**
+       * Gets information about a particular {<span class="hljs-doctag">@link</span> com.netflix.discovery.shared.Application}.
+       *
+       * <span class="hljs-doctag">@param</span> version
+       *            the version of the request.
+       * <span class="hljs-doctag">@param</span> acceptHeader
+       *            the accept header of the request to indicate whether to serve
+       *            JSON or XML data.
+       * <span class="hljs-doctag">@return</span> the response containing information about a particular
+       *         application.
+       */</span>
+      <span class="hljs-meta">@GET</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> Response <span class="hljs-title">getApplication</span><span class="hljs-params">(@PathParam(<span class="hljs-string">&quot;version&quot;</span>)</span> String version,
+                                     @<span class="hljs-title">HeaderParam</span><span class="hljs-params">(<span class="hljs-string">&quot;Accept&quot;</span>)</span> <span class="hljs-keyword">final</span> String acceptHeader,
+                                     @<span class="hljs-title">HeaderParam</span><span class="hljs-params">(EurekaAccept.HTTP_X_EUREKA_ACCEPT)</span> String eurekaAccept) </span>{
+          <span class="hljs-keyword">if</span> (!registry.shouldAllowAccess(<span class="hljs-keyword">false</span>)) {
+              <span class="hljs-keyword">return</span> Response.status(Status.FORBIDDEN).build();
+          }
+
+          EurekaMonitors.GET_APPLICATION.increment();
+
+          CurrentRequestVersion.set(Version.toEnum(version));
+          KeyType keyType = Key.KeyType.JSON;
+          <span class="hljs-keyword">if</span> (acceptHeader == <span class="hljs-keyword">null</span> || !acceptHeader.contains(<span class="hljs-string">&quot;json&quot;</span>)) {
+              keyType = Key.KeyType.XML;
+          }
+
+          Key cacheKey = <span class="hljs-keyword">new</span> Key(
+                  Key.EntityType.Application,
+                  appName,
+                  keyType,
+                  CurrentRequestVersion.get(),
+                  EurekaAccept.fromString(eurekaAccept)
+          );
+
+          String payLoad = responseCache.get(cacheKey);
+
+          <span class="hljs-keyword">if</span> (payLoad != <span class="hljs-keyword">null</span>) {
+              logger.debug(<span class="hljs-string">&quot;Found: {}&quot;</span>, appName);
+              <span class="hljs-keyword">return</span> Response.ok(payLoad).build();
+          } <span class="hljs-keyword">else</span> {
+              logger.debug(<span class="hljs-string">&quot;Not Found: {}&quot;</span>, appName);
+              <span class="hljs-keyword">return</span> Response.status(Status.NOT_FOUND).build();
+          }
+      }
+}
+</code></pre>
+<h3 id="comnetflixeurekaresourcesapplicationresource">com.netflix.eureka.resources.ApplicationResource</h3>
+<pre><code class="lang-java"><span class="hljs-meta">@Produces</span>({<span class="hljs-string">&quot;application/xml&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>})
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ApplicationResource</span> </span>{
+      <span class="hljs-comment">/**
+       * Gets information about a particular instance of an application.
+       *
+       * <span class="hljs-doctag">@param</span> id
+       *            the unique identifier of the instance.
+       * <span class="hljs-doctag">@return</span> information about a particular instance.
+       */</span>
+      <span class="hljs-meta">@Path</span>(<span class="hljs-string">&quot;{id}&quot;</span>)
+      <span class="hljs-function"><span class="hljs-keyword">public</span> InstanceResource <span class="hljs-title">getInstanceInfo</span><span class="hljs-params">(@PathParam(<span class="hljs-string">&quot;id&quot;</span>)</span> String id) </span>{
+          <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> InstanceResource(<span class="hljs-keyword">this</span>, id, serverConfig, registry);
+      }
+}
+</code></pre>
+<h3 id="comnetflixeurekaresourcesapplicationresource">com.netflix.eureka.resources.ApplicationResource</h3>
+<pre><code class="lang-java"><span class="hljs-meta">@Produces</span>({<span class="hljs-string">&quot;application/xml&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>})
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ApplicationResource</span> </span>{
+      <span class="hljs-comment">/**
+       * Registers information about a particular instance for an
+       * {<span class="hljs-doctag">@link</span> com.netflix.discovery.shared.Application}.
+       *
+       * <span class="hljs-doctag">@param</span> info
+       *            {<span class="hljs-doctag">@link</span> InstanceInfo} information of the instance.
+       * <span class="hljs-doctag">@param</span> isReplication
+       *            a header parameter containing information whether this is
+       *            replicated from other nodes.
+       */</span>
+      <span class="hljs-meta">@POST</span>
+      <span class="hljs-meta">@Consumes</span>({<span class="hljs-string">&quot;application/json&quot;</span>, <span class="hljs-string">&quot;application/xml&quot;</span>})
+      <span class="hljs-function"><span class="hljs-keyword">public</span> Response <span class="hljs-title">addInstance</span><span class="hljs-params">(InstanceInfo info,
+                                  @HeaderParam(PeerEurekaNode.HEADER_REPLICATION)</span> String isReplication) </span>{
+          logger.debug(<span class="hljs-string">&quot;Registering instance {} (replication={})&quot;</span>, info.getId(), isReplication);
+          <span class="hljs-comment">// validate that the instanceinfo contains all the necessary required fields</span>
+          <span class="hljs-keyword">if</span> (isBlank(info.getId())) {
+              <span class="hljs-keyword">return</span> Response.status(<span class="hljs-number">400</span>).entity(<span class="hljs-string">&quot;Missing instanceId&quot;</span>).build();
+          } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (isBlank(info.getHostName())) {
+              <span class="hljs-keyword">return</span> Response.status(<span class="hljs-number">400</span>).entity(<span class="hljs-string">&quot;Missing hostname&quot;</span>).build();
+          } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (isBlank(info.getIPAddr())) {
+              <span class="hljs-keyword">return</span> Response.status(<span class="hljs-number">400</span>).entity(<span class="hljs-string">&quot;Missing ip address&quot;</span>).build();
+          } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (isBlank(info.getAppName())) {
+              <span class="hljs-keyword">return</span> Response.status(<span class="hljs-number">400</span>).entity(<span class="hljs-string">&quot;Missing appName&quot;</span>).build();
+          } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!appName.equals(info.getAppName())) {
+              <span class="hljs-keyword">return</span> Response.status(<span class="hljs-number">400</span>).entity(<span class="hljs-string">&quot;Mismatched appName, expecting &quot;</span> + appName + <span class="hljs-string">&quot; but was &quot;</span> + info.getAppName()).build();
+          } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (info.getDataCenterInfo() == <span class="hljs-keyword">null</span>) {
+              <span class="hljs-keyword">return</span> Response.status(<span class="hljs-number">400</span>).entity(<span class="hljs-string">&quot;Missing dataCenterInfo&quot;</span>).build();
+          } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (info.getDataCenterInfo().getName() == <span class="hljs-keyword">null</span>) {
+              <span class="hljs-keyword">return</span> Response.status(<span class="hljs-number">400</span>).entity(<span class="hljs-string">&quot;Missing dataCenterInfo Name&quot;</span>).build();
+          }
+
+          <span class="hljs-comment">// handle cases where clients may be registering with bad DataCenterInfo with missing data</span>
+          DataCenterInfo dataCenterInfo = info.getDataCenterInfo();
+          <span class="hljs-keyword">if</span> (dataCenterInfo <span class="hljs-keyword">instanceof</span> UniqueIdentifier) {
+              String dataCenterInfoId = ((UniqueIdentifier) dataCenterInfo).getId();
+              <span class="hljs-keyword">if</span> (isBlank(dataCenterInfoId)) {
+                  <span class="hljs-keyword">boolean</span> experimental = <span class="hljs-string">&quot;true&quot;</span>.equalsIgnoreCase(serverConfig.getExperimental(<span class="hljs-string">&quot;registration.validation.dataCenterInfoId&quot;</span>));
+                  <span class="hljs-keyword">if</span> (experimental) {
+                      String entity = <span class="hljs-string">&quot;DataCenterInfo of type &quot;</span> + dataCenterInfo.getClass() + <span class="hljs-string">&quot; must contain a valid id&quot;</span>;
+                      <span class="hljs-keyword">return</span> Response.status(<span class="hljs-number">400</span>).entity(entity).build();
+                  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (dataCenterInfo <span class="hljs-keyword">instanceof</span> AmazonInfo) {
+                      AmazonInfo amazonInfo = (AmazonInfo) dataCenterInfo;
+                      String effectiveId = amazonInfo.get(AmazonInfo.MetaDataKey.instanceId);
+                      <span class="hljs-keyword">if</span> (effectiveId == <span class="hljs-keyword">null</span>) {
+                          amazonInfo.getMetadata().put(AmazonInfo.MetaDataKey.instanceId.getName(), info.getId());
+                      }
+                  } <span class="hljs-keyword">else</span> {
+                      logger.warn(<span class="hljs-string">&quot;Registering DataCenterInfo of type {} without an appropriate id&quot;</span>, dataCenterInfo.getClass());
+                  }
+              }
+          }
+
+          registry.register(info, <span class="hljs-string">&quot;true&quot;</span>.equals(isReplication));
+          <span class="hljs-keyword">return</span> Response.status(<span class="hljs-number">204</span>).build();  <span class="hljs-comment">// 204 to be backwards compatible</span>
+      }
+}
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Chapter01.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 使用示例">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"源码分析","level":"1.14.1.2","depth":3,"next":{"title":"Gateway","level":"1.14.2","depth":2,"ref":"","articles":[]},"previous":{"title":"使用示例","level":"1.14.1.1","depth":3,"path":"spring-cloud/eureka/Chapter01.md","ref":"spring-cloud/eureka/Chapter01.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["fontsettings","sharing","highlight","livereload","lunr","search","expandable-chapters","livereload"],"pluginsConfig":{"fontsettings":{"family":"sans","size":2,"theme":"white"},"sharing":{"all":["facebook","google","twitter","weibo","instapaper"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"highlight":{},"livereload":{},"lunr":{"ignoreSpecialCharacters":false,"maxIndexSize":1000000},"search":{},"expandable-chapters":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"spring-cloud/eureka/Chapter02.md","mtime":"2019-12-18T14:11:13.175Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-20T10:55:19.520Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.js"></script>
+        
+    
+
+    </body>
+</html>
+
