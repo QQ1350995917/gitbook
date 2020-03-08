@@ -1944,6 +1944,272 @@
 <p><img src="images/kafka-01.jpg" alt=""></p>
 <p><img src="images/kafka-02.jpg" alt=""></p>
 <p><img src="images/kafka-03.jpg" alt=""></p>
+<h1 id="&#x9707;&#x60CA;&#x7684;kafka">&#x9707;&#x60CA;&#x7684;KAFKA</h1>
+<p>kafka&#x662F;&#x4E00;&#x4E2A;&#x5206;&#x5E03;&#x5F0F;&#x6D88;&#x606F;&#x961F;&#x5217;&#x3002;&#x5177;&#x6709;&#x9AD8;&#x6027;&#x80FD;&#x3001;&#x6301;&#x4E45;&#x5316;&#x3001;&#x591A;&#x526F;&#x672C;&#x5907;&#x4EFD;&#x3001;&#x6A2A;&#x5411;&#x6269;&#x5C55;&#x80FD;&#x529B;&#x3002;&#x751F;&#x4EA7;&#x8005;&#x5F80;&#x961F;&#x5217;&#x91CC;&#x5199;&#x6D88;&#x606F;&#xFF0C;&#x6D88;&#x8D39;&#x8005;&#x4ECE;&#x961F;&#x5217;&#x91CC;&#x53D6;&#x6D88;&#x606F;&#x8FDB;&#x884C;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x3002;&#x4E00;&#x822C;&#x5728;&#x67B6;&#x6784;&#x8BBE;&#x8BA1;&#x4E2D;&#x8D77;&#x5230;&#x89E3;&#x8026;&#x3001;&#x524A;&#x5CF0;&#x3001;&#x5F02;&#x6B65;&#x5904;&#x7406;&#x7684;&#x4F5C;&#x7528;&#x3002;</p>
+<p>kafka&#x5BF9;&#x5916;&#x4F7F;&#x7528;topic&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x751F;&#x4EA7;&#x8005;&#x5F80;topic&#x91CC;&#x5199;&#x6D88;&#x606F;&#xFF0C;&#x6D88;&#x8D39;&#x8005;&#x4ECE;&#x8BFB;&#x6D88;&#x606F;&#x3002;&#x4E3A;&#x4E86;&#x505A;&#x5230;&#x6C34;&#x5E73;&#x6269;&#x5C55;&#xFF0C;&#x4E00;&#x4E2A;topic&#x5B9E;&#x9645;&#x662F;&#x7531;&#x591A;&#x4E2A;partition&#x7EC4;&#x6210;&#x7684;&#xFF0C;&#x9047;&#x5230;&#x74F6;&#x9888;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x589E;&#x52A0;partition&#x7684;&#x6570;&#x91CF;&#x6765;&#x8FDB;&#x884C;&#x6A2A;&#x5411;&#x6269;&#x5BB9;&#x3002;&#x5355;&#x4E2A;parition&#x5185;&#x662F;&#x4FDD;&#x8BC1;&#x6D88;&#x606F;&#x6709;&#x5E8F;&#x3002;</p>
+<p>&#x6BCF;&#x65B0;&#x5199;&#x4E00;&#x6761;&#x6D88;&#x606F;&#xFF0C;kafka&#x5C31;&#x662F;&#x5728;&#x5BF9;&#x5E94;&#x7684;&#x6587;&#x4EF6;append&#x5199;&#xFF0C;&#x6240;&#x4EE5;&#x6027;&#x80FD;&#x975E;&#x5E38;&#x9AD8;&#x3002;</p>
+<p>kafka&#x7684;&#x603B;&#x4F53;&#x6570;&#x636E;&#x6D41;&#x662F;&#x8FD9;&#x6837;&#x7684;&#xFF1A;</p>
+<p><img src="images/kafka-data-flow.webp" alt=""></p>
+<p>&#x5927;&#x6982;&#x7528;&#x6CD5;&#x5C31;&#x662F;&#xFF0C;Producers&#x5F80;Brokers&#x91CC;&#x9762;&#x7684;&#x6307;&#x5B9A;Topic&#x4E2D;&#x5199;&#x6D88;&#x606F;&#xFF0C;Consumers&#x4ECE;Brokers&#x91CC;&#x9762;&#x62C9;&#x53BB;&#x6307;&#x5B9A;Topic&#x7684;&#x6D88;&#x606F;&#xFF0C;&#x7136;&#x540E;&#x8FDB;&#x884C;&#x4E1A;&#x52A1;&#x5904;&#x7406;&#x3002;
+&#x56FE;&#x4E2D;&#x6709;&#x4E24;&#x4E2A;topic&#xFF0C;topic 0&#x6709;&#x4E24;&#x4E2A;partition&#xFF0C;topic 1&#x6709;&#x4E00;&#x4E2A;partition&#xFF0C;&#x4E09;&#x526F;&#x672C;&#x5907;&#x4EFD;&#x3002;&#x53EF;&#x4EE5;&#x770B;&#x5230;consumer gourp 1&#x4E2D;&#x7684;consumer 2&#x6CA1;&#x6709;&#x5206;&#x5230;partition&#x5904;&#x7406;&#xFF0C;&#x8FD9;&#x662F;&#x6709;&#x53EF;&#x80FD;&#x51FA;&#x73B0;&#x7684;&#xFF0C;&#x4E0B;&#x9762;&#x4F1A;&#x8BB2;&#x5230;&#x3002;</p>
+<p>&#x5173;&#x4E8E;broker&#x3001;topics&#x3001;partitions&#x7684;&#x4E00;&#x4E9B;&#x5143;&#x4FE1;&#x606F;&#x7528;zk&#x6765;&#x5B58;&#xFF0C;&#x76D1;&#x63A7;&#x548C;&#x8DEF;&#x7531;&#x5565;&#x7684;&#x4E5F;&#x90FD;&#x4F1A;&#x7528;&#x5230;zk&#x3002;</p>
+<h2 id="&#x751F;&#x4EA7;">&#x751F;&#x4EA7;</h2>
+<p>&#x57FA;&#x672C;&#x6D41;&#x7A0B;&#x662F;&#x8FD9;&#x6837;&#x7684;&#xFF1A;</p>
+<p><img src="images/kafka-sdk-product-flow.webp" alt=""></p>
+<p>&#x521B;&#x5EFA;&#x4E00;&#x6761;&#x8BB0;&#x5F55;&#xFF0C;&#x8BB0;&#x5F55;&#x4E2D;&#x4E00;&#x4E2A;&#x8981;&#x6307;&#x5B9A;&#x5BF9;&#x5E94;&#x7684;topic&#x548C;value&#xFF0C;key&#x548C;partition&#x53EF;&#x9009;&#x3002; &#x5148;&#x5E8F;&#x5217;&#x5316;&#xFF0C;&#x7136;&#x540E;&#x6309;&#x7167;topic&#x548C;partition&#xFF0C;&#x653E;&#x8FDB;&#x5BF9;&#x5E94;&#x7684;&#x53D1;&#x9001;&#x961F;&#x5217;&#x4E2D;&#x3002;kafka produce&#x90FD;&#x662F;&#x6279;&#x91CF;&#x8BF7;&#x6C42;&#xFF0C;&#x4F1A;&#x79EF;&#x6512;&#x4E00;&#x6279;&#xFF0C;&#x7136;&#x540E;&#x4E00;&#x8D77;&#x53D1;&#x9001;&#xFF0C;&#x4E0D;&#x662F;&#x8C03;send()&#x5C31;&#x8FDB;&#x884C;&#x7ACB;&#x523B;&#x8FDB;&#x884C;&#x7F51;&#x7EDC;&#x53D1;&#x5305;&#x3002;
+&#x5982;&#x679C;partition&#x6CA1;&#x586B;&#xFF0C;&#x90A3;&#x4E48;&#x60C5;&#x51B5;&#x4F1A;&#x662F;&#x8FD9;&#x6837;&#x7684;&#xFF1A;</p>
+<p>key&#x6709;&#x586B;
+&#x6309;&#x7167;key&#x8FDB;&#x884C;&#x54C8;&#x5E0C;&#xFF0C;&#x76F8;&#x540C;key&#x53BB;&#x4E00;&#x4E2A;partition&#x3002;&#xFF08;&#x5982;&#x679C;&#x6269;&#x5C55;&#x4E86;partition&#x7684;&#x6570;&#x91CF;&#x90A3;&#x4E48;&#x5C31;&#x4E0D;&#x80FD;&#x4FDD;&#x8BC1;&#x4E86;&#xFF09;
+key&#x6CA1;&#x586B;
+round-robin&#x6765;&#x9009;partition
+&#x8FD9;&#x4E9B;&#x8981;&#x53D1;&#x5F80;&#x540C;&#x4E00;&#x4E2A;partition&#x7684;&#x8BF7;&#x6C42;&#x6309;&#x7167;&#x914D;&#x7F6E;&#xFF0C;&#x6512;&#x4E00;&#x6CE2;&#xFF0C;&#x7136;&#x540E;&#x7531;&#x4E00;&#x4E2A;&#x5355;&#x72EC;&#x7684;&#x7EBF;&#x7A0B;&#x4E00;&#x6B21;&#x6027;&#x53D1;&#x8FC7;&#x53BB;&#x3002;</p>
+<h2 id="api">API</h2>
+<p>&#x6709;high level api&#xFF0C;&#x66FF;&#x6211;&#x4EEC;&#x628A;&#x5F88;&#x591A;&#x4E8B;&#x60C5;&#x90FD;&#x5E72;&#x4E86;&#xFF0C;offset&#xFF0C;&#x8DEF;&#x7531;&#x5565;&#x90FD;&#x66FF;&#x6211;&#x4EEC;&#x5E72;&#x4E86;&#xFF0C;&#x7528;&#x4EE5;&#x6765;&#x5F88;&#x7B80;&#x5355;&#x3002;
+&#x8FD8;&#x6709;simple api&#xFF0C;offset&#x5565;&#x7684;&#x90FD;&#x662F;&#x8981;&#x6211;&#x4EEC;&#x81EA;&#x5DF1;&#x8BB0;&#x5F55;&#x3002;</p>
+<h2 id="partition">partition</h2>
+<p>&#x5F53;&#x5B58;&#x5728;&#x591A;&#x526F;&#x672C;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4F1A;&#x5C3D;&#x91CF;&#x628A;&#x591A;&#x4E2A;&#x526F;&#x672C;&#xFF0C;&#x5206;&#x914D;&#x5230;&#x4E0D;&#x540C;&#x7684;broker&#x4E0A;&#x3002;kafka&#x4F1A;&#x4E3A;partition&#x9009;&#x51FA;&#x4E00;&#x4E2A;leader&#xFF0C;&#x4E4B;&#x540E;&#x6240;&#x6709;&#x8BE5;partition&#x7684;&#x8BF7;&#x6C42;&#xFF0C;&#x5B9E;&#x9645;&#x64CD;&#x4F5C;&#x7684;&#x90FD;&#x662F;leader&#xFF0C;&#x7136;&#x540E;&#x518D;&#x540C;&#x6B65;&#x5230;&#x5176;&#x4ED6;&#x7684;follower&#x3002;&#x5F53;&#x4E00;&#x4E2A;broker&#x6B47;&#x83DC;&#x540E;&#xFF0C;&#x6240;&#x6709;leader&#x5728;&#x8BE5;broker&#x4E0A;&#x7684;partition&#x90FD;&#x4F1A;&#x91CD;&#x65B0;&#x9009;&#x4E3E;&#xFF0C;&#x9009;&#x51FA;&#x4E00;&#x4E2A;leader&#x3002;&#xFF08;&#x8FD9;&#x91CC;&#x4E0D;&#x50CF;&#x5206;&#x5E03;&#x5F0F;&#x6587;&#x4EF6;&#x5B58;&#x50A8;&#x7CFB;&#x7EDF;&#x90A3;&#x6837;&#x4F1A;&#x81EA;&#x52A8;&#x8FDB;&#x884C;&#x590D;&#x5236;&#x4FDD;&#x6301;&#x526F;&#x672C;&#x6570;&#xFF09;</p>
+<p>&#x7136;&#x540E;&#x8FD9;&#x91CC;&#x5C31;&#x6D89;&#x53CA;&#x4E24;&#x4E2A;&#x7EC6;&#x8282;&#xFF1A;&#x600E;&#x4E48;&#x5206;&#x914D;partition&#xFF0C;&#x600E;&#x4E48;&#x9009;leader&#x3002;</p>
+<p>&#x5173;&#x4E8E;partition&#x7684;&#x5206;&#x914D;&#xFF0C;&#x8FD8;&#x6709;leader&#x7684;&#x9009;&#x4E3E;&#xFF0C;&#x603B;&#x5F97;&#x6709;&#x4E2A;&#x6267;&#x884C;&#x8005;&#x3002;&#x5728;kafka&#x4E2D;&#xFF0C;&#x8FD9;&#x4E2A;&#x6267;&#x884C;&#x8005;&#x5C31;&#x53EB;controller&#x3002;kafka&#x4F7F;&#x7528;zk&#x5728;broker&#x4E2D;&#x9009;&#x51FA;&#x4E00;&#x4E2A;controller&#xFF0C;&#x7528;&#x4E8E;partition&#x5206;&#x914D;&#x548C;leader&#x9009;&#x4E3E;&#x3002;</p>
+<h2 id="partition&#x5206;&#x914D;">partition&#x5206;&#x914D;</h2>
+<ul>
+<li>&#x5C06;&#x6240;&#x6709;Broker&#xFF08;&#x5047;&#x8BBE;&#x5171;n&#x4E2A;Broker&#xFF09;&#x548C;&#x5F85;&#x5206;&#x914D;&#x7684;Partition&#x6392;&#x5E8F;</li>
+<li>&#x5C06;&#x7B2C;i&#x4E2A;Partition&#x5206;&#x914D;&#x5230;&#x7B2C;&#xFF08;i mod n&#xFF09;&#x4E2A;Broker&#x4E0A; &#xFF08;&#x8FD9;&#x4E2A;&#x5C31;&#x662F;leader&#xFF09;</li>
+<li>&#x5C06;&#x7B2C;i&#x4E2A;Partition&#x7684;&#x7B2C;j&#x4E2A;Replica&#x5206;&#x914D;&#x5230;&#x7B2C;&#xFF08;(i + j) mode n&#xFF09;&#x4E2A;Broker&#x4E0A;</li>
+</ul>
+<h2 id="leader&#x5BB9;&#x707E;">leader&#x5BB9;&#x707E;</h2>
+<p>controller&#x4F1A;&#x5728;Zookeeper&#x7684;/brokers/ids&#x8282;&#x70B9;&#x4E0A;&#x6CE8;&#x518C;Watch&#xFF0C;&#x4E00;&#x65E6;&#x6709;broker&#x5B95;&#x673A;&#xFF0C;&#x5B83;&#x5C31;&#x80FD;&#x77E5;&#x9053;&#x3002;&#x5F53;broker&#x5B95;&#x673A;&#x540E;&#xFF0C;controller&#x5C31;&#x4F1A;&#x7ED9;&#x53D7;&#x5230;&#x5F71;&#x54CD;&#x7684;partition&#x9009;&#x51FA;&#x65B0;leader&#x3002;controller&#x4ECE;zk&#x7684;/brokers/topics/[topic]/partitions/[partition]/state&#x4E2D;&#xFF0C;&#x8BFB;&#x53D6;&#x5BF9;&#x5E94;partition&#x7684;ISR&#xFF08;in-sync replica&#x5DF2;&#x540C;&#x6B65;&#x7684;&#x526F;&#x672C;&#xFF09;&#x5217;&#x8868;&#xFF0C;&#x9009;&#x4E00;&#x4E2A;&#x51FA;&#x6765;&#x505A;leader&#x3002;
+&#x9009;&#x51FA;leader&#x540E;&#xFF0C;&#x66F4;&#x65B0;zk&#xFF0C;&#x7136;&#x540E;&#x53D1;&#x9001;LeaderAndISRRequest&#x7ED9;&#x53D7;&#x5F71;&#x54CD;&#x7684;broker&#xFF0C;&#x8BA9;&#x5B83;&#x4EEC;&#x6539;&#x53D8;&#x77E5;&#x9053;&#x8FD9;&#x4E8B;&#x3002;&#x4E3A;&#x4EC0;&#x4E48;&#x8FD9;&#x91CC;&#x4E0D;&#x662F;&#x4F7F;&#x7528;zk&#x901A;&#x77E5;&#xFF0C;&#x800C;&#x662F;&#x76F4;&#x63A5;&#x7ED9;broker&#x53D1;&#x9001;rpc&#x8BF7;&#x6C42;&#xFF0C;&#x6211;&#x7684;&#x7406;&#x89E3;&#x53EF;&#x80FD;&#x662F;&#x8FD9;&#x6837;&#x505A;zk&#x6709;&#x6027;&#x80FD;&#x95EE;&#x9898;&#x5427;&#x3002;</p>
+<p>&#x5982;&#x679C;ISR&#x5217;&#x8868;&#x662F;&#x7A7A;&#xFF0C;&#x90A3;&#x4E48;&#x4F1A;&#x6839;&#x636E;&#x914D;&#x7F6E;&#xFF0C;&#x968F;&#x4FBF;&#x9009;&#x4E00;&#x4E2A;replica&#x505A;leader&#xFF0C;&#x6216;&#x8005;&#x5E72;&#x8106;&#x8FD9;&#x4E2A;partition&#x5C31;&#x662F;&#x6B47;&#x83DC;&#x3002;&#x5982;&#x679C;ISR&#x5217;&#x8868;&#x7684;&#x6709;&#x673A;&#x5668;&#xFF0C;&#x4F46;&#x662F;&#x4E5F;&#x6B47;&#x83DC;&#x4E86;&#xFF0C;&#x90A3;&#x4E48;&#x8FD8;&#x53EF;&#x4EE5;&#x7B49;ISR&#x7684;&#x673A;&#x5668;&#x6D3B;&#x8FC7;&#x6765;&#x3002;</p>
+<h2 id="&#x591A;&#x526F;&#x672C;&#x540C;&#x6B65;">&#x591A;&#x526F;&#x672C;&#x540C;&#x6B65;</h2>
+<p>&#x8FD9;&#x91CC;&#x7684;&#x7B56;&#x7565;&#xFF0C;&#x670D;&#x52A1;&#x7AEF;&#x8FD9;&#x8FB9;&#x7684;&#x5904;&#x7406;&#x662F;follower&#x4ECE;leader&#x6279;&#x91CF;&#x62C9;&#x53D6;&#x6570;&#x636E;&#x6765;&#x540C;&#x6B65;&#x3002;&#x4F46;&#x662F;&#x5177;&#x4F53;&#x7684;&#x53EF;&#x9760;&#x6027;&#xFF0C;&#x662F;&#x7531;&#x751F;&#x4EA7;&#x8005;&#x6765;&#x51B3;&#x5B9A;&#x7684;&#x3002;
+&#x751F;&#x4EA7;&#x8005;&#x751F;&#x4EA7;&#x6D88;&#x606F;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x901A;&#x8FC7;request.required.acks&#x53C2;&#x6570;&#x6765;&#x8BBE;&#x7F6E;&#x6570;&#x636E;&#x7684;&#x53EF;&#x9760;&#x6027;&#x3002;</p>
+<table>
+<thead>
+<tr>
+<th>acks</th>
+<th>what happen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>which means that the producer never waits for an acknowledgement from the broker.&#x53D1;&#x8FC7;&#x53BB;&#x5C31;&#x5B8C;&#x4E8B;&#x4E86;&#xFF0C;&#x4E0D;&#x5173;&#x5FC3;broker&#x662F;&#x5426;&#x5904;&#x7406;&#x6210;&#x529F;&#xFF0C;&#x53EF;&#x80FD;&#x4E22;&#x6570;&#x636E;&#x3002;</td>
+</tr>
+<tr>
+<td>1</td>
+<td>which means that the producer gets an acknowledgement after the leader replica has received the data. &#x5F53;&#x5199;Leader&#x6210;&#x529F;&#x540E;&#x5C31;&#x8FD4;&#x56DE;,&#x5176;&#x4ED6;&#x7684;replica&#x90FD;&#x662F;&#x901A;&#x8FC7;fetcher&#x53BB;&#x540C;&#x6B65;&#x7684;,&#x6240;&#x4EE5;kafka&#x662F;&#x5F02;&#x6B65;&#x5199;&#xFF0C;&#x4E3B;&#x5907;&#x5207;&#x6362;&#x53EF;&#x80FD;&#x4E22;&#x6570;&#x636E;&#x3002;</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>which means that the producer gets an acknowledgement after all in-sync replicas have received the data. &#x8981;&#x7B49;&#x5230;isr&#x91CC;&#x6240;&#x6709;&#x673A;&#x5668;&#x540C;&#x6B65;&#x6210;&#x529F;&#xFF0C;&#x624D;&#x80FD;&#x8FD4;&#x56DE;&#x6210;&#x529F;&#xFF0C;&#x5EF6;&#x65F6;&#x53D6;&#x51B3;&#x4E8E;&#x6700;&#x6162;&#x7684;&#x673A;&#x5668;&#x3002;&#x5F3A;&#x4E00;&#x81F4;&#xFF0C;&#x4E0D;&#x4F1A;&#x4E22;&#x6570;&#x636E;&#x3002;</td>
+</tr>
+</tbody>
+</table>
+<p>&#x5728;acks=-1&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5982;&#x679C;ISR&#x5C11;&#x4E8E;min.insync.replicas&#x6307;&#x5B9A;&#x7684;&#x6570;&#x76EE;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x4F1A;&#x8FD4;&#x56DE;&#x4E0D;&#x53EF;&#x7528;&#x3002;</p>
+<p>&#x8FD9;&#x91CC;ISR&#x5217;&#x8868;&#x4E2D;&#x7684;&#x673A;&#x5668;&#x662F;&#x4F1A;&#x53D8;&#x5316;&#x7684;&#xFF0C;&#x6839;&#x636E;&#x914D;&#x7F6E;replica.lag.time.max.ms&#xFF0C;&#x591A;&#x4E45;&#x6CA1;&#x540C;&#x6B65;&#xFF0C;&#x5C31;&#x4F1A;&#x4ECE;ISR&#x5217;&#x8868;&#x4E2D;&#x5254;&#x9664;&#x3002;&#x4EE5;&#x524D;&#x8FD8;&#x6709;&#x6839;&#x636E;&#x843D;&#x540E;&#x591A;&#x5C11;&#x6761;&#x6D88;&#x606F;&#x5C31;&#x8E22;&#x51FA;ISR&#xFF0C;&#x5728;1.0&#x7248;&#x672C;&#x540E;&#x5C31;&#x53BB;&#x6389;&#x4E86;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x4E2A;&#x503C;&#x5F88;&#x96BE;&#x53D6;&#xFF0C;&#x5728;&#x9AD8;&#x5CF0;&#x7684;&#x65F6;&#x5019;&#x5F88;&#x5BB9;&#x6613;&#x51FA;&#x73B0;&#x8282;&#x70B9;&#x4E0D;&#x65AD;&#x7684;&#x8FDB;&#x51FA;ISR&#x5217;&#x8868;&#x3002;</p>
+<p>&#x4ECE;ISA&#x4E2D;&#x9009;&#x51FA;leader&#x540E;&#xFF0C;follower&#x4F1A;&#x4ECE;&#x628A;&#x81EA;&#x5DF1;&#x65E5;&#x5FD7;&#x4E2D;&#x4E0A;&#x4E00;&#x4E2A;&#x9AD8;&#x6C34;&#x4F4D;&#x540E;&#x9762;&#x7684;&#x8BB0;&#x5F55;&#x53BB;&#x6389;&#xFF0C;&#x7136;&#x540E;&#x53BB;&#x548C;leader&#x62FF;&#x65B0;&#x7684;&#x6570;&#x636E;&#x3002;&#x56E0;&#x4E3A;&#x65B0;&#x7684;leader&#x9009;&#x51FA;&#x6765;&#x540E;&#xFF0C;follower&#x4E0A;&#x9762;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x53EF;&#x80FD;&#x6BD4;&#x65B0;leader&#x591A;&#xFF0C;&#x6240;&#x4EE5;&#x8981;&#x622A;&#x53D6;&#x3002;&#x8FD9;&#x91CC;&#x9AD8;&#x6C34;&#x4F4D;&#x7684;&#x610F;&#x601D;&#xFF0C;&#x5BF9;&#x4E8E;partition&#x548C;leader&#xFF0C;&#x5C31;&#x662F;&#x6240;&#x6709;ISR&#x4E2D;&#x90FD;&#x6709;&#x7684;&#x6700;&#x65B0;&#x4E00;&#x6761;&#x8BB0;&#x5F55;&#x3002;&#x6D88;&#x8D39;&#x8005;&#x6700;&#x591A;&#x53EA;&#x80FD;&#x8BFB;&#x5230;&#x9AD8;&#x6C34;&#x4F4D;&#xFF1B;</p>
+<p>&#x4ECE;leader&#x7684;&#x89D2;&#x5EA6;&#x6765;&#x8BF4;&#x9AD8;&#x6C34;&#x4F4D;&#x7684;&#x66F4;&#x65B0;&#x4F1A;&#x5EF6;&#x8FDF;&#x4E00;&#x8F6E;&#xFF0C;&#x4F8B;&#x5982;&#x5199;&#x5165;&#x4E86;&#x4E00;&#x6761;&#x65B0;&#x6D88;&#x606F;&#xFF0C;ISR&#x4E2D;&#x7684;broker&#x90FD;fetch&#x5230;&#x4E86;&#xFF0C;&#x4F46;&#x662F;ISR&#x4E2D;&#x7684;broker&#x53EA;&#x6709;&#x5728;&#x4E0B;&#x4E00;&#x8F6E;&#x7684;fetch&#x4E2D;&#x624D;&#x80FD;&#x544A;&#x8BC9;leader&#x3002;</p>
+<p>&#x4E5F;&#x6B63;&#x662F;&#x7531;&#x4E8E;&#x8FD9;&#x4E2A;&#x9AD8;&#x6C34;&#x4F4D;&#x5EF6;&#x8FDF;&#x4E00;&#x8F6E;&#xFF0C;&#x5728;&#x4E00;&#x4E9B;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;kafka&#x4F1A;&#x51FA;&#x73B0;&#x4E22;&#x6570;&#x636E;&#x548C;&#x4E3B;&#x5907;&#x6570;&#x636E;&#x4E0D;&#x4E00;&#x81F4;&#x7684;&#x60C5;&#x51B5;&#xFF0C;0.11&#x5F00;&#x59CB;&#xFF0C;&#x4F7F;&#x7528;leader epoch&#x6765;&#x4EE3;&#x66FF;&#x9AD8;&#x6C34;&#x4F4D;&#x3002;&#xFF08;<a href="https://cwiki.apache.org/confluence/display/KAFKA/KIP-101+-+Alter+Replication+Protocol+to+use+Leader+Epoch+rather+than+High+Watermark+for+Truncation#KIP-101-AlterReplicationProtocoltouseLeaderEpochratherthanHighWatermarkforTruncation-Scenario1:HighWatermarkTruncationfollowedbyImmediateLeaderElection&#xFF09;" target="_blank">https://cwiki.apache.org/confluence/display/KAFKA/KIP-101+-+Alter+Replication+Protocol+to+use+Leader+Epoch+rather+than+High+Watermark+for+Truncation#KIP-101-AlterReplicationProtocoltouseLeaderEpochratherthanHighWatermarkforTruncation-Scenario1:HighWatermarkTruncationfollowedbyImmediateLeaderElection&#xFF09;</a></p>
+<p>&#x601D;&#x8003;&#xFF1A;
+&#x5F53;acks=-1&#x65F6;</p>
+<ul>
+<li>&#x662F;follwers&#x90FD;&#x6765;fetch&#x5C31;&#x8FD4;&#x56DE;&#x6210;&#x529F;&#xFF0C;&#x8FD8;&#x662F;&#x7B49;follwers&#x7B2C;&#x4E8C;&#x8F6E;fetch&#xFF1F;</li>
+<li>leader&#x5DF2;&#x7ECF;&#x5199;&#x5165;&#x672C;&#x5730;&#xFF0C;&#x4F46;&#x662F;ISR&#x4E2D;&#x6709;&#x4E9B;&#x673A;&#x5668;&#x5931;&#x8D25;&#xFF0C;&#x90A3;&#x4E48;&#x600E;&#x4E48;&#x5904;&#x7406;&#x5462;&#xFF1F;</li>
+</ul>
+<h2 id="&#x6D88;&#x8D39;">&#x6D88;&#x8D39;</h2>
+<p>&#x8BA2;&#x9605;topic&#x662F;&#x4EE5;&#x4E00;&#x4E2A;&#x6D88;&#x8D39;&#x7EC4;&#x6765;&#x8BA2;&#x9605;&#x7684;&#xFF0C;&#x4E00;&#x4E2A;&#x6D88;&#x8D39;&#x7EC4;&#x91CC;&#x9762;&#x53EF;&#x4EE5;&#x6709;&#x591A;&#x4E2A;&#x6D88;&#x8D39;&#x8005;&#x3002;&#x540C;&#x4E00;&#x4E2A;&#x6D88;&#x8D39;&#x7EC4;&#x4E2D;&#x7684;&#x4E24;&#x4E2A;&#x6D88;&#x8D39;&#x8005;&#xFF0C;&#x4E0D;&#x4F1A;&#x540C;&#x65F6;&#x6D88;&#x8D39;&#x4E00;&#x4E2A;partition&#x3002;&#x6362;&#x53E5;&#x8BDD;&#x6765;&#x8BF4;&#xFF0C;&#x5C31;&#x662F;&#x4E00;&#x4E2A;partition&#xFF0C;&#x53EA;&#x80FD;&#x88AB;&#x6D88;&#x8D39;&#x7EC4;&#x91CC;&#x7684;&#x4E00;&#x4E2A;&#x6D88;&#x8D39;&#x8005;&#x6D88;&#x8D39;&#xFF0C;&#x4F46;&#x662F;&#x53EF;&#x4EE5;&#x540C;&#x65F6;&#x88AB;&#x591A;&#x4E2A;&#x6D88;&#x8D39;&#x7EC4;&#x6D88;&#x8D39;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x5982;&#x679C;&#x6D88;&#x8D39;&#x7EC4;&#x5185;&#x7684;&#x6D88;&#x8D39;&#x8005;&#x5982;&#x679C;&#x6BD4;partition&#x591A;&#x7684;&#x8BDD;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x4F1A;&#x6709;&#x4E2A;&#x522B;&#x6D88;&#x8D39;&#x8005;&#x4E00;&#x76F4;&#x7A7A;&#x95F2;&#x3002;</p>
+<p><img src="images/kafka-data-consume.webp" alt=""></p>
+<h2 id="api">API</h2>
+<p>&#x8BA2;&#x9605;topic&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#xFF0C;&#x5982;&#x679C;&#x6709;&#x65B0;topic&#x5339;&#x914D;&#x4E0A;&#xFF0C;&#x90A3;&#x80FD;&#x81EA;&#x52A8;&#x8BA2;&#x9605;&#x4E0A;&#x3002;</p>
+<h2 id="offset&#x7684;&#x4FDD;&#x5B58;">offset&#x7684;&#x4FDD;&#x5B58;</h2>
+<p>&#x4E00;&#x4E2A;&#x6D88;&#x8D39;&#x7EC4;&#x6D88;&#x8D39;partition&#xFF0C;&#x9700;&#x8981;&#x4FDD;&#x5B58;offset&#x8BB0;&#x5F55;&#x6D88;&#x8D39;&#x5230;&#x54EA;&#xFF0C;&#x4EE5;&#x524D;&#x4FDD;&#x5B58;&#x5728;zk&#x4E2D;&#xFF0C;&#x7531;&#x4E8E;zk&#x7684;&#x5199;&#x6027;&#x80FD;&#x4E0D;&#x597D;&#xFF0C;&#x4EE5;&#x524D;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6CD5;&#x90FD;&#x662F;consumer&#x6BCF;&#x9694;&#x4E00;&#x5206;&#x949F;&#x4E0A;&#x62A5;&#x4E00;&#x6B21;&#x3002;&#x8FD9;&#x91CC;zk&#x7684;&#x6027;&#x80FD;&#x4E25;&#x91CD;&#x5F71;&#x54CD;&#x4E86;&#x6D88;&#x8D39;&#x7684;&#x901F;&#x5EA6;&#xFF0C;&#x800C;&#x4E14;&#x5F88;&#x5BB9;&#x6613;&#x51FA;&#x73B0;&#x91CD;&#x590D;&#x6D88;&#x8D39;&#x3002;
+&#x5728;0.10&#x7248;&#x672C;&#x540E;&#xFF0C;kafka&#x628A;&#x8FD9;&#x4E2A;offset&#x7684;&#x4FDD;&#x5B58;&#xFF0C;&#x4ECE;zk&#x603B;&#x5265;&#x79BB;&#xFF0C;&#x4FDD;&#x5B58;&#x5728;&#x4E00;&#x4E2A;&#x540D;&#x53EB;__consumeroffsets topic&#x7684;topic&#x4E2D;&#x3002;&#x5199;&#x8FDB;&#x6D88;&#x606F;&#x7684;key&#x7531;groupid&#x3001;topic&#x3001;partition&#x7EC4;&#x6210;&#xFF0C;value&#x662F;&#x504F;&#x79FB;&#x91CF;offset&#x3002;topic&#x914D;&#x7F6E;&#x7684;&#x6E05;&#x7406;&#x7B56;&#x7565;&#x662F;compact&#x3002;&#x603B;&#x662F;&#x4FDD;&#x7559;&#x6700;&#x65B0;&#x7684;key&#xFF0C;&#x5176;&#x4F59;&#x5220;&#x6389;&#x3002;&#x4E00;&#x822C;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6BCF;&#x4E2A;key&#x7684;offset&#x90FD;&#x662F;&#x7F13;&#x5B58;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#xFF0C;&#x67E5;&#x8BE2;&#x7684;&#x65F6;&#x5019;&#x4E0D;&#x7528;&#x904D;&#x5386;partition&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x7F13;&#x5B58;&#xFF0C;&#x7B2C;&#x4E00;&#x6B21;&#x5C31;&#x4F1A;&#x904D;&#x5386;partition&#x5EFA;&#x7ACB;&#x7F13;&#x5B58;&#xFF0C;&#x7136;&#x540E;&#x67E5;&#x8BE2;&#x8FD4;&#x56DE;&#x3002;</p>
+<p>&#x786E;&#x5B9A;consumer group&#x4F4D;&#x79FB;&#x4FE1;&#x606F;&#x5199;&#x5165;__consumers_offsets&#x7684;&#x54EA;&#x4E2A;partition&#xFF0C;&#x5177;&#x4F53;&#x8BA1;&#x7B97;&#x516C;&#x5F0F;&#xFF1A;</p>
+<pre><code>__consumers_offsets partition =
+           Math.abs(groupId.hashCode() % groupMetadataTopicPartitionCount)   
+//groupMetadataTopicPartitionCount&#x7531;offsets.topic.num.partitions&#x6307;&#x5B9A;&#xFF0C;&#x9ED8;&#x8BA4;&#x662F;50&#x4E2A;&#x5206;&#x533A;&#x3002;
+</code></pre><p>&#x601D;&#x8003;&#xFF1A;
+&#x5982;&#x679C;&#x6B63;&#x5728;&#x8DD1;&#x7684;&#x670D;&#x52A1;&#xFF0C;&#x4FEE;&#x6539;&#x4E86;offsets.topic.num.partitions&#xFF0C;&#x90A3;&#x4E48;offset&#x7684;&#x4FDD;&#x5B58;&#x662F;&#x4E0D;&#x662F;&#x5C31;&#x4E71;&#x5957;&#x4E86;</p>
+<h2 id="&#x5206;&#x914D;partition--reblance">&#x5206;&#x914D;partition--reblance</h2>
+<p>&#x751F;&#x4EA7;&#x8FC7;&#x7A0B;&#x4E2D;broker&#x8981;&#x5206;&#x914D;partition&#xFF0C;&#x6D88;&#x8D39;&#x8FC7;&#x7A0B;&#x8FD9;&#x91CC;&#xFF0C;&#x4E5F;&#x8981;&#x5206;&#x914D;partition&#x7ED9;&#x6D88;&#x8D39;&#x8005;&#x3002;&#x7C7B;&#x4F3C;broker&#x4E2D;&#x9009;&#x4E86;&#x4E00;&#x4E2A;controller&#x51FA;&#x6765;&#xFF0C;&#x6D88;&#x8D39;&#x4E5F;&#x8981;&#x4ECE;broker&#x4E2D;&#x9009;&#x4E00;&#x4E2A;coordinator&#xFF0C;&#x7528;&#x4E8E;&#x5206;&#x914D;partition&#x3002;
+&#x4E0B;&#x9762;&#x4ECE;&#x9876;&#x5411;&#x4E0B;&#xFF0C;&#x5206;&#x522B;&#x9610;&#x8FF0;&#x4E00;&#x4E0B;</p>
+<ul>
+<li>&#x600E;&#x4E48;&#x9009;coordinator&#x3002;</li>
+<li>&#x4EA4;&#x4E92;&#x6D41;&#x7A0B;&#x3002;</li>
+<li>reblance&#x7684;&#x6D41;&#x7A0B;&#x3002;</li>
+</ul>
+<h2 id="&#x9009;coordinator">&#x9009;coordinator</h2>
+<ul>
+<li>&#x770B;offset&#x4FDD;&#x5B58;&#x5728;&#x90A3;&#x4E2A;partition</li>
+<li>&#x8BE5;partition leader&#x6240;&#x5728;&#x7684;broker&#x5C31;&#x662F;&#x88AB;&#x9009;&#x5B9A;&#x7684;coordinator
+&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;consumer group&#x7684;coordinator&#xFF0C;&#x548C;&#x4FDD;&#x5B58;consumer group offset&#x7684;partition leader&#x662F;&#x540C;&#x4E00;&#x53F0;&#x673A;&#x5668;&#x3002;</li>
+</ul>
+<h2 id="&#x4EA4;&#x4E92;&#x6D41;&#x7A0B;">&#x4EA4;&#x4E92;&#x6D41;&#x7A0B;</h2>
+<p>&#x628A;coordinator&#x9009;&#x51FA;&#x6765;&#x4E4B;&#x540E;&#xFF0C;&#x5C31;&#x662F;&#x8981;&#x5206;&#x914D;&#x4E86;
+&#x6574;&#x4E2A;&#x6D41;&#x7A0B;&#x662F;&#x8FD9;&#x6837;&#x7684;&#xFF1A;</p>
+<ul>
+<li>consumer&#x542F;&#x52A8;&#x3001;&#x6216;&#x8005;coordinator&#x5B95;&#x673A;&#x4E86;&#xFF0C;consumer&#x4F1A;&#x4EFB;&#x610F;&#x8BF7;&#x6C42;&#x4E00;&#x4E2A;broker&#xFF0C;&#x53D1;&#x9001;ConsumerMetadataRequest&#x8BF7;&#x6C42;&#xFF0C;broker&#x4F1A;&#x6309;&#x7167;&#x4E0A;&#x9762;&#x8BF4;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x9009;&#x51FA;&#x8FD9;&#x4E2A;consumer&#x5BF9;&#x5E94;coordinator&#x7684;&#x5730;&#x5740;&#x3002;</li>
+<li>consumer &#x53D1;&#x9001;heartbeat&#x8BF7;&#x6C42;&#x7ED9;coordinator&#xFF0C;&#x8FD4;&#x56DE;IllegalGeneration&#x7684;&#x8BDD;&#xFF0C;&#x5C31;&#x8BF4;&#x660E;consumer&#x7684;&#x4FE1;&#x606F;&#x662F;&#x65E7;&#x7684;&#x4E86;&#xFF0C;&#x9700;&#x8981;&#x91CD;&#x65B0;&#x52A0;&#x5165;&#x8FDB;&#x6765;&#xFF0C;&#x8FDB;&#x884C;reblance&#x3002;&#x8FD4;&#x56DE;&#x6210;&#x529F;&#xFF0C;&#x90A3;&#x4E48;consumer&#x5C31;&#x4ECE;&#x4E0A;&#x6B21;&#x5206;&#x914D;&#x7684;partition&#x4E2D;&#x7EE7;&#x7EED;&#x6267;&#x884C;&#x3002;</li>
+</ul>
+<h2 id="reblance&#x6D41;&#x7A0B;">reblance&#x6D41;&#x7A0B;</h2>
+<ol>
+<li>consumer&#x7ED9;coordinator&#x53D1;&#x9001;JoinGroupRequest&#x8BF7;&#x6C42;&#x3002;</li>
+<li>&#x8FD9;&#x65F6;&#x5176;&#x4ED6;consumer&#x53D1;heartbeat&#x8BF7;&#x6C42;&#x8FC7;&#x6765;&#x65F6;&#xFF0C;coordinator&#x4F1A;&#x544A;&#x8BC9;&#x4ED6;&#x4EEC;&#xFF0C;&#x8981;reblance&#x4E86;&#x3002;</li>
+<li>&#x5176;&#x4ED6;consumer&#x53D1;&#x9001;JoinGroupRequest&#x8BF7;&#x6C42;&#x3002;</li>
+<li>&#x6240;&#x6709;&#x8BB0;&#x5F55;&#x5728;&#x518C;&#x7684;consumer&#x90FD;&#x53D1;&#x4E86;JoinGroupRequest&#x8BF7;&#x6C42;&#x4E4B;&#x540E;&#xFF0C;coordinator&#x5C31;&#x4F1A;&#x5728;&#x8FD9;&#x91CC;consumer&#x4E2D;&#x968F;&#x4FBF;&#x9009;&#x4E00;&#x4E2A;leader&#x3002;&#x7136;&#x540E;&#x56DE;JoinGroupRespone&#xFF0C;&#x8FD9;&#x4F1A;&#x544A;&#x8BC9;consumer&#x4F60;&#x662F;follower&#x8FD8;&#x662F;leader&#xFF0C;&#x5BF9;&#x4E8E;leader&#xFF0C;&#x8FD8;&#x4F1A;&#x628A;follower&#x7684;&#x4FE1;&#x606F;&#x5E26;&#x7ED9;&#x5B83;&#xFF0C;&#x8BA9;&#x5B83;&#x6839;&#x636E;&#x8FD9;&#x4E9B;&#x4FE1;&#x606F;&#x53BB;&#x5206;&#x914D;partition</li>
+<li>consumer&#x5411;coordinator&#x53D1;&#x9001;SyncGroupRequest&#xFF0C;&#x5176;&#x4E2D;leader&#x7684;SyncGroupRequest&#x4F1A;&#x5305;&#x542B;&#x5206;&#x914D;&#x7684;&#x60C5;&#x51B5;&#x3002;</li>
+<li>coordinator&#x56DE;&#x5305;&#xFF0C;&#x628A;&#x5206;&#x914D;&#x7684;&#x60C5;&#x51B5;&#x544A;&#x8BC9;consumer&#xFF0C;&#x5305;&#x62EC;leader&#x3002;</li>
+</ol>
+<p>&#x5F53;partition&#x6216;&#x8005;&#x6D88;&#x8D39;&#x8005;&#x7684;&#x6570;&#x91CF;&#x53D1;&#x751F;&#x53D8;&#x5316;&#x65F6;&#xFF0C;&#x90FD;&#x5F97;&#x8FDB;&#x884C;reblance&#x3002;
+&#x5217;&#x4E3E;&#x4E00;&#x4E0B;&#x4F1A;reblance&#x7684;&#x60C5;&#x51B5;&#xFF1A;</p>
+<ol>
+<li>&#x589E;&#x52A0;partition</li>
+<li>&#x589E;&#x52A0;&#x6D88;&#x8D39;&#x8005;</li>
+<li>&#x6D88;&#x8D39;&#x8005;&#x4E3B;&#x52A8;&#x5173;&#x95ED;</li>
+<li>&#x6D88;&#x8D39;&#x8005;&#x5B95;&#x673A;&#x4E86;</li>
+<li>coordinator&#x81EA;&#x5DF1;&#x4E5F;&#x5B95;&#x673A;&#x4E86;</li>
+</ol>
+<h2 id="&#x6D88;&#x606F;&#x6295;&#x9012;&#x8BED;&#x4E49;">&#x6D88;&#x606F;&#x6295;&#x9012;&#x8BED;&#x4E49;</h2>
+<p>kafka&#x652F;&#x6301;3&#x79CD;&#x6D88;&#x606F;&#x6295;&#x9012;&#x8BED;&#x4E49;
+At most once&#xFF1A;&#x6700;&#x591A;&#x4E00;&#x6B21;&#xFF0C;&#x6D88;&#x606F;&#x53EF;&#x80FD;&#x4F1A;&#x4E22;&#x5931;&#xFF0C;&#x4F46;&#x4E0D;&#x4F1A;&#x91CD;&#x590D;
+At least once&#xFF1A;&#x6700;&#x5C11;&#x4E00;&#x6B21;&#xFF0C;&#x6D88;&#x606F;&#x4E0D;&#x4F1A;&#x4E22;&#x5931;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x91CD;&#x590D;
+Exactly once&#xFF1A;&#x53EA;&#x4E14;&#x4E00;&#x6B21;&#xFF0C;&#x6D88;&#x606F;&#x4E0D;&#x4E22;&#x5931;&#x4E0D;&#x91CD;&#x590D;&#xFF0C;&#x53EA;&#x4E14;&#x6D88;&#x8D39;&#x4E00;&#x6B21;&#xFF08;0.11&#x4E2D;&#x5B9E;&#x73B0;&#xFF0C;&#x4EC5;&#x9650;&#x4E8E;&#x4E0B;&#x6E38;&#x4E5F;&#x662F;kafka&#xFF09;</p>
+<p>&#x5728;&#x4E1A;&#x52A1;&#x4E2D;&#xFF0C;&#x5E38;&#x5E38;&#x90FD;&#x662F;&#x4F7F;&#x7528;At least once&#x7684;&#x6A21;&#x578B;&#xFF0C;&#x5982;&#x679C;&#x9700;&#x8981;&#x53EF;&#x91CD;&#x5165;&#x7684;&#x8BDD;&#xFF0C;&#x5F80;&#x5F80;&#x662F;&#x4E1A;&#x52A1;&#x81EA;&#x5DF1;&#x5B9E;&#x73B0;&#x3002;</p>
+<h2 id="at-least-once">At least once</h2>
+<p>&#x5148;&#x83B7;&#x53D6;&#x6570;&#x636E;&#xFF0C;&#x518D;&#x8FDB;&#x884C;&#x4E1A;&#x52A1;&#x5904;&#x7406;&#xFF0C;&#x4E1A;&#x52A1;&#x5904;&#x7406;&#x6210;&#x529F;&#x540E;commit offset&#x3002;  </p>
+<ol>
+<li>&#x751F;&#x4EA7;&#x8005;&#x751F;&#x4EA7;&#x6D88;&#x606F;&#x5F02;&#x5E38;&#xFF0C;&#x6D88;&#x606F;&#x662F;&#x5426;&#x6210;&#x529F;&#x5199;&#x5165;&#x4E0D;&#x786E;&#x5B9A;&#xFF0C;&#x91CD;&#x505A;&#xFF0C;&#x53EF;&#x80FD;&#x5199;&#x5165;&#x91CD;&#x590D;&#x7684;&#x6D88;&#x606F;  </li>
+<li>&#x6D88;&#x8D39;&#x8005;&#x5904;&#x7406;&#x6D88;&#x606F;&#xFF0C;&#x4E1A;&#x52A1;&#x5904;&#x7406;&#x6210;&#x529F;&#x540E;&#xFF0C;&#x66F4;&#x65B0;offset&#x5931;&#x8D25;&#xFF0C;&#x6D88;&#x8D39;&#x8005;&#x91CD;&#x542F;&#x7684;&#x8BDD;&#xFF0C;&#x4F1A;&#x91CD;&#x590D;&#x6D88;&#x8D39; </li>
+</ol>
+<h2 id="at-most-once">At most once</h2>
+<p>&#x5148;&#x83B7;&#x53D6;&#x6570;&#x636E;&#xFF0C;&#x518D;commit offset&#xFF0C;&#x6700;&#x540E;&#x8FDB;&#x884C;&#x4E1A;&#x52A1;&#x5904;&#x7406;&#x3002;  </p>
+<ol>
+<li>&#x751F;&#x4EA7;&#x8005;&#x751F;&#x4EA7;&#x6D88;&#x606F;&#x5F02;&#x5E38;&#xFF0C;&#x4E0D;&#x7BA1;&#xFF0C;&#x751F;&#x4EA7;&#x4E0B;&#x4E00;&#x4E2A;&#x6D88;&#x606F;&#xFF0C;&#x6D88;&#x606F;&#x5C31;&#x4E22;&#x4E86;  </li>
+<li>&#x6D88;&#x8D39;&#x8005;&#x5904;&#x7406;&#x6D88;&#x606F;&#xFF0C;&#x5148;&#x66F4;&#x65B0;offset&#xFF0C;&#x518D;&#x505A;&#x4E1A;&#x52A1;&#x5904;&#x7406;&#xFF0C;&#x505A;&#x4E1A;&#x52A1;&#x5904;&#x7406;&#x5931;&#x8D25;&#xFF0C;&#x6D88;&#x8D39;&#x8005;&#x91CD;&#x542F;&#xFF0C;&#x6D88;&#x606F;&#x5C31;&#x4E22;&#x4E86;  </li>
+</ol>
+<h2 id="exactly-once">Exactly once</h2>
+<p>&#x601D;&#x8DEF;&#x662F;&#x8FD9;&#x6837;&#x7684;&#xFF0C;&#x9996;&#x5148;&#x8981;&#x4FDD;&#x8BC1;&#x6D88;&#x606F;&#x4E0D;&#x4E22;&#xFF0C;&#x518D;&#x53BB;&#x4FDD;&#x8BC1;&#x4E0D;&#x91CD;&#x590D;&#x3002;&#x6240;&#x4EE5;&#x76EF;&#x7740;At least once&#x7684;&#x539F;&#x56E0;&#x6765;&#x641E;&#x3002; &#x9996;&#x5148;&#x60F3;&#x51FA;&#x6765;&#x7684;&#xFF1A;</p>
+<ol>
+<li>&#x751F;&#x4EA7;&#x8005;&#x91CD;&#x505A;&#x5BFC;&#x81F4;&#x91CD;&#x590D;&#x5199;&#x5165;&#x6D88;&#x606F;----&#x751F;&#x4EA7;&#x4FDD;&#x8BC1;&#x5E42;&#x7B49;&#x6027;</li>
+<li>&#x6D88;&#x8D39;&#x8005;&#x91CD;&#x590D;&#x6D88;&#x8D39;---&#x6D88;&#x706D;&#x91CD;&#x590D;&#x6D88;&#x8D39;&#xFF0C;&#x6216;&#x8005;&#x4E1A;&#x52A1;&#x63A5;&#x53E3;&#x4FDD;&#x8BC1;&#x5E42;&#x7B49;&#x6027;&#x91CD;&#x590D;&#x6D88;&#x8D39;&#x4E5F;&#x6CA1;&#x95EE;&#x9898;</li>
+</ol>
+<p>&#x7531;&#x4E8E;&#x4E1A;&#x52A1;&#x63A5;&#x53E3;&#x662F;&#x5426;&#x5E42;&#x7B49;&#xFF0C;&#x4E0D;&#x662F;kafka&#x80FD;&#x4FDD;&#x8BC1;&#x7684;&#xFF0C;&#x6240;&#x4EE5;kafka&#x8FD9;&#x91CC;&#x63D0;&#x4F9B;&#x7684;exactly once&#x662F;&#x6709;&#x9650;&#x5236;&#x7684;&#xFF0C;&#x6D88;&#x8D39;&#x8005;&#x7684;&#x4E0B;&#x6E38;&#x4E5F;&#x5FC5;&#x987B;&#x662F;kafka&#x3002;&#x6240;&#x4EE5;&#x4E00;&#x4E0B;&#x8BA8;&#x8BBA;&#x7684;&#xFF0C;&#x6CA1;&#x7279;&#x6B8A;&#x8BF4;&#x660E;&#xFF0C;&#x6D88;&#x8D39;&#x8005;&#x7684;&#x4E0B;&#x6E38;&#x7CFB;&#x7EDF;&#x90FD;&#x662F;kafka&#xFF08;&#x6CE8;:&#x4F7F;&#x7528;kafka conector&#xFF0C;&#x5B83;&#x5BF9;&#x90E8;&#x5206;&#x7CFB;&#x7EDF;&#x505A;&#x4E86;&#x9002;&#x914D;&#xFF0C;&#x5B9E;&#x73B0;&#x4E86;exactly once&#xFF09;&#x3002;</p>
+<p>&#x751F;&#x4EA7;&#x8005;&#x5E42;&#x7B49;&#x6027;&#x597D;&#x505A;&#xFF0C;&#x6CA1;&#x5565;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x89E3;&#x51B3;&#x91CD;&#x590D;&#x6D88;&#x8D39;&#x6709;&#x4E24;&#x4E2A;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<ol>
+<li>&#x4E0B;&#x6E38;&#x7CFB;&#x7EDF;&#x4FDD;&#x8BC1;&#x5E42;&#x7B49;&#x6027;&#xFF0C;&#x91CD;&#x590D;&#x6D88;&#x8D39;&#x4E5F;&#x4E0D;&#x4F1A;&#x5BFC;&#x81F4;&#x591A;&#x6761;&#x8BB0;&#x5F55;&#x3002;</li>
+<li>&#x628A;commit offset&#x548C;&#x4E1A;&#x52A1;&#x5904;&#x7406;&#x7ED1;&#x5B9A;&#x6210;&#x4E00;&#x4E2A;&#x4E8B;&#x52A1;&#x3002;</li>
+</ol>
+<p>&#x672C;&#x6765;exactly once&#x5B9E;&#x73B0;&#x7B2C;1&#x70B9;&#x5C31;ok&#x4E86;&#x3002;</p>
+<p>&#x4F46;&#x662F;&#x5728;&#x4E00;&#x4E9B;&#x4F7F;&#x7528;&#x573A;&#x666F;&#x4E0B;&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x6570;&#x636E;&#x6E90;&#x53EF;&#x80FD;&#x662F;&#x591A;&#x4E2A;topic&#xFF0C;&#x5904;&#x7406;&#x540E;&#x8F93;&#x51FA;&#x5230;&#x591A;&#x4E2A;topic&#xFF0C;&#x8FD9;&#x65F6;&#x6211;&#x4EEC;&#x4F1A;&#x5E0C;&#x671B;&#x8F93;&#x51FA;&#x65F6;&#x8981;&#x4E48;&#x5168;&#x90E8;&#x6210;&#x529F;&#xFF0C;&#x8981;&#x4E48;&#x5168;&#x90E8;&#x5931;&#x8D25;&#x3002;&#x8FD9;&#x5C31;&#x9700;&#x8981;&#x5B9E;&#x73B0;&#x4E8B;&#x52A1;&#x6027;&#x3002;&#x65E2;&#x7136;&#x8981;&#x505A;&#x4E8B;&#x52A1;&#xFF0C;&#x90A3;&#x4E48;&#x5E72;&#x8106;&#x628A;&#x91CD;&#x590D;&#x6D88;&#x8D39;&#x7684;&#x95EE;&#x9898;&#x4ECE;&#x6839;&#x6E90;&#x4E0A;&#x89E3;&#x51B3;&#xFF0C;&#x628A;commit offset&#x548C;&#x8F93;&#x51FA;&#x5230;&#x5176;&#x4ED6;topic&#x7ED1;&#x5B9A;&#x6210;&#x4E00;&#x4E2A;&#x4E8B;&#x52A1;&#x3002;</p>
+<h2 id="&#x751F;&#x4EA7;&#x5E42;&#x7B49;&#x6027;">&#x751F;&#x4EA7;&#x5E42;&#x7B49;&#x6027;</h2>
+<p>&#x601D;&#x8DEF;&#x662F;&#x8FD9;&#x6837;&#x7684;&#xFF0C;&#x4E3A;&#x6BCF;&#x4E2A;producer&#x5206;&#x914D;&#x4E00;&#x4E2A;pid&#xFF0C;&#x4F5C;&#x4E3A;&#x8BE5;producer&#x7684;&#x552F;&#x4E00;&#x6807;&#x8BC6;&#x3002;producer&#x4F1A;&#x4E3A;&#x6BCF;&#x4E00;&#x4E2A;<topic,partition>&#x7EF4;&#x62A4;&#x4E00;&#x4E2A;&#x5355;&#x8C03;&#x9012;&#x589E;&#x7684;seq&#x3002;&#x7C7B;&#x4F3C;&#x7684;&#xFF0C;broker&#x4E5F;&#x4F1A;&#x4E3A;&#x6BCF;&#x4E2A;<pid,topic,partition>&#x8BB0;&#x5F55;&#x4E0B;&#x6700;&#x65B0;&#x7684;seq&#x3002;&#x5F53;req_seq == broker_seq+1&#x65F6;&#xFF0C;broker&#x624D;&#x4F1A;&#x63A5;&#x53D7;&#x8BE5;&#x6D88;&#x606F;&#x3002;&#x56E0;&#x4E3A;&#xFF1A;</pid,topic,partition></topic,partition></p>
+<ol>
+<li>&#x6D88;&#x606F;&#x7684;seq&#x6BD4;broker&#x7684;seq&#x5927;&#x8D85;&#x8FC7;&#x65F6;&#xFF0C;&#x8BF4;&#x660E;&#x4E2D;&#x95F4;&#x6709;&#x6570;&#x636E;&#x8FD8;&#x6CA1;&#x5199;&#x5165;&#xFF0C;&#x5373;&#x4E71;&#x5E8F;&#x4E86;&#x3002;</li>
+<li>&#x6D88;&#x606F;&#x7684;seq&#x4E0D;&#x6BD4;broker&#x7684;seq&#x5C0F;&#xFF0C;&#x90A3;&#x4E48;&#x8BF4;&#x660E;&#x8BE5;&#x6D88;&#x606F;&#x5DF2;&#x88AB;&#x4FDD;&#x5B58;&#x3002;</li>
+</ol>
+<p><img src="images/kafka-idempotency.webp" alt=""></p>
+<h2 id="&#x4E8B;&#x52A1;&#x6027;&#x539F;&#x5B50;&#x6027;&#x5E7F;&#x64AD;">&#x4E8B;&#x52A1;&#x6027;/&#x539F;&#x5B50;&#x6027;&#x5E7F;&#x64AD;</h2>
+<p>&#x573A;&#x666F;&#x662F;&#x8FD9;&#x6837;&#x7684;&#xFF1A;</p>
+<ol>
+<li>&#x5148;&#x4ECE;&#x591A;&#x4E2A;&#x6E90;topic&#x4E2D;&#x83B7;&#x53D6;&#x6570;&#x636E;&#x3002;</li>
+<li>&#x505A;&#x4E1A;&#x52A1;&#x5904;&#x7406;&#xFF0C;&#x5199;&#x5230;&#x4E0B;&#x6E38;&#x7684;&#x591A;&#x4E2A;&#x76EE;&#x7684;topic&#x3002;</li>
+<li>&#x66F4;&#x65B0;&#x591A;&#x4E2A;&#x6E90;topic&#x7684;offset&#x3002;</li>
+</ol>
+<p>&#x5176;&#x4E2D;&#x7B2C;2&#x3001;3&#x70B9;&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x4E8B;&#x52A1;&#xFF0C;&#x8981;&#x4E48;&#x5168;&#x6210;&#x529F;&#xFF0C;&#x8981;&#x4E48;&#x5168;&#x5931;&#x8D25;&#x3002;&#x8FD9;&#x91CC;&#x5F97;&#x76CA;&#x4E0E;offset&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x7528;&#x7279;&#x6B8A;&#x7684;topic&#x53BB;&#x4FDD;&#x5B58;&#xFF0C;&#x8FD9;&#x4E24;&#x70B9;&#x90FD;&#x5F52;&#x4E00;&#x4E3A;&#x5199;&#x591A;&#x4E2A;topic&#x7684;&#x4E8B;&#x52A1;&#x6027;&#x5904;&#x7406;&#x3002;</p>
+<p><img src="images/kafka-tansactionality.webp" alt=""></p>
+<p>&#x57FA;&#x672C;&#x601D;&#x8DEF;&#x662F;&#x8FD9;&#x6837;&#x7684;&#xFF1A;
+&#x5F15;&#x5165;tid&#xFF08;transaction id&#xFF09;&#xFF0C;&#x548C;pid&#x4E0D;&#x540C;&#xFF0C;&#x8FD9;&#x4E2A;id&#x662F;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x63D0;&#x4F9B;&#x7684;&#xFF0C;&#x7528;&#x4E8E;&#x6807;&#x8BC6;&#x4E8B;&#x52A1;&#xFF0C;&#x548C;producer&#x662F;&#x8C01;&#x5E76;&#x6CA1;&#x5173;&#x7CFB;&#x3002;&#x5C31;&#x662F;&#x4EFB;&#x4F55;producer&#x90FD;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;tid&#x53BB;&#x505A;&#x4E8B;&#x52A1;&#xFF0C;&#x8FD9;&#x6837;&#x8FDB;&#x884C;&#x5230;&#x4E00;&#x534A;&#x5C31;&#x6B7B;&#x6389;&#x7684;&#x4E8B;&#x52A1;&#xFF0C;&#x53EF;&#x4EE5;&#x7531;&#x53E6;&#x4E00;&#x4E2A;producer&#x53BB;&#x6062;&#x590D;&#x3002;
+&#x540C;&#x65F6;&#x4E3A;&#x4E86;&#x8BB0;&#x5F55;&#x4E8B;&#x52A1;&#x7684;&#x72B6;&#x6001;&#xFF0C;&#x7C7B;&#x4F3C;&#x5BF9;offset&#x7684;&#x5904;&#x7406;&#xFF0C;&#x5F15;&#x5165;transaction coordinator&#x7528;&#x4E8E;&#x8BB0;&#x5F55;transaction log&#x3002;&#x5728;&#x96C6;&#x7FA4;&#x4E2D;&#x4F1A;&#x6709;&#x591A;&#x4E2A;transaction coordinator&#xFF0C;&#x6BCF;&#x4E2A;tid&#x5BF9;&#x5E94;&#x552F;&#x4E00;&#x4E00;&#x4E2A;transaction coordinator&#x3002;
+&#x6CE8;&#xFF1A;transaction log&#x5220;&#x9664;&#x7B56;&#x7565;&#x662F;compact&#xFF0C;&#x5DF2;&#x5B8C;&#x6210;&#x7684;&#x4E8B;&#x52A1;&#x4F1A;&#x6807;&#x8BB0;&#x6210;null&#xFF0C;compact&#x540E;&#x4E0D;&#x4FDD;&#x7559;&#x3002;</p>
+<p>&#x505A;&#x4E8B;&#x52A1;&#x65F6;&#xFF0C;&#x5148;&#x6807;&#x8BB0;&#x5F00;&#x542F;&#x4E8B;&#x52A1;&#xFF0C;&#x5199;&#x5165;&#x6570;&#x636E;&#xFF0C;&#x5168;&#x90E8;&#x6210;&#x529F;&#x5C31;&#x5728;transaction log&#x4E2D;&#x8BB0;&#x5F55;&#x4E3A;prepare commit&#x72B6;&#x6001;&#xFF0C;&#x5426;&#x5219;&#x5199;&#x5165;prepare abort&#x7684;&#x72B6;&#x6001;&#x3002;&#x4E4B;&#x540E;&#x518D;&#x53BB;&#x7ED9;&#x6BCF;&#x4E2A;&#x76F8;&#x5173;&#x7684;partition&#x5199;&#x5165;&#x4E00;&#x6761;marker&#xFF08;commit&#x6216;&#x8005;abort&#xFF09;&#x6D88;&#x606F;&#xFF0C;&#x6807;&#x8BB0;&#x8FD9;&#x4E2A;&#x4E8B;&#x52A1;&#x7684;message&#x53EF;&#x4EE5;&#x88AB;&#x8BFB;&#x53D6;&#x6216;&#x5DF2;&#x7ECF;&#x5E9F;&#x5F03;&#x3002;&#x6210;&#x529F;&#x540E;&#x5728;transaction log&#x8BB0;&#x5F55;&#x4E0B;commit/abort&#x72B6;&#x6001;&#xFF0C;&#x81F3;&#x6B64;&#x4E8B;&#x52A1;&#x7ED3;&#x675F;&#x3002;</p>
+<p>&#x6570;&#x636E;&#x6D41;&#xFF1A;</p>
+<p><img src="images/kafka-tansactionality-data-flow.webp" alt=""></p>
+<ol>
+<li>&#x9996;&#x5148;&#x4F7F;&#x7528;tid&#x8BF7;&#x6C42;&#x4EFB;&#x610F;&#x4E00;&#x4E2A;broker&#xFF08;&#x4EE3;&#x7801;&#x4E2D;&#x5199;&#x7684;&#x662F;&#x8D1F;&#x8F7D;&#x6700;&#x5C0F;&#x7684;broker&#xFF09;&#xFF0C;&#x627E;&#x5230;&#x5BF9;&#x5E94;&#x7684;transaction coordinator&#x3002; </li>
+<li>&#x8BF7;&#x6C42;transaction coordinator&#x83B7;&#x53D6;&#x5230;&#x5BF9;&#x5E94;&#x7684;pid&#xFF0C;&#x548C;pid&#x5BF9;&#x5E94;&#x7684;epoch&#xFF0C;&#x8FD9;&#x4E2A;epoch&#x7528;&#x4E8E;&#x9632;&#x6B62;&#x50F5;&#x6B7B;&#x8FDB;&#x7A0B;&#x590D;&#x6D3B;&#x5BFC;&#x81F4;&#x6D88;&#x606F;&#x9519;&#x4E71;&#xFF0C;&#x5F53;&#x6D88;&#x606F;&#x7684;epoch&#x6BD4;&#x5F53;&#x524D;&#x7EF4;&#x62A4;&#x7684;epoch&#x5C0F;&#x65F6;&#xFF0C;&#x62D2;&#x7EDD;&#x6389;&#x3002;tid&#x548C;pid&#x6709;&#x4E00;&#x4E00;&#x5BF9;&#x5E94;&#x7684;&#x5173;&#x7CFB;&#xFF0C;&#x8FD9;&#x6837;&#x5BF9;&#x4E8E;&#x540C;&#x4E00;&#x4E2A;tid&#x4F1A;&#x8FD4;&#x56DE;&#x76F8;&#x540C;&#x7684;pid&#x3002;</li>
+<li>client&#x5148;&#x8BF7;&#x6C42;transaction coordinator&#x8BB0;&#x5F55;<topic,partition>&#x7684;&#x4E8B;&#x52A1;&#x72B6;&#x6001;&#xFF0C;&#x521D;&#x59CB;&#x72B6;&#x6001;&#x662F;BEGIN&#xFF0C;&#x5982;&#x679C;&#x662F;&#x8BE5;&#x4E8B;&#x52A1;&#x4E2D;&#x7B2C;&#x4E00;&#x4E2A;&#x5230;&#x8FBE;&#x7684;<topic,partition>&#xFF0C;&#x540C;&#x65F6;&#x4F1A;&#x5BF9;&#x4E8B;&#x52A1;&#x8FDB;&#x884C;&#x8BA1;&#x65F6;&#xFF1B;client&#x8F93;&#x51FA;&#x6570;&#x636E;&#x5230;&#x76F8;&#x5173;&#x7684;partition&#x4E2D;&#xFF1B;client&#x518D;&#x8BF7;&#x6C42;transaction coordinator&#x8BB0;&#x5F55;offset&#x7684;<topic,partition>&#x4E8B;&#x52A1;&#x72B6;&#x6001;&#xFF1B;client&#x53D1;&#x9001;offset commit&#x5230;&#x5BF9;&#x5E94;offset partition&#x3002;</topic,partition></topic,partition></topic,partition></li>
+<li>client&#x53D1;&#x9001;commit&#x8BF7;&#x6C42;&#xFF0C;transaction coordinator&#x8BB0;&#x5F55;prepare commit/abort&#xFF0C;&#x7136;&#x540E;&#x53D1;&#x9001;marker&#x7ED9;&#x76F8;&#x5173;&#x7684;partition&#x3002;&#x5168;&#x90E8;&#x6210;&#x529F;&#x540E;&#xFF0C;&#x8BB0;&#x5F55;commit/abort&#x7684;&#x72B6;&#x6001;&#xFF0C;&#x6700;&#x540E;&#x8FD9;&#x4E2A;&#x8BB0;&#x5F55;&#x4E0D;&#x9700;&#x8981;&#x7B49;&#x5F85;&#x5176;&#x4ED6;replica&#x7684;ack&#xFF0C;&#x56E0;&#x4E3A;prepare&#x4E0D;&#x4E22;&#x5C31;&#x80FD;&#x4FDD;&#x8BC1;&#x6700;&#x7EC8;&#x7684;&#x6B63;&#x786E;&#x6027;&#x4E86;&#x3002;</li>
+</ol>
+<p>&#x8FD9;&#x91CC;prepare&#x7684;&#x72B6;&#x6001;&#x4E3B;&#x8981;&#x662F;&#x7528;&#x4E8E;&#x4E8B;&#x52A1;&#x6062;&#x590D;&#xFF0C;&#x4F8B;&#x5982;&#x7ED9;&#x76F8;&#x5173;&#x7684;partition&#x53D1;&#x9001;&#x63A7;&#x5236;&#x6D88;&#x606F;&#xFF0C;&#x6CA1;&#x53D1;&#x5B8C;&#x5C31;&#x5B95;&#x673A;&#x4E86;&#xFF0C;&#x5907;&#x673A;&#x8D77;&#x6765;&#x540E;&#xFF0C;producer&#x53D1;&#x9001;&#x8BF7;&#x6C42;&#x83B7;&#x53D6;pid&#x65F6;&#xFF0C;&#x4F1A;&#x628A;&#x672A;&#x5B8C;&#x6210;&#x7684;&#x4E8B;&#x52A1;&#x63A5;&#x7740;&#x5B8C;&#x6210;&#x3002;</p>
+<p>&#x5F53;partition&#x4E2D;&#x5199;&#x5165;commit&#x7684;marker&#x540E;&#xFF0C;&#x76F8;&#x5173;&#x7684;&#x6D88;&#x606F;&#x5C31;&#x53EF;&#x88AB;&#x8BFB;&#x53D6;&#x3002;&#x6240;&#x4EE5;kafka&#x4E8B;&#x52A1;&#x5728;prepare commit&#x5230;commit&#x8FD9;&#x4E2A;&#x65F6;&#x95F4;&#x6BB5;&#x5185;&#xFF0C;&#x6D88;&#x606F;&#x662F;&#x9010;&#x6E10;&#x53EF;&#x89C1;&#x7684;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x540C;&#x4E00;&#x65F6;&#x523B;&#x53EF;&#x89C1;&#x3002;</p>
+<p>&#x8BE6;&#x7EC6;&#x7EC6;&#x8282;&#x53EF;&#x770B;&#xFF1A;<a href="https://cwiki.apache.org/confluence/display/KAFKA/KIP-98+-+Exactly+Once+Delivery+and+Transactional+Messaging#KIP-98-ExactlyOnceDeliveryandTransactionalMessaging-TransactionalGuarantees" target="_blank">https://cwiki.apache.org/confluence/display/KAFKA/KIP-98+-+Exactly+Once+Delivery+and+Transactional+Messaging#KIP-98-ExactlyOnceDeliveryandTransactionalMessaging-TransactionalGuarantees</a></p>
+<h2 id="&#x6D88;&#x8D39;&#x4E8B;&#x52A1;">&#x6D88;&#x8D39;&#x4E8B;&#x52A1;</h2>
+<p>&#x524D;&#x9762;&#x90FD;&#x662F;&#x4ECE;&#x751F;&#x4EA7;&#x7684;&#x89D2;&#x5EA6;&#x770B;&#x5F85;&#x4E8B;&#x52A1;&#x3002;&#x8FD8;&#x9700;&#x8981;&#x4ECE;&#x6D88;&#x8D39;&#x7684;&#x89D2;&#x5EA6;&#x53BB;&#x8003;&#x8651;&#x4E00;&#x4E9B;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x6D88;&#x8D39;&#x65F6;&#xFF0C;partition&#x4E2D;&#x4F1A;&#x5B58;&#x5728;&#x4E00;&#x4E9B;&#x6D88;&#x606F;&#x5904;&#x4E8E;&#x672A;commit&#x72B6;&#x6001;&#xFF0C;&#x5373;&#x4E1A;&#x52A1;&#x65B9;&#x5E94;&#x8BE5;&#x770B;&#x4E0D;&#x5230;&#x7684;&#x6D88;&#x606F;&#xFF0C;&#x9700;&#x8981;&#x8FC7;&#x6EE4;&#x8FD9;&#x4E9B;&#x6D88;&#x606F;&#x4E0D;&#x8BA9;&#x4E1A;&#x52A1;&#x770B;&#x5230;&#xFF0C;kafka&#x9009;&#x62E9;&#x5728;&#x6D88;&#x8D39;&#x8005;&#x8FDB;&#x7A0B;&#x4E2D;&#x8FDB;&#x884C;&#x8FC7;&#x6765;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5728;broker&#x4E2D;&#x8FC7;&#x6EE4;&#xFF0C;&#x4E3B;&#x8981;&#x8003;&#x8651;&#x7684;&#x8FD8;&#x662F;&#x6027;&#x80FD;&#x3002;kafka&#x9AD8;&#x6027;&#x80FD;&#x7684;&#x4E00;&#x4E2A;&#x5173;&#x952E;&#x70B9;&#x662F;zero copy&#xFF0C;&#x5982;&#x679C;&#x9700;&#x8981;&#x5728;broker&#x4E2D;&#x8FC7;&#x6EE4;&#xFF0C;&#x90A3;&#x4E48;&#x52BF;&#x5FC5;&#x9700;&#x8981;&#x8BFB;&#x53D6;&#x6D88;&#x606F;&#x5185;&#x5BB9;&#x5230;&#x5185;&#x5B58;&#xFF0C;&#x5C31;&#x4F1A;&#x5931;&#x53BB;zero copy&#x7684;&#x7279;&#x6027;&#x3002;</p>
+<h2 id="&#x6587;&#x4EF6;&#x7EC4;&#x7EC7;">&#x6587;&#x4EF6;&#x7EC4;&#x7EC7;</h2>
+<p>kafka&#x7684;&#x6570;&#x636E;&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x4EE5;&#x6587;&#x4EF6;&#x7684;&#x5F62;&#x5F0F;&#x5B58;&#x50A8;&#x5728;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x7684;&#x3002;topic&#x4E0B;&#x6709;partition&#xFF0C;partition&#x4E0B;&#x6709;segment&#xFF0C;segment&#x662F;&#x5B9E;&#x9645;&#x7684;&#x4E00;&#x4E2A;&#x4E2A;&#x6587;&#x4EF6;&#xFF0C;topic&#x548C;partition&#x90FD;&#x662F;&#x62BD;&#x8C61;&#x6982;&#x5FF5;&#x3002;</p>
+<p>&#x5728;&#x76EE;&#x5F55;/${topicName}-{$partitionid}/&#x4E0B;&#xFF0C;&#x5B58;&#x50A8;&#x7740;&#x5B9E;&#x9645;&#x7684;log&#x6587;&#x4EF6;&#xFF08;&#x5373;segment&#xFF09;&#xFF0C;&#x8FD8;&#x6709;&#x5BF9;&#x5E94;&#x7684;&#x7D22;&#x5F15;&#x6587;&#x4EF6;&#x3002;</p>
+<p>&#x6BCF;&#x4E2A;segment&#x6587;&#x4EF6;&#x5927;&#x5C0F;&#x76F8;&#x7B49;&#xFF0C;&#x6587;&#x4EF6;&#x540D;&#x4EE5;&#x8FD9;&#x4E2A;segment&#x4E2D;&#x6700;&#x5C0F;&#x7684;offset&#x547D;&#x540D;&#xFF0C;&#x6587;&#x4EF6;&#x6269;&#x5C55;&#x540D;&#x662F;.log&#xFF1B;segment&#x5BF9;&#x5E94;&#x7684;&#x7D22;&#x5F15;&#x7684;&#x6587;&#x4EF6;&#x540D;&#x5B57;&#x4E00;&#x6837;&#xFF0C;&#x6269;&#x5C55;&#x540D;&#x662F;.index&#x3002;&#x6709;&#x4E24;&#x4E2A;index&#x6587;&#x4EF6;&#xFF0C;&#x4E00;&#x4E2A;&#x662F;offset index&#x7528;&#x4E8E;&#x6309;offset&#x53BB;&#x67E5;message&#xFF0C;&#x4E00;&#x4E2A;&#x662F;time index&#x7528;&#x4E8E;&#x6309;&#x7167;&#x65F6;&#x95F4;&#x53BB;&#x67E5;&#xFF0C;&#x5176;&#x5B9E;&#x8FD9;&#x91CC;&#x53EF;&#x4EE5;&#x4F18;&#x5316;&#x5408;&#x5230;&#x4E00;&#x8D77;&#xFF0C;&#x4E0B;&#x9762;&#x53EA;&#x8BF4;offset index&#x3002;&#x603B;&#x4F53;&#x7684;&#x7EC4;&#x7EC7;&#x662F;&#x8FD9;&#x6837;&#x7684;&#xFF1A;</p>
+<p><img src="images/kafka-file-system.webp" alt=""></p>
+<p>&#x4E3A;&#x4E86;&#x51CF;&#x5C11;&#x7D22;&#x5F15;&#x6587;&#x4EF6;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x964D;&#x4F4E;&#x7A7A;&#x95F4;&#x4F7F;&#x7528;&#xFF0C;&#x65B9;&#x4FBF;&#x76F4;&#x63A5;&#x52A0;&#x8F7D;&#x8FDB;&#x5185;&#x5B58;&#x4E2D;&#xFF0C;&#x8FD9;&#x91CC;&#x7684;&#x7D22;&#x5F15;&#x4F7F;&#x7528;&#x7A00;&#x758F;&#x77E9;&#x9635;&#xFF0C;&#x4E0D;&#x4F1A;&#x6BCF;&#x4E00;&#x4E2A;message&#x90FD;&#x8BB0;&#x5F55;&#x4E0B;&#x5177;&#x4F53;&#x4F4D;&#x7F6E;&#xFF0C;&#x800C;&#x662F;&#x6BCF;&#x9694;&#x4E00;&#x5B9A;&#x7684;&#x5B57;&#x8282;&#x6570;&#xFF0C;&#x518D;&#x5EFA;&#x7ACB;&#x4E00;&#x6761;&#x7D22;&#x5F15;&#x3002; &#x7D22;&#x5F15;&#x5305;&#x542B;&#x4E24;&#x90E8;&#x5206;&#xFF0C;&#x5206;&#x522B;&#x662F;baseOffset&#xFF0C;&#x8FD8;&#x6709;position&#x3002;</p>
+<p>baseOffset&#xFF1A;&#x610F;&#x601D;&#x662F;&#x8FD9;&#x6761;&#x7D22;&#x5F15;&#x5BF9;&#x5E94;segment&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x7B2C;&#x51E0;&#x6761;message&#x3002;&#x8FD9;&#x6837;&#x505A;&#x65B9;&#x4FBF;&#x4F7F;&#x7528;&#x6570;&#x503C;&#x538B;&#x7F29;&#x7B97;&#x6CD5;&#x6765;&#x8282;&#x7701;&#x7A7A;&#x95F4;&#x3002;&#x4F8B;&#x5982;kafka&#x4F7F;&#x7528;&#x7684;&#x662F;varint&#x3002;</p>
+<p>position&#xFF1A;&#x5728;segment&#x4E2D;&#x7684;&#x7EDD;&#x5BF9;&#x4F4D;&#x7F6E;&#x3002;</p>
+<p>&#x67E5;&#x627E;offset&#x5BF9;&#x5E94;&#x7684;&#x8BB0;&#x5F55;&#x65F6;&#xFF0C;&#x4F1A;&#x5148;&#x7528;&#x4E8C;&#x5206;&#x6CD5;&#xFF0C;&#x627E;&#x51FA;&#x5BF9;&#x5E94;&#x7684;offset&#x5728;&#x54EA;&#x4E2A;segment&#x4E2D;&#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x7528;&#x7D22;&#x5F15;&#xFF0C;&#x5728;&#x5B9A;&#x4F4D;&#x51FA;offset&#x5728;segment&#x4E2D;&#x7684;&#x5927;&#x6982;&#x4F4D;&#x7F6E;&#xFF0C;&#x518D;&#x904D;&#x5386;&#x67E5;&#x627E;message&#x3002;</p>
+<h2 id="&#x5E38;&#x7528;&#x914D;&#x7F6E;&#x9879;">&#x5E38;&#x7528;&#x914D;&#x7F6E;&#x9879;</h2>
+<h3 id="broker&#x914D;&#x7F6E;">broker&#x914D;&#x7F6E;</h3>
+<table>
+<thead>
+<tr>
+<th>&#x914D;&#x7F6E;&#x9879;</th>
+<th>&#x4F5C;&#x7528;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>broker.id</td>
+<td>broker&#x7684;&#x552F;&#x4E00;&#x6807;&#x8BC6;</td>
+</tr>
+<tr>
+<td>auto.create.topics.auto</td>
+<td>&#x8BBE;&#x7F6E;&#x6210;true&#xFF0C;&#x5C31;&#x662F;&#x9047;&#x5230;&#x6CA1;&#x6709;&#x7684;topic&#x81EA;&#x52A8;&#x521B;&#x5EFA;topic&#x3002;</td>
+</tr>
+<tr>
+<td>log.dirs</td>
+<td>log&#x7684;&#x76EE;&#x5F55;&#x6570;&#xFF0C;&#x76EE;&#x5F55;&#x91CC;&#x9762;&#x653E;partition&#xFF0C;&#x5F53;&#x751F;&#x6210;&#x65B0;&#x7684;partition&#x65F6;&#xFF0C;&#x4F1A;&#x6311;&#x76EE;&#x5F55;&#x91CC;partition&#x6570;&#x6700;&#x5C11;&#x7684;&#x76EE;&#x5F55;&#x653E;&#x3002;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="topic&#x914D;&#x7F6E;">topic&#x914D;&#x7F6E;</h3>
+<table>
+<thead>
+<tr>
+<th>&#x914D;&#x7F6E;&#x9879;</th>
+<th>&#x4F5C;&#x7528;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>num.partitions</td>
+<td>&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;topic&#xFF0C;&#x4F1A;&#x6709;&#x51E0;&#x4E2A;partition&#x3002;</td>
+</tr>
+<tr>
+<td>log.retention.ms</td>
+<td>&#x5BF9;&#x5E94;&#x7684;&#x8FD8;&#x6709;minutes&#xFF0C;hours&#x7684;&#x5355;&#x4F4D;&#x3002;&#x65E5;&#x5FD7;&#x4FDD;&#x7559;&#x65F6;&#x95F4;&#xFF0C;&#x56E0;&#x4E3A;&#x5220;&#x9664;&#x662F;&#x6587;&#x4EF6;&#x7EF4;&#x5EA6;&#x800C;&#x4E0D;&#x662F;&#x6D88;&#x606F;&#x7EF4;&#x5EA6;&#xFF0C;&#x770B;&#x7684;&#x662F;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x7684;mtime&#x3002;</td>
+</tr>
+<tr>
+<td>log.retention.bytes</td>
+<td>partion&#x6700;&#x5927;&#x7684;&#x5BB9;&#x91CF;&#xFF0C;&#x8D85;&#x8FC7;&#x5C31;&#x6E05;&#x7406;&#x8001;&#x7684;&#x3002;&#x6CE8;&#x610F;&#x8FD9;&#x4E2A;&#x662F;partion&#x7EF4;&#x5EA6;&#xFF0C;&#x5C31;&#x662F;&#x8BF4;&#x5982;&#x679C;&#x4F60;&#x7684;topic&#x6709;8&#x4E2A;partition&#xFF0C;&#x914D;&#x7F6E;1G&#xFF0C;&#x90A3;&#x4E48;&#x5E73;&#x5747;&#x5206;&#x914D;&#x4E0B;&#xFF0C;topic&#x7406;&#x8BBA;&#x6700;&#x5927;&#x503C;8G&#x3002;</td>
+</tr>
+<tr>
+<td>log.segment.bytes</td>
+<td>&#x4E00;&#x4E2A;segment&#x7684;&#x5927;&#x5C0F;&#x3002;&#x8D85;&#x8FC7;&#x4E86;&#x5C31;&#x6EDA;&#x52A8;&#x3002;</td>
+</tr>
+<tr>
+<td>log.segment.ms</td>
+<td>&#x4E00;&#x4E2A;segment&#x7684;&#x6253;&#x5F00;&#x65F6;&#x95F4;&#xFF0C;&#x8D85;&#x8FC7;&#x4E86;&#x5C31;&#x6EDA;&#x52A8;&#x3002;</td>
+</tr>
+<tr>
+<td>message.max.bytes</td>
+<td>message&#x6700;&#x5927;&#x591A;&#x5927;</td>
+</tr>
+</tbody>
+</table>
+<p>&#x5173;&#x4E8E;&#x65E5;&#x5FD7;&#x6E05;&#x7406;&#xFF0C;&#x9ED8;&#x8BA4;&#x5F53;&#x524D;&#x6B63;&#x5728;&#x5199;&#x7684;&#x65E5;&#x5FD7;&#xFF0C;&#x662F;&#x600E;&#x4E48;&#x4E5F;&#x4E0D;&#x4F1A;&#x6E05;&#x7406;&#x6389;&#x7684;&#x3002;
+&#x8FD8;&#x6709;0.10&#x4E4B;&#x524D;&#x7684;&#x7248;&#x672C;&#xFF0C;&#x65F6;&#x95F4;&#x770B;&#x7684;&#x662F;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x7684;mtime&#xFF0C;&#x4F46;&#x8FD9;&#x4E2A;&#x6307;&#x662F;&#x4E0D;&#x51C6;&#x786E;&#x7684;&#xFF0C;&#x6709;&#x53EF;&#x80FD;&#x6587;&#x4EF6;&#x88AB;touch&#x4E00;&#x4E0B;&#xFF0C;mtime&#x5C31;&#x53D8;&#x4E86;&#x3002;&#x56E0;&#x6B64;&#x5728;0.10&#x7248;&#x672C;&#x5F00;&#x59CB;&#xFF0C;&#x6539;&#x4E3A;&#x4F7F;&#x7528;&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x65B0;&#x4E00;&#x6761;&#x6D88;&#x606F;&#x7684;&#x65F6;&#x95F4;&#x6765;&#x5224;&#x65AD;&#x3002;
+&#x6309;&#x5927;&#x5C0F;&#x6E05;&#x7406;&#x8FD9;&#x91CC;&#x4E5F;&#x8981;&#x6CE8;&#x610F;&#xFF0C;Kafka&#x5728;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x4E2D;&#x5C1D;&#x8BD5;&#x6BD4;&#x8F83;&#x5F53;&#x524D;&#x65E5;&#x5FD7;&#x91CF;&#x603B;&#x5927;&#x5C0F;&#x662F;&#x5426;&#x8D85;&#x8FC7;&#x9608;&#x503C;&#x81F3;&#x5C11;&#x4E00;&#x4E2A;&#x65E5;&#x5FD7;&#x6BB5;&#x7684;&#x5927;&#x5C0F;&#x3002;&#x5982;&#x679C;&#x8D85;&#x8FC7;&#x4F46;&#x662F;&#x6CA1;&#x8D85;&#x8FC7;&#x4E00;&#x4E2A;&#x65E5;&#x5FD7;&#x6BB5;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x4E0D;&#x4F1A;&#x5220;&#x9664;&#x3002;</p>
+<h2 id="&#x53C2;&#x8003;&#x8D44;&#x6599;">&#x53C2;&#x8003;&#x8D44;&#x6599;</h2>
+<p><a href="https://www.jianshu.com/p/d3e963ff8b70" target="_blank">https://www.jianshu.com/p/d3e963ff8b70</a></p>
 
                                 
                                 </section>
@@ -1987,7 +2253,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"高可用集群","level":"1.11.6.2","depth":3,"next":{"title":"实现原理","level":"1.11.6.3","depth":3,"path":"middleware/kafka/chapter3.md","ref":"middleware/kafka/chapter3.md","articles":[]},"previous":{"title":"安装","level":"1.11.6.1","depth":3,"path":"middleware/kafka/chapter0.md","ref":"middleware/kafka/chapter0.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["fontsettings","sharing","highlight","livereload","lunr","search","expandable-chapters","livereload"],"pluginsConfig":{"fontsettings":{"family":"sans","size":2,"theme":"white"},"sharing":{"all":["facebook","google","twitter","weibo","instapaper"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"highlight":{},"livereload":{},"lunr":{"ignoreSpecialCharacters":false,"maxIndexSize":1000000},"search":{},"expandable-chapters":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"middleware/kafka/chapter2.md","mtime":"2019-12-08T01:35:34.135Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-20T10:55:19.520Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"高可用集群","level":"1.11.6.2","depth":3,"next":{"title":"实现原理","level":"1.11.6.3","depth":3,"path":"middleware/kafka/chapter3.md","ref":"middleware/kafka/chapter3.md","articles":[]},"previous":{"title":"安装","level":"1.11.6.1","depth":3,"path":"middleware/kafka/chapter0.md","ref":"middleware/kafka/chapter0.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["fontsettings","sharing","highlight","livereload","lunr","search","expandable-chapters","livereload"],"pluginsConfig":{"fontsettings":{"family":"sans","size":2,"theme":"white"},"sharing":{"all":["facebook","google","twitter","weibo","instapaper"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"highlight":{},"livereload":{},"lunr":{"ignoreSpecialCharacters":false,"maxIndexSize":1000000},"search":{},"expandable-chapters":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"middleware/kafka/chapter2.md","mtime":"2020-03-08T03:14:49.859Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-08T03:17:26.523Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
