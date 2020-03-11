@@ -10,7 +10,7 @@
 
   <modules>
     <!--<module>zythum/mysql</module>-->
-    <module>zythum/java-concurrent</module>
+    <!--<module>zythum/java-concurrent</module>-->
     <!--<module>zythum/java-bytecode</module>-->
     <!--<module>zythum/spring-cloud</module>-->
     <!--<module>zythum/spring-context</module>-->

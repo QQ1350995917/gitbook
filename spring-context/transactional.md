@@ -1,30 +1,38 @@
-## SpringBoot声明式事务的简单运用
-### SpringBoot使用事物的步骤：
-第一步：在启动类上开启事物支持
-```
+# SpringBoot声明式事务
+
+## SpringBoot使用事物的步骤：
+### 第一步：在启动类上开启事物支持
+```java
 @SpringBootApplication
 @EnableTransactionManagement
 public class TransactionApplication {
 
 }
 ```
-提示：
-
 @EnableTransactionManagement注解其实在大多数情况下，不是必须的，因为SpringBoot在TransactionAutoConfiguration类里为我们自动配置启用了@EnableTransactionManagement注解。不过自动启用该注解有两个前提条件，分别是：
 - @ConditionalOnBean(PlatformTransactionManager.class)
 - @ConditionalOnMissingBean(AbstractTransactionManagementConfiguration.class)
 
 而一般情况下，这两个条件都是满足的，所以一般的，我们在启动类上写不写@EnableTransactionManagement都行。这里还是建议写出来。
 
-第二步：在业务逻辑层接口的实现类中的相关方法上声明事物
-```
-@Transactional(propagation = Propagation.REQUIRED,readOnly = false)
+### 第二步：在业务逻辑层接口的实现类中的相关方法上声明事物
+```java
+@Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,readOnly = false)
 public void test(){
 
 }
 ```
+Isolation.DEFAULT（-1）是Spring事务的默认隔离级别，该隔离级别的含义是spring依赖数据库的隔离级别。
 
-Transactional 注解的常用属性表
+### 最佳实践
+- service实现类(一般不建议在接口上)上添加@Transactional，可以将整个类纳入spring事务管理，在每个业务方法执行时都会开启一个事务，不过这些事务采用相同的管理方式。
+- Transactional 注解只能应用到 public 可见度的方法上。 如果应用在protected、private或者 package可见度的方法上，也不会报错，不过事务设置不会起作用。
+- 默认情况下，Transactional 注解的事物所管理的方法中，如果方法抛出运行时异常或error，那么会进行事务回滚；如果方法抛出的是非运行时异常，那么不会回滚。
+  - 注：SQL异常属于检查异常（有的框架将SQL异常重写为了运行时异常），但是有时我们写SQL时，检查异常并不会提示；而默认情况下，事物对检查异常不会作出回滚处理。
+  - 注：在很多时候，我们除了catch一般的异常或自定义异常外，我们还习惯于catch住Exception异常；然后再抛出Exception异常。但是Exception异常属于非运行时异常(即：检查异常)，因为默认是运行时异常时事物才进行回滚，那么这种情况下，是不会回滚的。我们可以在@Transacional注解中，通过rollbackFor = {Exception.class} 来解决这个问题。即：设置当Exception异常或Exception的所有任意子类异常时事物会进行回滚。
+  - 注：被catch处理了的异常，不会被事物作为判断依据；如果异常被catch 了，但是又在catch中抛出了新的异常，那么事物会以这个新的异常作 为是否进行回滚的判断依据。
+
+### Transactional 注解的常用属性表
 
 |属性|说明| 
 |---|---|
@@ -35,15 +43,169 @@ Transactional 注解的常用属性表
 |rollbackFor|用于指定能够触发事务回滚的异常类型，如果有多个异常类型需要指定，各类型之间可以通过逗号分隔。{xxx1.class, xxx2.class,……}|
 |noRollbackFor|抛出 no-rollback-for 指定的异常类型，不回滚事务。{xxx1.class, xxx2.class,……}|
 
-最佳实践
-- service实现类(一般不建议在接口上)上添加@Transactional，可以将整个类纳入spring事务管理，在每个业务方法执行时都会开启一个事务，不过这些事务采用相同的管理方式。
-- Transactional 注解只能应用到 public 可见度的方法上。 如果应用在protected、private或者 package可见度的方法上，也不会报错，不过事务设置不会起作用。
-- 默认情况下，Transactional 注解的事物所管理的方法中，如果方法抛出运行时异常或error，那么会进行事务回滚；如果方法抛出的是非运行时异常，那么不会回滚。
-  - 注：SQL异常属于检查异常（有的框架将SQL异常重写为了运行时异常），但是有时我们写SQL时，检查异常并不会提示；而默认情况下，事物对检查异常不会作出回滚处理。
-  - 注：在很多时候，我们除了catch一般的异常或自定义异常外，我们还习惯于catch住Exception异常；然后再抛出Exception异常。但是Exception异常属于非运行时异常(即：检查异常)，因为默认是运行时异常时事物才进行回滚，那么这种情况下，是不会回滚的。我们可以在@Transacional注解中，通过rollbackFor = {Exception.class} 来解决这个问题。即：设置当Exception异常或Exception的所有任意子类异常时事物会进行回滚。
-  - 注：被catch处理了的异常，不会被事物作为判断依据；如果异常被catch 了，但是又在catch中抛出了新的异常，那么事物会以这个新的异常作 为是否进行回滚的判断依据。
+## Spring事务失效的场景
+### 数据库引擎不支持事务
+这里以 MySQL 为例，其 MyISAM 引擎是不支持事务操作的，InnoDB 才是支持事务的引擎，一般要支持事务都会使用 InnoDB。从 MySQL 5.5.5 开始的默认存储引擎是：InnoDB，之前默认的都是：MyISAM，所以这点要值得注意，底层引擎不支持事务再怎么搞都是白搭。
 
-阿里规范推荐:事务场景中，抛出异常被catch后，如果需要回滚，一定要手动回滚事务。错误使用方式
+### 没有被 Spring 管理
+```java
+// @Service
+public class OrderServiceImpl implements OrderService {   
+ @Transactional    
+public void updateOrder(Order order) {       
+ // update order；  
+  }
+}
+```
+如果此时把 @Service 注解注释掉，这个类就不会被加载成一个 Bean，那这个类就不会被 Spring 管理了，事务自然就失效了。
+
+### 方法不是 public的
+该异常一般情况都会被编译器帮忙识别
+
+以下来自 Spring 官方文档：
+> When using proxies, you should apply the @Transactional annotation only to methods with public visibility. If you do annotate protected, private or package-visible methods with the @Transactional annotation, no error is raised, but the annotated method does not exhibit the configured transactional settings. Consider the use of AspectJ (see below) if you need to annotate non-public methods.
+
+大概意思就是 @Transactional 只能用于 public 的方法上，否则事务不会失效，如果要用在非 public 方法上，可以开启 AspectJ 代理模式。 
+```java
+@Service
+public class DemoServiceImpl implements  DemoService {
+
+    @Transactional(rollbackFor = SQLException.class)
+    @Override
+     int saveAll(){  // 编译器一般都会在这个地方给出错误提示
+        // do someThing;
+        return  1;
+    }
+}
+```
+[如何开启AspectJ支持](aop-index.md)
+
+### 自身调用问题
+来看两个示例：
+```java
+@Service
+public class OrderServiceImpl implements OrderService {
+    public void update(Order order) {
+        this.updateOrder(order);
+    }
+    @Transactional
+    public void updateOrder(Order order) {
+        // update order；
+    }
+}
+```
+update方法上面没有加 @Transactional 注解，调用有 @Transactional 注解的 updateOrder 方法，updateOrder 方法上的事务管用吗？
+
+再来看下面这个例子：
+```java
+@Service
+public class OrderServiceImpl implements OrderService {
+    @Transactional
+    public void update(Order order) {
+        this.updateOrder(order); 
+   }
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(propagation = Propagation.PROPAGATION_REQUIRED)
+    public void updateOrder(Order order) {
+        // update order；
+    }
+}
+```
+这次在 update 方法上加了 @Transactional，updateOrder 加了 REQUIRES_NEW 或者PROPAGATION_REQUIRED新开启一个事务，那么新开的事务管用么？
+
+这两个例子的答案是：不管用！
+
+因为它们发生了自身调用，就调该类自己的方法，而没有经过 Spring 的代理类，默认只有在外部调用事务才会生效，这也是老生常谈的经典问题了。
+
+问题原因：
+不带事务的方法通过this调用该类中带事务的方法，不会回滚。因为spring的回滚是用过代理模式生成的，如果是一个不带事务的方法调用该类的带事务的方法，直接通过this.xxx()调用，而不生成代理事务，所以事务不起作用。常见解决方法，拆类。spring中在一个拥有事务的方法A中调用另一个会挂起事务并创建新事务的方法B，如果使用this调用这个方法B， 此时方法B抛出了一个一场，此时的方法B的事务会失效的。并不会回滚。JDK的动态代理。只有被动态代理直接调用时才会产生事务。在SpringIoC容器中返回的调用的对象是代理对象而不是真实的对象。而这里的this是EmployeeService真实对象而不是代理对象。
+
+这个的解决方案之一就是在的类中注入自己，用注入的对象再调用另外一个方法。
+
+也可以在方法update上不开启事务，方法updateOrder上开启事务，并在方法update中将this调用改成动态代理调用(AopContext.currentProxy()),如下：
+```java
+@Service
+public class OrderServiceImpl implements OrderService {
+    public void update(Order order) {
+        OrderService proxy =(OrderService) AopContext.currentProxy();
+        proxy.updateOrder(order);
+   }
+   
+    @Transactional
+    public void updateOrder(Order order) {
+        // update order；
+    }
+}
+```
+
+这个不太优雅，另外一个可行的方案可以参考[Spring 如何在一个事务中开启另一个事务](https://mp.weixin.qq.com/s?__biz=MzI3ODcxMzQzMw==&mid=2247491775&idx=2&sn=142f1d6ab0415f17a413a852efbde54f&scene=21#wechat_redirect)这篇文章。
+
+
+### 数据源没有配置事务管理器
+```java
+@Bean
+public PlatformTransactionManager transactionManager(DataSource dataSource) {
+    return new DataSourceTransactionManager(dataSource);
+}
+```
+如上面所示，当前数据源若没有配置事务管理器，那也是白搭！
+
+### 不支持事务
+```java
+@Service
+public class OrderServiceImpl implements OrderService {
+    @Transactional
+    public void update(Order order) {
+        updateOrder(order);
+    }
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public void updateOrder(Order order) {
+        // update order；
+    }
+}
+```
+Propagation.NOT_SUPPORTED： 表示不以事务运行，当前若存在事务则挂起，详细的可以参考[事务隔离级别和传播机制](https://mp.weixin.qq.com/s?__biz=MzI3ODcxMzQzMw==&mid=2247483796&idx=1&sn=a11835fb6cdf4d957b5748ae916e53b7&scene=21#wechat_redirect)这篇文章。都主动不支持以事务方式运行了，那事务生效也是白搭！
+
+### 异常被吃了
+这个也是出现比较多的场景：
+```java
+@Service
+public class OrderServiceImpl implements OrderService {
+    @Transactional
+    public void updateOrder(Order order) {
+        try {
+            // update order;
+         }catch (Exception e){
+            //do something;
+        }
+    }
+}
+```
+把异常吃了，然后又不抛出来，事务就不生效了
+
+### 异常类型错误或格式配置错误
+上面的例子再抛出一个异常：
+```java
+@Service
+public class OrderServiceImpl implements OrderService {
+ @Transactional
+   // @Transactional(rollbackFor = SQLException.class)
+    public void updateOrder(Order order) {
+        try {            // update order
+          }catch (Exception e){
+           throw new Exception("更新错误");        
+        }    
+    }
+}
+```
+这样事务也是不生效的，因为默认回滚的是：RuntimeException，如果你想触发其他异常的回滚，需要在注解上配置一下，如：
+```java
+@Transactional(rollbackFor = Exception.class)
+```
+java的设计中，它认为不继承RuntimeException的异常是”checkException”或普通异常，如IOException，这些异常在java语法中是要求强制处理的。对于这些普通异常，spring默认它们都已经处理，所以默认不回滚。可以添加rollbackfor=Exception.class来表示所有的Exception都回滚。这个配置仅限于 Throwable 异常类及其子类。
+
+## 阿里规范推荐
+事务场景中，抛出异常被catch后，如果需要回滚，一定要手动回滚事务。错误使用方式
 ![](images/transactional-ali-01.png)
 正确使用方式
 ![](images/transactional-ali-02.png)
@@ -52,26 +214,16 @@ Transactional 注解的常用属性表
 
 
 ## spring事务管理(详解和实例)
-### 1 初步理解
-理解事务之前，先讲一个你日常生活中最常干的事：取钱。 
-比如你去ATM机取1000块钱，大体有两个步骤：首先输入密码金额，银行卡扣掉1000元钱；然后ATM出1000元钱。这两个步骤必须是要么都执行要么都不执行。如果银行卡扣除了1000块但是ATM出钱失败的话，你将会损失1000元；如果银行卡扣钱失败但是ATM却出了1000块，那么银行将损失1000元。所以，如果一个步骤成功另一个步骤失败对双方都不是好事，如果不管哪一个步骤失败了以后，整个取钱过程都能回滚，也就是完全取消所有操作的话，这对双方都是极好的。 
-事务就是用来解决类似问题的。事务是一系列的动作，它们综合在一起才是一个完整的工作单元，这些动作必须全部完成，如果有一个失败的话，那么事务就会回滚到最开始的状态，仿佛什么都没发生过一样。 
-在企业级应用程序开发中，事务管理必不可少的技术，用来确保数据的完整性和一致性。 
-事务有四个特性：ACID
-- 原子性（Atomicity）：事务是一个原子操作，由一系列动作组成。事务的原子性确保动作要么全部完成，要么完全不起作用。
-- 一致性（Consistency）：一旦事务完成（不管成功还是失败），系统必须确保它所建模的业务处于一致的状态，而不会是部分完成部分失败。在现实中的数据不应该被破坏。
-- 隔离性（Isolation）：可能有许多事务会同时处理相同的数据，因此每个事务都应该与其他事务隔离开来，防止数据损坏。
-- 持久性（Durability）：一旦事务完成，无论发生什么系统错误，它的结果都不应该受到影响，这样就能从任何系统崩溃中恢复过来。通常情况下，事务的结果被写到持久化存储器中。
-
-### 2 核心接口
+### [事务理解-以MySQL为例](../databases/mysql/chapter05.md)
+### 核心接口
 Spring事务管理的实现有许多细节，如果对整个接口框架有个大体了解会非常有利于我们理解事务，下面通过讲解Spring的事务接口来了解Spring实现事务的具体策略。 
 Spring事务管理涉及的接口的联系如下：
 ![](images/transactional-01.png)
-#### 2.1 事务管理器 
+#### 事务管理器 
 Spring并不直接管理事务，而是提供了多种事务管理器，他们将事务管理的职责委托给Hibernate或者JTA等持久化机制所提供的相关平台框架的事务来实现。 
 Spring事务管理器的接口是org.springframework.transaction.PlatformTransactionManager，通过这个接口，Spring为各个平台如JDBC、Hibernate等都提供了对应的事务管理器，但是具体的实现就是各个平台自己的事情了。此接口的内容如下：
-```
-Public interface PlatformTransactionManager()...{  
+```java
+Public interface PlatformTransactionManager(){  
     // 由TransactionDefinition得到TransactionStatus对象
     TransactionStatus getTransaction(TransactionDefinition definition) throws TransactionException; 
     // 提交
@@ -82,21 +234,25 @@ Public interface PlatformTransactionManager()...{
 ```
 从这里可知具体的具体的事务管理机制对Spring来说是透明的，它并不关心那些，那些是对应各个平台需要关心的，所以Spring事务管理的一个优点就是为不同的事务API提供一致的编程模型，如JTA、JDBC、Hibernate、JPA。下面分别介绍各个平台框架实现事务管理的机制。
 
-#### 2.1.1 JDBC事务 
+#### JDBC事务 
 如果应用程序中直接使用JDBC来进行持久化，DataSourceTransactionManager会为你处理事务边界。为了使用DataSourceTransactionManager，你需要使用如下的XML将其装配到应用程序的上下文定义中：
-```
+```xml
 <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
     <property name="dataSource" ref="dataSource" />
 </bean>
 ```
 实际上，DataSourceTransactionManager是通过调用java.sql.Connection来管理事务，而后者是通过DataSource获取到的。通过调用连接的commit()方法来提交事务，同样，事务失败则通过调用rollback()方法进行回滚。
-#### 2.1.2 Hibernate事务
+#### Hibernate事务
 如果应用程序的持久化是通过Hibernate实习的，那么你需要使用HibernateTransactionManager。对于Hibernate3，需要在Spring上下文定义中添加如下的<bean>声明：
+```xml
 <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
     <property name="sessionFactory" ref="sessionFactory" />
 </bean>
+```
+
 sessionFactory属性需要装配一个Hibernate的session工厂，HibernateTransactionManager的实现细节是它将事务管理的职责委托给org.hibernate.Transaction对象，而后者是从Hibernate Session中获取到的。当事务成功完成时，HibernateTransactionManager将会调用Transaction对象的commit()方法，反之，将会调用rollback()方法。
-#### 2.1.3 Java持久化API事务（JPA）
+
+#### Java持久化API事务（JPA）
 Hibernate多年来一直是事实上的Java持久化标准，但是现在Java持久化API作为真正的Java持久化标准进入大家的视野。如果你计划使用JPA的话，那你需要使用Spring的JpaTransactionManager来处理事务。你需要在Spring中这样配置JpaTransactionManager：
 ```
 <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
@@ -104,7 +260,7 @@ Hibernate多年来一直是事实上的Java持久化标准，但是现在Java持
 </bean>
 ```
 JpaTransactionManager只需要装配一个JPA实体管理工厂（javax.persistence.EntityManagerFactory接口的任意实现）。JpaTransactionManager将与由工厂所产生的JPA EntityManager合作来构建事务。
-#### 2.1.4 Java原生API事务
+#### Java原生API事务
 如果你没有使用以上所述的事务管理，或者是跨越了多个事务管理源（比如两个或者是多个不同的数据源），你就需要使用JtaTransactionManager:
 ```
 <bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">
@@ -112,7 +268,7 @@ JpaTransactionManager只需要装配一个JPA实体管理工厂（javax.persiste
 </bean>
 ```
 JtaTransactionManager将事务管理的责任委托给javax.transaction.UserTransaction和javax.transaction.TransactionManager对象，其中事务成功完成通过UserTransaction.commit()方法提交，事务失败通过UserTransaction.rollback()方法回滚。
-### 2.2 基本事务属性的定义
+### 基本事务属性的定义
 上面讲到的事务管理器接口PlatformTransactionManager通过getTransaction(TransactionDefinition definition)方法来得到事务，这个方法里面的参数是TransactionDefinition类，这个类就定义了一些基本的事务属性。 
 那么什么是事务属性呢？事务属性可以理解成事务的一些基本配置，描述了事务策略如何应用到方法上。事务属性包含了5个方面，如图所示：
 ![](images/transactional-02.png)
@@ -128,7 +284,7 @@ public interface TransactionDefinition {
 ```
 我们可以发现TransactionDefinition正好用来定义事务属性，下面详细介绍一下各个事务属性。
  
-#### 2.2.1 传播行为
+## spring事务传播行为
 事务的第一个方面是传播行为（propagation behavior）。当事务方法被另一个事务方法调用时，必须指定事务应该如何传播。例如：方法可能继续在现有事务中运行，也可能开启一个新事务，并在自己的事务中运行。Spring定义了七种传播行为：
 
 |传播行为	|    含义|
@@ -330,71 +486,7 @@ PROPAGATION_REQUIRES_NEW 启动一个新的, 不依赖于环境的 “内部” 
 
 PROPAGATION_REQUIRED应该是我们首先的事务传播行为。它能够满足我们大多数的事务需求。
 
-### 事务失效的两种情况
-- 异常处理导致失效
 
-  java的设计中，它认为不继承RuntimeException的异常是”checkException”或普通异常，如IOException，这些异常在java语法中是要求强制处理的。对于这些普通异常，spring默认它们都已经处理，所以默认不回滚。可以添加rollbackfor=Exception.class来表示所有的Exception都回滚。
-- 内部通过this调用  
-
-  不带事务的方法通过this调用该类中带事务的方法，不会回滚。因为spring的回滚是用过代理模式生成的，如果是一个不带事务的方法调用该类的带事务的方法，直接通过this.xxx()调用，而不生成代理事务，所以事务不起作用。常见解决方法，拆类。spring中在一个拥有事务的方法A中调用另一个会挂起事务并创建新事务的方法B，如果使用this调用这个方法B， 此时方法B抛出了一个一场，此时的方法B的事务会失效的。并不会回滚。
-  ```
-  @Service
-  public class EmployeeService {
-   
-      @Autowired
-      private EmployeeDao employeeDao;
-   
-      public void save(){
-          try {        
-              this.saveEmployee();  //此处this调用不会开启事务，数据会被保存
-          }catch (Exception e){
-              e.printStackTrace();
-          }
-      }
-      
-      @Transactional(propagation = Propagation.PROPAGATION_REQUIRED)
-      //此处无论是PROPAGATION_REQUIRED还是PROPAGATION_REQUIRES_NEW，事务均不生效
-      public void saveEmployee(){
-          Employee employee = new Employee();
-          employee.setName("zhangsan");
-          employee.setAge("26";
-          employeeDao.save(employee);
-          throw new RuntimeException();
-      }
-  }
-  ```
-  问题原因：
-  
-  JDK的动态代理。只有被动态代理直接调用时才会产生事务。在SpringIoC容器中返回的调用的对象是代理对象而不是真实的对象。而这里的this是EmployeeService真实对象而不是代理对象。
-  
-  解决办法：
-  
-  方法1、在方法A上开启事务，方法B不用事务或默认事务，并在方法A的catch中throw new RuntimeException();(在没指定rollbackFor时，默认回滚的异常为RuntimeException)，这样使用的就是方法A的事务。（一定要throw new RuntimeException();否则异常被捕捉处理，同样不会回滚。）如下：
-  
-  ```
-  @Transactional() //开启事务
-  public void save(){
-      try {        
-          this.saveEmployee();  //这里this调用会使事务失效，数据会被保存
-      }catch (Exception e){
-          e.printStackTrace();
-          throw new RuntimeException();
-      }
-  }
-  ```
-  
-  方法2、方法A上可以不开启事务，方法B上开启事务，并在方法A中将this调用改成动态代理调用(AopContext.currentProxy()),如下：
-  
-  ```
-  public void save(){
-      try {        
-          EmployeeService proxy =(EmployeeService) AopContext.currentProxy();
-          proxy.saveEmployee();
-      }catch (Exception e){
-          e.printStackTrace();
-      }
-  }
-  ```
 #### 2.2.2 隔离级别
 [MySQL隔离级别](../databases/mysql/chapter05.md)
 

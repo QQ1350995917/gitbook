@@ -2,7 +2,9 @@ package pwd.spring.framework.transaction;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +32,7 @@ public class TransactionApplication {
     methodB();
   }
 
-  @Transactional(propagation = Propagation.NESTED)
+  @Transactional(propagation = Propagation.NESTED,isolation = Isolation.DEFAULT)
   public void methodB(){
 
   }
