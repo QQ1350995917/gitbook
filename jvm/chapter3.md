@@ -99,6 +99,8 @@ CMS（Concurrent Mark Sweep）收集器是一种以获取最短回收停顿时�
 
 ![](image/gc-collector-cms.png)
 
+![](image/gc-collector-cms-log.png)
+
 从它的名字就可以看出它是一款优秀的垃圾收集器，主要优点：并发收集、低停顿。
 
 但是它有下面三个明显的缺点：
@@ -141,6 +143,14 @@ G1收集器的运作大致分为以下几个步骤：
 
 ![](image/gc-collector-g1-flow.png)
 
+![](image/gc-collector-g1-log-0.png)
+
+![](image/gc-collector-g1-log-1.png)
+
+![](image/gc-collector-g1-log-2.png)
+
+![](image/gc-collector-g1-log-3.png)
+
 G1收集器在后台维护了一个优先列表，每次根据允许的收集时间，优先选择回收价值最大的Region(这也就是它的名字Garbage-First的由来)。这种使用Region划分内存空间以及有优先级的区域回收方式，保证了GF收集器在有限时间内可以尽可能高的收集效率。
 
 #### G1垃圾收集机制分类
@@ -181,8 +191,8 @@ G1收集器在后台维护了一个优先列表，每次根据允许的收集时
 
 ## 实战调优
 JVM调优主要就是调整下面两个指标
-停顿时间:  垃圾收集器做垃圾回收中断应用执行的时间。-XX:MaxGCPauseMillis
-吞吐量：花在垃圾收集的时间和花在应用时间的占比 -XX:GCTimeRatio=<n>,垃圾收集时间占比：1/(1+n)
+- 停顿时间:  垃圾收集器做垃圾回收中断应用执行的时间。-XX:MaxGCPauseMillis
+- 吞吐量：花在垃圾收集的时间和花在应用时间的占比 -XX:GCTimeRatio=<n>,垃圾收集时间占比：1/(1+n)
 
 ### GC调优步骤
 1. 打印GC日志 -XX:+PrintGCDetails  -XX:+PrintGCTimeStamps  -XX:+PrintGCDateStamps  -Xloggc:./gc.log
