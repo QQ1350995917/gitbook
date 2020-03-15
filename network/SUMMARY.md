@@ -11,3 +11,4 @@
 ### [TCP三次握手四次挥手](basic/chapter8.md)
 ## [Netty框架](netty/SUMMARY.md)
 ## [Socket](socket/SUMMARY.md)
+## [nc](nc.md)
