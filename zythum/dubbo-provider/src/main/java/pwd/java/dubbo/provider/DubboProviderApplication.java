@@ -1,7 +1,7 @@
 package pwd.java.dubbo.provider;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import java.util.concurrent.CountDownLatch;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * pwd.java.lambda@gitbook
@@ -14,11 +14,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @version 1.0.0
  * @since DistributionVersion
  */
-@SpringBootApplication
 public class DubboProviderApplication {
 
-  public static void main(String[] args) {
-    SpringApplication.run(DubboProviderApplication.class, args);
+
+  public static void main(String[] args) throws Exception {
+    ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
+        "META-INF/spring/provider.xml");
+    context.start();
+    System.out.println("dubbo service started");
+    new CountDownLatch(1).await();
   }
 
 }

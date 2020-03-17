@@ -1,10 +1,16 @@
 package pwd.java.dubbo.consumer;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import org.apache.dubbo.config.ApplicationConfig;
+import org.apache.dubbo.config.ReferenceConfig;
+import org.apache.dubbo.config.RegistryConfig;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import pwd.java.dubbo.api.GreetingsService;
 
 /**
  * pwd.java.lambda@gitbook
@@ -19,29 +25,15 @@ import java.util.Random;
  */
 public class DubboConsumerApplication {
 
-  private static List<Map<String, String>> list = new LinkedList<>();
+  public static void main( String[] args ) throws IOException {
 
-  static {
-    for (int i = 0; i < 5; i++) {
-      HashMap<String, String> map = new HashMap<>();
-      int anInt = new Random().nextInt(5);
-      for (int j = 0; j < anInt; j++) {
-        map.put("key_" + j, "value_" + j);
-      }
-      list.add(map);
-    }
-  }
+    ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("consumer.xml");
+    context.start();
+    GreetingsService providerService = (GreetingsService) context.getBean("providerService");
+    String str = providerService.sayHi("hello");
+    System.out.println(str);
+    System.in.read();
 
-  public static void main(String[] args) {
-    list.stream().filter(map -> map.size() > 0).filter(map -> {
-      map.forEach((key,value) -> {
-
-      });
-      return true;
-    }
-    ).forEach(map -> {
-
-    });
   }
 
 }

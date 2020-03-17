@@ -17,6 +17,7 @@
     <!--<module>zythum/spring-cloud</module>-->
     <!--<module>zythum/spring-context</module>-->
     <!--<module>zythum/spring-mybatis</module>-->
+    <module>zythum/dubbo-api</module>
     <module>zythum/dubbo-provider</module>
     <module>zythum/dubbo-consumer</module>
   </modules>
