@@ -21,7 +21,7 @@ import com.netflix.discovery.shared.Application;
 import com.netflix.discovery.shared.Applications;
 
 /**
- * Low level Eureka HTTP client API.
+ *client
  *
  * @author Tomasz Bak
  */

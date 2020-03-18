@@ -20,6 +20,9 @@
     <module>zythum/dubbo-api</module>
     <module>zythum/dubbo-provider</module>
     <module>zythum/dubbo-consumer</module>
+    <!--<module>zythum/zk-api</module>-->
+    <!--<module>zythum/zk-client</module>-->
+    <!--<module>zythum/zk-curator</module>-->
   </modules>
 
 

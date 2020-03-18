@@ -18,6 +18,7 @@ public class DubboProviderApplication {
 
 
   public static void main(String[] args) throws Exception {
+    System.setProperty("java.net.preferIPv4Stack", "true");
     ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
         "META-INF/spring/provider.xml");
     context.start();
