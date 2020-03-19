@@ -1,0 +1,6 @@
+[submodule "zythum/dubbo-source"]
+	path = zythum/dubbo-source
+	url = https://github.com/apache/dubbo.git
+[submodule "zythum/zk-source"]
+	path = zythum/zk-source
+	url = https://github.com/apache/zookeeper.git
