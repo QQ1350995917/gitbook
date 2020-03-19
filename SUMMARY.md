@@ -49,7 +49,7 @@
      * [AIO]() 
      * [零拷贝IO](java/io/0io.md)
      * [磁盘IO状态监控](java/io/iostat.md)
-  * [SPI机制](spi.md)          
+  * [SPI机制](java/spi.md)          
 * [JVM](jvm/README.md)
   * [HotSpot下的JVM结构](jvm/chapter1.md)
   * [内存的分配与回收](jvm/chapter2.md)
