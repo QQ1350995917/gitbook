@@ -4,5 +4,7 @@
 
 [垃圾回收算法与垃圾收集器](chapter3.md)
 
+[JVM内存性能调优常用指令](chapter4.md)
+
 [磁盘IO状态监控](../java/io/SUMMARY.md)
 
