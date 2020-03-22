@@ -8,7 +8,7 @@
 
 * [JAVA内存实践](chapter5.md)
 
-* [JavaPerformance](JavaPerformance.PDF)
+* [JavaPerformance](https://github.com/QQ1350995917/gitbook/raw/master/jvm/JavaPerformance.PDF)
 
 * [磁盘IO状态监控](../java/io/SUMMARY.md)
 

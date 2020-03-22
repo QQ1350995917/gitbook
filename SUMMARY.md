@@ -56,7 +56,7 @@
   * [垃圾回收算法与垃圾收集器](jvm/chapter3.md)
   * [JVM内存性能调优常用指令](jvm/chapter4.md)
   * [JAVA内存实践](jvm/chapter5.md)
-  * [JavaPerformance](jvm/JavaPerformance.PDF)
+  * [JavaPerformance](https://github.com/QQ1350995917/gitbook/raw/master/jvm/JavaPerformance.PDF)
   * [Java内存模型JMM](java/concurrent/jmm.md)
   * [Volatile](java/concurrent/volatile.md)
 * [DB](databases/SUMMARY.md)
