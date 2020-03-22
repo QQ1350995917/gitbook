@@ -16,11 +16,19 @@ import java.util.List;
  */
 public class MockOnlineEntity {
 
-  private byte[] bytes = new byte[1024 * 1024 * 2];
+  private byte[] bytes ;
+
+  public MockOnlineEntity() {
+    bytes = new byte[1024];
+  }
 
   @Override
   protected void finalize() throws Throwable {
     super.finalize();
     System.out.println(this.getClass().getName() + " finalize ");
+  }
+
+  public byte[] getBytes() {
+    return bytes;
   }
 }

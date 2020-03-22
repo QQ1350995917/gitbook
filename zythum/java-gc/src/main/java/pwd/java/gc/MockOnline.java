@@ -15,36 +15,21 @@ import java.util.List;
  * @since DistributionVersion
  */
 public class MockOnline {
-
-
+  static List<Object> list = new LinkedList<>();
   public static void main(String[] args) {
-//    for (int i = 0; i < 1; i++) {
-//      new Thread(() -> {
-//
-//        while (true) {
-//          List<byte[]> list = new LinkedList<>();
-//          while (list.size() < 10) {
-//            list.add(new byte[1024 * 1024]);
-//            try {
-//              Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//              e.printStackTrace();
-//            }
-//          }
-//        }
-//      }).start();
-//    }
-    List<MockOnlineEntity> list = new LinkedList<>();
-    while (true) {
-      while (list.size() < 10) {
+    for (int i =0 ;i<2;i++) {
+      new Thread(()->{
+      while (true) {
         list.add(new MockOnlineEntity());
         try {
-//          Thread.sleep(10);
+          System.out.println("---" + System.currentTimeMillis());
+          Thread.sleep(2000);
         } catch (Exception e) {
           e.printStackTrace();
         }
       }
+      }).start();
     }
-  }
 
+  }
 }
