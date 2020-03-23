@@ -19,7 +19,7 @@ public class MockOnlineEntity {
   private byte[] bytes ;
 
   public MockOnlineEntity() {
-    bytes = new byte[1024];
+    bytes = new byte[1024 * 1];
   }
 
   @Override
