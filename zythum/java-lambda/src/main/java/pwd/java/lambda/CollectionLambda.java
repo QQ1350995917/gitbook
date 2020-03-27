@@ -1,10 +1,14 @@
 package pwd.java.lambda;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 /**
  * pwd.java.lambda@gitbook
@@ -19,29 +23,16 @@ import java.util.Random;
  */
 public class CollectionLambda {
 
-  private static List<Map<String, String>> list = new LinkedList<>();
 
-  static {
-    for (int i = 0; i < 5; i++) {
-      HashMap<String, String> map = new HashMap<>();
-      int anInt = new Random().nextInt(5);
-      for (int j = 0; j < anInt; j++) {
-        map.put("key_" + j, "value_" + j);
-      }
-      list.add(map);
-    }
-  }
 
   public static void main(String[] args) {
-    list.stream().filter(map -> map.size() > 0).filter(map -> {
-      map.forEach((key,value) -> {
+    Integer[] integers = {1, 1, 0, 2, 3, 4, 0, 5, 6, 7, 8, 9, 10};
+    List<Integer> nums0 = Arrays.asList(integers);
+    System.out.println("sum is:"+nums0.stream().filter(num -> num > 0).distinct().mapToInt(num -> num * 2).skip(2).limit(4).peek(System.out::println).sum());
 
-      });
-      return true;
-    }
-    ).forEach(map -> {
-
-    });
+    List<Integer> nums1 = Arrays.asList(integers);
+    List<Integer> numsWithoutNull = nums1.stream().filter(num -> num > 0).
+        collect(() -> new ArrayList<Integer>(), (list, item) -> list.add(item), (list1, list2) -> list1.addAll(list2));
   }
 
 }
