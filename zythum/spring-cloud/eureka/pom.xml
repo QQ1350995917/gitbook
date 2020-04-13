@@ -9,13 +9,8 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>spring-cloud</artifactId>
+  <artifactId>spring-eureka</artifactId>
   <packaging>jar</packaging>
-
-  <modules>
-    <!--<module>eureka</module>-->
-    <module>feign</module>
-  </modules>
 
 
   <properties>
@@ -36,17 +31,13 @@
   </dependencyManagement>
 
   <dependencies>
-    <!--<dependency>-->
-      <!--<groupId>org.springframework.cloud</groupId>-->
-      <!--<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-      <!--<groupId>org.springframework.boot</groupId>-->
-      <!--<artifactId>spring-boot-starter-aop</artifactId>-->
-    <!--</dependency>-->
     <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-openfeign</artifactId>
+      <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-aop</artifactId>
     </dependency>
   </dependencies>
 
