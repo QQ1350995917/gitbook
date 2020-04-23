@@ -13,11 +13,13 @@
     <!--<module>zythum/java-concurrent</module>-->
     <!--<module>zythum/java-gc</module>-->
     <!--<module>zythum/java-lambda</module>-->
+    <module>zythum/java-spark</module>
     <!--<module>zythum/java-bytecode</module>-->
     <!--<module>zythum/spring-boot</module>-->
-    <module>zythum/spring-cloud</module>
+    <!--<module>zythum/spring-cloud</module>-->
     <!--<module>zythum/spring-context</module>-->
     <!--<module>zythum/spring-mybatis</module>-->
+    <module>zythum/http-client</module>
     <!--<module>zythum/dubbo-api</module>-->
     <!--<module>zythum/dubbo-provider</module>-->
     <!--<module>zythum/dubbo-consumer</module>-->
