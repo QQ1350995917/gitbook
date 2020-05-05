@@ -11,7 +11,7 @@
   <modules>
     <!--<module>zythum/mysql</module>-->
     <!--<module>zythum/java-concurrent</module>-->
-    <!--<module>zythum/java-gc</module>-->
+    <module>zythum/java-gc</module>
     <!--<module>zythum/java-lambda</module>-->
     <module>zythum/java-spark</module>
     <!--<module>zythum/java-bytecode</module>-->

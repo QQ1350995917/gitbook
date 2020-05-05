@@ -1,6 +1,6 @@
 # Kill Application
 
-## [linux系统中的kill](../linux/kill.md)
+## [linux系统中的kill](../os/linux/kill.md)
 
 ## 1 增加一个实现了 DisposableBean 接口的类
 ```java

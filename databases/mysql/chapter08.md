@@ -183,6 +183,36 @@ FullText索引又称全文索引，是一种记录关键字与对应文档关系
 
 ## 4.InnoDB索引
 
+## 5.全文索引
+MySQL支持对文本进行全文检索，全文检索可以类似搜索引擎的功能，相比较模糊匹配更加灵活高效且更快。MySQL5.7之后也支持对中文的全文检索，这里描述如何启用MySQL的中文全文检索。
+
+首先，MySQL启用全文检索要对字段加全文检索的索引，注意，一个表只能建立一个全文检索字段，如需要检索多个字段，需要将多个字段一起建立索引，单独建立多个索引是无效的。所以建立方法如下：
+
+
+```mysql
+ALTER TABLE `localgo`.`entity` ADD FULLTEXT INDEX `entity_info` (`entity_name`, `entity_introduction`) WITH PARSER ngram;
+```
+
+MySQL5.7支持对中文进行全文检索，其自带了内部的切词系统，默认切词系统的字段是4，但中文一般是两个字组成一个单词，因此需要改变。首先看一下内部切词的长度
+
+```mysql
+SHOW VARIABLES LIKE 'ft_min_word_len';
+SHOW VARIABLES LIKE 'ft%';
+```
+发现结果都是4，下面更改数据库配置，在[client]下加上ft_min_word_len = 2，在[mysqld]下加上另两行。如下所示，注意，一般情况下这两个配置下都含有其他设置，这里省去了，只需要在这两个配置的末尾加上如下内容即可，不要删除之前的配置。
+
+```mysql
+[mysqld]
+ft_min_word_len = 2
+ngram_token_size=2
+[client]
+ft_min_word_len = 2
+```
+最后，用如下语句即可支持MySQL对中文进行全文检索了（注意检索词需要放在星号之间，支持空格或者分号作为关键词分隔符）。
+
+```mysql
+SELECT * FROM localgo.entity WHERE MATCH(`entity_name`,`entity_introduction`) AGAINST('*程序*' IN BOOLEAN MODE);
+```
 
 ## 索引操作
 MySQL中可以使用alter table这个SQL语句来为表中的字段添加索引。
@@ -217,3 +247,6 @@ ALTER TABLE `table_name` ADD INDEX `index_name` ( `column1`, `column2`, `column3
 ```mysql
 alter table `table_name` drop index `index_name`;/*mdl_tag_use_ix是上表查出的索引名，key_name*/
 ```
+
+## 参考资料
+https://www.cnblogs.com/wherein/p/7525687.html

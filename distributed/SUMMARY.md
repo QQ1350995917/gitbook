@@ -9,7 +9,7 @@
   * [客户端](zookeeper/chapter4.md)
   * [应用场景](zookeeper/chapter5.md)
 * [Dubbo](dubbo/SUMMARY.md)
-  * [Dubbo 架构与设计说明](dubbo/chapter0.md) 
+  * [Dubbo 架构与设计说明](../middleware/dubbo/chapter0.md) 
    
 
 ## 其他资料
