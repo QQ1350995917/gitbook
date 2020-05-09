@@ -7,12 +7,12 @@ wget http://mirrors.ustc.edu.cn/tdf/libreoffice/stable/6.3.5/rpm/x86_64/LibreOff
 wget http://mirrors.ustc.edu.cn/tdf/libreoffice/stable/6.3.5/rpm/x86_64/LibreOffice_6.3.5_Linux_x86-64_rpm_langpack_zh-CN.tar.gz
 wget http://mirrors.ustc.edu.cn/tdf/libreoffice/stable/6.3.5/rpm/x86_64/LibreOffice_6.3.5_Linux_x86-64_rpm_sdk.tar.gz
 
-tar -xzvf LibreOffice_6.3.5.2_Linux_x86-64_rpm.tar.gz
-tar -xzvf LibreOffice_6.3.5.2_Linux_x86-64_rpm_langpack_zh-CN.tar.gz
-tar -zxvf LibreOffice_6.3.5.2_Linux_x86-64_rpm_sdk.tar.gz
+tar -xzvf LibreOffice_6.3.5_Linux_x86-64_rpm.tar.gz
+tar -xzvf LibreOffice_6.3.5_Linux_x86-64_rpm_langpack_zh-CN.tar.gz
+tar -zxvf LibreOffice_6.3.5_Linux_x86-64_rpm_sdk.tar.gz
 
 yum install LibreOffice_6.3.5.2_Linux_x86-64_rpm/RPMS/*.rpm
-yum install LibreOffice_6.3.5.2_Linux_x86-64_rpm_langpack_zh-CN/RPMS/*.rpm
+yum install LibreOffice_6.3.5.2_Linux_x86-64_rpm_langpack_zh-CN/RPMS/*.rpm        
 yum install LibreOffice_6.3.5.2_Linux_x86-64_rpm_sdk/RPMS/*.rpm
 
 ```
@@ -21,6 +21,8 @@ yum install LibreOffice_6.3.5.2_Linux_x86-64_rpm_sdk/RPMS/*.rpm
 ```
 # 启动命令
 libreoffice6.3 --headless --accept="socket,host=127.0.0.1,port=8100;urp;" --nofirststartwizard
+
+soffice -accept=socket,host=localhost,port=2083;urp;StarOffice.ServiceManager
 
 #修改启动脚本
 vim /etc/rc.d/rc.local
@@ -52,11 +54,11 @@ fc-list
 
 - 添加中文字体
 ```bash
-mkdir /usr/shared/fonts/chinese
+mkdir /usr/share/fonts/chinese
 chmod -R 755 /usr/share/fonts/chinese
 ```
 
-中文字体文件在windows系统中c盘下的Windows/Fonts，把相关的字体放入到chinese目录中
+中文字体文件在windows系统中c盘下的Windows/Fonts(C:\Windows\Fonts)，把相关的字体放入到chinese目录中
 
 - 配置字体
 ```bash
@@ -78,6 +80,9 @@ vim /etc/fonts/fonts.conf
 fc-cache
 fc-list
 ```
+
+
+
 
 
 
