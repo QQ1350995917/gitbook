@@ -15,7 +15,7 @@
 - apache-zookeeper-xxx-bin.tar.gz 运行版本
 
 ## 准备部署环境
-- 使用root账号登录系统并[创建用户](../../linux/SUMMARY.md)后完成如下配置
+- 使用root账号登录系统并[创建用户](../../os/linux/SUMMARY.md)后完成如下配置
   ```
   cd /usr/local/bin
   mkdir zookeeper
@@ -36,7 +36,7 @@
   export PATH=$PATH:$ZK_HOME/bin
   ```
 ## 部署
-- [切换回创建的账号](../../linux/SUMMARY.md)并做如下配置
+- [切换回创建的账号](../../os/linux/SUMMARY.md)并做如下配置
   ```
   cd /home/zookeeper
   mkdir stand_alone
