@@ -11,9 +11,9 @@ tar -xzvf LibreOffice_6.3.5_Linux_x86-64_rpm.tar.gz
 tar -xzvf LibreOffice_6.3.5_Linux_x86-64_rpm_langpack_zh-CN.tar.gz
 tar -zxvf LibreOffice_6.3.5_Linux_x86-64_rpm_sdk.tar.gz
 
-yum install LibreOffice_6.3.5.2_Linux_x86-64_rpm/RPMS/*.rpm
-yum install LibreOffice_6.3.5.2_Linux_x86-64_rpm_langpack_zh-CN/RPMS/*.rpm        
-yum install LibreOffice_6.3.5.2_Linux_x86-64_rpm_sdk/RPMS/*.rpm
+yum -Y install LibreOffice_6.3.5.2_Linux_x86-64_rpm/RPMS/*.rpm
+yum -Y install LibreOffice_6.3.5.2_Linux_x86-64_rpm_langpack_zh-CN/RPMS/*.rpm        
+yum -Y install LibreOffice_6.3.5.2_Linux_x86-64_rpm_sdk/RPMS/*.rpm
 
 ```
 
