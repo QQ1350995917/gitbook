@@ -107,3 +107,86 @@ brew services start kibana
 http://localhost:5601
 ```
 
+- 下载插件并安装
+
+插件主页：https://github.com/mobz/elasticsearch-head
+
+```bash
+brew install node
+git clone git://github.com/mobz/elasticsearch-head.git
+cd elasticsearch-head
+npm install
+```
+安装完成后在elasticsearch-head/node_modules目录下会出现grunt文件。
+如果没有grunt二进制程序，需要执行
+```bash
+cd elasticsearch-head
+npm install grunt --save
+```
+
+修改服务器监听地址,修改elasticsearch-head下Gruntfile.js文件，默认监听在127.0.0.1下9200端口
+
+```json
+connect: {
+        server: {
+            options: {
+                hostname: '*',
+                port: 9100,
+                base: '.',
+                keepalive: true
+            }
+        }
+    } 
+```
+
+修改连接地址
+```bash
+cd elasticsearch-head/_site
+vim app.js
+```
+```xml
+this.base_uri = this.config.base_uri || this.prefs.get("app-base_uri") || "http://localhost:9200";
+```
+
+在cd elasticsearch-head目录下运行
+
+```bash
+grunt server
+```
+
+输出：
+```babsh
+>> Local Npm module "grunt-contrib-jasmine" not found. Is it installed?
+ 
+Running "connect:server" (connect) task
+Waiting forever...
+Started connect web server on http://localhost:9100
+```
+浏览器访问
+http://localhost:9100
+访问后会发现 集群健康值：显示“未连接”
+
+解决方案：
+```bash
+vim $ES_HOME$/config/elasticsearch.yml
+```
+
+
+由于我采用brew安装的ES所以$ES_HOME$/config为/usr/local/etc/elasticsearch/
+增加如下字段
+```bash
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+```
+
+重启es，并刷新head页面，发现已经可以连接上。
+
+使用brew install安装es后的一些安装路径：
+```bash
+elasticsearch:  /usr/local/Cellar/elasticsearch/6.2.4
+Data:    /usr/local/var/elasticsearch/elasticsearch_xuchen/
+Logs:    /usr/local/var/log/elasticsearch/elasticsearch_xuchen.log
+Plugins: /usr/local/opt/elasticsearch/libexec/plugins/
+Config:  /usr/local/etc/elasticsearch/
+plugin script: /usr/local/opt/elasticsearch/libexec/bin/elasticsearch-plugin
+```
