@@ -11,9 +11,9 @@ tar -xzvf LibreOffice_6.3.5_Linux_x86-64_rpm.tar.gz
 tar -xzvf LibreOffice_6.3.5_Linux_x86-64_rpm_langpack_zh-CN.tar.gz
 tar -zxvf LibreOffice_6.3.5_Linux_x86-64_rpm_sdk.tar.gz
 
-yum -Y install LibreOffice_6.3.5.2_Linux_x86-64_rpm/RPMS/*.rpm
-yum -Y install LibreOffice_6.3.5.2_Linux_x86-64_rpm_langpack_zh-CN/RPMS/*.rpm        
-yum -Y install LibreOffice_6.3.5.2_Linux_x86-64_rpm_sdk/RPMS/*.rpm
+yum install LibreOffice_6.3.5.2_Linux_x86-64_rpm/RPMS/*.rpm
+yum install LibreOffice_6.3.5.2_Linux_x86-64_rpm_langpack_zh-CN/RPMS/*.rpm        
+yum install LibreOffice_6.3.5.2_Linux_x86-64_rpm_sdk/RPMS/*.rpm
 
 ```
 
@@ -39,9 +39,28 @@ ps -ef|grep libreoffice
 
 转换，成功后生成同名pdf
 ```
-libreoffice6.3 --headless --invisible --convert-to pdf x.docx
+libreoffice6.3 --headless --invisible --convert-to pdf xxx.docx
 libreoffice6.3 --headless --invisible --convert-to pdf <待转换的word路径> --outdir <生成的pdf文件名>
 ```
+
+## 出错情况
+### 样例1
+```bash
+/opt/libreoffice6.3/program/soffice.bin: error while loading shared libraries: libcairo.so.2: cannot open shared object file: No such file or directory
+```
+#### 解决
+```bash
+yum install cairo
+```
+看是否可以，不行继续
+```bash
+yum install cups-libs
+```
+看是否可以，不行继续
+```bash
+yum install libSM
+```
+
 
 
 ## centos中转换中文乱码
