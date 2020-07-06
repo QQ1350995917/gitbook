@@ -9,6 +9,7 @@
 - [Lock](sync-lock.md)
 - [同步工具类](sync-tools.md)
 - [AQS](sync-aqs.md)
+- [创建多少线程最合适](best-thread-num.md)
 
 # java高并发系列全集（路人甲Java，阿里P7）
 
