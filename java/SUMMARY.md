@@ -10,6 +10,7 @@
   * [Lock](concurrent/sync-lock.md)
   * [同步工具类](concurrent/sync-tools.md)
   * [AQS](concurrent/sync-aqs.md)
+  * [创建多少线程最合适](best-thread-num.md)
 * [容器](container/SUMMARY.md)
   * [HashMap](container/map-hash-map.md)  
 * [IO](io/SUMMARY.md)
