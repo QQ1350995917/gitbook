@@ -2,6 +2,8 @@
 docker network create -d bridge local-docker-network-bridge
 
 docker pull gitlab/gitlab-ce
+docker run -d  -p 443:443 -p 81:81 -p 222:22 --name gitlab --restart always --network local-docker-network-bridge -v /var/lib/gitlab/config:/etc/gitlab -v /var/lib/gitlab/logs:/var/log/gitlab -v /var/lib/gitlab/data:/var/opt/gitlab gitlab/gitlab-ce
+
 docker run -d  -p 443:443 -p 81:80 -p 222:22 --name gitlab --restart always --network local-docker-network-bridge -v /Users/pwd/Document/docker/gitlab/config:/etc/gitlab -v /Users/pwd/Document/docker/gitlab/logs:/var/log/gitlab -v /Users/pwd/Document/docker/gitlab/data:/var/opt/gitlab gitlab/gitlab-ce
 vim /Users/pwd/Document/docker/gitlab/config/gitlab.rb
 https://www.jianshu.com/p/080a962c35b6
