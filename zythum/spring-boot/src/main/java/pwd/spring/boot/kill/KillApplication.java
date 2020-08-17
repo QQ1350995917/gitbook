@@ -5,8 +5,8 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+//import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.RestController;
 
 /**
  * pwd.spring.cloud@gitbook
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @SpringBootApplication
 @EnableAspectJAutoProxy(exposeProxy = true)
-@RestController
+//@RestController
 public class KillApplication implements DisposableBean {
 
   public static void main(String[] args) {
@@ -44,7 +44,7 @@ public class KillApplication implements DisposableBean {
     System.out.println("destroy");
   }
 
-  @GetMapping(value = "/test")
+//  @GetMapping(value = "/test")
   public String test() {
     return "ok";
   }

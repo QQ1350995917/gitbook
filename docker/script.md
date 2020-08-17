@@ -30,7 +30,7 @@ vim /etc/docker/daemon.json
 
 docker network create -d bridge local-docker-network-bridge
 
-docker run -d -p 443:443 -p 81:80 -p 222:22 --network local-docker-network-bridge -v /var/lib/gitlab/config:/etc/gitlab -v /var/lib/gitlab/logs:/var/log/gitlab -v /var/lib/gitlab/data:/var/opt/gitlab --restart always --name gitlab gitlab/gitlab-ce
+docker run -d -p 443:443 -p 81:81 -p 222:22 --network local-docker-network-bridge -v /var/lib/gitlab/config:/etc/gitlab -v /var/lib/gitlab/logs:/var/log/gitlab -v /var/lib/gitlab/data:/var/opt/gitlab --restart always --name gitlab gitlab/gitlab-ce
 
 docker run -d -p 82:8081 --privileged=true -u 0 --network local-docker-network-bridge -v /var/lib/nexus:/nexus-data --restart=always --name nexus sonatype/nexus3
 
@@ -44,4 +44,18 @@ docker run -d -p 83:8080 --privileged=true -u 0 --network local-docker-network-b
 --restart always --name jenkins jenkins/jenkins
 
 docker run -d -p 84:5000 --network local-docker-network-bridge --privileged=true -v /var/lib/registry:/var/lib/registry --restart=always --name registry registry
+
+docker pull portainer/portainer
+
+docker run -d -p 86:9000 --restart=always --name portainer  -v /var/lib/portainer/data:/data portainer/portainer
+
+
+docker run -d --name clickhouse-server --ulimit nofile=262144:262144 -p 6606:8123 -p 6616:9000 -p 6626:9009 yandex/clickhouse-server
+
+
+docker run -d -p 11220:11220 -v /var/lib/pwd.initializr/ms-web-configure:/tmp -e BOOTSTRAP=/tmp/bootstrap.yml -e APPLICATION=/tmp/application-dev.properties --name configure 192.168.50.20:84/pwd.initializr/ms-web-configure:latest
+
+
+
+
 
