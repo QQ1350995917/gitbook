@@ -46,9 +46,9 @@
 
 10：./kafka-server-start.sh ../config/server.properties
 
-11：./kafka-server-start.sh ../config/server.properties 1&gt;/dev/null 2&gt;&1 & （守护进程）
+11：./kafka-server-start.sh ../config/server.properties 1>/dev/null 2>&1 & （守护进程）
 
-12：./kafka-server-start.sh --deamon ../config/server.properties 1&gt;/dev/null 2&gt;&1 （守护进程）
+12：./kafka-server-start.sh -daemon ../config/server.properties 1>/dev/null 2>&1 & （守护进程）
 
 # 
 
