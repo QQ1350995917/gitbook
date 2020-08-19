@@ -37,7 +37,7 @@
 
 ![](images/dubbo-2.png)
 
-## [Dubbo 中的SPI机制](../../java/spi.md)
+## [Dubbo 中的SPI机制](../../../java/spi.md)
 dubbo作为一个高度可扩展的rpc框架，也依赖于java的spi，并且dubbo对java原生的spi机制作出了一定的扩展，使得其功能更加强大。
 
 首先，从上面的java spi的原理中可以了解到，java的spi机制有着如下的弊端：
