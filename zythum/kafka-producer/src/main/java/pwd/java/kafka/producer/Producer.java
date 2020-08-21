@@ -30,9 +30,9 @@ public class Producer {
     props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
     org.apache.kafka.clients.producer.Producer<String, String> producer = new KafkaProducer<>(props);
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < 3; i++) {
       producer.send(
-          new ProducerRecord<String, String>("test", Integer.toString(i) + "-pwd", Integer.toString(i) + "-pwd"));
+          new ProducerRecord<String, String>("test", i, Integer.toString(i) + "-pwd",Integer.toString(i) + "-pwd"));
     }
     producer.close();
   }
