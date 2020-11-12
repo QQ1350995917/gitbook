@@ -1,5 +1,4 @@
-# GitBook
-## Summary
+# Summary
 * [Introduction](README.md)
 * [IDE](ide/README.md)
   * [CodeStyle]()
@@ -28,7 +27,7 @@
     * [Demo私有协议栈](network/socket/demo/protocol.md)
     * [DemoUPD丢包排查](network/socket/demo/udp-lost-packet.md)
     * [DemoUDP可靠传输](network/socket/demo/udp-reliable-demo.md)
-  ## [nc](network/nc.md)  
+  * [nc](network/nc.md)  
 * [Java]()
   * [concurrent](java/concurrent/SUMMARY.md)
     * [并发和并行](java/concurrent/concurrency-parallellism.md)                                
@@ -43,10 +42,11 @@
     * [同步工具类](java/concurrent/sync-tools.md)
     * [AQS](java/concurrent/sync-aqs.md)
     * [无锁单例](java/concurrent/no-lock-singleton.md)
+    * [创建多少线程最合适](java/concurrent/best-thread-num.md)
   * [容器](java/container/SUMMARY.md)
-     * [HashMap](java/container//map-hash-map.md)   
+     * [HashMap](java/container/map-hash-map.md)   
   * [IO](java/SUMMARY.md)
-     * [IO](io/io.md) 
+     * [IO](java/io/io.md) 
      * [BIO]()
      * [NIO]()
      * [AIO]() 
@@ -124,9 +124,6 @@
     * [常用命令](distributed/middleware/kafka/chapter1.md)
   * [RabbitMQ]()
   * [ZeroMQ]()
-* [Session]()  
-    * [SSO]()
-    * [OAuth2.0]()  
 * [Spring-context](spring-context/SUMMARY.md)
   * [SpringIOC](spring-context/ioc-index.md)
   * [SpringAOP](spring-context/aop-index.md)
@@ -160,6 +157,9 @@
   * [IM]()
   * [UDP-CHANNEL](network/socket/SUMMARY.md)
   * [大数据去重方案](DuplicateRemoval.md)
+
+
+
 
 ## 参考资料
 * [GitBook 从懵逼到入门](https://blog.csdn.net/lu_embedded/article/details/81100704)
