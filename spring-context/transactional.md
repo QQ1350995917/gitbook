@@ -214,7 +214,7 @@ java的设计中，它认为不继承RuntimeException的异常是”checkExcepti
 
 
 ## spring事务管理(详解和实例)
-### [事务理解-以MySQL为例](../databases/mysql/chapter05.md)
+### [事务理解-以MySQL为例](../storage/databases/mysql/chapter05.md)
 ### 核心接口
 Spring事务管理的实现有许多细节，如果对整个接口框架有个大体了解会非常有利于我们理解事务，下面通过讲解Spring的事务接口来了解Spring实现事务的具体策略。 
 Spring事务管理涉及的接口的联系如下：
@@ -488,7 +488,7 @@ PROPAGATION_REQUIRED应该是我们首先的事务传播行为。它能够满足
 
 
 #### 2.2.2 隔离级别
-[MySQL隔离级别](../databases/mysql/chapter05.md)
+[MySQL隔离级别](../storage/databases/mysql/chapter05.md)
 
 事务的第二个维度就是隔离级别（isolation level）。隔离级别定义了一个事务可能受其他并发事务影响的程度。 
 并发事务引起的问题,在典型的应用程序中，多个事务并发运行，经常会操作相同的数据来完成各自的任务。并发虽然是必须的，但可能会导致一下的问题。

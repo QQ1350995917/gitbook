@@ -56,5 +56,5 @@ set tx_isolation='REPEATABLE-READ';
 + 消息事务：第三种方案是消息一致性方案。基本思路是将本地操作和发送消息放在一个事务中，保证本地操作和消息发送要么都成功要么都失败。下游应用订阅消息，收到消息后执行对应操作。
 + GTS/Fescar:阿里云中的全局事务服务GTS，对应的开源版本是Fescar。Fescar基于两段式提交进行改良，剥离了分布式事务方案对数据库在协议支持上的要求。使用Fescar的前提是分支事务中涉及的资源，必须是支持ACID事务的关系型数据库。分支的提交和回滚机制，都依赖于本地事务来保障。 Fescar的实现目前还存在一些局限，比如事务隔离级别最高支持到读已提交级别。
 
-## [Spring事务控制的隔离](../../spring-context/transactional.md)
+## [Spring事务控制的隔离](../../../spring-context/transactional.md)
 

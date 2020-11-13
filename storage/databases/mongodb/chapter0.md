@@ -28,7 +28,7 @@ cat /proc/version
 
 - 添加用户
 
-    [添加用户操作参考](../../os/linux/SUMMARY.md)
+    [添加用户操作参考](../../../os/linux/SUMMARY.md)
 
     在用户目录下添加工作空间
     ```
