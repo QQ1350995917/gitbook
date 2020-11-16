@@ -3,7 +3,7 @@
 
 ![数据一致性发展示意图](images/acid-cap-base.png '数据一致性发展示意图')
 
-## [数据库中的ACID理论](../storage/databases/mysql/chapter05.md)
+## [数据库中的ACID理论](../storage/mysql/chapter05.md)
 
 ## CAP理论
 
