@@ -105,6 +105,7 @@
     * [DoGetBean](spring/spring-context/do-get-bean.md)
     * [事务与隔离](spring/spring-context/transactional.md)
   * [Spring-Cloud](spring/spring-cloud/SUMMARY.md)
+    * [feign-ribbon-hystrix](spring/spring-cloud/feign-ribbon-hystrix.md) 
     * [Register](spring/spring-cloud/eureka/SUMMARY.md)
       * [使用示例](spring/spring-cloud/eureka/Chapter01.md)
       * [源码分析](spring/spring-cloud/eureka/Chapter02.md)
