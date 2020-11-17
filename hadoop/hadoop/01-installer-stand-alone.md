@@ -1,4 +1,6 @@
-## ununtu18-hadoop
+# hadoop stand alone
+
+## ununtu18
 
 - 准备好JRE环境
 - [安装包下载地址](https://archive.apache.org/dist/hadoop/common/)
@@ -16,6 +18,15 @@ ln -s hadoop-3.1.4 hadoop
 ```bash
 cd /usr/local/bin/hadoop/hadoop
 ./bin/hadoop version
+```
+输出
+```text
+Hadoop 3.1.4
+Source code repository https://github.com/apache/hadoop.git -r 1e877761e8dadd71effef30e592368f7fe66a61b
+Compiled by gabota on 2020-07-21T08:05Z
+Compiled with protoc 2.5.0
+From source with checksum 38405c63945c88fdf7a6fe391494799b
+This command was run using /usr/local/bin/hadoop/hadoop-3.1.4/share/hadoop/common/hadoop-common-3.1.4.jar
 ```
 
 ### 配置环境变量
@@ -69,7 +80,7 @@ vim etc/hadoop/hdfs-site.xml
   </property>
 	<property>
 		<name>dfs.http.address</name>
-		<value>localhost:50070</value>
+		<value>0.0.0.0:9870</value> <!-- web页面启动端口以及允许任意IP访问 -->
 	</property>
 </configuration>
 ```
@@ -132,7 +143,7 @@ vim sbin/stop-dfs.sh
 ```text
 #!/usr/bin/env bash
 HDFS_DATANODE_USER=root
-HADOOP_SECURE_DN_USER=root
+HADOOP_SECURE_DN_USER=hdfs
 HDFS_NAMENODE_USER=root
 HDFS_SECONDARYNAMENODE_USER=root
 ```
@@ -151,8 +162,43 @@ dingpw: Warning: Permanently added 'dingpw' (ECDSA) to the list of known hosts.
 dingpw: root@dingpw: Permission denied (publickey,password).
 ```
 
-启动完成后，可以通过命令 jps 来判断是否成功启动
+解决方法如下
+```bash
+cd ~/.ssh
+ssh-keygen -t rsa
+cat id_rsa.pub >> authorized_keys
+ssh localhost
+```
+再次启动即可，输出
+```text
+WARNING: HADOOP_SECURE_DN_USER has been replaced by HDFS_DATANODE_SECURE_USER. Using value of HADOOP_SECURE_DN_USER.
+Starting namenodes on [localhost]
+Starting datanodes
+Starting secondary namenodes [dingpw]
+```
 
+启动完成后，可以通过命令 jps 来判断是否成功
+```bash
+jps -ml
+8228 org.apache.hadoop.hdfs.server.datanode.DataNode
+8472 org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode
+9403 sun.tools.jps.Jps -ml
+8062 org.apache.hadoop.hdfs.server.namenode.NameNode
+```
+
+### 访问web管理页面
+> http://ip:9870
+
+[页面监控内容解读](https://www.cnblogs.com/go-no-1/p/13032247.html)
+
+### 开启 NameNode 和 DataNode 守护进程
+```bash
+stop-dfs.sh
+WARNING: HADOOP_SECURE_DN_USER has been replaced by HDFS_DATANODE_SECURE_USER. Using value of HADOOP_SECURE_DN_USER.
+Stopping namenodes on [localhost]
+Stopping datanodes
+Stopping secondary namenodes [dingpw]
+```
 
 ### 参考资料
 https://blog.csdn.net/weixin_38883338/article/details/82928809

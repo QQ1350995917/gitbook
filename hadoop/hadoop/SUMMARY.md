@@ -1,0 +1,1 @@
+### [单机部署](01-installer-stand-alone.md)
