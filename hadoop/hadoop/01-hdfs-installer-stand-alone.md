@@ -1,4 +1,4 @@
-# hadoop stand alone
+# hdfs stand alone
 
 ## ununtu18
 
