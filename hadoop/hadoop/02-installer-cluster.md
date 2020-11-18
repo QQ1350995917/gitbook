@@ -2,4 +2,4 @@
 
 ## ununtu18
 
-- [同步时钟](../../os/linux/ntp.md)
+- [同步时钟](../../os/linux/03-ntp.md)

@@ -16,7 +16,7 @@ su
 // input password
 adduser mongodb
 ```
-![](images/adduser.png)
+![](ubuntu/images/adduser.png)
 
 这样在创建用户名时，就创建了用户的主目录以及密码。
 

@@ -2,7 +2,7 @@
 
 ## ununtu18
 
-- [同步时钟](../../os/linux/ntp.md)
+- [同步时钟](../../os/linux/03-ntp.md)
 - [准备好hadoop环境](../hadoop/SUMMARY.md)
 - [准备好zookeeper环境](../../distributed/middleware/zookeeper/SUMMARY.md)
 - [查看hbase-hadoop兼容性版本](http://hbase.apache.org/book.html#hadoop)
