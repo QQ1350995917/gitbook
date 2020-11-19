@@ -46,15 +46,17 @@ vim etc/hadoop/core-site.xml
 配置core-site.xml的configuration的节点内容为：
 ```xml
 <configuration>
+  <!--hadoop存储目录-->
   <property>
     <name>hadoop.tmp.dir</name>
-      <value>file:/usr/local/bin/hadoop/tmp</value>
-        <description>Abase for other temporary directories.</description>
-      </property>
-    <property>
-  <name>fs.defaultFS</name>
-  <value>hdfs://localhost:9000</value>
- </property>
+    <value>file:/usr/local/bin/hadoop/tmp</value>
+    <description>Abase for other temporary directories.</description>
+  </property>
+  <!--指定namenode地址-->
+  <property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://localhost:9000</value>
+  </property>
 </configuration>
 ```
 
@@ -66,21 +68,25 @@ vim etc/hadoop/hdfs-site.xml
 配置hdfs-site.xml的configuration的节点内容为：
 ```xml
 <configuration>
+  <!--hdfs保存副本分数-->
   <property>
     <name>dfs.replication</name>
     <value>1</value>
   </property>
+  <!--hdfs namenode存储位置-->
   <property>
     <name>dfs.namenode.name.dir</name>
     <value>file:/usr/local/bin/hadoop/tmp/dfs/name</value>
   </property>
+  <!--hdfs datanode存储位置-->
   <property>
     <name>dfs.datanode.data.dir</name>
     <value>file:/usr/local/bin/hadoop/tmp/dfs/data</value>
   </property>
+  <!--web页面启动端口以及允许任意IP访问-->
 	<property>
 		<name>dfs.http.address</name>
-		<value>0.0.0.0:9870</value> <!-- web页面启动端口以及允许任意IP访问 -->
+		<value>0.0.0.0:9870</value>
 	</property>
 </configuration>
 ```

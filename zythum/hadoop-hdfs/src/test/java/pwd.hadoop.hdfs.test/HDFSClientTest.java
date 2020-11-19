@@ -36,7 +36,7 @@ public class HDFSClientTest {
     public void before() throws Exception {
 //        System.setProperty("hadoop.home.dir", "D:\\hadoop-2.8.3");
         Configuration configuration = new Configuration();
-        fileSystem = FileSystem.get(new URI("hdfs://192.168.107.141:9000"), configuration, "root");
+        fileSystem = FileSystem.get(new URI("hdfs://192.168.31.17:9870"), configuration, "root");
     }
 
     @After
