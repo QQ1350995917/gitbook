@@ -1,9 +1,12 @@
 # Summary
 * [Introduction](README.md)
-* [IDE](ide/README.md)
+* [IDE](ide/SUMMARY.md)
   * [CodeStyle]()
     * [Java](ide/code/java.md)
   * [Maven](ide/code/README.md)
+    * [部署私服](ide/mvn/01-deploy-nexus.md)
+    * [客户端安装](ide/mvn/02-installer.md)
+    * [客户端设置](ide/mvn/03-setting.xml.md)
   * [Git](ide/git/README.md)
   * [Idea](ide/idea/README.md)
     * [Idea快捷键](ide/idea/README.md)

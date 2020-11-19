@@ -1,6 +1,6 @@
 # Summary
 * [Introduction](README.md)
-* [IDE](ide/README.md)
+* [IDE](ide/SUMMARY.md)
   * [CodeStyle]()
     * [Java](ide/code/java.md)
   * [Maven](ide/code/README.md)

@@ -1,4 +1,4 @@
-package pwd.java.spark;
+package pwd.hadoop.spark;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

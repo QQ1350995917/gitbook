@@ -3,3 +3,7 @@
 - 线程池中线程启动/停止（任务排队执行，停止一个后启动另外一个，类似于jenkins的打包过程）
 - SpringCloud-Feign+Httpclient导致的cookie重复（saas平台对接耗费24小时，调用两次后接口不通）
 - JDBC启动过程
+- VIN数据库优化
+- APN-mark数据库优化
+- 监控
+- ETL

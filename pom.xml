@@ -9,28 +9,28 @@
   <packaging>pom</packaging>
 
   <modules>
+    <!--<module>zythum/dubbo-api</module>-->
+    <!--<module>zythum/dubbo-consumer</module>-->
+    <!--<module>zythum/dubbo-provider</module>-->
+    <module>zythum/hadoop-hdfs</module>
+    <!--<module>zythum/hadoop-spark</module>-->
+    <!--<module>zythum/http-client</module>-->
     <!--<module>zythum/java-bytecode</module>-->
     <!--<module>zythum/java-concurrent</module>-->
     <!--<module>zythum/java-gc</module>-->
-    <module>zythum/java-jdbc</module>
+    <!--<module>zythum/java-jdbc</module>-->
     <!--<module>zythum/java-lambda</module>-->
     <!--<module>zythum/java-monitor</module>-->
-    <!--<module>zythum/java-spark</module>-->
     <!--<module>zythum/kafka-consumer</module>-->
     <!--<module>zythum/kafka-producer</module>-->
     <!--<module>zythum/mysql</module>-->
     <!--<module>zythum/rocketmq-consumer</module>-->
     <!--<module>zythum/rocketmq-producer</module>-->
-    <!--<module>zythum/java-bytecode</module>-->
-    <module>zythum/spring-batch</module>
+    <!--<module>zythum/spring-batch</module>-->
     <!--<module>zythum/spring-boot</module>-->
     <!--<module>zythum/spring-cloud</module>-->
     <!--<module>zythum/spring-context</module>-->
     <!--<module>zythum/spring-mybatis</module>-->
-    <!--<module>zythum/http-client</module>-->
-    <!--<module>zythum/dubbo-api</module>-->
-    <!--<module>zythum/dubbo-provider</module>-->
-    <!--<module>zythum/dubbo-consumer</module>-->
     <!--<module>zythum/zk-api</module>-->
     <!--<module>zythum/zk-client</module>-->
     <!--<module>zythum/zk-curator</module>-->
