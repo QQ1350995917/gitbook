@@ -125,7 +125,8 @@
   * [Spring-Boot](spring/spring-boot/README.md)
     * [优雅停机](spring/spring-boot/killer.md)  
 * [Storage](storage/SUMMARY.md)  
-  * [块存储-对象存储-文件存储](storage/block-object-file.md)
+  * [块存储-对象存储-文件存储](storage/01-block-object-file.md)
+  * [五大主流分布式存储技术对比分析](02-storage-pick.md)
   * [MySQL](storage/mysql/SUMMARY.md)
     * [单机部署](storage/mysql/deploy-standalone.md)
     * [主从部署](storage/mysql/deploy-master-slave.md)
@@ -184,7 +185,7 @@
   * [IM]()
   * [UDP-CHANNEL](network/socket/SUMMARY.md)
   * [大数据去重方案](DuplicateRemoval.md)
-
+* [清华大学开源软件镜像站](https://mirrors.tuna.tsinghua.edu.cn/)
 
 
 

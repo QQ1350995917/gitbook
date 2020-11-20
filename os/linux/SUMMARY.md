@@ -2,6 +2,7 @@
 1. # [Group](02-group.md)
 1. # [时钟同步](03-ntp.md)
 1. # [Kill](04-kill.md)
+1. # [静态IP](05-ipconfig.md)
 1. # [CentOS](centos/SUMMARY.md)
     1. ## [yum-repo-offline](centos/01-yum-repo-offline.md)
 1. # [Ubuntu](ubuntu/SUMMARY.md)
