@@ -65,13 +65,9 @@ vim conf/hbase-site.xml
 	<property>
 		<name>hbase.rootdir</name>
 		<value>file:///usr/local/bin/hbase/data</value>
+		<!-- <value>hdfs://dingpw:9000/hbase</value>  -->
 	</property>
-	<!-- ZK -->
   <property>
-    <name>hbase.zookeeper.property.dataDir</name>
-    <value>/usr/local/bin/hbase/zookeeper</value>
-  </property>
-    <property>
       <name>hbase.unsafe.stream.capability.enforce</name>
       <value>false</value>
     </property>

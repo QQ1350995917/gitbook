@@ -36,7 +36,8 @@ public class HDFSClientTest {
     public void before() throws Exception {
 //        System.setProperty("hadoop.home.dir", "E:\\data\\hadoop");
         Configuration configuration = new Configuration();
-        fileSystem = FileSystem.get(new URI("hdfs://192.168.50.52:9000"), configuration, "root");
+//        fileSystem = FileSystem.get(new URI("hdfs://192.168.50.52:9000"), configuration, "root");
+        fileSystem = FileSystem.get(new URI("hdfs://192.168.31.17:9000"), configuration, "root");
         System.out.println();
     }
 
@@ -52,14 +53,9 @@ public class HDFSClientTest {
      * 创建文件夹
      */
     @Test
-    public void mkdir() {
-        try {
-            boolean result = fileSystem.mkdirs(new Path("/test"));
-            log.info("创建文件夹结果：{}", result);
-        } catch (IllegalArgumentException | IOException e) {
-            log.error("创建文件夹出错", e);
-            e.printStackTrace();
-        }
+    public void mkdir() throws Exception {
+        boolean result = fileSystem.mkdirs(new Path("/test"));
+        log.info("创建文件夹结果：{}", result);
     }
 
     /**
@@ -72,7 +68,7 @@ public class HDFSClientTest {
             IOUtils.copy(input, output, 4096);
             log.error("上传文件成功");
         } catch (IllegalArgumentException | IOException e) {
-            log.error("上传文件出错", e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -86,7 +82,7 @@ public class HDFSClientTest {
             IOUtils.copy(input, output, 4096);
             log.error("下载文件成功");
         } catch (IllegalArgumentException | IOException e) {
-            log.error("下载文件出错", e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -94,28 +90,20 @@ public class HDFSClientTest {
      * 删除文件
      */
     @Test
-    public void deleteFile() {
+    public void deleteFile() throws Exception {
         String fileName = "hadoop.txt";
-        try {
-            boolean result = fileSystem.delete(new Path("/test/" + fileName), true);
-            log.info("删除文件结果：{}", result);
-        } catch (IllegalArgumentException | IOException e) {
-            log.error("删除文件出错", e);
-        }
+        boolean result = fileSystem.delete(new Path("/test/" + fileName), true);
+        log.info("删除文件结果：{}", result);
     }
 
     /**
      * 遍历文件
      */
     @Test
-    public void listFiles() {
-        try {
-            FileStatus[] statuses = fileSystem.listStatus(new Path("/"));
-            for (FileStatus file : statuses) {
-                log.info("扫描到文件或目录，名称：{}，是否为文件：{}", file.getPath().getName(), file.isFile());
-            }
-        } catch (IllegalArgumentException | IOException e) {
-            log.error("遍历文件出错", e);
+    public void listFiles() throws Exception {
+        FileStatus[] statuses = fileSystem.listStatus(new Path("/"));
+        for (FileStatus file : statuses) {
+            log.info("扫描到文件或目录，名称：{}，是否为文件：{}", file.getPath().getName(), file.isFile());
         }
     }
 

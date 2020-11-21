@@ -164,7 +164,7 @@
     * [HDFS核心概念](hadoop/hadoop/03-hdfs-concept.md)
     * [YARN单机部署](hadoop/hadoop/04-yarn-installer-stand-alone.md) 
   * [hbase](hadoop/hbase/SUMMARY.md)  
-    * [单机部署](hadoop/hbase/01-installer-stand-alone.md)
+    * [单机部署](hadoop/hbase/01-installer-stand-alone-local.md)
     * [集群部署](hadoop/hbase/02-installer-cluster.md)
     * [HBaseShell](hadoop/hbase/03-usage-shell.md)
     * [HBase详解](hadoop/hbase/04-hbase-concept.md)
