@@ -11,7 +11,7 @@ cd /usr/local/bin/
 mkdir hive
 wget https://mirrors.tuna.tsinghua.edu.cn/apache/hive/stable-2/apache-hive-2.3.7-bin.tar.gz
 tar -zxvf apache-hive-2.3.7-bin.tar.gz
-ln -s apache-hive-2.3.7-bin.tar.gz hive
+ln -s apache-hive-2.3.7 hive
 ```
 
 ### 验证
