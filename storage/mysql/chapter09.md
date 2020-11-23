@@ -12,6 +12,39 @@
 + 第4个原则：是尽量使用Prepared Statements，一个是性能更好，另一个是可以防止SQL注入；
 + 第5个原则：是尽量使用索引扫描来进行排序，也就是尽量在有索引的字段上进行排序操作。
 
+### 确定慢查询
+查看是否开启慢查询记录,以及记录文件存放位置
+```mysql
+show variables like 'slow_query%'; 
+```
+|Variable_name|Value|
+|---|---|
+|slow_query_log|OFF|
+|slow_query_log_file|/home/mysql/mysqldb-slow.log|
+
+开启慢查询记录，以及设置慢查询记录文件位置
+```mysql
+set global slow_query_log = on;
+set global slow_query_log_file = /tmp/mysql_slow/mysqldb-slow.log;
+```
+查看慢查询阈值，系统默认为10S
+```mysql
+show global  variables like 'long_query_time';
+```
+
+修改慢查询阈值
+```mysql
+set global long_query_time =1;
+```
+
+慢查询日志无记录原因
+- 在线动态设置long_query_time，比如 set global long_query_time=0.5，该设置对当前已建立的连接不会生效。
+- 慢SQL里有大量锁等待，慢SQL的执行时间不包含锁等待的时间。
+- log_slow_admin_statements=0，因此alter, create index, analyze table等操作即使超过 long_query_time，也不会记录到慢日志中。
+- min_examined_row_limit设置为非0值，SQL检查行数未超过该值，也不会记录。
+- slow log文件钻句柄发生了变化，如运行期间用vim打开log，最后又保存退出，此时文件句柄发生变化，需要执行flush slow logs。
+- 误将slow_query_log_file 当作 slow log的开关，设置为1，此时slow log文件名为1。
+
 ### 3.1 explain查询计划
 在 select 语句之前增加 explain 关键字，MySQL 会在查询上设置一个标记，执行查询时，会返回执行计划的信息，而不是执行这条SQL（如果 from 中包含子查询，仍会执行该子查询，将结果放入临时表中）
 
