@@ -1,3 +1,6 @@
+## 查看用户
+cat /etc/passwd
+
 ## 创建用户
 创建用户有两条命令：
 - adduer
@@ -76,7 +79,7 @@ passwd：已成功更新密码
 1
 2
 3
-2. 删除用户
+## 删除用户
 2.1 deluser
 只删除用户：sudo deluser tt 
 输出显示：
