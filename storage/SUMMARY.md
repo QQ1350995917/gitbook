@@ -24,6 +24,10 @@
 
 #### KV数据库
 - [Redis](redis/SUMMARY.md)
+  - [部署](redis/01-install.md)
+  - [部署模式以及对比](redis/02-deploy-model.md)
+  - [基本概念介绍](redis/03-concept.md)
+  - [其他](redis/chapter1.md)
 
 #### 图数据库
 - [Neo4J]()
