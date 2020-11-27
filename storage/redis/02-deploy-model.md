@@ -60,6 +60,7 @@ Redis 的 Sentinel 系统用于管理多个 Redis 服务器（instance）， 该
 ### [部署方式请见对应章节](01-install.md)
 
 ### 集群概念
+- 节点,一个redis集群由多个节点node组成，而多个node之间通过cluster meet命令来进行连接.
 - 多个Redis服务器组成的分布式网络服务集群；
 - 群之中有多个Master主节点，每一个主节点都可读可写；
 - 点之间会互相通信，两两相连；
@@ -72,6 +73,27 @@ Redis 的 Sentinel 系统用于管理多个 Redis 服务器（instance）， 该
 ![](images/deploy-model-cluster-02.png)
 
 在Redis-Cluster集群中，可以给每一个主节点添加从节点，主节点和从节点直接遵循主从模型的特性。当用户需要处理更多读请求的时候，添加从节点可以扩展系统的读性能
+### 节点握手过程
+- 节点A收到客户端的cluster meet命令
+- A根据收到的IP地址和端口号，向B发送一条meet消息
+- 节点B收到meet消息返回pong
+- A知道B收到了meet消息，返回一条ping消息，握手成功
+- 最后，节点A将会通过gossip协议把节点B的信息传播给集群中的其他节点，其他节点也将和B进行握手
+
+![](images/deploy-model-cluster-06.png)
+
+### 槽slot
+redis通过集群分片的形式来保存数据，整个集群数据库被分为16384个slot，集群中的每个节点可以处理0-16384个slot，当数据库16384个slot都有节点在处理时，集群处于上线状态，反之只要有一个slot没有得到处理都会处理下线状态。通过cluster addslots命令可以将slot指派给对应节点处理。
+
+slot是一个位数组，数组的长度是16384/8=2048，而数组的每一位用1表示被节点处理，0表示不处理，如图所示的话表示A节点处理0-7的slot。
+
+![](images/deploy-model-cluster-07.png)
+
+当客户端向节点发送命令，如果刚好找到slot属于当前节点，那么节点就执行命令，反之，则会返回一个MOVED命令到客户端指引客户端转向正确的节点。（MOVED过程是自动的）
+
+![](images/deploy-model-cluster-08.png)
+
+如果增加或者移出节点，对于slot的重新分配也是非常方便的，redis提供了工具帮助实现slot的迁移，整个过程是完全在线的，不需要停止服务。
 
 ### 故障转移
 Redis集群的主节点内置了类似Redis Sentinel的节点故障检测和自动故障转移功能，当集群中的某个主节点下线时，集群中的其他在线主节点会注意到这一点，并对已下线的主节点进行故障转移。
