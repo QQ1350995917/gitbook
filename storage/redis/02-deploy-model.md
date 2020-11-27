@@ -80,14 +80,14 @@ Redis 的 Sentinel 系统用于管理多个 Redis 服务器（instance）， 该
 - A知道B收到了meet消息，返回一条ping消息，握手成功
 - 最后，节点A将会通过gossip协议把节点B的信息传播给集群中的其他节点，其他节点也将和B进行握手
 
-![](images/deploy-model-cluster-06.png)
+![](images/deploy-model-cluster-06.jpeg)
 
 ### 槽slot
 redis通过集群分片的形式来保存数据，整个集群数据库被分为16384个slot，集群中的每个节点可以处理0-16384个slot，当数据库16384个slot都有节点在处理时，集群处于上线状态，反之只要有一个slot没有得到处理都会处理下线状态。通过cluster addslots命令可以将slot指派给对应节点处理。
 
 slot是一个位数组，数组的长度是16384/8=2048，而数组的每一位用1表示被节点处理，0表示不处理，如图所示的话表示A节点处理0-7的slot。
 
-![](images/deploy-model-cluster-07.png)
+![](images/deploy-model-cluster-07.jpeg)
 
 当客户端向节点发送命令，如果刚好找到slot属于当前节点，那么节点就执行命令，反之，则会返回一个MOVED命令到客户端指引客户端转向正确的节点。（MOVED过程是自动的）
 
