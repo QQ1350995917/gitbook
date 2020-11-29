@@ -1,0 +1,32 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+  application:
+    name: springboot-mybatisplus-shardingjdbc
+
+sharding.jdbc:
+  data-sources:
+    ds_master:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://192.168.9.174:3306/test?useSSL=false  #主库
+      username: root
+      password: root
+    ds_slave_0:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://192.168.9.184:3306/test?useSSL=false  #从库
+      username: root
+      password: root
+  master-slave-rule:
+    name: ds_ms
+    master-data-source-name: ds_master
+    slave-data-source-names: ds_slave_0
+    load-balance-algorithm-type: round_robin
+    props:
+      sql.show: true
+mybatis:
+  config-location: classpath:mybatis/config.xml
+  mapper-locations:
+    - classpath:mapping/*.xml

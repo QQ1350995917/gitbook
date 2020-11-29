@@ -12,7 +12,7 @@
     <!--<module>zythum/dubbo-api</module>-->
     <!--<module>zythum/dubbo-consumer</module>-->
     <!--<module>zythum/dubbo-provider</module>-->
-    <module>zythum/hadoop-hdfs</module>
+    <!--<module>zythum/hadoop-hdfs</module>-->
     <!--<module>zythum/hadoop-spark</module>-->
     <!--<module>zythum/http-client</module>-->
     <!--<module>zythum/java-bytecode</module>-->
@@ -31,6 +31,7 @@
     <!--<module>zythum/spring-cloud</module>-->
     <!--<module>zythum/spring-context</module>-->
     <!--<module>zythum/spring-mybatis</module>-->
+    <module>zythum/springboot-mybatis-sharding-jdbc-rws</module>
     <!--<module>zythum/zk-api</module>-->
     <!--<module>zythum/zk-client</module>-->
     <!--<module>zythum/zk-curator</module>-->
