@@ -1,7 +1,7 @@
 # 目录
 ## [Dubbo](dubbo/SUMMARY.md)
+  * [Dubbo简介](dubbo/chapter0.md)
 ## [elastic](elastic/SUMMARY.md)
-## [hadoop](hadoop/SUMMARY.md)
 ## [kafka](kafka/SUMMARY.md)
 ## [zookeeper](zookeeper/SUMMARY.md)
   * [简介](zookeeper/chapter0.md)
@@ -10,6 +10,3 @@
   * [集群介绍](zookeeper/chapter3.md)
   * [客户端](zookeeper/chapter4.md)
   * [应用场景](zookeeper/chapter5.md)
-* [Dubbo](dubbo/SUMMARY.md)
-  * [Dubbo 架构与设计说明](dubbo/chapter0.md) 
-## [spark](spark/SUMMARY.md)

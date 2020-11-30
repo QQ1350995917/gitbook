@@ -9,5 +9,6 @@
 ### [缓存](mybatis/02-cache.md)
 ### [读写分离](mybatis/03-read-write.md)
 ### [原码](mybatis/04-source.md)
+### [一些应用问题](mybatis/05-question.md)
 
 ## Sharding

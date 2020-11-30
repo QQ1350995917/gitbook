@@ -2,6 +2,17 @@
 * [分布式架构简述](chapter1.md)
 * [分布式事务的解决方案](chapter2.md)
 * [中间件](middleware/SUMMARY.md)
+  * [Dubbo](middleware/dubbo/SUMMARY.md)
+    * [Dubbo简介](middleware/dubbo/chapter0.md)
+  * [elastic](middleware/elastic/SUMMARY.md)
+  * [kafka](middleware/kafka/SUMMARY.md)
+  * [zookeeper](middleware/zookeeper/SUMMARY.md)
+    * [简介](middleware/zookeeper/chapter0.md)
+    * [部署](middleware/zookeeper/chapter1.md)
+    * [核心概念](middleware/zookeeper/chapter2.md)
+    * [集群介绍](middleware/zookeeper/chapter3.md)
+    * [客户端](middleware/zookeeper/chapter4.md)
+    * [应用场景](middleware/zookeeper/chapter5.md)
 
 ## 其他资料
 [阿里巴巴为什么能抗住90秒100亿](https://www.jianshu.com/p/9f985bbc9c70)

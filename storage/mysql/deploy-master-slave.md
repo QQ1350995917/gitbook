@@ -55,6 +55,14 @@ sync_binlog=n，当每进行n次事务提交之后，MySQL将进行一`fsync之�
 在MySQL中系统默认的设置是sync_binlog=0，也就是不做任何强制性的磁盘刷新指令，这时候的性能是最好的，但是风险也是最大的。因为一旦系统Crash，在binlog_cache中的所有binlog信息都会被丢失。而当设置为“1”的时候，是最安全但是性能损耗最大的设置。因为当设置为1的时候，即使系统Crash，也最多丢失binlog_cache中未完成的一个事务，对实际数据没有任何实质性影响。
 对于高并发事务的系统来说，“sync_binlog”设置为0和设置为1的系统写入性能差距可能高达5倍甚至更多
 
+由于mysql默认的复制方式是异步的，主库把日志发送给从库后不关心从库是否已经处理，这样会产生一个问题就是假设主库挂了，从库处理失败了，这时候从库升为主库后，日志就丢失了。由此产生两个概念。
+- 全同步复制
+
+主库写入binlog后强制同步日志到从库，所有的从库都执行完成后才返回给客户端，但是很显然这个方式的话性能会受到严重影响。
+- 半同步复制
+
+和全同步不同的是，半同步复制的逻辑是这样，从库写入日志成功后返回ACK确认给主库，主库收到至少一个从库的确认就认为写操作完成。
+
 - /home/mysql/master-slave/slave-22001/mysql/my.conf
 ```
 vim /home/mysql/master-slave/slave-22001/mysql/my.conf
@@ -236,6 +244,17 @@ Replication的详细介绍，可以参考京东发布的翻译文档[《MySql组
 ## MySQL 主从复制概念
 MySQL 主从复制是指数据可以从一个MySQL数据库服务器主节点复制到一个或多个从节点。MySQL 默认采用异步复制方式，这样从节点不用一直访问主服务器来更新自己的数据，数据的更新可以在远程连接上进行，从节点可以复制主数据库中的所有数据库或者特定的数据库，或者特定的表。
 ## MySQL 主从形式
+### mysql主从同步过程
+
+- master提交完事务后，写入binlog
+- slave连接到master，获取binlog
+- master创建dump线程，推送binglog到slave
+- slave启动一个IO线程读取同步过来的master的binlog，记录到relay log中继日志中
+- slave再开启一个sql线程读取relay log事件并在slave执行，完成同步
+- slave记录自己的binglog
+
+![](images/deploy-master-slave-flow.jpg)
+
 ### 一主一从
 ### 一主多从，提高系统的读性能
 ![](images/1MMS.jfif)
