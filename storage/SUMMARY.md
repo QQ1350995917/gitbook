@@ -2,6 +2,12 @@
 - [块存储-对象存储-文件存储](01-block-object-file.md)
 - [五大主流分布式存储技术对比分析](02-storage-pick.md)
 
+## 文件存储
+- [MinIO分布式存储](minio/SUMMARY.md)
+  - [MinIO选型](minio/01-chooser.md)
+  - [MinIO部署](minio/02-deploy.md)
+  - [MinIO集群](minio/03-deploy-cluster.md)
+
 ## 数据库
 ### 关系型数据库
 - 做表结构设计
