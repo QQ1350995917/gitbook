@@ -84,6 +84,7 @@
     * [一些应用问题](jdbc/mybatis/05-question.md)
   * [Sharding](jdbc/sharding/SUMMARY.md)
 * [Web](web/README.md)  
+  * [并发量计算](web/concurrency.md)
   * [Nginx](web/nginx/README.md)
   * [Apache]()
   * [Tomcat](web/tomcat/README.md)
