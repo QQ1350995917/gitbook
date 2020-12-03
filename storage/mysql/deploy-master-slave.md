@@ -335,3 +335,9 @@ MySQL 主从复制有三种方式：基于SQL语句的复制（statement-based r
 - 如果有记录，说明该GTID的事务已经执行，从节点会忽略。
 - 如果没有记录，从节点就会从relay log中执行该GTID的事务，并记录到bin log。
 - 在解析过程中会判断是否有主键，如果没有就用二级索引，如果有就用全部扫描。 
+
+
+## 参考资料
+https://www.cnblogs.com/baizhanshi/p/10512399.html
+https://blog.csdn.net/keil_wang/article/details/88669587
+
