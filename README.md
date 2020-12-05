@@ -141,6 +141,7 @@
   * [MySQL](storage/mysql/SUMMARY.md)
     * [单机部署](storage/mysql/deploy-standalone.md)
     * [主从部署](storage/mysql/deploy-master-slave.md)
+    * [主从原理](storage/mysql/deploy-master-slave-concept.md)
     * [NDB-Cluster部署](storage/mysql/deploy-cluster-ndb.md)
     * [INNODB-Cluster部署](storage/mysql/deploy-cluster-innodb.md)
     * [数据类型](storage/mysql/chapter02.md)

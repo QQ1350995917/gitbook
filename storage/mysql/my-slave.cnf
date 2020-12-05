@@ -53,6 +53,7 @@ sync_binlog=0
 read_only=1
 master_info_repository=TABLE
 relay_log_info_repository=TABLE
+relay_log_recovery=on
 relay_log=/home/mysql/relay-bin
 # 主服务器I/O日志读取、记录及存放
 relay_log_index=/home/mysql/relay-bin/relay-bin.index

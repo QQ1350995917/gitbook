@@ -10,6 +10,7 @@
 1. ## [8.0新特性](chapter10.md)
 1. ## [单机部署](deploy-standalone.md)
 1. ## [主从模式](deploy-master-slave.md)
+1. ## [主从原理](deploy-master-slave-concept.md)
 1. ## [读写分离](../../jdbc/mybatis/03-read-write.md)
 1. ## [集群-innodb](deploy-cluster-innodb.md)
 1. ## [集群-ndb](deploy-cluster-ndb.md)
