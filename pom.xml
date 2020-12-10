@@ -27,11 +27,11 @@
     <!--<module>zythum/rocketmq-consumer</module>-->
     <!--<module>zythum/rocketmq-producer</module>-->
     <!--<module>zythum/spring-batch</module>-->
-    <!--<module>zythum/spring-boot</module>-->
+    <module>zythum/spring-boot</module>
     <!--<module>zythum/spring-cloud</module>-->
     <!--<module>zythum/spring-context</module>-->
     <!--<module>zythum/spring-mybatis</module>-->
-    <module>zythum/springboot-mybatis-sharding-jdbc-rws</module>
+    <!--<module>zythum/springboot-mybatis-sharding-jdbc-rws</module>-->
     <!--<module>zythum/zk-api</module>-->
     <!--<module>zythum/zk-client</module>-->
     <!--<module>zythum/zk-curator</module>-->
