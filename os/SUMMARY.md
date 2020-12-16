@@ -3,3 +3,4 @@
         1. ### [yum-repo-offline](linux/centos/01-yum-repo-offline.md)
     1. ## [Ubuntu](linux/ubuntu/SUMMARY.md)
 1. # [macOS](mac/SUMMARY.md)
+1. # [WIN](win/SUMMARY.md)
