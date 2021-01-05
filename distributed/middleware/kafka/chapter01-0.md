@@ -50,7 +50,6 @@
 
 12：./kafka-server-start.sh -daemon ../config/server.properties 1>/dev/null 2>&1 & （守护进程）
 
-# 
 
 # 集群配置
 

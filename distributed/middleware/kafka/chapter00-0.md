@@ -74,10 +74,6 @@ kafka-consumer-groups.sh --new-consumer --bootstrap-server 127.0.0.1:9092 --grou
 | :--- |
 
 
-## 
-
-## 
-
 ## 生产者相关命令
 
 kafka-console-producer.sh --broker-list localhost:9092 --topic udp-channel-publisher
