@@ -92,3 +92,5 @@
 - profiles：用于指定一系列的profile。 可以配置构件和插件的远程仓库，并且可以通过<id>来配置多个profile，最后通过<activeProfiles>来指定当前处于活跃状态(即有效的)的profile配置是哪一个。
 - activeProfiles：指定当前正在活跃的profile。
 - servers：表示当需要连接到一个远程服务器的时候需要使用到的验证方式。
+
+## [setting诸元素详解](04-setting.md)
