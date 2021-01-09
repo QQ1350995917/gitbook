@@ -42,7 +42,7 @@
     * [HotSpot下的JVM结构](java/jvm/chapter1.md)
       - [Class文件]()
       - [类加载器]()
-      - 运行时区
+      - [运行时区]()
         - [方法区](java/jvm/chapter1-02-00.md)
           - [方法区/永久代/元空间演进](java/jvm/chapter1-02-00-01.md)
         - [堆](java/jvm/chapter1-02-01.md)
