@@ -67,6 +67,7 @@ GC日志中会记录每次FullGC之后各代的内存大小，观察老年代GC�
 1. 使用top -h -p pid 查看特定进程的线程资源占用情况
 1. 使用jmap -histo:live查看具体占用资源的类型或者类
 1. 结合访问日志定位代码实现
+1. [案例](https://www.cnblogs.com/rude3knife/p/13570423.html)
 
 ## 参考资料
 https://blog.csdn.net/liao0801_123/article/details/83022647
