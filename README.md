@@ -145,6 +145,7 @@
   * [Spring-Boot](spring/spring-boot/README.md)
     * [优雅停机](spring/spring-boot/killer.md)  
 * [Storage](storage/SUMMARY.md)  
+  * [磁盘](storage/disk/SUMMARY.md)
   * [块存储-对象存储-文件存储](storage/01-block-object-file.md)
   * [五大主流分布式存储技术对比分析](storage/02-storage-pick.md)
   * [MinIO分布式存储](storage/minio/SUMMARY.md)
