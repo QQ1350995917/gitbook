@@ -4,6 +4,8 @@
 
 如上图所示，一个典型的Kafka体系架构包括若干Producer（可以是服务器日志，业务数据，页面前端产生的page view等等），若干broker（Kafka支持水平扩展，一般broker数量越多，集群吞吐率越高），若干Consumer (Group)，以及一个Zookeeper集群。Kafka通过Zookeeper管理集群配置，选举leader，以及在consumer group发生变化时进行rebalance。Producer使用push(推)模式将消息发布到broker，Consumer使用pull(拉)模式从broker订阅并消费消息。
 
+
+
 ##名词解释：
 
 |名称|解释|
@@ -11,11 +13,10 @@
 |Broker	|消息中间件处理节点，一个Kafka节点就是一个broker，一个或者多个Broker可以组成一个Kafka集群|
 |Topic	|Kafka根据topic对消息进行归类，发布到Kafka集群的每条消息都需要指定一个topic|
 |Partition	|物理上的概念，一个topic可以分为多个partition，每个partition内部是有序的|
+|Segment	|---|
 |Producer	|消息生产者，向Broker发送消息的客户端|
 |Consumer	|消息消费者，从Broker读取消息的客户端|
 |ConsumerGroup	|每个Consumer属于一个特定的Consumer Group，一条消息可以发送到多个不同的Consumer Group，但是一个Consumer Group中只能有一个Consumer能够消费该消息|
-|Controller|---|
-|ControllerContext|---|
 ## Broker
 
 ## Topic & Partition
@@ -45,8 +46,28 @@ Topic是Kafka数据写入操作的基本单元，可以指定副本，broker，t
 
 ![](images/kafka-03.jpg)
 
+Kafka默认使用的是hash进行分区，所以会出现不同的分区数据不一样的情况，但是partitioner是可以override的
+
+## Segment
+
+Partition包含多个Segment，每个Segment对应一个文件，Segment可以手动指定大小，当Segment达到阈值时，将不再写数据，每个Segment都是大小相同的
+
+Segment由多个不可变的记录组成，记录只会被append到Segment中，不会被单独删除或者修改，每个Segment中的Message数量不一定相等
+
+清除过期日志时，支持删除一个或多个Segment，默认保留7天的数据
+
+LogSegment文件命名的规则是，partition全局的第一个Segment从0（20个0）开始，后续的每一个文件的文件名是上一个文件的最后一条消息的offset值，这样命名的好处是什么呢？假如我们有一个Consumer已经消费到了offset=x，那么如果要继续消费的话，就可以使用二分查找法来进行查找，对LogSegment文件进行查找，就可以定位到某个文件，然后拿x值去对应的index文件中去找第x条数据所在的位置。Consumer读数据的时候，实际是读Index的offset，并且会记录上次读到哪里。
+
+## Producer
+
+## Consumer
+
+## ConsumerGroup
+
+## kafka在zookeeper中的数据结构
 
 ## kafka磁盘读写高性能分析
+
 
 如果把读写分开来说的话，我们可能会得出不同的结论。
 
@@ -62,25 +83,12 @@ Topic是Kafka数据写入操作的基本单元，可以指定副本，broker，t
 
 [以上参考](https://www.zhihu.com/question/309414875/answer/576557880)
 
-## kafka在zookeeper中的数据结构
+Kafka实际是用先写内存映射的文件，磁盘顺序读写的技术来提高性能的。Producer生产的消息按照一定的分组策略被发送到broker中的partition中的时候，这些消息如果在内存中放不下了，就会放在partition目录下的文件中，partition目录名是topic的名称加上一个序号。在这个目录下有两类文件，一类是以log为后缀的文件，另一类是以index为后缀的文件，每一个log文件和一个index文件相对应，这一对文件就是一个Segment File，其中的log文件就是数据文件，里面存放的就是Message，而index文件是索引文件。Index文件记录了元数据信息，指向对应的数据文件中Message的物理偏移量。
+
+附kafka网络传输过程
+![kafka网络传输过程](images/kafka-04.jpg)
 
 
-kafka选举是发生在切片之间的，依托的是Zookeeper分布式锁实现，故分片在ZK中的注册都是临时节点，以保证不会在选举时候产生死锁。
-
-
-7：Partition包含多个Segment，每个Segment对应一个文件，Segment可以手动指定大小，当Segment达到阈值时，将不再写数据，每个Segment都是大小相同的
-
-8：Segment由多个不可变的记录组成，记录只会被append到Segment中，不会被单独删除或者修改，每个Segment中的Message数量不一定相等
-
-9：Kafka默认使用的是hash进行分区，所以会出现不同的分区数据不一样的情况，但是partitioner是可以override的
-
-10：Region = Partition
-
-11：清除过期日志时，支持删除一个或多个Segment，默认保留7天的数据
-
-12：Kafka实际是用先写内存映射的文件，磁盘顺序读写的技术来提高性能的。Producer生产的消息按照一定的分组策略被发送到broker中的partition中的时候，这些消息如果在内存中放不下了，就会放在partition目录下的文件中，partition目录名是topic的名称加上一个序号。在这个目录下有两类文件，一类是以log为后缀的文件，另一类是以index为后缀的文件，每一个log文件和一个index文件相对应，这一对文件就是一个Segment File，其中的log文件就是数据文件，里面存放的就是Message，而index文件是索引文件。Index文件记录了元数据信息，指向对应的数据文件中Message的物理偏移量。
-
-13：LogSegment文件命名的规则是，partition全局的第一个Segment从0（20个0）开始，后续的每一个文件的文件名是上一个文件的最后一条消息的offset值，这样命名的好处是什么呢？假如我们有一个Consumer已经消费到了offset=x，那么如果要继续消费的话，就可以使用二分查找法来进行查找，对LogSegment文件进行查找，就可以定位到某个文件，然后拿x值去对应的index文件中去找第x条数据所在的位置。Consumer读数据的时候，实际是读Index的offset，并且会记录上次读到哪里。
 
 
 
