@@ -2,10 +2,6 @@
 
 ## 服务端相关命令
 
-启动
-
-./zookeeper-server-start.sh ../config/zookeeper.properties
-
 罗列所有的topic
 
 kafka-topics.sh --list --zookeeper localhost:2181

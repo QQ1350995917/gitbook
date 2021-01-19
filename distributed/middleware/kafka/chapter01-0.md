@@ -50,7 +50,33 @@
 
 12：./kafka-server-start.sh -daemon ../config/server.properties 1>/dev/null 2>&1 & （守护进程）
 
+## kafka-manager
+[下载地址](https://github.com/yahoo/CMAK/releases)
+### Java 11
+```text
+unzip cmak-3.0.0.5.zip
+ln -s cmak-3.0.0.5 cmak
+cd cmak
+vim conf/application.conf
+# kafka-manager.zkhosts="192.168.1.22:2181,192.168.1.23:2181,192.168.1.24:2181"
+# cmak.zkhosts="192.168.105.25:2181"
+# 创建启动脚本
+vim start.sh
+# bin/cmak -Dconfig.file=conf/application.conf -Dhttp.port=9900
+sh start.sh
+bin/cmak 
+```
+### Java 8
+```text
+curl https://codeload.github.com/yahoo/CMAK/zip/2.0.0.2
+unzip unzip CMAK-2.0.0.2.zip
+ln -s CMAK-2.0.0.2 cmak
+cd cmak
+# sbt安装地址 https://docs.huihoo.com/sbt/0.13/tutorial/zh-cn/Manual-Installation.html
 
+```
+
+- 软连接 
 # 集群配置
 
 [https://www.cnblogs.com/zikai/p/9627736.html](https://www.cnblogs.com/zikai/p/9627736.html)
