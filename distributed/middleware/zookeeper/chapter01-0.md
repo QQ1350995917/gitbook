@@ -1,5 +1,29 @@
 # 单机部署Zookeeper
 
+## 安装zookeeper
+
+1：官网地址[https://archive.apache.org/dist/zookeeper/](https://archive.apache.org/dist/zookeeper/)
+
+2：cd /usr/local/bin/
+
+3：mkdir zookeeper
+
+4：cd zookeeper
+
+5：curl -o apache-zookeeper-3.5.5-bin.tar.gz [https://archive.apache.org/dist/zookeeper/zookeeper-3.5.5/apache-zookeeper-3.5.5-bin.tar.gz](https://archive.apache.org/dist/zookeeper/zookeeper-3.5.5/apache-zookeeper-3.5.5-bin.tar.gz)
+
+6：tar -zxvf apache-zookeeper-3.5.5-bin.tar.gz
+
+7：ln -s apache-zookeeper-3.5.5-bin zookeeper
+
+8：cd zookeeper/conf
+
+9：cp zoo\_sample.cfg zoo.cfg
+
+10：cd ../bin
+
+11：./zkServer.sh start
+
 ## [版本列表](https://archive.apache.org/dist/zookeeper/)
 2019年5月20日发行的3.5.5是3.5分支的第一个稳定版本。此版本被认为是3.4稳定分支的后续版本，可以用于生产。基于3.4它包含以下新功能
 - 动态重新配置

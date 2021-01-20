@@ -1,132 +1,5 @@
-# Kafka角色
-## Kafka体系架构
-![](images/chapter02-0-00.png)
-
-如上图所示，一个典型的Kafka体系架构包括若干Producer（可以是服务器日志，业务数据，页面前端产生的page view等等），若干broker（Kafka支持水平扩展，一般broker数量越多，集群吞吐率越高），若干Consumer (Group)，以及一个Zookeeper集群。Kafka通过Zookeeper管理集群配置，选举leader，以及在consumer group发生变化时进行rebalance。Producer使用push(推)模式将消息发布到broker，Consumer使用pull(拉)模式从broker订阅并消费消息。
-
-
-
-##名词解释：
-
-|名称|解释|
-|---|---|
-|Broker	|消息中间件处理节点，一个Kafka节点就是一个broker，一个或者多个Broker可以组成一个Kafka集群|
-|Topic	|Kafka根据topic对消息进行归类，发布到Kafka集群的每条消息都需要指定一个topic|
-|Partition	|物理上的概念，一个topic可以分为多个partition，每个partition内部是有序的|
-|Segment	|---|
-|Producer	|消息生产者，向Broker发送消息的客户端|
-|Consumer	|消息消费者，从Broker读取消息的客户端|
-|ConsumerGroup	|每个Consumer属于一个特定的Consumer Group，一条消息可以发送到多个不同的Consumer Group，但是一个Consumer Group中只能有一个Consumer能够消费该消息|
-## Broker
-
-## Topic & Partition
-
-一个topic可以认为一个一类消息，每个topic将被分成多个partition，每个partition在存储层面是append log文件，物理上每个Partition对应的是一个文件夹。任何发布到此partition的消息都会被追加到log文件的尾部，每条消息在文件中的位置称为offset(偏移量)，offset为一个long型的数字，它唯一标记一条消息。每条消息都被append到partition中，是顺序写磁盘，因此效率非常高（经验证，顺序写磁盘效率比随机写内存还要高，这是Kafka高吞吐率的一个很重要的保证）。
-
-```text
-# The default number of log partitions per topic. More partitions allow greater
-# parallelism for consumption, but this will also result in more files across
-# the brokers.
-num.partitions=3
-```
-在发送一条消息时，可以指定这个消息的key，producer根据这个key和partition机制来判断这个消息发送到哪个partition。partition机制可以通过指定producer的partition.class这一参数来指定，该class必须实现kafka.producer.Partitioner接口。
-
-
-一个Topic包含一个或多个Partition，建Topic的时候可以手动指定Partition个数，个数与服务器个数相当
-
-![](images/chapter02-0-01.png)
-
-每一条消息被发送到broker中，会根据partition规则选择被存储到哪一个partition。如果partition规则设置的合理，所有消息可以均匀分布到不同的partition里，这样就实现了水平扩展。（如果一个topic对应一个文件，那这个文件所在的机器I/O将会成为这个topic的性能瓶颈，而partition解决了这个问题）。在创建topic时可以在$KAFKA_HOME/config/server.properties中指定这个partition的数量（如下所示），当然可以在topic创建之后去修改partition的数量。
-
-Topic是Kafka数据写入操作的基本单元，可以指定副本，broker，topic，replication也可用下图表示
-
-![](images/kafka-01.jpg)
-
-![](images/kafka-02.jpg)
-
-![](images/kafka-03.jpg)
-
-Kafka默认使用的是hash进行分区，所以会出现不同的分区数据不一样的情况，但是partitioner是可以override的
-
-## Segment
-
-Partition包含多个Segment，每个Segment对应一个文件，Segment可以手动指定大小，当Segment达到阈值时，将不再写数据，每个Segment都是大小相同的
-
-Segment由多个不可变的记录组成，记录只会被append到Segment中，不会被单独删除或者修改，每个Segment中的Message数量不一定相等
-
-清除过期日志时，支持删除一个或多个Segment，默认保留7天的数据
-
-LogSegment文件命名的规则是，partition全局的第一个Segment从0（20个0）开始，后续的每一个文件的文件名是上一个文件的最后一条消息的offset值，这样命名的好处是什么呢？假如我们有一个Consumer已经消费到了offset=x，那么如果要继续消费的话，就可以使用二分查找法来进行查找，对LogSegment文件进行查找，就可以定位到某个文件，然后拿x值去对应的index文件中去找第x条数据所在的位置。Consumer读数据的时候，实际是读Index的offset，并且会记录上次读到哪里。
-
-## Producer
-
-## Consumer
-
-## ConsumerGroup
-
-## kafka在zookeeper中的数据结构
-
-## kafka磁盘读写高性能分析
-
-
-如果把读写分开来说的话，我们可能会得出不同的结论。
-
-对于写来说，Kafka的设计确实有助于实现顺序写的模式。每个topic有不同的分区，而每个分区下包含若干个只能追加写的提交日志：新消息被追加到文件的最末端。最直接的证明就是Kafka源码中只调用了FileChannel.write(ByteBuffer)，而没有调用过带offset参数的write方法，说明它不会执行随机写操作。对于其他分布式系统而言，只要你是这种基于消息或事件的设计（不同领域对这种模式有不同的说法，比如数据库领域可能叫changelog/binlog，也可有叫event sourcing或者就是简单地称之为logging、journaling等），再辅一个随时间单调增加的字段（通常是时间戳），基本上都可以保证顺序消息写入。   
- 
-对于读来说，其实我个人并不赞同所谓顺序读的提法——我猜网上文章想强调的是它与“随机读”的区别吧——也就是说Kafka consumer定位到读取位置后顺序地读取消息，从而避免磁头的过度寻道移动，但其实用户使用consumer API也能实现在日志文件中的来回跳跃读取，所以顺序读的提法有待商榷。    
-
-我始终认为，如果说Kafka性能还不错的话，应该是多个设计因素共同叠加(比如结合java NIO、pagecache和Zerocopy)的结果，不太可能只是因为顺序读写带来的。    
-
-比如在producer端，FileChannel.write底层调用了pwrite，虽然pwrite系统调用会使用inode的信号量从而造成多线程竞争，但由于pwrite仅仅是写入数据到pagecache，延时非常短，所以这种争用并不是很明显——应该说这是producer实现高TPS的原因之一。另外producer端batch的设计也有助于提升TPS，因为它间接地改善了写操作模型，将部分随机写整编成顺序写；    
-
-而在consumer端，如果消费的数据是最近刚刚生产的，那么它们有很大概率依然在page cache中，所以Kafka源码中的FileChannel.transferTo直接调用底层sendfile实现Zero copy，将数据直接从page cache传输到socket buffer然后再通过网络传给consumer——这是consumer高TPS的原因之一。
-
-[以上参考](https://www.zhihu.com/question/309414875/answer/576557880)
-
-Kafka实际是用先写内存映射的文件，磁盘顺序读写的技术来提高性能的。Producer生产的消息按照一定的分组策略被发送到broker中的partition中的时候，这些消息如果在内存中放不下了，就会放在partition目录下的文件中，partition目录名是topic的名称加上一个序号。在这个目录下有两类文件，一类是以log为后缀的文件，另一类是以index为后缀的文件，每一个log文件和一个index文件相对应，这一对文件就是一个Segment File，其中的log文件就是数据文件，里面存放的就是Message，而index文件是索引文件。Index文件记录了元数据信息，指向对应的数据文件中Message的物理偏移量。
-
-附kafka网络传输过程
-![kafka网络传输过程](images/kafka-04.jpg)
-
-
-
-
-
-# 震惊的KAFKA
-kafka是一个分布式消息队列。具有高性能、持久化、多副本备份、横向扩展能力。生产者往队列里写消息，消费者从队列里取消息进行业务逻辑。一般在架构设计中起到解耦、削峰、异步处理的作用。
-
-kafka对外使用topic的概念，生产者往topic里写消息，消费者从读消息。为了做到水平扩展，一个topic实际是由多个partition组成的，遇到瓶颈时，可以通过增加partition的数量来进行横向扩容。单个parition内是保证消息有序。
-
-每新写一条消息，kafka就是在对应的文件append写，所以性能非常高。
-
-kafka的总体数据流是这样的：
-
-![](images/kafka-data-flow.webp)
-
-大概用法就是，Producers往Brokers里面的指定Topic中写消息，Consumers从Brokers里面拉去指定Topic的消息，然后进行业务处理。
-图中有两个topic，topic 0有两个partition，topic 1有一个partition，三副本备份。可以看到consumer gourp 1中的consumer 2没有分到partition处理，这是有可能出现的，下面会讲到。
-
-关于broker、topics、partitions的一些元信息用zk来存，监控和路由啥的也都会用到zk。
-
-## 生产
-基本流程是这样的：
-
-![](images/kafka-sdk-product-flow.webp)
-
-创建一条记录，记录中一个要指定对应的topic和value，key和partition可选。 先序列化，然后按照topic和partition，放进对应的发送队列中。kafka produce都是批量请求，会积攒一批，然后一起发送，不是调send()就进行立刻进行网络发包。
-如果partition没填，那么情况会是这样的：
-
-key有填
-按照key进行哈希，相同key去一个partition。（如果扩展了partition的数量那么就不能保证了）
-key没填
-round-robin来选partition
-这些要发往同一个partition的请求按照配置，攒一波，然后由一个单独的线程一次性发过去。
-
-## API
-有high level api，替我们把很多事情都干了，offset，路由啥都替我们干了，用以来很简单。
-还有simple api，offset啥的都是要我们自己记录。
-
-## partition
+# kafka 高可用原理
+## partition分配
 
 当存在多副本的情况下，会尽量把多个副本，分配到不同的broker上。kafka会为partition选出一个leader，之后所有该partition的请求，实际操作的都是leader，然后再同步到其他的follower。当一个broker歇菜后，所有leader在该broker上的partition都会重新选举，选出一个leader。（这里不像分布式文件存储系统那样会自动进行复制保持副本数）
 
@@ -134,11 +7,11 @@ round-robin来选partition
 
 关于partition的分配，还有leader的选举，总得有个执行者。在kafka中，这个执行者就叫controller。kafka使用zk在broker中选出一个controller，用于partition分配和leader选举。
 
-## partition分配
-
 - 将所有Broker（假设共n个Broker）和待分配的Partition排序
 - 将第i个Partition分配到第（i mod n）个Broker上 （这个就是leader）
 - 将第i个Partition的第j个Replica分配到第（(i + j) mode n）个Broker上
+
+
 
 ## leader容灾
 controller会在Zookeeper的/brokers/ids节点上注册Watch，一旦有broker宕机，它就能知道。当broker宕机后，controller就会给受到影响的partition选出新leader。controller从zk的/brokers/topics/[topic]/partitions/[partition]/state中，读取对应partition的ISR（in-sync replica已同步的副本）列表，选一个出来做leader。
@@ -175,7 +48,7 @@ controller会在Zookeeper的/brokers/ids节点上注册Watch，一旦有broker�
 ## 消费
 订阅topic是以一个消费组来订阅的，一个消费组里面可以有多个消费者。同一个消费组中的两个消费者，不会同时消费一个partition。换句话来说，就是一个partition，只能被消费组里的一个消费者消费，但是可以同时被多个消费组消费。因此，如果消费组内的消费者如果比partition多的话，那么就会有个别消费者一直空闲。
 
-![](images/kafka-data-consume.webp)
+![](images/kafka-data-consume.jpg)
 
 ## API
 订阅topic时，可以用正则表达式，如果有新topic匹配上，那能自动订阅上。
@@ -274,7 +147,7 @@ Exactly once：只且一次，消息不丢失不重复，只且消费一次（0.
 1. 消息的seq比broker的seq大超过时，说明中间有数据还没写入，即乱序了。
 1. 消息的seq不比broker的seq小，那么说明该消息已被保存。
 
-![](images/kafka-idempotency.webp)
+![](images/kafka-idempotency.jpg)
 
 ## 事务性/原子性广播
 场景是这样的：
@@ -285,7 +158,7 @@ Exactly once：只且一次，消息不丢失不重复，只且消费一次（0.
 
 其中第2、3点作为一个事务，要么全成功，要么全失败。这里得益与offset实际上是用特殊的topic去保存，这两点都归一为写多个topic的事务性处理。
 
-![](images/kafka-tansactionality.webp)
+![](images/kafka-tansactionality.jpg)
 
 基本思路是这样的：
 引入tid（transaction id），和pid不同，这个id是应用程序提供的，用于标识事务，和producer是谁并没关系。就是任何producer都可以使用这个tid去做事务，这样进行到一半就死掉的事务，可以由另一个producer去恢复。
@@ -296,7 +169,7 @@ Exactly once：只且一次，消息不丢失不重复，只且消费一次（0.
 
 数据流：
 
-![](images/kafka-tansactionality-data-flow.webp)
+![](images/kafka-tansactionality-data-flow.jpg)
 
 1. 首先使用tid请求任意一个broker（代码中写的是负载最小的broker），找到对应的transaction coordinator。 
 1. 请求transaction coordinator获取到对应的pid，和pid对应的epoch，这个epoch用于防止僵死进程复活导致消息错乱，当消息的epoch比当前维护的epoch小时，拒绝掉。tid和pid有一一对应的关系，这样对于同一个tid会返回相同的pid。
@@ -321,7 +194,7 @@ kafka的数据，实际上是以文件的形式存储在文件系统的。topic�
 
 每个segment文件大小相等，文件名以这个segment中最小的offset命名，文件扩展名是.log；segment对应的索引的文件名字一样，扩展名是.index。有两个index文件，一个是offset index用于按offset去查message，一个是time index用于按照时间去查，其实这里可以优化合到一起，下面只说offset index。总体的组织是这样的：
 
-![](images/kafka-file-system.webp)
+![](images/kafka-file-system.jpg)
 
 为了减少索引文件的大小，降低空间使用，方便直接加载进内存中，这里的索引使用稀疏矩阵，不会每一个message都记录下具体位置，而是每隔一定的字节数，再建立一条索引。 索引包含两部分，分别是baseOffset，还有position。
 
@@ -331,36 +204,8 @@ position：在segment中的绝对位置。
 
 查找offset对应的记录时，会先用二分法，找出对应的offset在哪个segment中，然后使用索引，在定位出offset在segment中的大概位置，再遍历查找message。
 
-## 常用配置项
 
-### broker配置
-
-|配置项|作用|
-|---|---|
-|broker.id|	broker的唯一标识|
-|auto.create.topics.auto	|设置成true，就是遇到没有的topic自动创建topic。|
-|log.dirs	|log的目录数，目录里面放partition，当生成新的partition时，会挑目录里partition数最少的目录放。|
-
-### topic配置
-
-|配置项|	作用|
-|---|---|
-|num.partitions	|新建一个topic，会有几个partition。|
-|log.retention.ms	|对应的还有minutes，hours的单位。日志保留时间，因为删除是文件维度而不是消息维度，看的是日志文件的mtime。|
-|log.retention.bytes	|partion最大的容量，超过就清理老的。注意这个是partion维度，就是说如果你的topic有8个partition，配置1G，那么平均分配下，topic理论最大值8G。|
-|log.segment.bytes	|一个segment的大小。超过了就滚动。|
-|log.segment.ms	|一个segment的打开时间，超过了就滚动。|
-|message.max.bytes	|message最大多大|
-
-
-关于日志清理，默认当前正在写的日志，是怎么也不会清理掉的。
-还有0.10之前的版本，时间看的是日志文件的mtime，但这个指是不准确的，有可能文件被touch一下，mtime就变了。因此在0.10版本开始，改为使用该文件最新一条消息的时间来判断。
-按大小清理这里也要注意，Kafka在定时任务中尝试比较当前日志量总大小是否超过阈值至少一个日志段的大小。如果超过但是没超过一个日志段，那么就不会删除。
-
-
-
-
-# Controller
+## Controller
 在Kafka集群中会有一个或者多个broker，其中有一个broker会被选举为控制器（Kafka Controller），它负责管理整个集群中所有分区和副本的状态。当某个分区的leader副本出现故障时，由控制器负责为该分区选举新的leader副本。当检测到某个分区的ISR集合发生变化时，由控制器负责通知所有broker更新其元数据信息。当使用kafka-topics.sh脚本为某个topic增加分区数量时，同样还是由控制器负责分区的重新分配。
 
 Kafka中的控制器选举的工作依赖于Zookeeper，成功竞选为控制器的broker会在Zookeeper中创建/controller这个临时（EPHEMERAL）节点，此临时节点的内容参考如下：
@@ -386,7 +231,7 @@ Zookeeper中还有一个与控制器有关的/controller_epoch节点，这个节
 1. 如果参数auto.leader.rebalance.enable设置为true，则还会开启一个名为“auto-leader-rebalance-task”的定时任务来负责维护分区的优先副本的均衡。
 
 
-# ControllerContext
+## ControllerContext
 控制器在选举成功之后会读取Zookeeper中各个节点的数据来初始化上下文信息（ControllerContext），并且也需要管理这些上下文信息，比如为某个topic增加了若干个分区，控制器在负责创建这些分区的同时也要更新上下文信息，并且也需要将这些变更信息同步到其他普通的broker节点中。不管是监听器触发的事件，还是定时任务触发的事件，亦或者是其他事件（比如ControlledShutdown）都会读取或者更新控制器中的上下文信息，那么这样就会涉及到多线程间的同步，如果单纯的使用锁机制来实现，那么整体的性能也会大打折扣。针对这一现象，Kafka的控制器使用单线程基于事件队列的模型，将每个事件都做一层封装，然后按照事件发生的先后顺序暂存到LinkedBlockingQueue中，然后使用一个专用的线程（ControllerEventThread）按照FIFO（First Input First Output, 先入先出）的原则顺序处理各个事件，这样可以不需要锁机制就可以在多线程间维护线程安全。
 
 ![](images/kafka-broker-controller-context.png)
@@ -399,8 +244,7 @@ Zookeeper中还有一个与控制器有关的/controller_epoch节点，这个节
 当/controller节点被删除时，每个broker都会进行选举，如果broker在节点被删除前是控制器的话，在选举前还需要有一个“退位”的动作。如果有特殊需要，可以手动删除/controller节点来触发新一轮的选举。当然关闭控制器所对应的broker以及手动向/controller节点写入新的brokerid的所对应的数据同样可以触发新一轮的选举。
 
 
-
-# PARTITION
+## PARTITION
 在Kafka中Partition的四种状态：
 
 1. NonExistentPartition —— 这个状态表示该分区要么没有被创建过或曾经被创建过但后面被删除了。
@@ -420,7 +264,7 @@ Zookeeper中还有一个与控制器有关的/controller_epoch节点，这个节
 4. OfflinePartition -> NonExistentPartition
     1. 离线状态标记为不存在分区，表示该分区失败或者被删除。
 
-# PartitionLeaderSelector
+## PartitionLeaderSelector
 KafkaController.scala
 ```text
 class KafkaController(val config : KafkaConfig, zkClient: ZkClient, val brokerState: BrokerState) extends Logging with KafkaMetricsGroup {
@@ -467,17 +311,6 @@ trait PartitionLeaderSelector {
  
 所有的leader选择完成后，都要通过请求把具体的request路由到对应的handler处理。目前kafka并没有把handler抽象出来，而是每个handler都是一个函数，混在KafkaApi类中。  
    
-    
-# kafka的高吞吐率
-
-Kafka的消息是保存或缓存在磁盘上的，Apache Kafka基准测试：每秒写入2百万（在三台廉价机器上）。轻松支持每秒百万级的写入请求，超过了大部分的消息中间件，这种特性也使得Kafka在日志处理等海量数据场景广泛应用。
-
-## **下面从数据写入和读取两方面分析，为什么Kafka速度这么快。**
-
-## **一、写入数据**
-
-Kafka会把收到的消息都写入到硬盘中，它绝对不会丢失数据。为了优化写入速度Kafka采用了两个技术， 顺序写入和MMFile 。
-
 
 ## 参考资料
 https://www.zhihu.com/question/309414875/answer/576557880

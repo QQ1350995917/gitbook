@@ -17,8 +17,8 @@ public class ZKCreateNode {
 
 
   public static void main(String[] args) {
-    ZkClient client = new ZkClient("localhost:2181", 5000);
-    String path = "/zk-client/c1";
+    ZkClient client = new ZkClient("192.168.105.25:2181", 5000);
+    String path = "/pwd-test/test1";
     // 递归创建顺序节点 true：先创建父节点/zk-client
     client.createPersistent(path, true);
   }

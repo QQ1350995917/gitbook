@@ -33,7 +33,7 @@
     <!--<module>zythum/spring-mybatis</module>-->
     <!--<module>zythum/springboot-mybatis-sharding-jdbc-rws</module>-->
     <!--<module>zythum/zk-api</module>-->
-    <!--<module>zythum/zk-client</module>-->
+    <module>zythum/zk-client</module>
     <!--<module>zythum/zk-curator</module>-->
   </modules>
 
