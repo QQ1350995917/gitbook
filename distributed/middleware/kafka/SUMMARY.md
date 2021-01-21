@@ -8,6 +8,7 @@
     - [消费者详解](chapter03-3.md)
 - [高可用详解](chapter04.md)    
 - [常用命令](chapter05.md)
+- [kafka-manager](chapter06.md)
 
 
 
