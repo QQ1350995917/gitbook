@@ -119,6 +119,7 @@
         - [消费者详解](distributed/middleware/kafka/chapter03-3.md)
     - [高可用详解](distributed/middleware/kafka/chapter04.md)    
     - [常用命令](distributed/middleware/kafka/chapter05.md)
+    - [kafka-manager](distributed/middleware/kafka/chapter06.md)
   * [zookeeper](distributed/middleware/zookeeper/SUMMARY.md)
     - [单机部署](distributed/middleware/zookeeper/chapter01-0.md)
     - [集群部署](distributed/middleware/zookeeper/chapter01-1.md)

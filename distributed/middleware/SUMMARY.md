@@ -12,6 +12,7 @@
       - [消费者详解](kafka/chapter03-3.md)
   - [高可用详解](kafka/chapter04.md)    
   - [常用命令](kafka/chapter05.md)
+  - [kafka-manager](kafka/chapter06.md)
 ## [zookeeper](zookeeper/SUMMARY.md)
   - [单机部署](zookeeper/chapter01-0.md)
   - [集群部署](zookeeper/chapter01-1.md)
