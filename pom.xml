@@ -21,9 +21,11 @@
     <!--<module>zythum/java-jdbc</module>-->
     <!--<module>zythum/java-lambda</module>-->
     <!--<module>zythum/java-monitor</module>-->
-    <module>zythum/kafka-consumer</module>
-    <module>zythum/kafka-producer</module>
+    <!--<module>zythum/kafka-consumer</module>-->
+    <!--<module>zythum/kafka-producer</module>-->
     <!--<module>zythum/mysql</module>-->
+    <module>zythum/rabbitmq-consumer</module>
+    <module>zythum/rabbitmq-producer</module>
     <!--<module>zythum/rocketmq-consumer</module>-->
     <!--<module>zythum/rocketmq-producer</module>-->
     <!--<module>zythum/spring-batch</module>-->
@@ -33,7 +35,7 @@
     <!--<module>zythum/spring-mybatis</module>-->
     <!--<module>zythum/springboot-mybatis-sharding-jdbc-rws</module>-->
     <!--<module>zythum/zk-api</module>-->
-    <module>zythum/zk-client</module>
+    <!--<module>zythum/zk-client</module>-->
     <!--<module>zythum/zk-curator</module>-->
   </modules>
 

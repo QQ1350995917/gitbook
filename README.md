@@ -126,7 +126,7 @@
     - [常用命令](distributed/middleware/zookeeper/chapter03-0.md)
     - [应用场景](distributed/middleware/zookeeper/chapter05-0.md)
     - [客户端](distributed/middleware/zookeeper/chapter06-0.md)
-  * [RabbitMQ]()
+  * [RabbitMQ](distributed/middleware/rabbitmq/SUMMARY.md)
   * [ZeroMQ]()
 * [Spring](spring/SUMMARY.md)  
   * [Spring-context](spring/spring-context/SUMMARY.md)
