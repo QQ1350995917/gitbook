@@ -20,27 +20,29 @@ import java.util.concurrent.TimeoutException;
  */
 public class ProducerDirect {
 
+  private final static String QUEUE_NAME = "hello";
 
   public static void main(String[] args) throws IOException, TimeoutException {
 
-    String queneName = "testQuene";
+    ConnectionFactory factory = new ConnectionFactory();
+    factory.setHost("localhost");
+    factory.setPort(5672);
+    factory.setUsername("guest");
+    factory.setPassword("guest");
     Connection connection = null;
     Channel channel = null;
     try {
-      ConnectionFactory factory = new ConnectionFactory();
-      factory.setHost("localhost");
-      factory.setPort(5672);
-      factory.setUsername("guest");
-      factory.setPassword("guest");
-      factory.setVirtualHost("test_vhosts");
       // 创建与RabbitMQ服务器的TCP连接
       connection = factory.newConnection();
       // 创建一个频道
       channel = connection.createChannel();
       // 声明默认的队列
-      channel.queueDeclare(queneName, true, false, true, null);
+      boolean durable = true;
+      channel.queueDeclare(QUEUE_NAME, durable, false, true, null);
       while (true) {
-        channel.basicPublish("", queneName, null, UUID.randomUUID().toString().getBytes());
+        String message = UUID.randomUUID().toString();
+        channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
+        System.out.println(" [x] Sent '" + message + "'");
         Thread.sleep(1000);
       }
     } catch (Exception ex) {

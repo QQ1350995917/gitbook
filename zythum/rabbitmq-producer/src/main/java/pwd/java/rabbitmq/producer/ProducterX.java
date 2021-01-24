@@ -1,5 +1,6 @@
 package pwd.java.rabbitmq.producer;
 
+import com.rabbitmq.client.MessageProperties;
 import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.TimeoutException;
@@ -41,14 +42,15 @@ public class ProducterX {
       // 声明交换机类型
       channel.exchangeDeclare("amq.fanout", "fanout", true);
       // 声明默认的队列 (也可不申明队列，使用默认队列)
-      channel.queueDeclare(queneName, true, false, true, null);
+      boolean durable = true;
+      channel.queueDeclare(queneName, durable, false, true, null);
       // String queue = channel.queueDeclare().getQueue();
       // 将队列与交换机绑定
       channel.queueBind(queneName, exchangeName, routingKey);
       // 指定一个队列
       // channel.queueDeclare(queneName, false, false, false, null);
       while (true) {
-        channel.basicPublish(exchangeName, routingKey, null, UUID.randomUUID().toString().getBytes());
+        channel.basicPublish(exchangeName, routingKey, MessageProperties.PERSISTENT_TEXT_PLAIN, UUID.randomUUID().toString().getBytes());
         Thread.sleep(1000);
       }
     } catch (Exception ex) {
