@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pwd.spring.boot.concurrent.persistence.dao.TestMapper">
+
+  <resultMap id="TestMap"
+    type="pwd.spring.boot.concurrent.persistence.entity.TestEntity">
+    <result column="id" jdbcType="BIGINT" property="id"/>
+    <result column="num" jdbcType="BIGINT" property="num"/>
+    <result column="day" jdbcType="BIGINT" property="day"/>
+  </resultMap>
+
+  <!--查询单个-->
+  <select id="queryByDay" resultMap="TestMap">
+        select
+          id, num, `day`
+        from test
+        where day = #{day} order by id asc limit 1 for update
+  </select>
+
+  <update id="updateById">
+    update test
+    set `day` = #{day}
+    where id = #{id}
+  </update>
+
+</mapper>
