@@ -30,6 +30,6 @@
     - [常用命令](middleware/zookeeper/chapter03-0.md)
     - [应用场景](middleware/zookeeper/chapter05-0.md)
     - [客户端](middleware/zookeeper/chapter06-0.md)
-
+  - [MQ选型](middleware/mq.md)
 ## 其他资料
 [阿里巴巴为什么能抗住90秒100亿](https://www.jianshu.com/p/9f985bbc9c70)

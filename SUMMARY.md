@@ -132,6 +132,7 @@
     - [架构详解](distributed/middleware/rabbitmq/chapter03.md)
     - [运维工具](distributed/middleware/rabbitmq/chapter04.md)
   * [ZeroMQ]()
+  * [MQ选型](distributed/middleware/mq.md)
 * [Spring](spring/SUMMARY.md)  
   * [Spring-context](spring/spring-context/SUMMARY.md)
     * [SpringIOC](spring/spring-context/ioc-index.md)

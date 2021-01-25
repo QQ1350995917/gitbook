@@ -27,3 +27,4 @@
   - [常用命令](zookeeper/chapter03-0.md)
   - [应用场景](zookeeper/chapter05-0.md)
   - [客户端](zookeeper/chapter06-0.md)
+## [MQ选型](mq.md)
