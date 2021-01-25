@@ -25,6 +25,8 @@ When special characters, "*" (star) and "#" (hash), aren't used in bindings, the
 
 ### Queue
 
+#### CallbackQueue
+
 ### Binding
 
 ## Consumer
