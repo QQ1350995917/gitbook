@@ -45,6 +45,7 @@
   - [部署](redis/01-install.md)
   - [部署模式以及对比](redis/02-deploy-model.md)
   - [基本概念介绍](redis/03-concept.md)
+  - [RedisMQ](redis/04-mq.md)
   - [其他](redis/chapter1.md)
 
 - [Cassandra](cassandra/SUMMARY.md):一个高可靠的大规模分布式存储系统。支持分布式的结构化Key-value存储，以高可用性为主要目标。适合写多的场景，适合做一些简单查询，不适合用来做数据分析统计。

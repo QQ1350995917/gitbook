@@ -190,6 +190,7 @@
     * [部署](storage/redis/01-install.md)
     * [部署模式以及对比](storage/redis/02-deploy-model.md)
     * [基本概念介绍](storage/redis/03-concept.md)
+    * [RedisMQ](storage/redis/04-mq.md)
     * [其他](storage/redis/chapter1.md)  
   * [RRD](storage/rrd/SUMMARY.md)
   * [TSDB](storage/tsdb/SUMMARY.md)

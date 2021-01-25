@@ -86,6 +86,8 @@ RabbitMQ管理消息的分发以及队列上消息的移除（也可能转移到
 - 每种解决方案的运营成本；
 - 适用于我们目标栈的SDK的可用性。
 
+## [Redis MQ](../../storage/redis/04-mq.md)
+
 ## 参考资料
 https://www.zhihu.com/question/275090117/answer/1645290543
 
