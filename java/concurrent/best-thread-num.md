@@ -11,7 +11,7 @@
 
 将这句话翻译到硬件级别就是要充分的利用 CPU 和 I/O 的利用率
 
-![](images/best-thread-num-0.webp)
+![](images/best-thread-num-0.jpg)
 
 两个正确得到保证，也就能达到最大化利用 CPU 和 I/O的目的了。最关键是，如何做到两个【正确】？
 
@@ -37,7 +37,7 @@
 
 我们来看下图他们会发生什么？
 
-![](images/best-thread-num-1.webp)
+![](images/best-thread-num-1.jpg)
 
 由于是单核 CPU，所有线程都在等待 CPU 时间片。按照理想情况来看，四个线程执行的时间总和与一个线程5独自完成是相等的，实际上我们还忽略了四个线程上下文切换的开销
 
@@ -45,7 +45,7 @@
 
 此时如果在 4 核CPU下，同样创建四个线程来分段计算，看看会发生什么？
 
-![](images/best-thread-num-2.webp)
+![](images/best-thread-num-2.jpg)
 
 每个线程都有 CPU 来运行，并不会发生等待 CPU 时间片的情况，也没有线程切换的开销。理论情况来看效率提升了 4 倍
 
@@ -61,7 +61,7 @@
 
 同样在单核 CPU 的情况下：
 
-![](images/best-thread-num-3.webp)
+![](images/best-thread-num-3.jpg)
 
 从上图中可以看出，每个线程都执行了相同长度的 CPU 耗时和 I/O 耗时，如果你将上面的图多画几个周期，CPU操作耗时固定，将 I/O 操作耗时变为 CPU 耗时的 3 倍，你会发现，CPU又有空闲了，这时你就可以新建线程 4，来继续最大化的利用 CPU。
 
@@ -98,7 +98,7 @@
 
 我这么体贴，当然担心有些同学不理解这个公式，我们将上图的比例手动带入到上面的公式中：
 
-![](images/best-thread-num-4.webp)
+![](images/best-thread-num-4.jpg)
 
 这是一个CPU核心的最佳线程数，如果多个核心，那么 I/O 密集型程序的最佳线程数就是：
 ```text
@@ -109,7 +109,7 @@
 
 按照上面公式，假如几乎全是 I/O耗时，所以纯理论你就可以说是 2N（N=CPU核数），当然也有说 2N + 1的，（我猜这个 1 也是 backup），没有找到具体的推倒过程，在【并发编程实战-8.2章节】截图在此，大家有兴趣的可以自己看看
 
-![](images/best-thread-num-5.webp)
+![](images/best-thread-num-5.jpg)
 
 理论上来说，理论上来说，理论上来说，这样就能达到 CPU 100% 的利用率
 
@@ -136,7 +136,7 @@
 假设要求一个系统的 TPS（Transaction Per Second 或者 Task Per Second）至少为20，然后假设每个Transaction由一个线程完成，继续假设平均每个线程处理一个Transaction的时间为4s
 如何设计线程个数，使得可以在1s内处理完20个Transaction？
 ```
-![](images/best-thread-num-6.webp)
+![](images/best-thread-num-6.jpg)
 
 但是，但是，这是因为没有考虑到CPU数目。家里又没矿，一般服务器的CPU核数为16或者32，如果有80个线程，那么肯定会带来太多不必要的线程上下文切换开销（希望这句话你可以主动说出来），这就需要调优了，来做到最佳 balance
 
@@ -149,7 +149,7 @@
 ```text
 那如果DB的 QPS（Query Per Second）上限是1000，此时这个线程数又该设置为多大呢？
 ```
-![](images/best-thread-num-7.webp)
+![](images/best-thread-num-7.jpg)
 
 同样，这是没有考虑 CPU 数目，接下来就又是细节调优的阶段了
 
@@ -161,11 +161,11 @@
 
 在讲互斥锁的内容是，我故意遗留了一个知识:
 
-![](images/best-thread-num-8.webp)
+![](images/best-thread-num-8.jpg)
 
 怎么理解这个公式呢？
 
-![](images/best-thread-num-9.webp)
+![](images/best-thread-num-9.jpg)
 
 这个结论告诉我们，假如我们的串行率是 5%，那么我们无论采用什么技术，最高也就只能提高 20 倍的性能。
 
@@ -190,6 +190,9 @@ Tips: 临界区都是串行的，非临界区都是并行的，用单线程执�
 1. 我们已经知道创建多少个线程合适了，为什么还要搞一个线程池出来？
 1. 创建一个线程都要做哪些事情？为什么说频繁的创建线程开销很大？
 1. 多线程通常要注意共享变量问题，为什么局部变量就没有线程安全问题呢？
+
+
+## [并发量计算](../../web/concurrency.md)
 
 ## 參考资料
 https://www.jianshu.com/p/f30ee2346f9f

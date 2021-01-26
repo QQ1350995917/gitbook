@@ -1,7 +1,7 @@
 ## 等待队列和同步队列（本是Object里的方法，但影响了线程）
 - 调用obj的wait(), notify()方法前，必须获得obj锁，也就是必须写在synchronized(obj) 代码段内。
 - 与等待队列和同步队列相关的步骤和图
-![](images/thread-sync-queue.jfif)
+![](images/thread-sync-queue.jpg)
 
 1. 线程1获取对象A的锁，正在使用对象A。
 2. 线程1调用对象A的wait()方法。
