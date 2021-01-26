@@ -5,7 +5,7 @@ File.read(file, buf, len);
 Socket.send(socket, buf, len);
 ```
 
-![](images/io-copy-01.webp)
+![](images/io-copy-01.jpg)
 
 1、应用程序中调用read() 方法，这里会涉及到一次上下文切换（用户态->内核态），底层采用DMA（direct memory access）读取磁盘的文件，并把内容存储到内核地址空间的读取缓存区。
 
@@ -17,7 +17,7 @@ Socket.send(socket, buf, len);
 
 5, 如果在应用程序中，不需要操作内容，过程2和3就是多余的，如果可以直接把内核态读取缓存冲区数据直接拷贝到套接字相关的缓存区，可以达到优化的目的
 
-![](images/io-copy-02.webp)
+![](images/io-copy-02.jpg)
 
 这种实现，可以有以下几点改进：
 - 上下文切换的次数从四次减少到了两次

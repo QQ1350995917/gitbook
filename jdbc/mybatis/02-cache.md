@@ -51,11 +51,11 @@ spring整合mybatis后，非事务环境下，每次操作数据库都使用新�
 
 用下面这张图描述一级缓存和二级缓存的关系
 
-![](images/mybatis-cache-01.webp)
+![](images/mybatis-cache-01.jpg)
 
 ### 配置二级缓存
 在保证二级缓存的全局配置开启的情况下，给某个xml开启二级缓存只需要在xml中添加<cache />即可
-```xml
+```text
 // mybatis-config.xml 中配置
 <settings>
     默认值为 true。即二级缓存默认是开启的
