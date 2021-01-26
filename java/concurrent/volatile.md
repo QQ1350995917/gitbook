@@ -95,7 +95,7 @@ class VolatileExample {
 - 根据 volatile 规则：2 happens-before 3。
 - 根据 happens-before 的传递性规则：1 happens-before 4。
 
-![](images/volatile-example.webp)
+![](images/volatile-example.jpg)
 
 - 因为以上规则，当线程 A 将 volatile 变量 flag 更改为 true 后，线程 B 能够迅速感知。
 
@@ -104,7 +104,7 @@ class VolatileExample {
 - Java 编译器会在生成指令系列时在适当的位置会插入内存屏障指令来禁止特定类型的处理器重排序。
 - JMM 会针对编译器制定 volatile 重排序规则表。
 
-![](images/volatile-example-1.webp)
+![](images/volatile-example-1.jpg)
 
 - " NO " 表示禁止重排序。
   - 为了实现 volatile 内存语义时，编译器在生成字节码时，会在指令序列中插入内存屏障来禁止特定类型的处理器重排序。
@@ -124,9 +124,9 @@ class VolatileExample {
 |LoadLoad  | 屏障	禁止下面所有的普通读操作和上面的 volatile 读重排序。|
 |LoadStore  | 屏障	禁止下面所有的普通写操作和上面的 volatile 读重排序。|
 
-![](images/volatile-example-2.webp)
+![](images/volatile-example-2.jpg)
 
-![](images/volatile-example-3.webp)
+![](images/volatile-example-3.jpg)
 
 ### volatile 的应用场景
 - 使用 volatile 必须具备的条件
