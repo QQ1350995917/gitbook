@@ -20,22 +20,22 @@ MySQL 主从复制是指数据可以从一个MySQL数据库服务器主节点复
 
 ### 一主一从
 ### 一主多从，提高系统的读性能
-![](images/1MMS.jfif)
+![](images/1MMS.jpg)
 
 一主一从和一主多从是最常见的主从架构，实施起来简单并且有效，不仅可以实现HA，而且还能读写分离，进而提升集群的并发能力。
 ### 多主一从 （从5.7开始支持）
-![](images/MM1S.jfif)
+![](images/MM1S.jpg)
 
 多主一从可以将多个mysql数据库备份到一台存储性能比较好的服务器上。
 ### 双主复制
 双主复制，也就是互做主从复制，每个master既是master，又是另外一台服务器的slave。这样任何一方所做的变更，都会通过复制应用到另外一方的数据库中。
 ### 级联复制
-![](images/MLevel.jfif)
+![](images/MLevel.jpg)
 
 级联复制模式下，部分slave的数据同步不连接主节点，而是连接从节点。因为如果主节点有太多的从节点，就会损耗一部分性能用于replication，那么我们可以让3~5个从节点连接主节点，其它从节点作为二级或者三级与从节点连接，这样不仅可以缓解主节点的压力，并且对数据一致性没有负面影响。    
 
 ## 主从复制原理
-![](images/concept.jfif)
+![](images/concept.jpg)
 
 MySQL主从复制涉及到三个线程，一个运行在主节点（log dump thread），其余两个(I/O thread, SQL thread)运行在从节点，如图所示:
 
@@ -57,7 +57,7 @@ SQL线程负责读取relay log中的内容，解析成具体的操作并执行�
 
 因为整个复制过程实际上就是Slave 从Master 端获取该日志然后再在自己身上完全顺序的执行日志中所记录的各种操作。如下图所示：
 
-![](images/rep-flow.jfif)
+![](images/rep-flow.jpg)
 
 复制的基本过程如下：
 
@@ -69,10 +69,10 @@ SQL线程负责读取relay log中的内容，解析成具体的操作并执行�
 MySQL 主从复制默认是异步的模式。MySQL增删改操作会全部记录在binary log中，当slave节点连接master时，会主动从master处获取最新的bin log文件。并把bin log中的sql relay。
 ### 异步模式（mysql async-mode）
 异步模式如下图所示，这种模式下，主节点不会主动push bin log到从节点，这样有可能导致failover的情况下，也许从节点没有即时地将最新的bin log同步到本地。
-![](images/async-mode.jfif)
+![](images/async-mode.jpg)
 ### 半同步模式(mysql semi-sync)
 这种模式下主节点只需要接收到其中一台从节点的返回信息，就会commit；否则需要等待直到超时时间然后切换成异步模式再提交；这样做的目的可以使主从数据库的数据延迟缩小，可以提高数据安全性，确保了事务提交后，binlog至少传输到了一个从节点上，不能保证从节点将此事务更新到db中。性能上会有一定的降低，响应时间会变长。如下图所示：
-![](images/semi-sync.jfif)  
+![](images/semi-sync.jpg)  
 半同步模式不是mysql内置的，从mysql 5.5开始集成，需要master 和slave 安装插件开启半同步模式
 ### 全同步模式
 全同步模式是指主节点和从节点全部执行了commit并确认才会向客户端返回成功。
