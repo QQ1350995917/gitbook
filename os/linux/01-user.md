@@ -1,6 +1,16 @@
 ## 查看用户
 cat /etc/passwd
 
+```text
+adduser es
+echo es|passwd --stdin es
+
+# 添加sudoer
+visudo
+es      ALL=(ALL)       ALL
+
+```
+
 ## 创建用户
 创建用户有两条命令：
 - adduer
