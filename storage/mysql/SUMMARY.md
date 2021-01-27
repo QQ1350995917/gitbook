@@ -17,7 +17,7 @@
 1. ## 分布式事务
 1. ## [运维相关](op.md)
 1. ## [SQL语句常见错误](sql-optimization.md)
-
+1. ## [C-N-V-D测试数据MySQL插入慢](sql-optimization-write-slow.md)
 
 
 

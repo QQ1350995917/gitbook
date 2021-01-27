@@ -7,3 +7,5 @@
 - APN-mark数据库优化
 - 监控
 - ETL
+
+- [C-N-V-D测试数据MySQL插入慢](../../storage/mysql/sql-optimization-write-slow.md)
