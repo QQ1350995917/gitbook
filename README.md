@@ -179,6 +179,7 @@
     * [主从模式](storage/mysql/deploy-master-slave.md)
     * [运维相关](storage/mysql/op.md)
     * [SQL语句常见错误](storage/mysql/sql-optimization.md)
+    * [C-N-V-D测试数据MySQL插入慢](storage/mysql/sql-optimization-write-slow.md)
   * [MongoDB](storage/mongodb/SUMMARY.md)
     * [单机部署](storage/mongodb/chapter0.md)
     * [主从部署](storage/mongodb/chapter1.md)
