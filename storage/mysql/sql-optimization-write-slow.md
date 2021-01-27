@@ -2,7 +2,13 @@
 
 [先查看执行过程](optimization-02.md)
 
+
+
 ## 调整数据库参数
+![](images/sql-optimization-write-02.jpg)
+
+![](images/sql-optimization-write-03.jpg)
+
 ### innodb_flush_log_at_trx_commit
 默认为1，这是数据库的事务提交设置参数，可选值如下：
 
