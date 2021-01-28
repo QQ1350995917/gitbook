@@ -177,7 +177,12 @@ cd elasticsearch-head-master
 启动
 ```text
 yum -y install bzip2
+npm config set registry https://registry.npm.taobao.org 
+
+npm install grunt
+npm install grunt-cli
 npm install
+
 npm run start           
 nohup npm run start
 ```
