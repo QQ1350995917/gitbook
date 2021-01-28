@@ -30,6 +30,8 @@ cluster.name: cnvd-es
 # Use a descriptive name for the node:
 #
 node.name: node-24
+node.master: true
+node.data: true
 #
 # Add custom attributes to the node:
 #
@@ -61,7 +63,7 @@ path.logs: /home/es/logs
 #
 # Set the bind address to a specific IP (IPv4 or IPv6):
 #
-network.host: 192.168.105.24
+network.host: 0.0.0.0
 #
 # Set a custom port for HTTP:
 #
@@ -78,7 +80,7 @@ discovery.seed_hosts: ["192.168.105.25"]
 #
 # Bootstrap the cluster using an initial set of master-eligible nodes:
 #
-#cluster.initial_master_nodes: ["node-1", "node-2"]
+cluster.initial_master_nodes: ["192.168.105.24", "192.168.105.25"]
 #
 # For more information, consult the discovery and cluster formation module documentation.
 #
@@ -156,7 +158,7 @@ path.logs: /home/es/logs
 #
 # Set the bind address to a specific IP (IPv4 or IPv6):
 #
-network.host: 192.168.105.25
+network.host: 0.0.0.0
 #
 # Set a custom port for HTTP:
 #
@@ -169,11 +171,11 @@ http.port: 1200
 # Pass an initial list of hosts to perform discovery when this node is started:
 # The default list of hosts is ["127.0.0.1", "[::1]"]
 #
-discovery.seed_hosts: ["192.168.105.24"]
+# discovery.seed_hosts: ["192.168.105.24"]
 #
 # Bootstrap the cluster using an initial set of master-eligible nodes:
 #
-#cluster.initial_master_nodes: ["node-1", "node-2"]
+cluster.initial_master_nodes: ["192.168.105.24", "192.168.105.25"]
 #
 # For more information, consult the discovery and cluster formation module documentation.
 #
@@ -193,4 +195,5 @@ discovery.seed_hosts: ["192.168.105.24"]
 
 http.cors.enabled: true
 http.cors.allow-origin: "*"
+
 ```
