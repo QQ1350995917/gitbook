@@ -76,11 +76,11 @@ http.port: 1200
 # Pass an initial list of hosts to perform discovery when this node is started:
 # The default list of hosts is ["127.0.0.1", "[::1]"]
 #
-discovery.seed_hosts: ["192.168.105.25"]
+discovery.seed_hosts: ["192.168.105.25:9300","192.168.105.25:9300"]
 #
 # Bootstrap the cluster using an initial set of master-eligible nodes:
 #
-cluster.initial_master_nodes: ["192.168.105.24", "192.168.105.25"]
+cluster.initial_master_nodes: ["node-24", "node-25"]
 #
 # For more information, consult the discovery and cluster formation module documentation.
 #
@@ -171,11 +171,11 @@ http.port: 1200
 # Pass an initial list of hosts to perform discovery when this node is started:
 # The default list of hosts is ["127.0.0.1", "[::1]"]
 #
-# discovery.seed_hosts: ["192.168.105.24"]
+discovery.seed_hosts: ["192.168.105.25:9300","192.168.105.25:9300"]
 #
 # Bootstrap the cluster using an initial set of master-eligible nodes:
 #
-cluster.initial_master_nodes: ["192.168.105.24", "192.168.105.25"]
+cluster.initial_master_nodes: ["node-24", "node-25"]
 #
 # For more information, consult the discovery and cluster formation module documentation.
 #
