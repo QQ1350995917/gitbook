@@ -9,6 +9,8 @@
 ### [Auth2.0以及SSO](basic/chapter6.md)
 ### [DNS协议以及工作介绍](basic/chapter7.md)
 ### [TCP三次握手四次挥手](basic/chapter8.md)
+### [TCP连接数](basic/chapter9.md)
+### [网络掩码](basic/chapter10.md)
 ## [Netty框架](netty/SUMMARY.md)
 ## [Socket](socket/SUMMARY.md)
 ## [nc](nc.md)
