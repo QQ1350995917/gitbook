@@ -2,7 +2,7 @@
 
 ## ununtu18
 
-- [准备MySQL环境](../../storage/mysql/SUMMARY.md)
+- [准备MySQL环境](../mysql/SUMMARY.md)
 - [hive下载地址](https://mirrors.tuna.tsinghua.edu.cn/apache/hive/stable-2/apache-hive-2.3.7-bin.tar.gz)  
 
 ### 部署 
