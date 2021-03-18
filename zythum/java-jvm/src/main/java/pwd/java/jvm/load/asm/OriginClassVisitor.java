@@ -1,4 +1,4 @@
-package pwd.java.bytecode.asm;
+package pwd.java.jvm.load.asm;
 
 import jdk.internal.org.objectweb.asm.ClassVisitor;
 import jdk.internal.org.objectweb.asm.MethodVisitor;

@@ -1,4 +1,4 @@
-package pwd.java.gc;
+package pwd.java.jvm.gc;
 
 /**
  * pwd.java.gc@gitbook
@@ -11,11 +11,10 @@ package pwd.java.gc;
  * @version 1.0.0
  * @since DistributionVersion
  */
-public class GCByCount2 {
+public class GCByCount1 {
+  private GCByCount2 gcByCount2;
 
-  private GCByCount1 gcByCount1;
-
-  public void setGcByCount1(GCByCount1 gcByCount1) {
-    this.gcByCount1 = gcByCount1;
+  public void setGcByCount2(GCByCount2 gcByCount2) {
+    this.gcByCount2 = gcByCount2;
   }
 }

@@ -1,4 +1,4 @@
-package pwd.java.gc;
+package pwd.java.jvm.gc;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

@@ -1,4 +1,4 @@
-package pwd.java.gc;
+package pwd.java.jvm.gc;
 
 import java.lang.management.ManagementFactory;
 import java.util.LinkedList;

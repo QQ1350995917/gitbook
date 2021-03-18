@@ -1,4 +1,4 @@
-package pwd.java.bytecode.asm;
+package pwd.java.jvm.load.asm;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -20,7 +20,7 @@ public class OriginGenerator {
 
   public static void main(String[] args) throws Exception {
     //读取
-    ClassReader classReader = new ClassReader("pwd/java/bytecode/asm/Origin");
+    ClassReader classReader = new ClassReader("pwd/java/jvm/load/asm/Origin");
     ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS);
     //处理
     OriginClassVisitor classVisitor = new OriginClassVisitor(classWriter);

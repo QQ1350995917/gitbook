@@ -1,4 +1,4 @@
-package pwd.java.gc;
+package pwd.java.jvm.gc;
 
 /**
  * pwd.java.gc@gitbook

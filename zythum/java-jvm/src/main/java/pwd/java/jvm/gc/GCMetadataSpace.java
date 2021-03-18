@@ -1,13 +1,8 @@
-package pwd.java.gc;
+package pwd.java.jvm.gc;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.PropertyNamingStrategy;
 import com.alibaba.fastjson.serializer.SerializeConfig;
-import java.io.File;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * pwd.java.gc@gitbook

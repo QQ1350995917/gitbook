@@ -1,10 +1,7 @@
-package pwd.java.gc;
-
-import java.util.LinkedList;
-import java.util.List;
+package pwd.java.jvm.gc;
 
 /**
- * pwd.java.gc@gitbook
+ * pwd.java.jvm.gc@gitbook
  *
  * <h1>TODO what you want to do?</h1>
  *

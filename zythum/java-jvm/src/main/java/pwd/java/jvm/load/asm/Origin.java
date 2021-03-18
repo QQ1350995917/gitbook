@@ -1,4 +1,4 @@
-package pwd.java.bytecode.asm;
+package pwd.java.jvm.load.asm;
 
 /**
  * pwd.java.concurrent@gitbook

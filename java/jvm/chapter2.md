@@ -188,7 +188,7 @@ public class GCByCount1 {
 package pwd.java.gc;
 
 /**
- * pwd.java.gc@gitbook
+ *pwd.java.jvm.gc
  *
  * <h1>TODO what you want to do?</h1>
  *
