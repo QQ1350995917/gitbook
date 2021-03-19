@@ -9,7 +9,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>java-gc</artifactId>
+  <artifactId>java-gvm</artifactId>
   <packaging>jar</packaging>
 
   <dependencies>
