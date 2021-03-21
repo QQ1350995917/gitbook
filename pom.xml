@@ -15,6 +15,7 @@
     <!--<module>zythum/hadoop-hdfs</module>-->
     <!--<module>zythum/hadoop-spark</module>-->
     <!--<module>zythum/http-client</module>-->
+    <module>zythum/java-collections</module>
     <!--<module>zythum/java-concurrent</module>-->
     <module>zythum/java-jvm</module>
     <!--<module>zythum/java-jdbc</module>-->

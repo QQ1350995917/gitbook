@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pwd.spring.mybatis.mapper.ListMapMapper">
+
+  <insert id="insert" keyProperty="id" parameterType="Map" useGeneratedKeys="true">
+    INSERT INTo black_list_domain
+    (domain)
+    VALUES
+    <foreach collection="domains" item="domain" separator=",">
+      (#{domain.domain})
+    </foreach>
+  </insert>
+
+  <insert id="insertEnterprise" keyProperty="id" parameterType="Map" useGeneratedKeys="true">
+    INSERT INTo enterprise
+    (
+    `code`,
+    `name`,
+    `address`,
+    `province`,
+    `city`,
+    `area`,
+    `found_ti`,
+    `owner`,
+    `phone`,
+    `email`,
+    `value`,
+    `status`,
+    `type`,
+    `phones`,
+    `domain`,
+    `scope`
+    )
+    VALUES
+    <foreach collection="enterprises" item="enterprise" separator=",">
+      (
+      #{enterprise.code},
+      #{enterprise.name},
+      #{enterprise.address},
+      #{enterprise.province},
+      #{enterprise.city},
+      #{enterprise.area},
+      #{enterprise.found_time},
+      #{enterprise.owner},
+      #{enterprise.phone},
+      #{enterprise.email},
+      #{enterprise.value},
+      #{enterprise.status},
+      #{enterprise.type},
+      #{enterprise.phones},
+      #{enterprise.domain},
+      #{enterprise.scope}
+      )
+    </foreach>
+
+  </insert>
+
+
+
+
+</mapper>
