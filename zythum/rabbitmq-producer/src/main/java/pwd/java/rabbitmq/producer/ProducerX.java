@@ -19,7 +19,7 @@ import com.rabbitmq.client.ConnectionFactory;
  * @version 1.0.0
  * @since DistributionVersion
  */
-public class ProducterX {
+public class ProducerX {
   public static void main(String[] args) throws IOException, TimeoutException {
 
     String queneName = "firstQueue";

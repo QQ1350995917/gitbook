@@ -24,8 +24,8 @@
     <!--<module>zythum/kafka-consumer</module>-->
     <!--<module>zythum/kafka-producer</module>-->
     <!--<module>zythum/mysql</module>-->
-    <!--<module>zythum/rabbitmq-consumer</module>-->
-    <!--<module>zythum/rabbitmq-producer</module>-->
+    <module>zythum/rabbitmq-consumer</module>
+    <module>zythum/rabbitmq-producer</module>
     <module>zythum/redis-client</module>
     <!--<module>zythum/rocketmq-consumer</module>-->
     <!--<module>zythum/rocketmq-producer</module>-->
