@@ -1,6 +1,41 @@
 # DNS
+DNS是域名系统(Domain Name System)或者域名服务(Domain Name Service)的英文缩写。
 
-DNS\( Domain Name System\)是“域名系统”的英文缩写.
+https://root-servers.org/
+
+## DNS用途是什么
+一道面试题：在浏览器中输入一个域名，如www.google.com，点击回车后，发生了什么？
+
+- 第一步：输入域名后，电脑首先看自己有没有对应域名的缓存，有缓存就直接用缓存里的ip访问。
+    ```text
+    在windows系统中通过ipconfig管理dns缓存，查看：ipconfig /displaydns；清空：ipconfig /flushdns、
+    在MacOS系统中通过lookupd管理dns缓存，清空：lookupd -flushcache 
+    在Linux各个发行版有区别：nscd DNS cache；dnsmasq dns cache；BIND server dns cache
+    ```
+- 第二步，如果缓存中没有，则去查询hosts文件
+- 第三步，如果hosts文件里也没找到想解析的域名，则将域名发往自己配置的dns服务器，也叫本地dns服务器
+    ```text
+    在windows命令行ipconfig /all可以看到自己的本地dns服务器
+    
+    ```
+- 第四步，如果本地dns服务器有相应域名的记录，则返回记录。
+  电脑的dns服务器一般是各大运营商如电信联通提供的，或者像180.76.76.76，223.5.5.5，4个114等知名dns服务商提供的，本身缓存了大量的常见域名的ip，所以常见的网站，都是有记录的。不需要找根服务器。
+
+- 第五步，如果电脑自己的服务器没有记录，会去找根服务器。根服务器全球只要13台，回去找其中之一。
+
+找了根服务器后，根服务器会根据请求的域名，返回对应的“顶级域名服务器”，如：
+
+如果请求的域名是http://xxx.com，则返回负责com域的服务器
+
+如果是http://xxx.cn，则发给负责cn域的服务器
+
+如果是http://xxx.ca，则发给负责ca域的服务器
+
+https://zhuanlan.zhihu.com/p/150417003
+
+
+
+
 
 DNS（domain name system）域名系统或者（domain named system）区域名称服务，分为正向与反向域名解析，适用C/S,端口路53/udp，53/tcp，属于应用层协议；
 
