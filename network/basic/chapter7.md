@@ -1,10 +1,14 @@
 # DNS
-DNS是域名系统(Domain Name System)或者域名服务(Domain Name Service)的英文缩写。
+
+一道面试题：在浏览器中输入一个域名，如www.google.com，点击回车后，发生了什么？
+
+## DNS是什么
+DNS是域名系统(Domain Name System)或者域名服务(Domain Name Service)的英文缩写。一个字典，一个电话簿。
 
 https://root-servers.org/
 
 ## DNS用途是什么
-一道面试题：在浏览器中输入一个域名，如www.google.com，点击回车后，发生了什么？
+
 
 - 第一步：输入域名后，电脑首先看自己有没有对应域名的缓存，有缓存就直接用缓存里的ip访问。
     ```text
@@ -37,7 +41,7 @@ https://zhuanlan.zhihu.com/p/150417003
 
 
 
-DNS（domain name system）域名系统或者（domain named system）区域名称服务，分为正向与反向域名解析，适用C/S,端口路53/udp，53/tcp，属于应用层协议；
+分为正向与反向域名解析，适用C/S,端口路53/udp，53/tcp，属于应用层协议；
 
 DNS是应用层协议，client端（一般指浏览器）构建DNS查询请求，依次被传输层，网络层，数据链路层等封装传送到达DNS服务器端，最终client端接收到DNS响应消息
 
