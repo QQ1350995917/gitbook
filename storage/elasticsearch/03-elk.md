@@ -190,3 +190,68 @@ Plugins: /usr/local/opt/elasticsearch/libexec/plugins/
 Config:  /usr/local/etc/elasticsearch/
 plugin script: /usr/local/opt/elasticsearch/libexec/bin/elasticsearch-plugin
 ```
+
+## 启动命令 
+./filebeat -e -c filebeat.yml 
+
+
+## 配置文件
+
+filebeat.inputs:
+
+- type: log
+  enabled: true
+  paths:
+    - /Users/pwd/.log/account/log_debug.log
+  fields:
+    application: account
+    level: debug
+- type: log
+  enabled: true
+  paths:
+    - /Users/pwd/.log/account/log_error.log
+  fields:
+    application: account
+    level: error
+- type: log
+  enabled: true
+  paths:
+    - /Users/pwd/.log/account/log_info.log
+  fields:
+    application: account
+    level: info      
+- type: log
+  enabled: true
+  paths:
+    - /Users/pwd/.log/account/log_warn.log
+  fields:
+    application: account
+    level: warn     
+output.kafka:
+  enabled: true
+  hosts: ["192.168.31.18:9092"]
+  topic: '%{[fields][application]}-%{[fields][level]}' 
+  
+## 启动命令
+bin/logstash -f config/logstash.conf
+
+## 配置文件
+
+input{
+	kafka{
+		bootstrap_servers => ["localhost:9092"]
+		group_id => "logstash" 
+		auto_offset_reset => "earliest"
+		consumer_threads => 4 
+		decorate_events => true
+		topics => ["account-debug","account-info","account-error","account-warn"]
+	}
+}
+
+output {
+	elasticsearch { 
+    index => "%{[@metadata][kafka][topic]}-%{+YYYY.MM.dd}"
+  	hosts => ["localhost:9200"]
+  	document_type=> "doc"
+  }
+}
