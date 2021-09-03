@@ -1,6 +1,12 @@
 # 单机部署
 [镜像地址](https://repo.huaweicloud.com/elasticsearch/)
 
+## Docker部署
+```text
+docker pull elasticsearch:6.8.1
+
+```
+
 ## 部署
 ```text
 # ======================== Elasticsearch Configuration =========================
