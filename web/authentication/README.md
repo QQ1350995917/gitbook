@@ -1,3 +1,3 @@
 # 服务鉴权
-## [SSO](sso/README.md)
+## [SSO](web/authentication/cas/README.md)
 ## [OAuthor](oauthor/README.md) 

@@ -1,3 +1,45 @@
+# HTTP与HTTPS
+## HTTP
+### http报文结构
+* #### http报文概述
+![](images/http&https-protocol-0.jpg)
+* #### http请求报文
+![](images/http&https-protocol-request.jpg)
+* #### http响应报文
+![](images/http&https-protocol-response.jpg)
+* #### 消息头中重复数据
+  ```
+    协议规范中没有明确当 HTTP 报文首部中出现了两个或以上具有相同首部字段名的首部字段时应该如何处理，此时根据不同的浏览器或者实现方而定义。一般情况应该是后者覆盖前者。
+  ```
+
+### http报文封解包过程
+![](images/http&https-packet.jpg)
+#### 通用消息头
+
+#### 请求消息头
+
+#### 响应消息头
+
+## HTTPS
+
+* ## 数据传输如何截获
+
+  * ## [数据传输](network/basic/01-network.md)
+* ### 数据加密传输
+
+  * ### 对称加密
+
+    * ### 加密方法
+    * ### 工作过程
+  * ### 非对称加密
+
+    * ### 加密方法
+    * ### 工作过程
+* ## 安全通信关键是如何安全的传输秘钥
+* ## 数字证书和数字签名
+
+* ## https落地过程
+
 ## 背景
 HTTP协议是无状态的协议，即每一次请求都是互相独立的。因此它的最初实现是，每一个http请求都会打开一个tcp socket连接，当交互完毕后会关闭这个连接。
 
@@ -38,3 +80,18 @@ HTTP/1.1的连接默认情况下都是持久连接。如果要显式关闭，需
 然而如同Keep-Alive一样，空闲的持久连接也可以随时被客户端与服务端关闭。不发送Connection:Close不意味着服务器承诺连接永远保持打开。
 
 ## [HTTPClient中的持久连接](../httpclient/http-connect-polling.md)
+
+## 参考资料
+http://www.52im.net/forum.php?mod=viewthread&tid=1677&highlight=http
+https://showme.codes/2017-02-20/understand-https/
+https://wetest.qq.com/lab/view/110.html
+https://www.cnblogs.com/yangtianle/p/11202574.html
+https://www.jianshu.com/p/cfc3cff08697
+https://blog.51cto.com/237451446/759338
+https://zhuanlan.zhihu.com/p/133375078
+https://www.cnblogs.com/wqbin/p/12117007.html
+https://www.jianshu.com/p/202c3ee27974
+https://blog.csdn.net/enweitech/article/details/81781405
+https://blog.csdn.net/freekiteyu/article/details/76423436?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase
+https://blog.csdn.net/fw0124/article/details/40875629?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase
+http://tengine.taobao.org/nginx_docs/cn/docs/http/configuring_https_servers.html

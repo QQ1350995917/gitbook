@@ -1,6 +1,16 @@
 # DNS
-
 一道面试题：在浏览器中输入一个域名，如www.google.com，点击回车后，发生了什么？
+## 抓包验证
+### 修改/etc/hosts验证
+### 修改/etc/resolv.conf验证
+## 流程
+说明递归解析以及迭代解析流程
+## 权威解析
+## 递归解析
+## 迭代解析
+## 根和根镜像
+### 为何是13个跟
+
 
 ## DNS是什么
 DNS是域名系统(Domain Name System)或者域名服务(Domain Name Service)的英文缩写。一个字典，一个电话簿。
@@ -53,15 +63,13 @@ DNS主要基于UDP运输层协议，这里解释下为什么使用UDP（User Dat
 
 只会在UDP报文中表明有截断的时候使用TCP查询。
 
-参考资料
-
-* [https://www.cnblogs.com/zhangxingeng/p/9970733.html](https://www.cnblogs.com/zhangxingeng/p/9970733.html)
-
-* [https://www.zhihu.com/question/22587247](https://www.zhihu.com/question/22587247)
-
-* [https://www.cnblogs.com/gopark/p/8430916.html](https://www.cnblogs.com/gopark/p/8430916.html)
-
-* [https://miek.nl/2013/november/10/why-13-dns-root-servers/](https://miek.nl/2013/november/10/why-13-dns-root-servers/)
-
+## 参考资料
+https://www.cnblogs.com/zhangxingeng/p/9970733.html
+https://www.zhihu.com/question/22587247
+https://www.cnblogs.com/gopark/p/8430916.html
+https://miek.nl/2013/november/10/why-13-dns-root-servers/
+https://blog.csdn.net/yetugeng/article/details/88858291
+https://blog.csdn.net/sole_cc/article/details/52262394
+http://www.east263.com/news/jsj/wlzs/2019-08-24/1687.html
 
 
