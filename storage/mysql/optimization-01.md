@@ -3,7 +3,93 @@
 
 ## 2.服务进程方面
 对mysql服务的配置进行优化，例如对链接数的管理，对索引缓存、查询缓存、排序缓存等各种缓存大小进行优化;
+```
+[mysqld]
+port=3306
+socket=/tmp/mysql.sock
+character_set_server=utf-8
+default-character-set=utf-8                            # 字符集
+                                                       
+# data                                                 
+basedir=/usr/local/mysql                               # mysql安装目录
+datadir=/data/mysql                                    # 数据文件路径
+pid-file=/data/mysql/mysql.pid                         # mysql进程ID文件
+log_error=/data/mysql/log/mysql.err                    # mysql 错误日志路径
+#skip-grant-tables                                     # 忘记root密码时，可通过--skip-grant--tables启动后连接mysql并重置密码
+slow_query_log=1                                       # 开启慢查询日志
+slow_query_log_file=/data/mysql/log/slowq.log          # 慢查询日志路径
+long_query_time=1                                      # 慢查询时间1秒
 
+# temp
+max_tmp_tables=64                                      # 打开临时表的最大数量
+max_heap_table_size=1G                                 # 创建内存表的大小
+tmp_table_size=512M                                    # 内存临时表的最大值
+slave_load_tmpdir=/data/mysql/log                      # slave 临时目录路径
+tmpdir=/data/mysql/log                                 # 临时目录路径
+
+# session
+back_log=8192                                          # mysql 停止新请求前表示有多少请求可以暂时堆栈
+max_allowed_packet=32M                                 # 客户端接收最大字节会话值
+max_connections=16000                                  # 最大连接数
+max_connect_errors=10000                               # 最大错误连接数，满了需要通过flush hosts 来清除
+wait_timeout=28800                                     # 等待超时时间
+binlog_cache_size=1M                                   # binlog缓存大小
+table_open_cache=1024                                  # 表缓冲区大小
+thread_concurrency=4                                   # 线程并发数
+thread_cache_size=128                                  # 线程缓冲区大小
+thread_handling=pool-of-threads                        # 开启线程池
+thread_pool_high_prio_mode=none                        # 新的连接根据thread_pool_high_prio_mode分出优先级
+thread_pool_idle_timeout=28800                         # 闲置线程超时时间
+thread_pool_oversubscribe=20                           # 支持运行的最大任务数
+#max_statement_time=5000                               # 控制查询在mysql的最长执行时间，单位毫秒
+query_cache_type=0                                     # 查询缓冲区是否开启 0：关闭  1：开启 2：demand
+query_cache_size=0                                     # 查询缓冲区大小
+key_buffer_size=128M                                   # 索引缓冲区大小
+read_buffer_size=8M                                    # 顺序读缓区冲大小
+read_rnd_buffer_size=4M                                # 随机读缓冲区大小
+sort_buffer_size=16M                                   # 排序缓冲区大小
+join_buffer_size=16M                                   # join缓冲区大小
+
+# innodb
+default_storage_engine = InnoDB                        # 默认存储引擎
+innodb_data_home_dir = /data/mysql/log                 # innodb存储引擎共享表空间路径，即：ibdata
+innodb_data_file_path = ibdata1:256M:autoextend        # innodb存储引擎大小，自增
+innodb_log_group_home_dir = /data/mysql/log            # ib_logfile日志路径
+innodb_log_files_in_group = 2                          # ib_logfile两组，每组两个
+innodb_log_file_size = 512M                            # ib_logfile大小
+innodb_log_buffer_size = 8M                            # 日志缓冲区大小
+innodb_flush_log_at_trx_commit = 2                     # 等于2时，不写硬盘而是写入系统缓存，日志仍会每秒写到硬盘
+innodb_flush_method = O_DIRECT                         # 向文件写入数据，只有数据写到了磁盘，写入操作完成（write返回成功）
+innodb_lock_wait_timeout = 50                          # innodb引擎锁等待超时时间
+#innodb_thread_concurrency = 16                        # innodb线程并发数
+innodb_buffer_pool_size = 44G                          # innodb存储引擎缓冲区大小
+innodb_additional_mem_pool_size = 20M                  # 用来设置 InnoDB 存储的数据目录信息和其它内部数据结构的内存池大小
+innodb_io_capacity = 1500                              # 控制Innodb checkpoint时的IO能力
+innodb_use_native_aio = 1                              # 控制是否启用Native AIO，默认开启。官方的测试显示，启用Native AIO，恢复速度可以提高75%
+innodb_file_per_table = 1                              # innodb引擎使用独立的表空间
+innodb_open_files = 3000                               # innodb打开文件数
+innodb_print_all_deadlocks = 1                         # 在error中打印锁信息
+
+# others
+memlock = 1                                            # MySQL是否使用交换分区
+
+# replication
+server-id = 1137                                       # server-id 搭建主从时必须配置且唯一
+log-bin = /data/mysql/log/mysql-bin                    # 二进制日志文件路径
+#binlog-ignore-db=mysql                                # 过滤mysql库的二进制日志
+binlog_format = mixed                                  # 二进制日志模式    分三种，分别为：row，statement，mixed
+expire_logs_days = 7                                   # 删除过期日志时间
+relay_log = /data/mysql/log/relay-bin                  # relay-log文件路径
+#replicate_ignore_db = mysql                           # 复制过滤MySQL库
+#slave_skip_errors = 1062                              # 主从同步出现问题，从库忽略所有类型为1062的错误
+log_slave_updates = 1                                  # 级联复制使用的参数，为满足M-S-S
+skip-slave-start                                       # Slave不会随MySQL的启动而启动
+#read_only = 1                                         # 只读
+sync_binlog = 1                                        # 将binlog_cache中的数据强制写入磁盘
+
+[mysqldump]
+default-character-set = utf8                         #数据库字符集
+```
 ## 3.SQL语句方面
 对业务中使用的SQL语句进行优化，例如调整Where查询条件；
 + 第1个原则：要找的最需要优化的SQL语句。要么是使用最频繁的语句，要么是优化后提高最明显的语句，可以通过查询MySQL的慢查询日志来发现需要进行优化的SQL语句；
