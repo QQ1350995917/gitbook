@@ -1,4 +1,5 @@
-# Java SPI机制(since jdk1.6)
+# SPI机制
+
 SPI全称为Service Provider Interface，是JDK内置的一种服务提供发现机制。简单来说，它就是一种动态替换发现机制。例如：有个接口想在运行时才发现具体的实现类，那么你只需要在程序运行前添加一个实现即可，并把新加的实现描述给JDK即可。此外，在程序的运行过程中，也可以随时对该描述进行修改，完成具体实现的替换。
 
 Java提供了很多服务提供者接口（Service Provider Interface，SPI），允许第三方为这些接口提供实现。常见的SPI有JDBC、JCE、JNDI、JAXP和JBI等。
@@ -21,37 +22,43 @@ Java SPI就是提供这样的一个机制：为某个接口寻找服务实现的
 
 比较常见的例子：
 
-- 数据库驱动加载接口实现类的加载
-- JDBC加载不同类型数据库的驱动
-- 日志门面接口实现类加载
-- SLF4J加载不同提供商的日志实现类
-- Spring
-- Spring中大量使用了SPI,比如：对servlet3.0规范对ServletContainerInitializer的实现、自动类型转换Type Conversion SPI(Converter SPI、Formatter SPI)等
-- Dubbo
-- Dubbo中也大量使用SPI的方式实现框架的扩展, 不过它对Java提供的原生SPI做了封装，允许用户扩展实现Filter接口
-
-
+* 数据库驱动加载接口实现类的加载
+* JDBC加载不同类型数据库的驱动
+* 日志门面接口实现类加载
+* SLF4J加载不同提供商的日志实现类
+* Spring
+* Spring中大量使用了SPI,比如：对servlet3.0规范对ServletContainerInitializer的实现、自动类型转换Type Conversion SPI(Converter SPI、Formatter SPI)等
+* Dubbo
+* Dubbo中也大量使用SPI的方式实现框架的扩展, 不过它对Java提供的原生SPI做了封装，允许用户扩展实现Filter接口
 
 下面，我们就用具体的代码来说明逆向类加载。不过，在距离之前，还是想对spi的使用进行一个简单的说明。
 
 ## spi使用
+
 ### 1.代码编写
+
 既然是spi，那么就必须先定义好接口。其次，就是定义好接口的实现类。
 
 ### 2.创建一个文件夹
+
 在项目的\src\main\resources\下创建\META-INF\services目录
 
 ### 3.文件夹下增加配置文件
+
 在上面META-INF\services的目录下再增加一个配置文件，这个文件必须以接口的全限定类名保持一致，例如：com.xxx.xxx.HelloService
 
 ### 4.配置文件增加描述
+
 上面介绍spi时说道，除了代码上的接口实现之外，你还需要把该实现的描述提供给JDK。那么，此步骤就是在配置文件中撰写接口实现描述。很简单，就是在配置文件中写入具体实现类的全限定类名，如有多个便换行写入。
 
 ### 5.使用JDK来载入
+
 编写main()方法，输出测试接口。使用JDK提供的ServiceLoader.load()来加载配置文件中的描述信息，完成类加载操作。
 
 ## SPI原理解析
+
 ServiceLoader这个类
+
 ```java
 public final class ServiceLoader<S> implements Iterable<S> {
 
@@ -124,19 +131,19 @@ public final class ServiceLoader<S> implements Iterable<S> {
 
 spi加载的主要流程供参考
 
-![](images/spi-1.png)
+![](../.gitbook/assets/spi-1.png)
 
 ## spi能带来的好处
-- 不需要改动源码就可以实现扩展，解耦。
-- 实现扩展对原来的代码几乎没有侵入性。
-- 只需要添加配置就可以实现扩展，符合开闭原则。
+
+* 不需要改动源码就可以实现扩展，解耦。
+* 实现扩展对原来的代码几乎没有侵入性。
+* 只需要添加配置就可以实现扩展，符合开闭原则。
 
 ## 使用spi需要注意
-- 虽然ServiceLoader也算是使用的延迟加载，但是基本只能通过遍历全部获取，也就是接口的实现类全部加载并实例化一遍。如果你并不想用某些实现类，它也被加载并实例化了，这就造成了浪费。获取某个实现类的方式不够灵活，只能通过Iterator形式获取，不能根据某个参数来获取对应的实现类。
-- 多个并发多线程使用ServiceLoader类的实例是不安全的。
 
+* 虽然ServiceLoader也算是使用的延迟加载，但是基本只能通过遍历全部获取，也就是接口的实现类全部加载并实例化一遍。如果你并不想用某些实现类，它也被加载并实例化了，这就造成了浪费。获取某个实现类的方式不够灵活，只能通过Iterator形式获取，不能根据某个参数来获取对应的实现类。
+* 多个并发多线程使用ServiceLoader类的实例是不安全的。
 
 ## 参考资料
-https://www.jianshu.com/p/e4262536000d
-https://www.cnblogs.com/jy107600/p/11464985.html
-https://www.jianshu.com/p/46b42f7f593c
+
+[https://www.jianshu.com/p/e4262536000d](https://www.jianshu.com/p/e4262536000d) [https://www.cnblogs.com/jy107600/p/11464985.html](https://www.cnblogs.com/jy107600/p/11464985.html) [https://www.jianshu.com/p/46b42f7f593c](https://www.jianshu.com/p/46b42f7f593c)
