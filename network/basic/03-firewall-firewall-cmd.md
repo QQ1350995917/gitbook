@@ -3,6 +3,17 @@
 - 开启firewalld服务: systemctl enable firewalld 
 - 打开firewalld服务: systemctl start firewalld
 
+## firewalld的port
+开启端口
+```text
+firewall-cmd --zone=public --add-port=80/tcp --permanent
+```
+删除端口
+```text
+firewall-cmd --zone=public --remove-port=80/tcp --permanent
+```
+
+
 ## firewalld的zone
 zone 是firewalld 的单位。默认使用public zone
 - 查看所有的zone : firewall-cmd --get-zones
